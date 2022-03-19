@@ -7,5 +7,6 @@
 #include<bios.h>
 #include<dos.h>
 #include"mouse.h"
+#include"commonfunc.h"
 
 #endif
