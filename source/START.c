@@ -1,14 +1,4 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<graphics.h>
-#include<math.h>
-#include<bios.h>
-#include<conio.h>
-#include<dos.h>
-#include<time.h>
-#include"HZ.H"
-#include"mouse.h"
+#include"common.h"
 
 void drawstart()
 {
@@ -56,7 +46,6 @@ void drawstart()
 void start()
 {
 	int num = 0;
-	char str[5] = { '\0' };
 	
 	int gdriver=VGA;
     int gmode=VGAHI;
@@ -67,67 +56,11 @@ void start()
 	delay(100);
 	cleardevice();
 	drawstart();
+	
 	while(1)
 	{
 		newmouse(&MouseX,&MouseY,&press);
-		if(mouse_press(400,160,560,220) == 2)
-		{
-			if (num == 0)
-			{
-				MouseS = 1;
-				clrmous(MouseX, MouseY);
-				delay(10);
-				button(400,160,560,220,15,LIGHTGREEN,3);
-				puthz(420,180,"用户注册",24,28,1);
-				num = 1;
-			}
-			continue;
-		}
-		else if (mouse_press(400,160,560,220) == 1)
-		{
-			MouseS = 0;
-			//*func = 2;
-			return;
-		}
-		else if(mouse_press(400,260,560,320) == 2)
-		{
-			if (num == 0)
-			{
-				MouseS = 1;
-				clrmous(MouseX, MouseY);
-				delay(10);
-				button(400,260,560,320,15,LIGHTGREEN,3);
-				puthz(420,280,"用户登录",24,28,1);
-				num = 2;
-			}
-			continue;
-		}
-		else if (mouse_press(400,260,560,320) == 1)
-		{
-			MouseS = 0;
-			//*func = 2;
-			return;
-		}
-		else if(mouse_press(400,360,560,420) == 2)
-		{
-			if (num == 0)
-			{
-				MouseS = 1;
-				clrmous(MouseX, MouseY);
-				delay(10);
-				button(400,360,560,420,15,LIGHTGREEN,3);
-				puthz(410,380,"管理员登录",24,28,1);
-				num = 3;
-			}
-			continue;
-		}
-		else if (mouse_press(400,360,560,420) == 1)
-		{
-			MouseS = 0;
-			//*func = 2;
-			return;
-		}
-		else if(mouse_press(610,0,640,30) == 2)
+		if(mouse_press(610,0,640,30) == 2)   //退出
 		{
 			if (num == 0)
 		    {
@@ -137,11 +70,12 @@ void start()
 				setfillstyle(1,RED);
 				bar(610,0,640,30);
 			    setcolor(15);
+				setlinestyle(0,4,3);
 			    line(610,0,640,30);
 				line(640,0,610,30);
-			    num = 4;
+			    num = 1;
 		    }
-		continue;
+			continue;
 		}
 		else if(mouse_press(610,0,640,30) == 1)
 		{
@@ -149,6 +83,67 @@ void start()
 			closegraph();
 			exit(1);
 		}
+		
+		if(mouse_press(400,160,560,220) == 2)   //用户注册
+		{
+			if (num == 0)
+			{
+				MouseS = 1;
+				clrmous(MouseX, MouseY);
+				delay(10);
+				button(400,160,560,220,15,LIGHTGREEN,3);
+				puthz(420,180,"用户注册",24,28,1);
+				num = 2;
+			}
+			continue;
+		}
+		else if (mouse_press(400,160,560,220) == 1)
+		{
+			MouseS = 0;
+			//*func = 2;
+			return;
+		}
+		
+		else if(mouse_press(400,260,560,320) == 2)   //用户登录
+		{
+			if (num == 0)
+			{
+				MouseS = 1;
+				clrmous(MouseX, MouseY);
+				delay(10);
+				button(400,260,560,320,15,LIGHTGREEN,3);
+				puthz(420,280,"用户登录",24,28,1);
+				num = 3;
+			}
+			continue;
+		}
+		else if (mouse_press(400,260,560,320) == 1)
+		{
+			MouseS = 0;
+			//*func = 2;
+			return;
+		}
+		
+		else if(mouse_press(400,360,560,420) == 2)   //管理员登录
+		{
+			if (num == 0)
+			{
+				MouseS = 1;
+				clrmous(MouseX, MouseY);
+				delay(10);
+				button(400,360,560,420,15,LIGHTGREEN,3);
+				puthz(410,380,"管理员登录",24,28,1);
+				num = 4;
+			}
+			continue;
+		}
+		else if (mouse_press(400,360,560,420) == 1)
+		{
+			MouseS = 0;
+			//*func = 2;
+			return;
+		}
+		
 		else
 		{
 			if(num != 0)
@@ -158,29 +153,30 @@ void start()
 				delay(10);
 				if(num == 1)
 				{
+					setfillstyle(1,LIGHTGRAY);
+					bar(610,0,640,30);
+					setcolor(1);
+					setlinestyle(0,4,3);
+					line(610,0,640,30);
+					line(640,0,610,30);
+				}
+				else if(num == 2)
+				{
 					setfillstyle(1,YELLOW);
 					bar(400,160,560,220);
 					puthz(420,180,"用户注册",24,28,1);
 				}
-				else if(num == 2)
+				else if(num == 3)
 				{
 					setfillstyle(1,YELLOW);
 					bar(400,260,560,320);
 					puthz(420,280,"用户登录",24,28,1);
 				}
-				else if(num == 3)
+				else if(num == 4)
 				{
 					setfillstyle(1,YELLOW);
 					bar(400,360,560,420);
 					puthz(410,380,"管理员登录",24,28,1);
-				}
-				else if(num == 4)
-				{
-					setfillstyle(1,LIGHTGRAY);
-					bar(610,0,640,30);
-					setcolor(1);
-					line(610,0,640,30);
-					line(640,0,610,30);
 				}
 				num = 0;
 			}

@@ -1,13 +1,4 @@
-#include<string.h>
-#include<graphics.h>
-#include<math.h>
-#include<bios.h>
-#include<conio.h>
-#include<dos.h>
-#include<time.h>
-#include"HZ.H"
-#include"mouse.h"
-//#include"mouse.h"
+#include"common.h"
 
 void a_info()
 {
@@ -43,13 +34,9 @@ void a_info()
 	puthz(360,400,"ÔÂ",24,28,1);
 	puthz(430,400,"ÈÕ",24,28,1);
 	
-	setcolor(LIGHTGRAY);
-    setfillstyle(1,LIGHTGRAY);
-	bar(625,0,640,15);
+	setfillstyle(1,LIGHTGRAY);
+    bar(610,0,640,30);
     setcolor(1);
-    line(625,0,640,15);
-    line(640,0,625,15);
-	
-	getch();
-    cleardevice();
+    line(610,0,640,30);
+    line(640,0,610,30);
 }

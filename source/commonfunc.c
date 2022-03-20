@@ -2,8 +2,8 @@
 #include "commonfunc.h"
 
 
-void button (int x1,int y1,int x2,int y2,int framecolor,int fillcolor,int framewidth){
-	clrmous(MouseX, MouseY); //防止画图函数与鼠标重叠
+void button(int x1,int y1,int x2,int y2,int framecolor,int fillcolor,int framewidth){
+	clrmous(MouseX, MouseY); 
 	delay(10);
 	setcolor(framecolor);
 	setlinestyle(SOLID_LINE, 0, framewidth); //width = "1" or "3" pixel
@@ -14,18 +14,18 @@ void button (int x1,int y1,int x2,int y2,int framecolor,int fillcolor,int framew
 
 /*********************************************
 FUNCTION:input
-DESCRIPTION：flag = 1时正常显示输入信息
-			 flag = 2时输入信息以"*"号遮盖
+DESCRIPTION：flag = 1时输入账号、身份证号等无需隐藏的信息
+			 flag = 2时输入密码等需要隐藏的信息
 INPUT:id,x1,y1,charnum,color
 RETURN:无
-***********************************************/
+***********************************************/  
 void input(char* id, int x1, int y1, int charnum, int color, int flag)//输入的字符串，输入的xy，输入的字符限制，输入框的颜色，输入模式
 {
 	int i = 0;
 	char t;
 	setfillstyle(SOLID_FILL, color);
 	setlinestyle(SOLID_LINE, 0, NORM_WIDTH);
-	setcolor(WHITE);
+	setcolor(8);
 	settextstyle(TRIPLEX_FONT, HORIZ_DIR, flag);
 	settextjustify(LEFT_TEXT, TOP_TEXT);
 	line(x1 + 10, y1 + 6, x1 + 10, y1 + 20);
@@ -63,32 +63,4 @@ void input(char* id, int x1, int y1, int charnum, int color, int flag)//输入的字
 			break;
 		}
 	}
-}
-
-void captcha (char* str){ //5 digits
-
-	char a,i,j;
-	srand(time(NULL));
-	
-	for (i = 0; i < 5; i++)
-	{
-		j = rand() % 3;
-		if( j == 0 )
-		{
-			a = rand() % 26 + 97;
-			str[i] = a;
-		}
-		else if( j == 1 )
-		{
-			a = rand() % 26 + 65;
-			str[i] = a;
-		}
-		else
-		{
-			a = rand() % 10 + 48; // 0-9
-			str[i] = a;
-		}
-	}
-	str[5] = '\0';
-	
 }

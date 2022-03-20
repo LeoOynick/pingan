@@ -1,13 +1,4 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<graphics.h>
-#include<math.h>
-#include<bios.h>
-#include<conio.h>
-#include<dos.h>
-#include<time.h>
-#include"HZ.H"
+#include"common.h"
 
 void mine()
 {
@@ -60,13 +51,9 @@ void mine()
 	line(200,165,200,195);
 	puthz(280,170,"Á¢¼´Ìí¼Ó³µÁ¾",24,28,8);
 	
-	setcolor(LIGHTGRAY);
-    setfillstyle(1,LIGHTGRAY);
-	bar(625,0,640,15);
+	setfillstyle(1,LIGHTGRAY);
+    bar(610,0,640,30);
     setcolor(1);
-    line(625,0,640,15);
-    line(640,0,625,15);
-	
-	getch();
-    cleardevice();
+    line(610,0,640,30);
+    line(640,0,610,30);
 }
