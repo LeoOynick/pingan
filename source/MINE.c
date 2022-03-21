@@ -51,7 +51,7 @@ void drawmine()
     line(640,0,610,30);
 }
 
-void home()
+void mine()
 {
 	int num = 0;
 	
