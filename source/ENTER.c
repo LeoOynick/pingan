@@ -1,35 +1,7 @@
 #include"common.h"
+#include"enter.h"
 
-void drawenter()
-{
-	setbkcolor(LIGHTCYAN);
-    setcolor(1);
-	bar(80,170,560,200);
-    bar(80,240,560,270);
-    bar(160,310,560,340);
-	setfillstyle(1,LIGHTGRAY);
-	bar(80,310,160,340);
-	puthz(80,150,"用户名",16,20,1);
-    puthz(80,220,"密码",16,20,1);
-    puthz(80,290,"验证码",16,20,1);
-	
-	setfillstyle(1,2);
-	bar(180,400,260,430);
-	setfillstyle(1,4);
-	bar(380,400,460,430);
-	puthz(195,405,"登录",24,28,1);
-	puthz(395,405,"返回",24,28,1);
-	puthz(280,360,"忘记密码",16,18,DARKGRAY);
-	puthz(200,50,"用户登录",48,56,1);
-	
-	setfillstyle(1,LIGHTGRAY);
-    bar(610,0,640,30);
-    setcolor(1);
-    line(610,0,640,30);
-    line(640,0,610,30);
-}
-
-void enter()
+void enter(int *page)
 {
 	int num=0;
 	char str[6] = { '\0' };
@@ -40,11 +12,11 @@ void enter()
 	int state2 = 0;
 	int state3 = 0;
 	
-	int gdriver=VGA;
+	/*int gdriver=VGA;
     int gmode=VGAHI;
     initgraph(&gdriver,&gmode,"C:\\BORLANDC\\BGI");
 	
-	mouseinit();
+	mouseinit();*/
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
@@ -72,9 +44,8 @@ void enter()
 		}
 		else if(mouse_press(610,0,640,30) == 1)
 		{
-			delay(1000);
-			closegraph();
-			exit(1);
+			*page = 1;
+			return;
 		}
 		
 		else if(mouse_press(180,400,260,430) == 2)   //登录
@@ -93,7 +64,7 @@ void enter()
 		else if (mouse_press(180,400,260,430) == 1)
 		{
 			MouseS = 0;
-			//*func = 2;
+			//*page = 2;
 			return;
 		}
 		
@@ -113,7 +84,7 @@ void enter()
 		else if (mouse_press(380,400,460,430) == 1)
 		{
 			MouseS = 0;
-		    //*func = 2;
+		    *page = 0;
 			return;
 		}
 		
@@ -131,7 +102,7 @@ void enter()
 		else if (mouse_press(280,360,350,380) == 1)
 		{
 			MouseS = 0;
-		    //*func = 2;
+		    //*page = 2;
 			return;
 		}
 
@@ -272,4 +243,33 @@ void enter()
 			continue;
 		}
 	}
+}
+
+void drawenter()
+{
+	setbkcolor(LIGHTCYAN);
+    setcolor(1);
+	bar(80,170,560,200);
+    bar(80,240,560,270);
+    bar(160,310,560,340);
+	setfillstyle(1,LIGHTGRAY);
+	bar(80,310,160,340);
+	puthz(80,150,"用户名",16,20,1);
+    puthz(80,220,"密码",16,20,1);
+    puthz(80,290,"验证码",16,20,1);
+	
+	setfillstyle(1,2);
+	bar(180,400,260,430);
+	setfillstyle(1,4);
+	bar(380,400,460,430);
+	puthz(195,405,"登录",24,28,1);
+	puthz(395,405,"返回",24,28,1);
+	puthz(280,360,"忘记密码",16,18,DARKGRAY);
+	puthz(200,50,"用户登录",48,56,1);
+	
+	setfillstyle(1,LIGHTGRAY);
+    bar(610,0,640,30);
+    setcolor(1);
+    line(610,0,640,30);
+    line(640,0,610,30);
 }

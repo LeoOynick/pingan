@@ -1,10 +1,11 @@
 #include"common.h"
+#include"claim.h"
 
-void claim()
+void drawclaim()
 {
-	int gdriver=VGA;
+	/*int gdriver=VGA;
     int gmode=VGAHI;
-    initgraph(&gdriver,&gmode,"C:\\BORLANDC\\BGI");
+    initgraph(&gdriver,&gmode,"C:\\BORLANDC\\BGI");*/
 	
 	setbkcolor(LIGHTCYAN);
 	
