@@ -37,9 +37,6 @@ void home(int *page)
 		}
 		else if(mouse_press(610,0,640,30) == 1) //exit
 		{
-			/*delay(1000);
-			closegraph();
-			exit(1);*/
 			*page = 1;
 			return;
 		}
@@ -242,7 +239,7 @@ void home(int *page)
 		else if(mouse_press(280,420,360,480) == 1)
 		{
 			MouseS = 0;
-			//*page = 2;
+			*page = 6;
 			return;
 		}
 		
@@ -267,7 +264,7 @@ void home(int *page)
 		else if(mouse_press(440,420,520,480) == 1)
 		{
 			MouseS = 0;
-			//*page = 2;
+			*page = 7;
 			return;
 		}
 		
