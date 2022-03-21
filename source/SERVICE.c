@@ -80,7 +80,7 @@ void drawservice()
     line(640,0,610,30);
 }
 
-void main()
+void service()
 {
 	int num = 0;
 	
