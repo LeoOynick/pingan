@@ -18,29 +18,30 @@ void main()
 	{
 		switch(page)
 		{	
-			case(0): //初始界面
+			case(0):   //初始界面
 				start(&page);
 				break;
 				
-			case(1): //关闭按钮
+			case(1):   //关闭按钮
 				delay(1000);
-				closegraph();
-				exit(0);
+			    closegraph();
+			    exit(1);
 				
-			case(2): //用户注册界面
+			case(2):   //用户注册
 				regist(&page);
 				break;
 				
-			case(3)://用户登录界面
+			case(3):   //用户登录
 				enter(&page);
 				break;
 				
-			case(4):
-				binding(&page);
+			case(4):   //管理员登录
+				administ(&page);
 				break;
 				
-			case(5):
-				
+			case(5):   //忘记密码
+			    forget(&page);
+				break;
 			//管理员界面
 			//买车险界面
 			//忘记密码界面

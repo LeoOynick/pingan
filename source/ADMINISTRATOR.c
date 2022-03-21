@@ -4,7 +4,7 @@ void drawadminist()
 {
 	setbkcolor(LIGHTCYAN);
     
-	setcolor(15);
+	setfillstyle(1,15);
     bar(80,240,560,270);
 	
 	setfillstyle(1,2);
@@ -25,18 +25,13 @@ void drawadminist()
     line(640,0,610,30);
 }
 
-void administ()
+void administ(int *page)
 {
 	int num=0;
 	char str[6] = { '\0' };
 	char password[20] = { '\0' };   //ÃÜÂë£¨²»³¬¹ý16Î»£©
 	int state = 0;
 	
-	int gdriver=VGA;
-    int gmode=VGAHI;
-    initgraph(&gdriver,&gmode,"C:\\BORLANDC\\BGI");
-	
-	mouseinit();
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
@@ -64,9 +59,8 @@ void administ()
 		}
 		else if(mouse_press(610,0,640,30) == 1)
 		{
-			delay(1000);
-			closegraph();
-			exit(1);
+			*page = 1;
+			return;
 		}
 		
 		else if(mouse_press(180,400,260,430) == 2)   //µÇÂ¼
@@ -85,7 +79,7 @@ void administ()
 		else if (mouse_press(180,400,260,430) == 1)
 		{
 			MouseS = 0;
-			//*func = 2;
+			//*page = 0;
 			return;
 		}
 		
@@ -105,7 +99,7 @@ void administ()
 		else if (mouse_press(380,400,460,430) == 1)
 		{
 			MouseS = 0;
-		    //*func = 2;
+		    *page = 0;
 			return;
 		}
 		

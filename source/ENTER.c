@@ -12,11 +12,6 @@ void enter(int *page)
 	int state2 = 0;
 	int state3 = 0;
 	
-	/*int gdriver=VGA;
-    int gmode=VGAHI;
-    initgraph(&gdriver,&gmode,"C:\\BORLANDC\\BGI");
-	
-	mouseinit();*/
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
@@ -102,7 +97,7 @@ void enter(int *page)
 		else if (mouse_press(280,360,350,380) == 1)
 		{
 			MouseS = 0;
-		    //*page = 2;
+		    *page = 5;
 			return;
 		}
 
@@ -248,7 +243,7 @@ void enter(int *page)
 void drawenter()
 {
 	setbkcolor(LIGHTCYAN);
-    setcolor(1);
+    setfillstyle(1,15);
 	bar(80,170,560,200);
     bar(80,240,560,270);
     bar(160,310,560,340);

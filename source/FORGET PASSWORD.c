@@ -54,11 +54,6 @@ void forget(int *page)
 	int state5 = 0;
 	int state6 = 0;
 	
-	int gdriver=VGA;
-    int gmode=VGAHI;
-    initgraph(&gdriver,&gmode,"C:\\BORLANDC\\BGI");
-	
-	mouseinit();
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
@@ -86,9 +81,8 @@ void forget(int *page)
 		}
 		else if(mouse_press(610,0,640,30) == 1)
 		{
-			delay(1000);
-			closegraph();
-			exit(1);
+			*page = 1;
+			return;
 		}
 		
 		else if(mouse_press(180,440,260,470) == 2)   //Íê³É
@@ -127,7 +121,7 @@ void forget(int *page)
 		else if (mouse_press(380,440,460,470) == 1)
 		{
 			MouseS = 0;
-		    //*func = 2;
+		    *page = 0;
 			return;
 		}
 		
