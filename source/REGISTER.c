@@ -1,39 +1,7 @@
 #include"common.h"
+#include"register.h"
 
-void drawregist()
-{
-	setbkcolor(11);
-	bar(80,100,560,130);
-    bar(80,160,560,190);
-    bar(80,220,560,250);
-	bar(80,280,560,310);
-    bar(80,340,560,370);
-    bar(160,400,560,430);
-	setfillstyle(1,7);
-	bar(80,400,160,430);
-	puthz(80,80,"用户名",16,20,1);
-    puthz(80,140,"密码",16,20,1);
-    puthz(80,200,"确认密码",16,20,1);
-    puthz(80,260,"身份证号",16,20,1);
-    puthz(80,320, "电话号码",16,20,1);
-    puthz(80,380,"验证码",16,20,1);
-	
-	setfillstyle(1,2);
-	bar(180,440,260,470);
-	setfillstyle(1,4);
-	bar(380,440,460,470);
-	puthz(195,445,"注册",24,28,1);
-	puthz(395,445,"返回",24,28,1);
-	puthz(200,20,"用户注册",48,56,1);
-	
-	setfillstyle(1,LIGHTGRAY);
-    bar(610,0,640,30);
-    setcolor(1);
-    line(610,0,640,30);
-    line(640,0,610,30);
-}
-
-void regist()
+void regist(int *page)
 {
 	int num=0;
 	char str[6] = { '\0' };
@@ -50,11 +18,11 @@ void regist()
 	int state5 = 0;
 	int state6 = 0;
 	
-	int gdriver=VGA;
+	/*int gdriver=VGA;
     int gmode=VGAHI;
     initgraph(&gdriver,&gmode,"C:\\BORLANDC\\BGI");
 	
-	mouseinit();
+	mouseinit();*/
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
@@ -352,4 +320,38 @@ void regist()
 			continue;
 		}
 	}
+}
+
+void drawregist()
+{
+	setbkcolor(11);
+	setfillstyle(1,15);
+	bar(80,100,560,130);
+    bar(80,160,560,190);
+    bar(80,220,560,250);
+	bar(80,280,560,310);
+    bar(80,340,560,370);
+    bar(160,400,560,430);
+	setfillstyle(1,7);
+	bar(80,400,160,430);
+	puthz(80,80,"用户名",16,20,1);
+    puthz(80,140,"密码",16,20,1);
+    puthz(80,200,"确认密码",16,20,1);
+    puthz(80,260,"身份证号",16,20,1);
+    puthz(80,320, "电话号码",16,20,1);
+    puthz(80,380,"验证码",16,20,1);
+	
+	setfillstyle(1,2);
+	bar(180,440,260,470);
+	setfillstyle(1,4);
+	bar(380,440,460,470);
+	puthz(195,445,"注册",24,28,1);
+	puthz(395,445,"返回",24,28,1);
+	puthz(200,20,"用户注册",48,56,1);
+	
+	setfillstyle(1,LIGHTGRAY);
+    bar(610,0,640,30);
+    setcolor(1);
+    line(610,0,640,30);
+    line(640,0,610,30);
 }

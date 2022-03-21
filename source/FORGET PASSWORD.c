@@ -37,7 +37,7 @@ void drawforget()
     line(640,0,610,30);
 }
 
-void forget()
+void forget(int *page)
 {
 	int num=0;
 	char str[6] = { '\0' };

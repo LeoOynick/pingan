@@ -1,4 +1,5 @@
 #include"common.h"
+#include"binding.h"
 
 void binding()
 {

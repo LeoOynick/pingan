@@ -1,4 +1,5 @@
 #include"common.h"
+#include"A_INFOMATION.h"
 
 void a_info()
 {
