@@ -2,11 +2,9 @@
 
 void drawforget()
 {
-	int gdriver=VGA;
-    int gmode=VGAHI;
-    initgraph(&gdriver,&gmode,"C:\\BORLANDC\\BGI");
-	
 	setbkcolor(11);
+	setlinestyle(0,4,3);
+	setfillstyle(1,15);
 	bar(80,100,560,130);
     bar(80,160,560,190);
     bar(80,220,560,250);

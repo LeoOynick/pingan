@@ -243,6 +243,7 @@ void enter(int *page)
 void drawenter()
 {
 	setbkcolor(LIGHTCYAN);
+	setlinestyle(0,4,3);
     setfillstyle(1,15);
 	bar(80,170,560,200);
     bar(80,240,560,270);

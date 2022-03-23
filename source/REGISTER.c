@@ -11,17 +11,26 @@ void regist(int *page)
 	char ID[20] = { '\0' };   //身份证号（18位）
 	char tele[12] = { '\0' };   //电话号码（11位）
 	char code[6] = { '\0' };   //验证码（5位）
-	int state1 = 0;
+	int state1 = 0;   //判断是否有字符输入
 	int state2 = 0;
 	int state3 = 0;
 	int state4 = 0;
 	int state5 = 0;
 	int state6 = 0;
+	int flag1 = 0;   //判断输入字符是否符合要求
+	int flag2 = 0;
+	int flag3 = 0;
+	int flag4 = 0;
+	int flag5 = 0;
+	int flag6 = 0;
 	
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
 	drawregist();
+	settextstyle(0,0,2);
+	captcha(str);
+	outtextxy(80,407,str);
 	
 	while(1)
     {
@@ -65,8 +74,11 @@ void regist(int *page)
 		else if (mouse_press(180,440,260,470) == 1)
 		{
 			MouseS = 0;
-			//*func = 2;
-			return;
+			if(flag1 == 1 && flag2 == 1 && flag3 == 1 && flag4 == 1 && flag5 == 1 && flag6 == 1)
+			{
+				puthz(120,445,"注册成功！",24,28,RED);
+			}
+			//return;
 		}
 		
 		else if(mouse_press(380,440,460,470) == 2)   //返回
@@ -111,6 +123,10 @@ void regist(int *page)
 				state1 = 1;
 			else
 				state1 = 0;
+			if(strlen(name) >= 4 && strlen(name) <= 12)
+				flag1 = 1;
+			else
+				flag1 = 0;
 			continue;
 		}
 		
@@ -136,6 +152,10 @@ void regist(int *page)
 				state2 = 1;
 			else
 				state2 = 0;
+			if(strlen(password) >= 4 && strlen(password) <= 16)
+				flag2 = 1;
+			else
+				flag2 = 0;
 			continue;
 		}
 		
@@ -161,6 +181,10 @@ void regist(int *page)
 				state3 = 1;
 			else
 				state3 = 0;
+			if(confirm == password)
+				flag3 = 1;
+			else
+				flag3 = 0;
 			continue;
 		}
 		
@@ -181,11 +205,15 @@ void regist(int *page)
 			MouseS = 0;
 		    button(80,280,560,310,8,15,1);
 			ID[0] = '\0';
-			input(ID,85,282,16,15,2);
+			input(ID,85,282,18,15,2);
 			if(strlen(ID) != 0)
 				state4 = 1;
 			else
 				state4 = 0;
+			if(strlen(ID) == 18)
+				flag4 = 1;
+			else
+				flag4 = 0;
 			continue;
 		}
 		
@@ -206,11 +234,15 @@ void regist(int *page)
 			MouseS = 0;
 		    button(80,340,560,370,8,15,1);
 			tele[0] = '\0';
-			input(tele,85,342,16,15,2);
+			input(tele,85,342,11,15,2);
 			if(strlen(tele) != 0)
 				state5 = 1;
 			else
 				state5 = 0;
+			if(strlen(tele) == 11)
+				flag5 = 1;
+			else
+				flag5 = 0;
 			continue;
 		}
 		
@@ -236,6 +268,10 @@ void regist(int *page)
 				state6 = 1;
 			else
 				state6 = 0;
+			if(code == str)
+				flag6 = 1;
+			else
+				flag6 = 0;
 			continue;
 		}
 		
@@ -253,7 +289,11 @@ void regist(int *page)
 		else if (mouse_press(80,400,160,430) == 1)
 		{
 			MouseS = 0;
-		    
+			button(80,400,160,430,7,7,1);
+		    settextstyle(0,0,2);
+			captcha(str);
+			setcolor(1);
+			outtextxy(80,407,str);
 		}
 		
 		else
@@ -319,6 +359,7 @@ void regist(int *page)
 void drawregist()
 {
 	setbkcolor(11);
+	setlinestyle(0,4,3);
 	setfillstyle(1,15);
 	bar(80,100,560,130);
     bar(80,160,560,190);
@@ -329,7 +370,13 @@ void drawregist()
 	setfillstyle(1,7);
 	bar(80,400,160,430);
 	puthz(80,80,"用户名",16,20,1);
+	puthz(135,80,"（",16,18,8);
+	outtextxy(155,85,"4-12");
+	puthz(190,80,"个字符）",16,18,8);
     puthz(80,140,"密码",16,20,1);
+	puthz(115,140,"（",16,18,8);
+	outtextxy(135,145,"4-16");
+	puthz(170,140,"个字符）",16,18,8);
     puthz(80,200,"确认密码",16,20,1);
     puthz(80,260,"身份证号",16,20,1);
     puthz(80,320, "电话号码",16,20,1);
