@@ -9,4 +9,9 @@ void input(char* id, int x1, int y1, int charnum, int color, int flag);
 
 void captcha (char* str);
 //5Î»ÑéÖ¤Âë
+
+int checkcaptcha(char* str1, char* str2,int x, int y)
+//return 0 for match else return 1
+
+
 #endif

@@ -92,3 +92,18 @@ void captcha (char* str){ //5 digits
 	str[5] = '\0';
 	
 }
+
+int checkcaptcha(char* str1, char* str2,int x, int y) //return 0 for match else return 1
+{
+	if(strcmp(str1,str2) != 0)
+	{
+		puthz(x,y,"ÑéÖ¤Âë´íÎó",16,17,RED);
+		
+	}
+	else if (strcmp(str1,str2) == 0)	//match
+	{
+		
+		return 0;
+	}
+	return 1;
+}

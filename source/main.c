@@ -23,7 +23,7 @@ void main()
 				break;
 				
 			case(1):	//关闭按钮
-				delay(1000);
+				delay(500);
 			    closegraph();
 			    exit(1);
 				
