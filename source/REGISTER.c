@@ -79,7 +79,11 @@ void regist(int *page)
 				puthz(120,445,"×¢²á³É¹¦£¡",24,28,RED);
 			}*/
 			//return;
-			check_legal_reg(name,password,confirmpw,ID,tele,code,inputcode);
+			if(check_legal_reg(name,password,confirmpw,ID,tele,code,inputcode) == 1)
+			{
+				delay(1000); //remove when complete check_x function
+				*page = 3;
+				return;
 		}
 		
 		else if(mouse_press(380,440,460,470) == 2)		//·µ»Ø
@@ -441,9 +445,23 @@ int check_legal_reg(char* name, char* password, char* confirmpw,
 			format_tele = check_tele_dig(tele,566,370-23);
 			format_code = check_captcha(code,inputcode,566,430-23);
 			
-			return 1;
+			return 1;	//remove when complete below
+			/*if(check_sameuser())
+			{
+				//break
+			}
+			else
+			{
+				//log_userdata()
+				if(format_name == 0 || format_pw == 0 || format_Cpw == 0 
+					|| format_tele == 0 || format_code == 0 ||format_ID == 0)
+				{
+					//button(
+					//puthz
+					//return 1;
+				}
+			}*/
 		}
-	
 	}
 	return 0;
 }

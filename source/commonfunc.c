@@ -106,9 +106,12 @@ int check_captcha(char* str1, char* str2,int x, int y) //return 0 for match else
 		puthz(x,y,"输入错误",16,17,RED);
 		
 	}
-	else if (strcmp(str1,str2) == 0)	//match
+	else if (strcmp(str1,str2) == 0)	//match and display tick
 	{
-		
+		setcolor(GREEN);
+		setlinestyle(SOLID_LINE, 0, 3); 
+		line(x + 24, y + 9, x + 33, y + 19);
+		line(x + 33, y + 19, x + 43, y - 3);
 		return 0;
 	}
 
@@ -130,6 +133,10 @@ int check_username_dig(char* str,int x,int y) //4-12位用户名
 {
 	if(strlen(str) >=4 && strlen(str) <=12)
 	{
+		setcolor(GREEN);
+		setlinestyle(SOLID_LINE, 0, 3); 
+		line(x + 24, y + 9, x + 33, y + 19);
+		line(x + 33, y + 19, x + 43, y - 3);
 		return 1;
 	}
 	else if(strlen(str) < 4)
@@ -147,6 +154,11 @@ int check_comfirmpw(char* str1,char* str2,int x,int y)
 {
 	if(strcmp(str1,str2) == 0) //same
 	{
+		setcolor(GREEN);
+		setlinestyle(SOLID_LINE, 0, 3); 
+		line(x + 24, y + 9, x + 33, y + 19);
+		line(x + 33, y + 19, x + 43, y - 3);
+		
 		return 1;
 	}
 	else
@@ -160,6 +172,11 @@ int check_pw_dig(char* str,int x,int y)
 {
 	if(strlen(str) >=4 && strlen(str) <=16)
 	{
+		setcolor(GREEN);
+		setlinestyle(SOLID_LINE, 0, 3); 
+		line(x + 24, y + 9, x + 33, y + 19);
+		line(x + 33, y + 19, x + 43, y - 3);
+		
 		return 1;
 	}
 	else if(strlen(str) < 4)
@@ -196,7 +213,12 @@ int check_tele_dig(char* str,int x,int y)
 			}
 		}
 	}
-	return 0;
+	setcolor(GREEN);
+	setlinestyle(SOLID_LINE, 0, 3); 
+	line(x + 24, y + 9, x + 33, y + 19);
+	line(x + 33, y + 19, x + 43, y - 3);
+	
+	return 1;
 }
 
 int check_id(char* str,int x,int y)
@@ -223,6 +245,10 @@ int check_id(char* str,int x,int y)
 		}
 		if(str[17] =='X' || (str[17] >= '0' && str[17] <= '9') )
 		{
+			setcolor(GREEN);
+			setlinestyle(SOLID_LINE, 0, 3); 
+			line(x + 24, y + 9, x + 33, y + 19);
+			line(x + 33, y + 19, x + 43, y - 3);
 			return 1;
 		}
 		else
