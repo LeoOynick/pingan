@@ -5,10 +5,10 @@ void regist(int *page)
 {
 	int num=0;
 	char str[6] = { '\0' };
-	char name[15] = { '\0' };   //用户名（不超过12位）	
-	char password[20] = { '\0' };   //密码（不超过16位）
-	char confirm[20] = { '\0' };   //确认密码
-	char ID[20] = { '\0' };   //身份证号（18位）
+	char name[13] = { '\0' };   //用户名（不超过12位）	
+	char password[17] = { '\0' };   //密码（不超过16位）
+	char confirm[17] = { '\0' };   //确认密码
+	char ID[19] = { '\0' };   //身份证号（18位）
 	char tele[12] = { '\0' };   //电话号码（11位）
 	char code[6] = { '\0' };   //验证码（5位）
 	int state1 = 0;   //判断是否有字符输入

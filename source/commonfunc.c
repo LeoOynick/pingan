@@ -92,3 +92,27 @@ void captcha (char* str){ //5 digits
 	str[5] = '\0';
 	
 }
+
+int checkcaptcha(char* str1, char* str2,int x, int y) //return 0 for match else return 1
+{
+	if(strcmp(str1,str2) != 0)
+	{
+		puthz(x,y,"验证码错误",16,17,RED);
+		
+	}
+	else if (strcmp(str1,str2) == 0)	//match
+	{
+		
+		return 0;
+	}
+	return 1;
+}
+
+void judgeinput(char* str,int* state,int x,int y) //判断是否有输入
+{
+	if(strlen(str) == 0)
+	{
+		puthz(x,y,"未输入",16,17,RED);
+		*state = 1;
+	}
+}

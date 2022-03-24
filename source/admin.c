@@ -1,29 +1,5 @@
 #include"common.h"
-
-void drawadminist()
-{
-	setbkcolor(LIGHTCYAN);
-    setlinestyle(0,4,3);
-	setfillstyle(1,15);
-    bar(80,240,560,270);
-	
-	setfillstyle(1,2);
-	bar(180,400,260,430);
-	setfillstyle(1,4);
-	bar(380,400,460,430);
-	
-	setcolor(1);
-	puthz(80,220,"请输入管理员密码",16,20,1);
-	puthz(195,405,"登录",24,28,1);
-	puthz(395,405,"返回",24,28,1);
-	puthz(180,50,"管理员登录",48,56,1);
-	
-	setfillstyle(1,LIGHTGRAY);
-    bar(610,0,640,30);
-    setcolor(1);
-    line(610,0,640,30);
-    line(640,0,610,30);
-}
+#include"admin.h"
 
 void administ(int *page)
 {
@@ -165,4 +141,29 @@ void administ(int *page)
 			continue;
 		}
 	}
+}
+
+void drawadminist()
+{
+	setbkcolor(LIGHTCYAN);
+    
+	setfillstyle(1,15);
+    bar(80,240,560,270);
+	
+	setfillstyle(1,2);
+	bar(180,400,260,430);
+	setfillstyle(1,4);
+	bar(380,400,460,430);
+	
+	setcolor(1);
+	puthz(80,220,"请输入管理员密码",16,20,1);
+	puthz(195,405,"登录",24,28,1);
+	puthz(395,405,"返回",24,28,1);
+	puthz(180,50,"管理员登录",48,56,1);
+	
+	setfillstyle(1,LIGHTGRAY);
+    bar(610,0,640,30);
+    setcolor(1);
+    line(610,0,640,30);
+    line(640,0,610,30);
 }
