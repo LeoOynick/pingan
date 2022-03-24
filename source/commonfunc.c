@@ -97,12 +97,11 @@ int checkcaptcha(char* str1, char* str2,int x, int y) //return 0 for match else 
 {
 	if(strcmp(str1,str2) != 0)
 	{
-		puthz(x,y,"验证码错误",16,17,RED);
+		puthz(x,y,"验证码错误!",16,17,RED);
 		
 	}
 	else if (strcmp(str1,str2) == 0)	//match
 	{
-		
 		return 0;
 	}
 	return 1;
@@ -112,7 +111,114 @@ void judgeinput(char* str,int* state,int x,int y) //判断是否有输入
 {
 	if(strlen(str) == 0)
 	{
-		puthz(x,y,"未输入",16,17,RED);
+		puthz(x,y,"未输入!",16,17,RED);
 		*state = 1;
+	}
+}
+
+int check_username_dig(char* str,int x,int y) //4-12位用户名
+{
+	if(strlen(str) >=4 && strlen(str) <=12)
+	{
+		return 1;
+	}
+	else if(strlen(str) < 4)
+	{
+		puthz(x,y,"用户名应",16,17,RED);
+		setcolor(RED);
+		settextjustify(LEFT_TEXT, TOP_TEXT);
+		settextstyle(1,HORIZ_DIR,2);
+		outtextxy(x+72,y-5,">4!");
+	}
+	return 0;
+}
+
+int check_comfirmpw(char* str1,char* str2,int x,int y)
+{
+	if(strcmp(str1,str2) == 0) //same
+	{
+		return 1;
+	}
+	else
+	{
+		puthz(x,y,"密码不一致!",16,17,RED);	
+	}
+	return 0;
+}
+
+int check_pw_dig(char* str,int x,int y)
+{
+	if(strlen(str) >=4 && strlen(str) <=16)
+	{
+		return 1;
+	}
+	else if(strlen(str) < 4)
+	{
+		puthz(x,y,"密码应",16,17,RED);
+		setcolor(RED);
+		settextjustify(LEFT_TEXT, TOP_TEXT);
+		settextstyle(1,HORIZ_DIR,2);
+		outtextxy(x+53,y-5,">4!");
+	}
+	return 0;
+}
+
+int check_phone_dig(char* str,int x,int y)
+{
+	int i;
+	if(strlen(str) != 11)
+	{
+		puthz(x,y,"电话号码长度不正确!",16,17,RED);
+		return 0;
+	}
+	else
+	{
+		for(i=0;i<11;i++)
+		{
+			if(str[i] >= '0' && str[i] <= '9')
+			{
+				continue;
+			}
+			else
+			{
+				puthz(x,y,"电话号码格式不正确!",16,17,RED);
+				return 0;
+			}
+		}
+	}
+	return 0;
+}
+
+int check_id(char* str,int x,int y)
+{
+	int i;
+	if(strlen(str) != 18)
+	{
+		puthz(x,y,"身份证格式不正确!",16,17,RED);
+		return 0;
+	}
+	else
+	{
+		for(i=0;i<17;i++)
+		{
+			if(str[i] >= '0' && str[i] <= '9')
+			{
+				continue;
+			}
+			else
+			{
+				puthz(x,y,"身份证格式不正确!",16,17,RED);
+				return 0;
+			}
+		}
+		if(str[17] =='X' || (str[17] >= '0' && str[17] <= '9') )
+		{
+			return 1;
+		}
+		else
+		{
+			puthz(x,y,"身份证格式不正确!",16,17,RED);
+			return 0;
+		}
 	}
 }

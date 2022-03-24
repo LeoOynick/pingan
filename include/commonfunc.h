@@ -11,10 +11,24 @@ void captcha (char* str);
 //5Î»ÑéÖ¤Âë
 
 int checkcaptcha(char* str1, char* str2,int x, int y);
-//return 0 for match else return 1
+//ÅĞ¶Ï
 
 void judgeinput(char* str,int* state,int x,int y);
 //ÅĞ¶ÏÊÇ·ñÓĞÊäÈë
 
+int check_username_dig(char* str,int x,int y);
+//ÅĞ¶Ï
+
+int check_comfirmpw(char* str1,char* str2,int x,int y);
+//ÅĞ¶Ï
+
+int check_pw_dig(char* str,int x,int y);
+//ÅĞ¶Ï
+
+int check_phone_dig(char* str,int x,int y);
+//ÅĞ¶Ï
+
+int check_id(char* str,int x,int y);
+//ÅĞ¶Ï
 
 #endif
