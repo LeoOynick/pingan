@@ -4,38 +4,38 @@
 void regist(int *page)
 {
 	int num=0;
-	char str[6] = { '\0' };
-	char name[13] = { '\0' };   //用户名（不超过12位）	
-	char password[17] = { '\0' };   //密码（不超过16位）
-	char confirm[17] = { '\0' };   //确认密码
-	char ID[19] = { '\0' };   //身份证号（18位）
-	char tele[12] = { '\0' };   //电话号码（11位）
-	char code[6] = { '\0' };   //验证码（5位）
-	int state1 = 0;   //判断是否有字符输入
+	char inputcode[6] = { '\0' };
+	char name[13] = { '\0' };		//用户名（不超过12位）	
+	char password[17] = { '\0' };	//密码（不超过16位）
+	char confirmpw[17] = { '\0' };	//确认密码
+	char ID[19] = { '\0' };			//身份证号（18位）
+	char tele[12] = { '\0' };		//电话号码（11位）
+	char code[6] = { '\0' };		//验证码（5位）
+	int state1 = 0;					//判断是否有字符输入
 	int state2 = 0;
 	int state3 = 0;
 	int state4 = 0;
 	int state5 = 0;
 	int state6 = 0;
-	int flag1 = 0;   //判断输入字符是否符合要求
+	/*int flag1 = 0;					//判断输入字符是否符合要求
 	int flag2 = 0;
 	int flag3 = 0;
-	int flag4 = 0;
+	int flag4 = 0;						//已用check_reg
 	int flag5 = 0;
-	int flag6 = 0;
+	int flag6 = 0;*/
 	
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
 	drawregist();
 	settextstyle(0,0,2);
-	captcha(str);
-	outtextxy(80,407,str);
+	captcha(code);
+	outtextxy(80,407,code);
 	
 	while(1)
     {
 		newmouse(&MouseX,&MouseY,&press);
-		if(mouse_press(610,0,640,30) == 2)   //退出
+		if(mouse_press(610,0,640,30) == 2)		//退出
 		{
 			if (num == 0)
 		    {
@@ -58,7 +58,7 @@ void regist(int *page)
 			return;
 		}
 		
-		else if(mouse_press(180,440,260,470) == 2)   //注册
+		else if(mouse_press(180,440,260,470) == 2)		//注册
 		{
 			if (num == 0)
 			{
@@ -74,14 +74,15 @@ void regist(int *page)
 		else if (mouse_press(180,440,260,470) == 1)
 		{
 			MouseS = 0;
-			if(flag1 == 1 && flag2 == 1 && flag3 == 1 && flag4 == 1 && flag5 == 1 && flag6 == 1)
+			/*if(flag1 == 1 && flag2 == 1 && flag3 == 1 && flag4 == 1 && flag5 == 1 && flag6 == 1)
 			{
 				puthz(120,445,"注册成功！",24,28,RED);
-			}
+			}*/
 			//return;
+			check_legal_reg(name,password,confirmpw,ID,tele,code,inputcode);
 		}
 		
-		else if(mouse_press(380,440,460,470) == 2)   //返回
+		else if(mouse_press(380,440,460,470) == 2)		//返回
 		{
 			if (num == 0)
 			{
@@ -101,7 +102,7 @@ void regist(int *page)
 			return;
 		}
 		
-		else if(mouse_press(80,100,560,130) == 2)   //用户名
+		else if(mouse_press(80,100,560,130) == 2)		//用户名
 		{
 			if (num == 0 && state1 == 0)
 			{
@@ -123,14 +124,14 @@ void regist(int *page)
 				state1 = 1;
 			else
 				state1 = 0;
-			if(strlen(name) >= 4 && strlen(name) <= 12)
+			/*if(strlen(name) >= 4 && strlen(name) <= 12)
 				flag1 = 1;
 			else
-				flag1 = 0;
+				flag1 = 0;*/
 			continue;
 		}
 		
-		else if(mouse_press(80,160,560,190) == 2)   //密码
+		else if(mouse_press(80,160,560,190) == 2)		//密码
 		{
 			if (num == 0 && state2 == 0)
 			{
@@ -152,14 +153,14 @@ void regist(int *page)
 				state2 = 1;
 			else
 				state2 = 0;
-			if(strlen(password) >= 4 && strlen(password) <= 16)
+			/*if(strlen(password) >= 4 && strlen(password) <= 16)
 				flag2 = 1;
 			else
-				flag2 = 0;
+				flag2 = 0;*/
 			continue;
 		}
 		
-		else if(mouse_press(80,220,560,250) == 2)   //确认密码
+		else if(mouse_press(80,220,560,250) == 2)		//确认密码
 		{
 			if (num == 0 && state3 == 0)
 			{
@@ -175,20 +176,20 @@ void regist(int *page)
 		{
 			MouseS = 0;
 		    button(80,220,560,250,8,15,1);
-			confirm[0] = '\0';
-			input(confirm,85,222,16,15,1);
-			if(strlen(confirm) != 0)
+			confirmpw[0] = '\0';
+			input(confirmpw,85,222,16,15,1);
+			if(strlen(confirmpw) != 0)
 				state3 = 1;
 			else
 				state3 = 0;
-			if(confirm == password)
+			/*if(confirmpw == password)
 				flag3 = 1;
 			else
-				flag3 = 0;
+				flag3 = 0;*/
 			continue;
 		}
 		
-		else if(mouse_press(80,280,560,310) == 2)   //身份证号
+		else if(mouse_press(80,280,560,310) == 2)		//身份证号
 		{
 			if (num == 0 && state4 == 0)
 			{
@@ -210,14 +211,14 @@ void regist(int *page)
 				state4 = 1;
 			else
 				state4 = 0;
-			if(strlen(ID) == 18)
+			/*if(strlen(ID) == 18)
 				flag4 = 1;
 			else
-				flag4 = 0;
+				flag4 = 0;*/
 			continue;
 		}
 		
-		else if(mouse_press(80,340,560,370) == 2)   //电话号码
+		else if(mouse_press(80,340,560,370) == 2)		//电话号码
 		{
 			if (num == 0 && state5 == 0)
 			{
@@ -239,14 +240,14 @@ void regist(int *page)
 				state5 = 1;
 			else
 				state5 = 0;
-			if(strlen(tele) == 11)
+			/*if(strlen(tele) == 11)
 				flag5 = 1;
 			else
-				flag5 = 0;
+				flag5 = 0;*/
 			continue;
 		}
 		
-		else if(mouse_press(160,400,560,430) == 2)   //验证码
+		else if(mouse_press(160,400,560,430) == 2)		//验证码
 		{
 			if ((num == 0 || num == 10)&& state6 == 0)
 			{
@@ -262,20 +263,20 @@ void regist(int *page)
 		{
 			MouseS = 0;
 		    button(160,400,560,430,8,15,1);
-			code[0] = '\0';
-			input(code,165,402,16,15,2);
-			if(strlen(code) != 0)
+			inputcode[0] = '\0';
+			input(inputcode,165,402,5,15,2);
+			if(strlen(inputcode) != 0)
 				state6 = 1;
 			else
 				state6 = 0;
-			if(code == str)
+			/*if(inputcode == code)
 				flag6 = 1;
 			else
-				flag6 = 0;
+				flag6 = 0;*/
 			continue;
 		}
 		
-		else if(mouse_press(80,400,160,430) == 2)   //换验证码
+		else if(mouse_press(80,400,160,430) == 2)		//换验证码
 		{
 			if (num == 0 || num == 9)
 			{
@@ -291,9 +292,10 @@ void regist(int *page)
 			MouseS = 0;
 			button(80,400,160,430,7,7,1);
 		    settextstyle(0,0,2);
-			captcha(str);
+			captcha(code);
 			setcolor(1);
-			outtextxy(80,407,str);
+			outtextxy(80,407,code);
+			continue;
 		}
 		
 		else
@@ -396,4 +398,52 @@ void drawregist()
     setcolor(1);
     line(610,0,640,30);
     line(640,0,610,30);
+}
+
+int check_legal_reg(char* name, char* password, char* confirmpw, 
+					char* ID, char* tele, char* code, char* inputcode)
+{
+	int i;
+	int inputed = 0;	//判断是否有输入
+	int format_name = 0;   //判断输入字符是否符合要求
+	int format_pw = 0;
+	int format_Cpw = 0;
+	int format_ID = 0;
+	int format_tele = 0;
+	int format_code = 0;
+	
+	while(1)
+	{
+		coverhz(566,130-23,11);	//覆盖文字
+		coverhz(566,190-23,11);
+		coverhz(566,250-23,11);
+		coverhz(566,310-23,11);
+		coverhz(566,370-23,11);
+		coverhz(566,430-23,11);
+	
+		judgeinput(name,&inputed,566,130-23);	//判断格式是否符合要求
+		judgeinput(password,&inputed,566,190-23);
+		judgeinput(confirmpw,&inputed,566,250-23);
+		judgeinput(ID,&inputed,566,310-23);
+		judgeinput(tele,&inputed,566,370-23);
+		judgeinput(inputcode,&inputed,566,430-23);
+		
+		if(inputed == 1)
+		{
+			break;
+		}
+		else if(inputed == 0)
+		{
+			format_name = check_username_dig (name,566,130-23);	//若符合格式则为 1
+			format_pw = check_pw_dig (password,566,190-23);
+			format_Cpw = check_comfirmpw(password,confirmpw,566,250-23);
+			format_ID = check_id(ID,566,310-23);
+			format_tele = check_tele_dig(tele,566,370-23);
+			format_code = check_captcha(code,inputcode,566,430-23);
+			
+			return 1;
+		}
+	
+	}
+	return 0;
 }
