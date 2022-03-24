@@ -62,10 +62,10 @@ void mine(int *page)
 		    }
 			continue;
 		}
-		else if(mouse_press(120,420,400,480) == 1)
+		else if(mouse_press(120,420,200,480) == 1)
 		{
 			MouseS = 0;
-			*page = 8;
+			*page = 6;
 			return;
 		}
 		
@@ -91,7 +91,7 @@ void mine(int *page)
 		else if(mouse_press(280,420,360,480) == 1)
 		{
 			MouseS = 0;
-			*page = 6;
+			*page = 7;
 			return;
 		}
 		

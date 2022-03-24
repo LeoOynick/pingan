@@ -37,9 +37,8 @@ void service(int *page)
 		}
 		else if(mouse_press(610,0,640,30) == 1)
 		{
-			delay(1000);
-			closegraph();
-			exit(1);
+			*page= 1;
+			return;
 		}
 		
 		else if(mouse_press(115,95,205,205) == 2)   //³µÁ¾·þÎñ
@@ -183,10 +182,10 @@ void service(int *page)
 		    }
 			continue;
 		}
-		else if(mouse_press(120,420,400,480) == 1)
+		else if(mouse_press(120,420,200,480) == 1)
 		{
 			MouseS = 0;
-			//*page = 2;
+			*page = 6;
 			return;
 		}
 		
@@ -211,7 +210,7 @@ void service(int *page)
 		else if(mouse_press(440,420,520,480) == 1)
 		{
 			MouseS = 0;
-			//*page = 2;
+			*page = 8;
 			return;
 		}
 		
