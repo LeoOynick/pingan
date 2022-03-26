@@ -258,3 +258,23 @@ int check_id(char* str,int x,int y)
 		}
 	}
 }
+
+void choose(int x,int y,int state)
+{
+	if(state == 0)
+	{
+		clrmous(MouseX, MouseY);
+		delay(10);
+		setfillstyle(1,RED);
+		fillellipse(x,y,2,2);
+		state = 1;
+	}
+	else
+	{
+		clrmous(MouseX, MouseY);
+		delay(10);
+		setfillstyle(1,15);
+		fillellipse(x,y,3,3);
+		state = 0;
+	}
+}

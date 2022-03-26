@@ -90,7 +90,7 @@ void home(int *page)
 		else if(mouse_press(275,95,365,205) == 1)
 		{
 			MouseS = 0;
-			//*page = 2;
+			*page = 10;
 			return;
 		}
 		
@@ -122,7 +122,7 @@ void home(int *page)
 		else if(mouse_press(435,95,525,205) == 1)
 		{
 			MouseS = 0;
-			//*page = 2;
+			*page = 11;
 			return;
 		}
 		
@@ -151,7 +151,7 @@ void home(int *page)
 		else if(mouse_press(115,255,205,365) == 1)
 		{
 			MouseS = 0;
-			//*page = 2;
+			*page = 12;
 			return;
 		}
 		
@@ -180,7 +180,7 @@ void home(int *page)
 		else if(mouse_press(275,255,365,365) == 1)
 		{
 			MouseS = 0;
-			//*page = 2;
+			*page = 13;
 			return;
 		}
 		
@@ -208,7 +208,7 @@ void home(int *page)
 		else if(mouse_press(435,255,525,365) == 1)
 		{
 			MouseS = 0;
-			//*page = 2;
+			*page = 14;
 			return;
 		}
 		
