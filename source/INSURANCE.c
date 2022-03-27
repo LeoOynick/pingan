@@ -96,7 +96,7 @@ void insure(int *page)
 			return;
 		}
 		
-		else if (mouse_press(530,230,550,250) == 2)   //基本险
+		else if (mouse_press(535,235,545,245) == 2)   //基本险
 		{
 			if (num == 0)
 			{
@@ -107,28 +107,13 @@ void insure(int *page)
 			}
 			continue;
 		}
-		else if (mouse_press(530,230,550,250) == 1)
+		else if (mouse_press(535,235,545,245) == 1)
 		{
 			delay(150);
-			if(state1 == 0)
-			{
-				clrmous(MouseX, MouseY);
-				delay(10);
-				setfillstyle(1,RED);
-				fillellipse(540,240,5,5);
-				state1 = 1;
-			}
-			else
-			{
-				clrmous(MouseX, MouseY);
-				delay(10);
-				setfillstyle(1,LIGHTCYAN);
-				fillellipse(540,240,7,7);
-				state1 = 0;
-			}
+			choose(530,240,state1);
 		}
 		
-		else if (mouse_press(530,270,550,290) == 2)   //商业险
+		else if (mouse_press(535,275,545,285) == 2)   //商业险
 		{
 			
 			if (num == 0)
@@ -140,28 +125,13 @@ void insure(int *page)
 			}
 			continue;
 		}
-		else if (mouse_press(530,270,550,290) == 1)
+		else if (mouse_press(535,275,545,285) == 1)
 		{
 			delay(150);
-			if(state2 == 0)
-			{
-				clrmous(MouseX, MouseY);
-				delay(10);
-				setfillstyle(1,RED);
-				fillellipse(540,280,5,5);
-				state2 = 1;
-			}
-			else
-			{
-				clrmous(MouseX, MouseY);
-				delay(10);
-				setfillstyle(1,LIGHTCYAN);
-				fillellipse(540,280,7,7);
-				state2 = 0;
-			}
+			choose(540,280,state2);
 		}
 		
-		else if (mouse_press(530,310,550,330) == 2)   //交强险
+		else if (mouse_press(535,315,545,325) == 2)   //交强险
 		{
 			if (num == 0)
 			{
@@ -172,25 +142,10 @@ void insure(int *page)
 			}
 			continue;
 		}
-		else if (mouse_press(530,310,550,330) == 1)
+		else if (mouse_press(535,315,545,325) == 1)
 		{
 			delay(150);
-			if(state3 == 0)
-			{
-				clrmous(MouseX, MouseY);
-				delay(10);
-				setfillstyle(1,RED);
-				fillellipse(540,320,5,5);
-				state3 = 1;
-			}
-			else
-			{
-				clrmous(MouseX, MouseY);
-				delay(10);
-				setfillstyle(1,LIGHTCYAN);
-				fillellipse(540,320,7,7);
-				state3 = 0;
-			}
+			choose(540,320,state3);
 		}
 		
 		else
@@ -261,10 +216,9 @@ void drawinsure()
 	puthz(400,230,"万元",24,28,1);
 	puthz(400,270,"万元",24,28,1);
 	puthz(400,310,"万元",24,28,1);
-	setlinestyle(0,4,3);
-	circle(540,240,8);
-	circle(540,280,8);
-	circle(540,320,8);
+	fillellipse(540,240,5,5);
+	fillellipse(540,280,5,5);
+	fillellipse(540,320,5,5);
 	puthz(80,350,"总计",24,28,1);
 	puthz(200,350,"万元",24,28,1);
 	puthz(260,355,"（更多请关注“平安好车主”公众号）",16,18,8);

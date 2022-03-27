@@ -63,13 +63,37 @@ void main()
 				policy(&page);
 				break;
 				
-			/*case(11):   //办理赔
+			case(11):   //办理赔
 				claim(&page);
-				break;*/
-			//管理员界面
-			//买车险界面
-			//忘记密码界面
-			//
+				break;
+				
+			case(12):   //查违章
+				violate(&page);
+				break;
+				
+			case(13):   //停车·缴费
+				parking(&page);
+				break;
+				
+			case(14):   //车损测算
+				measure(&page);
+				break;
+			
+			case(15):   //车辆服务
+				carserve(&page);
+				break;
+				
+			case(16):   //年检代办
+				inspect(&page);
+				break;
+				
+			case(17):   //道路救援
+				rescue(&page);
+				break;
+				
+			case(18):   //服务地图
+				map(&page);
+				break;
 		}
 	}
 }

@@ -5,11 +5,6 @@ void service(int *page)
 {
 	int num = 0;
 	
-	/*int gdriver=VGA;
-    int gmode=VGAHI;
-    initgraph(&gdriver,&gmode,"C:\\BORLANDC\\BGI");
-	
-	mouseinit();*/
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
@@ -71,7 +66,7 @@ void service(int *page)
 		else if(mouse_press(115,95,205,205) == 1)
 		{
 			MouseS = 0;
-			//*page = 2;
+			*page = 15;
 			return;
 		}
 		
@@ -99,7 +94,7 @@ void service(int *page)
 		else if(mouse_press(435,95,525,205) == 1)
 		{
 			MouseS = 0;
-			//*page = 2;
+			*page = 16;
 			return;
 		}
 		
@@ -127,7 +122,7 @@ void service(int *page)
 		else if(mouse_press(115,255,205,365) == 1)
 		{
 			MouseS = 0;
-			//*page = 2;
+			*page = 17;
 			return;
 		}
 		
@@ -157,7 +152,7 @@ void service(int *page)
 		else if(mouse_press(435,255,525,365) == 1)
 		{
 			MouseS = 0;
-			//*page = 2;
+			*page = 18;
 			return;
 		}
 		

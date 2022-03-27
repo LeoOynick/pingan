@@ -126,7 +126,7 @@ void drawviolate()
 	puthz(270,220,"违章类型",24,28,1);
 	puthz(450,220,"处罚",24,28,1);
 	
-	setfillstyle(1,14);
+	setfillstyle(1,4);
 	bar(280,400,360,430);
 	puthz(295,405,"返回",24,28,1);
 	
