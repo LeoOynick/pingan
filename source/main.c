@@ -94,6 +94,14 @@ void main()
 			case(18):   //服务地图
 				map(&page);
 				break;
+				
+			case(19):   //添加车辆
+				binding(&page);
+				break;
+				
+			case(20):   //更多信息
+				moreinfo(&page);
+				break;
 		}
 	}
 }

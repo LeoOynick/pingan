@@ -5,11 +5,6 @@ void mine(int *page)
 {
 	int num = 0;
 	
-	/*int gdriver=VGA;
-    int gmode=VGAHI;
-    initgraph(&gdriver,&gmode,"C:\\BORLANDC\\BGI");
-	
-	mouseinit();*/
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
@@ -108,7 +103,7 @@ void mine(int *page)
 		else if(mouse_press(20,160,620,200) == 1)
 		{
 			MouseS = 0;
-			//*page = 2;
+			*page = 19;
 			return;
 		}
 		
