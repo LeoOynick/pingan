@@ -84,6 +84,7 @@ void regist(int *page)
 				delay(1000); //remove when complete check_x function
 				*page = 3;
 				return;
+			}
 		}
 		
 		else if(mouse_press(380,440,460,470) == 2)		//·µ»Ø
@@ -445,6 +446,7 @@ int check_legal_reg(char* name, char* password, char* confirmpw,
 			format_tele = check_tele_dig(tele,566,370-23);
 			format_code = check_captcha(code,inputcode,566,430-23);
 			
+			write_userdata(name,password,ID,tele);
 			return 1;	//remove when complete below
 			/*if(check_sameuser())
 			{
@@ -465,3 +467,45 @@ int check_legal_reg(char* name, char* password, char* confirmpw,
 	}
 	return 0;
 }
+
+void write_userdata(char* name, char* pw, char* ID, char* tele)
+{
+	FILE *fp = NULL;
+	User *u = NULL;
+	
+	if( (fp = fopen("Database\\UserData.dat", "rb+" )) == NULL )	//open userdata.dat in fp
+	{
+		printf("Error! Can't Open UserData.dat File");
+		delay(1500);
+		exit(1);
+	}
+	
+	if( (u = (User*)malloc(sizeof(User))) == NULL )	//allocate memory for u
+	{
+		printf("Error - unable to allocate required memory");
+		delay(1500);
+		exit(1);
+	}
+	
+	stpcpy(u->name,name);		//copy name to U.name
+	stpcpy(u->password,pw); 
+	stpcpy(u->ID,ID);
+	stpcpy(u->tele,tele);
+	fseek(fp,0,SEEK_END);
+	fwrite(u,sizeof(User),1,fp);
+	
+	if (u != NULL)
+	{
+		free(u);
+		u = NULL;
+	}
+	
+	if (fclose(fp) != 0)
+	{
+		printf("\n cannot close UserData.dat");
+		delay(3000);
+		exit(1);
+	}
+	
+}
+	

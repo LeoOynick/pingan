@@ -9,7 +9,7 @@ typedef struct userinfo
 	char tele[12];			//11位电话号码
 }User;		//封装用户信息
 
-typedef struct date
+typedef struct datetime
 {
 	char year[5];			//年
 	char month[5];			//月

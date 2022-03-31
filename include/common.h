@@ -13,5 +13,6 @@
 #include<time.h>
 #include"HZ.H"
 #include"mouse.h"
+#include"datastruct.h"
 
 #endif
