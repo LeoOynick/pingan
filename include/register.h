@@ -6,4 +6,7 @@ void drawregist();
 int check_legal_reg(char* name, char* password, char* confirmpw, 
 					char* ID, char* tele, char* code, char* inputcode);
 
+void write_userdata(char* name, char* pw, char* ID, char* tele);
+
+
 #endif
