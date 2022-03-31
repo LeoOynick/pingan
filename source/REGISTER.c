@@ -17,12 +17,6 @@ void regist(int *page)
 	int state4 = 0;
 	int state5 = 0;
 	int state6 = 0;
-	/*int flag1 = 0;					//判断输入字符是否符合要求
-	int flag2 = 0;
-	int flag3 = 0;
-	int flag4 = 0;						//已用check_reg
-	int flag5 = 0;
-	int flag6 = 0;*/
 	
 	clrmous(MouseX, MouseY);
 	delay(100);
@@ -405,8 +399,7 @@ void drawregist()
     line(640,0,610,30);
 }
 
-int check_legal_reg(char* name, char* password, char* confirmpw, 
-					char* ID, char* tele, char* code, char* inputcode)
+int check_legal_reg(char* name, char* password, char* confirmpw, char* ID, char* tele, char* code, char* inputcode)
 {
 	int i;
 	int inputed = 0;	//判断是否有输入

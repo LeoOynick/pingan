@@ -106,7 +106,6 @@ void policy(int *page)
 void drawpolicy()
 {
 	setbkcolor(LIGHTCYAN);
-	setlinestyle(0,4,3);
 	
 	puthz(240,20,"查保单",48,56,1);
 	puthz(20,120,"车辆信息",24,28,1);
@@ -118,6 +117,8 @@ void drawpolicy()
 	line(500,145,505,150);
 	setfillstyle(1,15);
 	bar(20,160,620,200);
+	setlinestyle(0,4,3);
+	setcolor(15);
 	rectangle(80,200,560,320);
 	puthz(90,250,"保额：",24,28,1);
 	puthz(260,250,"万元",24,28,1);
