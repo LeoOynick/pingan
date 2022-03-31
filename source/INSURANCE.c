@@ -110,7 +110,7 @@ void insure(int *page)
 		else if (mouse_press(535,235,545,245) == 1)
 		{
 			delay(150);
-			choose(530,240,state1);
+			choose(540,240,&state1);
 		}
 		
 		else if (mouse_press(535,275,545,285) == 2)   //商业险
@@ -128,7 +128,7 @@ void insure(int *page)
 		else if (mouse_press(535,275,545,285) == 1)
 		{
 			delay(150);
-			choose(540,280,state2);
+			choose(540,280,&state2);
 		}
 		
 		else if (mouse_press(535,315,545,325) == 2)   //交强险
@@ -145,7 +145,7 @@ void insure(int *page)
 		else if (mouse_press(535,315,545,325) == 1)
 		{
 			delay(150);
-			choose(540,320,state3);
+			choose(540,320,&state3);
 		}
 		
 		else
@@ -216,6 +216,8 @@ void drawinsure()
 	puthz(400,230,"万元",24,28,1);
 	puthz(400,270,"万元",24,28,1);
 	puthz(400,310,"万元",24,28,1);
+	setcolor(15);
+	setfillstyle(1,15);
 	fillellipse(540,240,5,5);
 	fillellipse(540,280,5,5);
 	fillellipse(540,320,5,5);

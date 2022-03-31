@@ -34,7 +34,7 @@ int check_tele_dig (char* str,int x,int y);
 int check_id (char* str,int x,int y);
 //判断身份证格式
 
-void choose(int x,int y,int state);
+void choose(int x,int y,int *state);
 //进行项目勾选
 
 #endif

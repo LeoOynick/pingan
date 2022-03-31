@@ -135,7 +135,7 @@ void parking(int *page)
 				MouseS = 1;
 				clrmous(MouseX, MouseY);
 				delay(10);
-				button(570,240,610,260,15,8,3);
+				button(570,240,610,260,15,8,1);
 				puthz(575,242,"ԤԼ",16,18,15);
 				num = 7;
 			}
@@ -154,8 +154,8 @@ void parking(int *page)
 				MouseS = 1;
 				clrmous(MouseX, MouseY);
 				delay(10);
-				button(570,350,610,370,15,8,3);
-				puthz(575,352,"ԤԼ",16,18,15);
+				button(570,350,610,370,15,8,1);
+				puthz(575,352,"�ɷ�",16,18,15);
 				num = 8;
 			}
 			continue;

@@ -114,13 +114,31 @@ void mine(int *page)
 				MouseS = 1;
 				clrmous(MouseX, MouseY);
 				delay(10);
-				num = 4;
+				num = 5;
 			}	
 		}
 		else if(mouse_press(520,135,600,155) == 1)
 		{
 			MouseS = 0;
 			//*page = 2;
+			return;
+		}
+		
+		else if(mouse_press(500,60,590,80) == 2)   //ÍË³öµÇÂ¼
+		{
+			if (num == 0)
+			{
+				MouseS = 1;
+				clrmous(MouseX, MouseY);
+				delay(10);
+				num = 6;
+			}	
+		}
+		else if(mouse_press(500,60,590,80) == 1)
+		{
+			MouseS = 0;
+			delay(1000);
+			*page = 0;
 			return;
 		}
 		
@@ -180,6 +198,12 @@ void drawmine()
 	bar(520,420,640,480);
 	setfillstyle(1,15);
 	fillellipse(25,25,24,24);
+	
+	puthz(520,60,"ÍË³öµÇÂ¼",16,18,8);
+	setcolor(8);
+	arc(510,67,100,440,7);
+	line(510,63,510,58);
+	
 	setlinestyle(0,4,3);
 	setcolor(9);
 	circle(25,15,15);
@@ -214,6 +238,8 @@ void drawmine()
 	line(185,180,215,180);
 	line(200,165,200,195);
 	puthz(280,170,"Á¢¼´Ìí¼Ó³µÁ¾",24,28,8);
+	
+	
 	
 	setfillstyle(1,LIGHTGRAY);
     bar(610,0,640,30);

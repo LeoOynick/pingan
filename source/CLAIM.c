@@ -46,7 +46,7 @@ void claim(int *page)
 			return;
 		}
 		
-		else if(mouse_press(180,400,260,430) == 2)   //确定
+		else if(mouse_press(180,400,260,430) == 2)   //购买
 		{
 			if (num == 0)
 			{
@@ -54,7 +54,7 @@ void claim(int *page)
 				clrmous(MouseX, MouseY);
 				delay(10);
 				button(180,400,260,430,15,10,1);
-				puthz(195,405,"确定",24,28,1);
+				puthz(195,405,"购买",24,28,1);
 				num = 2;
 			}
 			continue;
@@ -355,7 +355,7 @@ void drawclaim()
 	bar(180,400,260,430);
 	setfillstyle(1,4);
 	bar(380,400,460,430);
-	puthz(195,405,"确定",24,28,1);
+	puthz(195,405,"购买",24,28,1);
 	puthz(395,405,"返回",24,28,1);
 	
     setfillstyle(1,LIGHTGRAY);

@@ -8,7 +8,7 @@ void violate(int *page)
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
-	drawpolicy();
+	drawviolate();
 	
 	while(1)
 	{
