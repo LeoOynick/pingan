@@ -146,6 +146,7 @@ void administ(int *page)
 void drawadminist()
 {
 	setbkcolor(LIGHTCYAN);
+	setlinestyle(0,4,3);
     
 	setfillstyle(1,15);
     bar(80,240,560,270);

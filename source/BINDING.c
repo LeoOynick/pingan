@@ -84,28 +84,28 @@ void binding(int *page)
 		else if (mouse_press(380,400,460,430) == 1)
 		{
 			MouseS = 0;
-		    *page = 0;
+		    *page = 8;
 			return;
 		}
 		
-		else if(mouse_press(275,120,480,160) == 2)		//³µÅÆºÅÂë
+		else if(mouse_press(310,120,480,160) == 2)		//³µÅÆºÅÂë
 		{
 			if (num == 0 && state1 == 0)
 			{
 				MouseS = 2;
 				clrmous(MouseX, MouseY);
 				delay(10);
-				button(275,120,480,160,8,15,1);
+				button(310,120,480,160,8,15,1);
 				num = 4;
 			}
 			continue;
 		}
-		else if (mouse_press(275,120,480,160) == 1)
+		else if (mouse_press(310,120,480,160) == 1)
 		{
 			MouseS = 0;
-		    button(275,120,480,160,8,15,1);
+		    button(310,120,480,160,8,15,1);
 			licensenum[0] = '\0';
-			input(licensenum,280,122,11,15,2);
+			input(licensenum,310,122,11,15,2);
 			if(strlen(licensenum) != 0)
 				state1 = 1;
 			else
@@ -269,7 +269,7 @@ void binding(int *page)
 				
 				else if(num == 4 && state1 == 0)
 				{
-					button(275,120,480,160,15,15,1);
+					button(310,120,480,160,15,15,1);
 				}
 				else if(num == 5 && state2 == 0)
 				{

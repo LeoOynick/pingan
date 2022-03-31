@@ -36,20 +36,38 @@ void violate(int *page)
 			return;
 		}
 		
-		else if(mouse_press(280,400,360,430) == 2)   //返回
+		else if(mouse_press(180,400,260,430) == 2)   //查询
 		{
 			if (num == 0)
 			{
 				MouseS = 1;
 				clrmous(MouseX, MouseY);
 				delay(10);
-				button(280,400,360,430,15,12,1);
-				puthz(295,405,"返回",24,28,1);
+				button(180,400,260,430,15,10,1);
+				puthz(195,405,"查询",24,28,1);
 				num = 2;
 			}
 			continue;
 		}
-		else if (mouse_press(280,400,360,430) == 1)
+		else if (mouse_press(180,400,260,430) == 1)
+		{
+			MouseS = 0;
+		}
+		
+		else if(mouse_press(380,400,460,430) == 2)   //返回
+		{
+			if (num == 0)
+			{
+				MouseS = 1;
+				clrmous(MouseX, MouseY);
+				delay(10);
+				button(380,400,460,430,15,12,1);
+				puthz(395,405,"返回",24,28,1);
+				num = 3;
+			}
+			continue;
+		}
+		else if (mouse_press(380,400,460,430) == 1)
 		{
 			MouseS = 0;
 		    *page = 6;
@@ -92,9 +110,15 @@ void violate(int *page)
 				}
 				else if(num == 2)
 				{
+					setfillstyle(1,2);
+					bar(180,400,260,430);
+					puthz(195,405,"查询",24,28,1);
+				}
+				else if(num == 3)
+				{
 					setfillstyle(1,4);
-					bar(280,400,360,430);
-					puthz(295,405,"返回",24,28,1);
+					bar(380,400,460,430);
+					puthz(395,405,"返回",24,28,1);
 				}
 				num = 0;
 			}
@@ -126,9 +150,12 @@ void drawviolate()
 	puthz(270,220,"违章类型",24,28,1);
 	puthz(450,220,"处罚",24,28,1);
 	
+	setfillstyle(1,GREEN);
+	bar(180,400,260,430);
 	setfillstyle(1,4);
-	bar(280,400,360,430);
-	puthz(295,405,"返回",24,28,1);
+	bar(380,400,460,430);
+	puthz(195,405,"查询",24,28,1);
+	puthz(395,405,"返回",24,28,1);
 	
 	setfillstyle(1,LIGHTGRAY);
     bar(610,0,640,30);
