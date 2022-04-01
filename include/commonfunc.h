@@ -16,6 +16,9 @@ void captcha (char* str);
 int check_captcha (char* str1, char* str2,int x, int y);
 //判断验证码是否正确
 
+int check_samename(char* name, int flag);
+//flag 1--用户已被注册, 2--账号存在, 3--不输出
+
 void judgeinput (char* str,int* state,int x,int y);
 //判断是否有输入
 

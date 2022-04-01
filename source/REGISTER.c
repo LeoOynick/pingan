@@ -22,6 +22,7 @@ void regist(int *page)
 	delay(100);
 	cleardevice();
 	drawregist();
+	
 	settextstyle(0,0,2);
 	captcha(code);
 	outtextxy(80,407,code);
@@ -245,7 +246,6 @@ void regist(int *page)
 				flag5 = 0;*/
 			continue;
 		}
-		
 		else if(mouse_press(160,400,560,430) == 2)		//验证码
 		{
 			if ((num == 0 || num == 10)&& state6 == 0)
@@ -288,7 +288,7 @@ void regist(int *page)
 		}
 		else if (mouse_press(80,400,160,430) == 1)
 		{
-			MouseS = 0;
+			//MouseS = 0;
 			button(80,400,160,430,7,7,1);
 		    settextstyle(0,0,2);
 			captcha(code);
@@ -399,7 +399,8 @@ void drawregist()
     line(640,0,610,30);
 }
 
-int check_legal_reg(char* name, char* password, char* confirmpw, char* ID, char* tele, char* code, char* inputcode)
+int check_legal_reg(char* name, char* password, char* confirmpw, 
+					char* ID, char* tele, char* code, char* inputcode)
 {
 	int i;
 	int inputed = 0;	//判断是否有输入
@@ -439,23 +440,28 @@ int check_legal_reg(char* name, char* password, char* confirmpw, char* ID, char*
 			format_tele = check_tele_dig(tele,566,370-23);
 			format_code = check_captcha(code,inputcode,566,430-23);
 			
-			write_userdata(name,password,ID,tele);
-			return 1;	//remove when complete below
-			/*if(check_sameuser())
+			if(!check_samename(name,1))	//检查重名
 			{
-				//break
+				break;
 			}
 			else
 			{
-				//log_userdata()
-				if(format_name == 0 || format_pw == 0 || format_Cpw == 0 
-					|| format_tele == 0 || format_code == 0 ||format_ID == 0)
+				coverhz(350,68,11);
+				if(format_name != 1 || format_pw != 1 || format_Cpw != 1 
+					|| format_tele != 1 || format_code != 1 ||format_ID != 1)	
 				{
-					//button(
-					//puthz
-					//return 1;
+					break;
 				}
-			}*/
+				else if(format_name == 1 && format_pw == 1 && format_Cpw == 1 
+					&& format_tele == 1 && format_code == 1 &&format_ID == 1)
+				{
+					write_userdata(name,password,ID,tele);
+					//button(								//差输出形式
+					//puthz
+					return 1;
+				}
+			}
+			
 		}
 	}
 	return 0;
@@ -468,7 +474,7 @@ void write_userdata(char* name, char* pw, char* ID, char* tele)
 	
 	if( (fp = fopen("Database\\UserData.dat", "rb+" )) == NULL )	//open userdata.dat in fp
 	{
-		printf("Error! Can't Open UserData.dat File");
+		printf("Error! Can't Open \"UserData.dat\" File");
 		delay(1500);
 		exit(1);
 	}
@@ -480,12 +486,12 @@ void write_userdata(char* name, char* pw, char* ID, char* tele)
 		exit(1);
 	}
 	
-	stpcpy(u->name,name);		//copy name to U.name
+	stpcpy(u->name,name);			//copy name to U.name
 	stpcpy(u->password,pw); 
 	stpcpy(u->ID,ID);
 	stpcpy(u->tele,tele);
 	fseek(fp,0,SEEK_END);
-	fwrite(u,sizeof(User),1,fp);
+	fwrite(u,sizeof(User),1,fp);	//write u to *fp->file
 	
 	if (u != NULL)
 	{
