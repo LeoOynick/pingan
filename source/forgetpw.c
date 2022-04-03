@@ -4,6 +4,7 @@
 void forget(int *page)
 {
 	int num=0;
+	char inputcode[6] = { '\0' };
 	char str[6] = { '\0' };
 	char name[15] = { '\0' };   //用户名（不超过12位）	
 	char password[20] = { '\0' };   //重置密码（不超过16位）
@@ -22,6 +23,10 @@ void forget(int *page)
 	delay(100);
 	cleardevice();
 	drawforget();
+	
+	settextstyle(0,0,2);
+	captcha(code);
+	outtextxy(80,407,code);
 	
 	while(1)
 	{
@@ -213,8 +218,7 @@ void forget(int *page)
 				state5 = 0;
 			continue;
 		}
-		
-		else if(mouse_press(160,400,560,430) == 2)   //验证码
+		else if(mouse_press(160,400,560,430) == 2)		//验证码
 		{
 			if ((num == 0 || num == 10)&& state6 == 0)
 			{
@@ -230,16 +234,16 @@ void forget(int *page)
 		{
 			MouseS = 0;
 		    button(160,400,560,430,8,15,1);
-			code[0] = '\0';
-			input(code,165,402,16,15,2);
-			if(strlen(code) != 0)
+			inputcode[0] = '\0';
+			input(inputcode,165,402,5,15,2);
+			if(strlen(inputcode) != 0)
 				state6 = 1;
 			else
 				state6 = 0;
 			continue;
 		}
 		
-		else if(mouse_press(80,400,160,430) == 2)   //换验证码
+		else if(mouse_press(80,400,160,430) == 2)		//换验证码
 		{
 			if (num == 0 || num == 9)
 			{
@@ -253,7 +257,12 @@ void forget(int *page)
 		else if (mouse_press(80,400,160,430) == 1)
 		{
 			MouseS = 0;
-		    
+			button(80,400,160,430,7,7,1);
+		    settextstyle(0,0,2);
+			captcha(code);
+			setcolor(1);
+			outtextxy(80,407,code);
+			continue;
 		}
 		
 		else
@@ -350,6 +359,7 @@ void drawforget()
 	setfillstyle(1,LIGHTGRAY);
     bar(610,0,640,30);
     setcolor(1);
+	setlinestyle(0,4,3);
     line(610,0,640,30);
     line(640,0,610,30);
 }

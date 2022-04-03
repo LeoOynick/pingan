@@ -4,6 +4,7 @@
 void enter(int *page)
 {
 	int num=0;
+	char inputcode[6] = { '\0' };
 	char str[6] = { '\0' };
 	char name[15] = { '\0' };   //用户名（不超过12位）	
 	char password[20] = { '\0' };   //密码（不超过16位）
@@ -16,6 +17,10 @@ void enter(int *page)
 	delay(100);
 	cleardevice();
 	drawenter();
+	
+	settextstyle(0,0,2);
+	captcha(code);
+	outtextxy(80,318,code);
 	
 	while(1)
 	{
@@ -167,9 +172,9 @@ void enter(int *page)
 		{
 			MouseS = 0;
 		    button(160,310,560,340,8,15,1);
-			code[0] = '\0';
-			input(code,165,312,16,15,2);
-			if(strlen(code) != 0)
+			inputcode[0] = '\0';
+			input(inputcode,165,312,5,15,2);
+			if(strlen(inputcode) != 0)
 				state3 = 1;
 			else
 				state3 = 0;
@@ -189,7 +194,12 @@ void enter(int *page)
 		}
 		else if (mouse_press(80,310,160,340) == 1)
 		{
-			MouseS = 0;
+			//MouseS = 0;
+			button(80,310,160,340,7,7,1);
+			settextstyle(0,0,2);
+			captcha(code);
+			setcolor(1);
+			outtextxy(80,318,code);
 		    
 		}
 

@@ -99,7 +99,7 @@ void captcha (char* str){ //5 digits
 	
 }
 
-int check_captcha(char* str1, char* str2,int x, int y) //return 0 for match else return 1
+int check_captcha(char* str1, char* str2,int x, int y) //return 1 for match else return 0
 {
 	if(strcmp(str1,str2) != 0)
 	{
@@ -112,12 +112,102 @@ int check_captcha(char* str1, char* str2,int x, int y) //return 0 for match else
 		setlinestyle(SOLID_LINE, 0, 3); 
 		line(x + 24, y + 9, x + 33, y + 19);
 		line(x + 33, y + 19, x + 43, y - 3);
-		return 0;
+		return 1;
 	}
 
 		puthz(x,y,"输入错误",16,17,RED);
 	
-	return 1;
+	return 0;
+}
+
+int check_samename(char* name, int flag)	//flag 1--用户已被注册, 2--账号存在, 3--不输出
+{
+	int i;
+	int set_num;
+	FILE *fp = NULL;
+	User *u = NULL;
+	
+	if( (fp = fopen("Database\\UserData.dat", "rb+" )) == NULL )	//open userdata.dat in fp
+	{
+		printf("Error! Can't Open \"UserData.dat\" File");
+		delay(1500);
+		exit(1);
+	}
+	
+	fseek(fp,0,SEEK_END);
+	set_num = ftell(fp) / sizeof(User);	// total / sizeof user
+	
+	for(i = 0; i < set_num ; i++)
+	{
+		if( (u = (User*)malloc(sizeof(User))) == NULL )	//allocate memory for u
+		{
+			printf("Error - unable to allocate required memory");
+			delay(1500);
+			exit(1);
+		}
+		
+		fseek(fp, i * sizeof(User), SEEK_SET);	//指向每隔一个User大小的
+		fread(u, sizeof(User), 1, fp);			//读取一个u
+		
+		if( strcmp(name,u->name) == 0) 
+		{
+			switch(flag)
+			{
+				case 1:
+					puthz(350,80,"用户已被注册",16 ,17 ,RED);
+					
+					setcolor(LIGHTCYAN);
+					setlinestyle(SOLID_LINE, 0, 3); 	//566,130-23
+					line(566 + 24, 130-23 + 9, 566 + 33, 130-23 + 19);
+					line(566 + 33, 130-23 + 19, 566 + 43, 130-23 - 3);
+					
+					setcolor(RED);
+					line(592,105,607,125);
+					line(607,105,592,125);
+					break;
+					
+				case 2:
+					puthz(450, 110, "账号存在", 16, 17, RED);
+					break;
+					
+				case 3:		//不输出
+					break;
+					
+				default:
+					printf("check flag of \"check_samename\" function");
+					delay(1500);
+					exit(1);
+			}
+			
+			if (u != NULL)
+			{
+				free(u);
+				u = NULL;
+			}
+			if (fclose(fp) != 0)
+			{
+				printf("\n cannot close Database.");
+				delay(3000);
+				exit(1);
+			}
+			return 0;
+			
+		}
+		free(u);
+		u = NULL; 
+	}
+	if (u != NULL)
+	{
+		free(u);
+		u = NULL;
+	}
+	if (fclose(fp) != 0)
+	{
+		printf("\n cannot close Database.");
+		delay(3000);
+		exit(1);
+	}
+	return 1;	
 }
 
 void judgeinput(char* str,int* state,int x,int y) //判断是否有输入
@@ -133,6 +223,11 @@ int check_username_dig(char* str,int x,int y) //4-12位用户名
 {
 	if(strlen(str) >=4 && strlen(str) <=12)
 	{
+		setlinestyle(SOLID_LINE, 0, 3); 
+		setcolor(LIGHTCYAN);
+		line(592,105,607,125);
+		line(607,105,592,125);
+		
 		setcolor(GREEN);
 		setlinestyle(SOLID_LINE, 0, 3); 
 		line(x + 24, y + 9, x + 33, y + 19);
@@ -259,7 +354,7 @@ int check_id(char* str,int x,int y)
 	}
 }
 
-void choose(int x,int y,int *state)
+void choose(int x,int y,int *state)	
 {
 	delay(150);
 	if(*state == 0)
