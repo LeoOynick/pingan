@@ -124,7 +124,7 @@ void mine(int *page)
 			return;
 		}
 		
-		else if(mouse_press(500,60,590,80) == 2)   //ÍË³öµÇÂ¼
+		else if(mouse_press(540,60,630,80) == 2)   //ÍË³öµÇÂ¼
 		{
 			if (num == 0)
 			{
@@ -134,7 +134,7 @@ void mine(int *page)
 				num = 6;
 			}	
 		}
-		else if(mouse_press(500,60,590,80) == 1)
+		else if(mouse_press(540,60,630,80) == 1)
 		{
 			MouseS = 0;
 			delay(1000);
@@ -199,10 +199,10 @@ void drawmine()
 	setfillstyle(1,15);
 	fillellipse(25,25,24,24);
 	
-	puthz(520,60,"ÍË³öµÇÂ¼",16,18,8);
+	puthz(560,60,"ÍË³öµÇÂ¼",16,18,8);
 	setcolor(8);
-	arc(510,67,100,440,7);
-	line(510,63,510,58);
+	arc(550,67,100,440,7);
+	line(550,63,550,58);
 	
 	setlinestyle(0,4,3);
 	setcolor(9);

@@ -196,6 +196,12 @@ void drawinsure()
 	line(500,145,515,145);
 	line(500,145,505,150);
 	setfillstyle(1,15);
+	fillellipse(540,240,5,5);
+	fillellipse(540,280,5,5);
+	fillellipse(540,320,5,5);
+	circle(540,240,5);
+	circle(540,280,5);
+	circle(540,320,5);
 	bar(20,160,620,200);
 	setcolor(15);
 	setlinestyle(0,4,3);
@@ -216,11 +222,6 @@ void drawinsure()
 	puthz(400,230,"万元",24,28,1);
 	puthz(400,270,"万元",24,28,1);
 	puthz(400,310,"万元",24,28,1);
-	setcolor(15);
-	setfillstyle(1,15);
-	fillellipse(540,240,5,5);
-	fillellipse(540,280,5,5);
-	fillellipse(540,320,5,5);
 	puthz(80,350,"总计",24,28,1);
 	puthz(200,350,"万元",24,28,1);
 	puthz(260,355,"（更多请关注“平安好车主”公众号）",16,18,8);

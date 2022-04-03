@@ -46,7 +46,7 @@ void claim(int *page)
 			return;
 		}
 		
-		else if(mouse_press(180,400,260,430) == 2)   //购买
+		else if(mouse_press(180,400,260,430) == 2)   //提交
 		{
 			if (num == 0)
 			{
@@ -54,7 +54,7 @@ void claim(int *page)
 				clrmous(MouseX, MouseY);
 				delay(10);
 				button(180,400,260,430,15,10,1);
-				puthz(195,405,"购买",24,28,1);
+				puthz(195,405,"提交",24,28,1);
 				num = 2;
 			}
 			continue;
@@ -117,7 +117,7 @@ void claim(int *page)
 		else if (mouse_press(175,225,185,235) == 1)
 		{
 			delay(150);
-			choose(180,230,state1);
+			choose(180,230,&state1);
 		}
 		
 		else if (mouse_press(375,225,385,235) == 2)   //撞了别人车
@@ -134,7 +134,7 @@ void claim(int *page)
 		else if (mouse_press(375,225,385,235) == 1)
 		{
 			delay(150);
-			choose(380,230,state2);
+			choose(380,230,&state2);
 		}
 		
 		else if (mouse_press(575,225,585,235) == 2)   //有人受伤了
@@ -151,7 +151,7 @@ void claim(int *page)
 		else if (mouse_press(575,225,585,235) == 1)
 		{
 			delay(150);
-			choose(580,230,state3);
+			choose(580,230,&state3);
 		}
 		
 		else if (mouse_press(175,265,185,275) == 2)   //有物品损失
@@ -168,7 +168,7 @@ void claim(int *page)
 		else if (mouse_press(175,265,185,275) == 1)
 		{
 			delay(150);
-			choose(180,270,state4);
+			choose(180,270,&state4);
 		}
 		
 		else if (mouse_press(375,265,385,275) == 2)   //车停放受损
@@ -185,7 +185,7 @@ void claim(int *page)
 		else if (mouse_press(375,265,385,275) == 1)
 		{
 			delay(150);
-			choose(380,270,state5);
+			choose(380,270,&state5);
 		}
 		
 		else if (mouse_press(575,265,585,275) == 2)   //代驾发生事故
@@ -202,7 +202,7 @@ void claim(int *page)
 		else if (mouse_press(575,265,585,275) == 1)
 		{
 			delay(150);
-			choose(580,270,state6);
+			choose(580,270,&state6);
 		}
 		
 		else if (mouse_press(115,355,125,365) == 2)   //主责方
@@ -219,7 +219,7 @@ void claim(int *page)
 		else if (mouse_press(115,355,125,365) == 1)
 		{
 			delay(150);
-			choose(120,360,state7);
+			choose(120,360,&state7);
 		}
 		
 		else if (mouse_press(265,355,275,365) == 2)   //次责方
@@ -236,7 +236,7 @@ void claim(int *page)
 		else if (mouse_press(265,355,275,365) == 1)
 		{
 			delay(150);
-			choose(270,360,state8);
+			choose(270,360,&state8);
 		}
 		
 		else if (mouse_press(415,355,425,365) == 2)   //无责方
@@ -253,7 +253,7 @@ void claim(int *page)
 		else if (mouse_press(415,355,425,365) == 1)
 		{
 			delay(150);
-			choose(420,360,state9);
+			choose(420,360,&state9);
 		}
 		
 		else if (mouse_press(535,355,545,365) == 2)   //伤者
@@ -270,7 +270,7 @@ void claim(int *page)
 		else if (mouse_press(535,355,545,365) == 1)
 		{
 			delay(150);
-			choose(540,360,state10);
+			choose(540,360,&state10);
 		}
 		
 		else
@@ -322,6 +322,26 @@ void drawclaim()
 	line(500,105,505,110);
 	setfillstyle(1,15);
 	bar(20,120,620,160);
+	fillellipse(180,230,5,5);
+	fillellipse(380,230,5,5);
+	fillellipse(580,230,5,5);
+	fillellipse(180,270,5,5);
+	fillellipse(380,270,5,5);
+	fillellipse(600,270,5,5);
+	circle(180,230,5);
+	circle(380,230,5);
+	circle(580,230,5);
+	circle(180,270,5);
+	circle(380,270,5);
+	circle(600,270,5);
+	fillellipse(120,360,5,5);
+	fillellipse(270,360,5,5);
+	fillellipse(420,360,5,5);
+	fillellipse(540,360,5,5);
+	circle(120,360,5);
+	circle(270,360,5);
+	circle(420,360,5);
+	circle(540,360,5);
 	
 	puthz(20,180,"场景选择",24,28,1);
 	setcolor(15);
@@ -346,16 +366,12 @@ void drawclaim()
 	puthz(180,350,"次责方",24,28,8);
 	puthz(330,350,"无责方",24,28,8);
 	puthz(480,350,"伤者",24,28,8);
-	fillellipse(120,360,5,5);
-	fillellipse(270,360,5,5);
-	fillellipse(420,360,5,5);
-	fillellipse(540,360,5,5);
 	
 	setfillstyle(1,GREEN);
 	bar(180,400,260,430);
 	setfillstyle(1,4);
 	bar(380,400,460,430);
-	puthz(195,405,"购买",24,28,1);
+	puthz(195,405,"提交",24,28,1);
 	puthz(395,405,"返回",24,28,1);
 	
     setfillstyle(1,LIGHTGRAY);
