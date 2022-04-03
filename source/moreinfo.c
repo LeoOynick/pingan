@@ -2,10 +2,6 @@
 
 void moreinfo()
 {
-	int gdriver=VGA;
-    int gmode=VGAHI;
-    initgraph(&gdriver,&gmode,"C:\\BORLANDC\\BGI");
-	
 	setbkcolor(LIGHTCYAN);
 	puthz(220,20,"更多信息",48,56,1);
 	
@@ -33,6 +29,7 @@ void moreinfo()
 	puthz(195,405,"提交",24,28,1);
 	puthz(395,405,"返回",24,28,1);
 	
+	setlinestyle(0,4,3);
 	setfillstyle(1,LIGHTGRAY);
     bar(610,0,640,30);
     setcolor(1);

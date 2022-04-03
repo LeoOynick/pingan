@@ -325,6 +325,7 @@ void drawbinding()
 	bar(380,400,460,430);
 	puthz(395,405,"·µ»Ø",24,28,1);
 	
+	setlinestyle(0,4,3);
 	setfillstyle(1,LIGHTGRAY);
     bar(610,0,640,30);
     setcolor(1);

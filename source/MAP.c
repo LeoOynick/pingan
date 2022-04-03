@@ -96,6 +96,7 @@ void drawmap()
 	bar(280,430,360,460);
 	puthz(295,435,"·µ»Ø",24,28,1);
 	
+	setlinestyle(0,4,3);
 	setfillstyle(1,LIGHTGRAY);
     bar(610,0,640,30);
     setcolor(1);
