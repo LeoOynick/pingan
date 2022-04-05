@@ -456,8 +456,9 @@ int check_legal_reg(char* name, char* password, char* confirmpw,
 					&& format_tele == 1 && format_code == 1 &&format_ID == 1)
 				{
 					write_userdata(name,password,ID,tele);
-					//button(								//差输出形式
-					//puthz
+					button(70,70,800,800,LIGHTCYAN,LIGHTCYAN,3);	//覆盖输入框
+					button(200,200,430,300,CYAN,LIGHTGRAY,3);				
+					puthz(256,238, "注册成功！", 24, 28, BLUE);
 					return 1;
 				}
 			}
@@ -485,6 +486,8 @@ void write_userdata(char* name, char* pw, char* ID, char* tele)
 		delay(1500);
 		exit(1);
 	}
+	
+	memset(u,'\0',sizeof(User));
 	
 	stpcpy(u->name,name);			//copy name to U.name
 	stpcpy(u->password,pw); 

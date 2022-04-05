@@ -63,9 +63,24 @@ void enter(int *page)
 		}
 		else if (mouse_press(180,400,260,430) == 1)
 		{
-			MouseS = 0;
-			*page = 6;
-			return;
+			//MouseS = 0;
+			if(verify_login(name,password,code,inputcode) == 1)			//验证成功
+			{
+				delay(1000);
+				*page = 6;
+				return;
+			}
+			else if(verify_login(name,password,code,inputcode) == 0)	//验证失败
+			{
+				delay(1000);
+				*page = 3;
+				return;
+			}
+			else if(verify_login(name,password,code,inputcode) == 2)	//验证码不正确
+			{
+				continue;
+			}
+			
 		}
 		
 		else if(mouse_press(380,400,460,430) == 2)   //返回
@@ -278,4 +293,150 @@ void drawenter()
     setcolor(1);
     line(610,0,640,30);
     line(640,0,610,30);
+}
+
+int verify_login(char *name, char *password, char *code, char *inputcode)
+{
+	int inputed = 0;
+	int format_code = 0;
+	
+	while(1)
+	{
+		coverhz(566,200-23,11);
+		coverhz(566,270-23,11);
+		coverhz(566,340-23,11);
+		
+		judgeinput(name,&inputed,566,200-23);
+		judgeinput(password,&inputed,566,270-23);
+		judgeinput(inputcode,&inputed,566,340-23);
+		
+		if(inputed == 1)
+		{
+			break;
+		}
+		else 
+		{
+			format_code = check_captcha(code,inputcode,566,340-23);
+			if(format_code == 1)										//若验证码正确
+			{
+				if(verify_user(name,password))							//验证成功
+				{
+					return 1;
+				}
+				else
+				{
+					return 0;
+				}	
+			}
+			else
+			{
+				return 2;
+			}
+		}
+		
+	}
+	return 2;
+}
+
+int verify_user(char *name, char *password)
+{
+	int i;
+	int set_num;
+	FILE *fp;
+	User *u;
+	
+	if( (fp = fopen("Database\\UserData.dat", "rb+" )) == NULL )	//open userdata.dat in fp
+	{
+		printf("Error! Can't Open \"UserData.dat\" File");
+		delay(1500);
+		exit(1);
+	}
+	
+	fseek(fp,0,SEEK_END);
+	set_num = ftell(fp) / sizeof(User);	// total / sizeof user
+	
+	for(i = 0; i < set_num ; i++)
+	{
+		if( (u = (User*)malloc(sizeof(User))) == NULL )	//allocate memory for u
+		{
+			printf("Error - unable to allocate required memory");
+			delay(1500);
+			exit(1);
+		}
+		
+		fseek(fp, i * sizeof(User), SEEK_SET);	//指向每隔一个User大小的
+		fread(u, sizeof(User), 1, fp);			//读取一个u
+		
+		if( strcmp(name,u->name) == 0) 			//用户名匹配
+		{
+			if( strcmp(password, u->password) == 0)	//密码匹配
+			{
+				button(70,100,800,800,LIGHTCYAN,LIGHTCYAN,3);	//覆盖输入框
+				button(200,200,430,300,CYAN,LIGHTGRAY,3);				
+				puthz(256,238, "登录成功！", 24, 28, BLUE);
+				
+				if (u != NULL)
+				{
+					free(u);
+					u = NULL;
+				}
+				
+				delay(1000);
+				
+				if (fclose(fp) != 0)
+				{
+					printf("\n cannot close Database");
+					delay(3000);
+					exit(1);
+				}
+				return 1;
+			}
+			else if( strcmp(password, u->password) != 0 )	//密码不匹配
+			{
+				button(70,100,800,800,LIGHTCYAN,LIGHTCYAN,3);	//覆盖输入框
+				button(190,200,440,300,CYAN,LIGHTGRAY,3);				
+				puthz(200,238, "用户名或密码错误！", 24, 28, BLUE);
+				
+				if (u != NULL)
+				{
+					free(u);
+					u = NULL;
+				}
+				break;
+			}
+		}
+		else
+		{
+			button(70,100,800,800,LIGHTCYAN,LIGHTCYAN,3);	//覆盖输入框
+			button(190,200,440,300,CYAN,LIGHTGRAY,3);				
+			puthz(200,238, "用户名或密码错误！", 24, 28, BLUE);
+			
+			if (u != NULL)
+			{
+				free(u);
+				u = NULL;
+			}
+			break;
+		}
+		
+		if (u != NULL)
+		{
+			free(u);
+			u = NULL;
+		}
+	}
+	
+	if (u != NULL)
+	{
+		free(u);
+		u = NULL;
+	}
+
+	if (fclose(fp) != 0)
+	{
+		printf("\n cannot close Database");
+		delay(3000);
+		exit(1);
+	}
+	return 0;
 }
