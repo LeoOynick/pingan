@@ -377,26 +377,24 @@ void choose(int x,int y,int *state)
 	}
 }
 
-void price(int *state1, int *state2, int *state3, int cost, char *charge, int x, int y)
+void single(int *state1, int *state2, int *state3, int x1, int y1, int x2, int y2, int x3, int y3)
 {
-	if(*state1 == 1 && *state2 == 0 && *state3 == 0)
-		cost = 1000;
-	else if(*state1 == 0 && *state2 == 1 && *state3 == 0)
-		cost = 800;
-	else if(*state1 == 0 && *state2 == 0 && *state3 == 1)
-		cost = 1200;
-	else if(*state1 == 1 && *state2 == 1 && *state3 == 0)
-		cost = 1800;
-	else if(*state1 == 1 && *state2 == 0 && *state3 == 1)
-		cost = 2200;
-	else if(*state1 == 0 && *state2 == 1 && *state3 == 1)
-		cost = 2000;
-	else if(*state1 == 1 && *state2 == 1 && *state3 == 1)
-		cost = 3000;
+	if(*state1 == 1)
+		choose(x1,y1,state1);
+	if(*state2 == 1)
+		choose(x2,y2,state2);
+	if(*state3 == 1)
+		choose(x3,y3,state3);
+}
+
+void price(int *state1, int *state2, int *state3, int *state4, int *state5, int *state6, 
+			int cost1, int cost2, int cost3, int cost4, int cost5, int cost6, int cost, char *charge, int x, int y)
+{
+	cost = *state1 * cost1 + *state2 * cost2 + *state3 * cost3 +  *state4 * cost4 + *state5 * cost5 + *state6 * cost6;
 	itoa(cost,charge,10);
 	setfillstyle(1,LIGHTCYAN);
 	bar(x-5,y-5,x+45,y+20);
 	setcolor(8);
 	settextstyle(1,0,1);
-	outtextxy(x,y,charge);
+	outtextxy(x,y,charge);	
 }

@@ -57,10 +57,21 @@ void insure(int *page)
 		else if (mouse_press(180,400,260,430) == 1)
 		{
 			MouseS = 0;
-			
-			puthz(280,435,"购买成功！",16,20,RED);
-			delay(800);
-			drawinsure();
+			if(state1 == 0 && state2 == 0 && state3 == 0)
+			{
+				setfillstyle(1,LIGHTCYAN);
+				bar(270,435,370,455);
+				puthz(270,435,"请选择保险！",16,20,RED);
+			}
+			else
+			{
+				setfillstyle(1,LIGHTCYAN);
+				bar(270,435,390,455);
+				puthz(280,435,"购买成功！",16,20,RED);
+				delay(800);
+				*page = 6;
+				return;
+			}
 		}
 		
 		else if(mouse_press(380,400,460,430) == 2)   //返回
@@ -184,7 +195,7 @@ void insure(int *page)
 			}
 			continue;
 		}
-		price(&state1,&state2,&state3,cost,charge,150,350);
+		price(&state1,&state2,&state3,&state1,&state2,&state3,1000,800,1200,0,0,0,cost,charge,150,350);
 	}
 }
 

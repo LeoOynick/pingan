@@ -10,6 +10,8 @@ void measure(int *page)
 	int state4 = 0;
 	int state5 = 0;
 	int state6 = 0;
+	int cost = 0;
+	char charge[5];
 	
 	clrmous(MouseX, MouseY);
 	delay(100);
@@ -58,7 +60,7 @@ void measure(int *page)
 		else if (mouse_press(180,400,260,430) == 1)
 		{
 			MouseS = 0;
-			
+			price(&state1,&state2,&state3,&state4,&state5,&state6,1000,1500,600,800,800,3000,cost,charge,340,300);
 		}
 		
 		else if(mouse_press(380,400,460,430) == 2)   //返回
@@ -95,7 +97,7 @@ void measure(int *page)
 		else if (mouse_press(195,205,205,215) == 1)
 		{
 			delay(150);
-			choose(200,210,state1);
+			choose(200,210,&state1);
 		}
 		
 		else if (mouse_press(355,205,365,215) == 2)   //引擎盖
@@ -112,7 +114,7 @@ void measure(int *page)
 		else if (mouse_press(355,205,365,215) == 1)
 		{
 			delay(150);
-			choose(360,210,state2);
+			choose(360,210,&state2);
 		}
 		
 		else if (mouse_press(515,205,525,215) == 2)   //保险杠
@@ -129,7 +131,7 @@ void measure(int *page)
 		else if (mouse_press(515,205,525,215) == 1)
 		{
 			delay(150);
-			choose(520,210,state3);
+			choose(520,210,&state3);
 		}
 		
 		else if (mouse_press(195,245,205,255) == 2)   //车灯
@@ -146,7 +148,7 @@ void measure(int *page)
 		else if (mouse_press(195,245,205,255) == 1)
 		{
 			delay(150);
-			choose(200,250,state4);
+			choose(200,250,&state4);
 		}
 		
 		else if (mouse_press(355,245,365,255) == 2)   //后视镜
@@ -163,7 +165,7 @@ void measure(int *page)
 		else if (mouse_press(355,245,365,255) == 1)
 		{
 			delay(150);
-			choose(360,250,state5);
+			choose(360,250,&state5);
 		}
 		
 		else if (mouse_press(515,245,525,255) == 2)   //车门
@@ -180,7 +182,7 @@ void measure(int *page)
 		else if (mouse_press(515,245,525,255) == 1)
 		{
 			delay(150);
-			choose(520,250,state6);
+			choose(520,250,&state6);
 		}
 		
 		else
@@ -224,6 +226,20 @@ void drawmeasure()
 	setbkcolor(LIGHTCYAN);
 	puthz(200,20,"车损测算",48,56,1);
 	puthz(20,160,"选择损坏部位",24,28,1);
+	setfillstyle(1,15);
+	fillellipse(200,210,5,5);
+	fillellipse(360,210,5,5);
+	fillellipse(520,210,5,5);
+	fillellipse(200,250,5,5);
+	fillellipse(360,250,5,5);
+	fillellipse(520,250,5,5);
+	setcolor(8);
+	circle(200,210,5);
+	circle(360,210,5);
+	circle(520,210,5);
+	circle(200,250,5);
+	circle(360,250,5);
+	circle(520,250,5);
 	setlinestyle(0,4,3);
 	setcolor(15);
 	rectangle(80,190,560,270);
@@ -236,15 +252,9 @@ void drawmeasure()
 	puthz(90,240,"车灯",24,28,1);
 	puthz(250,240,"后视镜",24,28,1);
 	puthz(410,240,"车门",24,28,1);
-	fillellipse(200,210,5,5);
-	fillellipse(360,210,5,5);
-	fillellipse(520,210,5,5);
-	fillellipse(200,250,5,5);
-	fillellipse(360,250,5,5);
-	fillellipse(520,250,5,5);
 	puthz(100,300,"预计维修费用为：",24,28,1);
-	puthz(400,305,"元",16,18,8);
-	puthz(120,330,"注：预计维修费用仅供参考",16,18,8);
+	puthz(400,305,"元",24,28,1);
+	puthz(120,330,"注：预计维修费用仅供参考。",16,18,8);
 	
 	setfillstyle(1,GREEN);
 	bar(180,400,260,430);
