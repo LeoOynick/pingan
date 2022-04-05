@@ -188,7 +188,7 @@ void claim(int *page)
 			choose(380,270,&state5);
 		}
 		
-		else if (mouse_press(575,265,585,275) == 2)   //代驾发生事故
+		else if (mouse_press(595,265,605,275) == 2)   //代驾发生事故
 		{
 			if (num == 0)
 			{
@@ -199,7 +199,7 @@ void claim(int *page)
 			}
 			continue;
 		}
-		else if (mouse_press(575,265,585,275) == 1)
+		else if (mouse_press(595,265,605,275) == 1)
 		{
 			delay(150);
 			choose(580,270,&state6);

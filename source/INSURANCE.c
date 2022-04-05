@@ -7,6 +7,8 @@ void insure(int *page)
 	int state1 = 0;
 	int state2 = 0;
 	int state3 = 0;
+	int cost = 0;
+	char charge[5];
 	
 	clrmous(MouseX, MouseY);
 	delay(100);
@@ -56,6 +58,9 @@ void insure(int *page)
 		{
 			MouseS = 0;
 			
+			puthz(280,435,"购买成功！",16,20,RED);
+			delay(800);
+			drawinsure();
 		}
 		
 		else if(mouse_press(380,400,460,430) == 2)   //返回
@@ -92,8 +97,7 @@ void insure(int *page)
 		else if (mouse_press(520,135,600,155) == 1)
 		{
 			MouseS = 0;
-		    //*page = 6;
-			return;
+
 		}
 		
 		else if (mouse_press(535,235,545,245) == 2)   //基本险
@@ -180,6 +184,7 @@ void insure(int *page)
 			}
 			continue;
 		}
+		price(&state1,&state2,&state3,cost,charge,150,350);
 	}
 }
 
@@ -212,18 +217,27 @@ void drawinsure()
 	puthz(80,230,"基本险",24,28,1);
 	puthz(80,270,"商业险",24,28,1);
 	puthz(80,310,"交强险",24,28,1);
-	puthz(280,230,"保额",24,28,1);
-	puthz(280,270,"保额",24,28,1);
-	puthz(280,310,"保额",24,28,1);
+	puthz(200,230,"保额",24,28,1);
+	puthz(200,270,"保额",24,28,1);
+	puthz(200,310,"保额",24,28,1);
 	settextstyle(1,0,1);
-	outtextxy(360,230,"2.00");
-	outtextxy(360,270,"1.00");
-	outtextxy(360,310,"1.50");
-	puthz(400,230,"万元",24,28,1);
-	puthz(400,270,"万元",24,28,1);
-	puthz(400,310,"万元",24,28,1);
+	outtextxy(280,230,"2.00");
+	outtextxy(280,270,"1.00");
+	outtextxy(280,310,"1.50");
+	puthz(320,230,"万元",24,28,1);
+	puthz(320,270,"万元",24,28,1);
+	puthz(320,310,"万元",24,28,1);
+	puthz(390,233,"价格",16,18,8);
+	puthz(390,273,"价格",16,18,8);
+	puthz(390,313,"价格",16,18,8);
+	outtextxy(430,230,"1000");
+	outtextxy(430,270,"800");
+	outtextxy(430,310,"1200");
+	puthz(480,233,"元",16,18,8);
+	puthz(480,273,"元",16,18,8);
+	puthz(480,313,"元",16,18,8);
 	puthz(80,350,"总计",24,28,1);
-	puthz(200,350,"万元",24,28,1);
+	puthz(200,350,"元",24,28,1);
 	puthz(260,355,"（更多请关注“平安好车主”公众号）",16,18,8);
 	
 	setfillstyle(1,GREEN);

@@ -371,6 +371,32 @@ void choose(int x,int y,int *state)
 		delay(10);
 		setfillstyle(1,15);
 		fillellipse(x,y,5,5);
+		setcolor(8);
+		circle(x,y,5);
 		*state = 0;
 	}
+}
+
+void price(int *state1, int *state2, int *state3, int cost, char *charge, int x, int y)
+{
+	if(*state1 == 1 && *state2 == 0 && *state3 == 0)
+		cost = 1000;
+	else if(*state1 == 0 && *state2 == 1 && *state3 == 0)
+		cost = 800;
+	else if(*state1 == 0 && *state2 == 0 && *state3 == 1)
+		cost = 1200;
+	else if(*state1 == 1 && *state2 == 1 && *state3 == 0)
+		cost = 1800;
+	else if(*state1 == 1 && *state2 == 0 && *state3 == 1)
+		cost = 2200;
+	else if(*state1 == 0 && *state2 == 1 && *state3 == 1)
+		cost = 2000;
+	else if(*state1 == 1 && *state2 == 1 && *state3 == 1)
+		cost = 3000;
+	itoa(cost,charge,10);
+	setfillstyle(1,LIGHTCYAN);
+	bar(x-5,y-5,x+45,y+20);
+	setcolor(8);
+	settextstyle(1,0,1);
+	outtextxy(x,y,charge);
 }

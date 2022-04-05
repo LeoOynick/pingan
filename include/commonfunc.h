@@ -40,4 +40,6 @@ int check_id (char* str,int x,int y);
 void choose(int x,int y,int *state);
 //进行项目勾选
 
+void price(int *state1, int *state2, int *state3, int cost, char *charge, int x, int y);
+//勾选之后显示价格
 #endif
