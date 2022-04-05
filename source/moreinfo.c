@@ -5,9 +5,12 @@ void moreinfo(int *page)
 {
 	int num=0;
 	char seatnum[5];		//座位数量
-	int state1 = 0;					//判断是否有字符输入
+	int state1 = 0;
 	int state2 = 0;
 	int state3 = 0;
+	int state4 = 0;
+	int state5 = 0;
+	int state6 = 0;
 	
 	clrmous(MouseX, MouseY);
 	delay(100);
@@ -56,8 +59,30 @@ void moreinfo(int *page)
 		else if (mouse_press(180,400,260,430) == 1)
 		{
 			MouseS = 0;
-			/**page = 20;*/
-			return;
+			if(state1 == 0 && state2 == 0 && state3 == 0 && state4 == 0)
+				puthz(220,135,"请选择型号！",16,18,4);
+			else
+			{
+				setfillstyle(1,LIGHTCYAN);
+				bar(220,135,420,155);
+			}
+			if(state5 == 0 && state6 == 0)
+				puthz(220,195,"请选择使用性质！",16,18,4);
+			else
+			{
+				setfillstyle(1,LIGHTCYAN);
+				bar(220,195,420,215);
+			}
+			if((state1 != 0 || state2 != 0 || state3 != 0 || state4 != 0) && (state5 != 0 || state6 != 0))
+			{
+				setfillstyle(1,LIGHTCYAN);
+				bar(220,135,420,155);
+				bar(220,195,420,335);
+				puthz(280,435,"提交成功！",16,20,4);
+				delay(800);
+				*page = 8;
+				return;
+			}			
 		}
 		
 		else if(mouse_press(380,400,460,430) == 2)		//返回
@@ -78,6 +103,114 @@ void moreinfo(int *page)
 			MouseS = 0;
 		    *page = 19;
 			return;
+		}
+		
+		else if (mouse_press(185,135,195,145) == 2)   //红旗
+		{
+			if (num == 0)
+			{
+				MouseS = 1;
+				clrmous(MouseX, MouseY);
+				delay(10);
+				num = 4;
+			}
+			continue;
+		}
+		else if (mouse_press(185,135,195,145) == 1)
+		{
+			delay(150);
+			choose(190,140,&state1);
+			single(&state2,&state3,&state4,290,140,390,140,490,140);
+		}
+		
+		else if (mouse_press(285,135,295,145) == 2)   //奥迪
+		{
+			if (num == 0)
+			{
+				MouseS = 1;
+				clrmous(MouseX, MouseY);
+				delay(10);
+				num = 5;
+			}
+			continue;
+		}
+		else if (mouse_press(285,135,295,145) == 1)
+		{
+			delay(150);
+			choose(290,140,&state2);
+			single(&state1,&state3,&state4,190,140,390,140,490,140);
+		}
+		
+		else if (mouse_press(385,135,395,145) == 2)   //宝马
+		{
+			if (num == 0)
+			{
+				MouseS = 1;
+				clrmous(MouseX, MouseY);
+				delay(10);
+				num = 6;
+			}
+			continue;
+		}
+		else if (mouse_press(385,135,395,145) == 1)
+		{
+			delay(150);
+			choose(390,140,&state3);
+			single(&state1,&state2,&state4,190,140,290,140,490,140);
+		}
+		
+		else if (mouse_press(485,135,495,145) == 2)   //奔驰
+		{
+			if (num == 0)
+			{
+				MouseS = 1;
+				clrmous(MouseX, MouseY);
+				delay(10);
+				num = 7;
+			}
+			continue;
+		}
+		else if (mouse_press(485,135,495,145) == 1)
+		{
+			delay(150);
+			choose(490,140,&state3);
+			single(&state1,&state2,&state3,190,140,290,140,390,140);
+		}
+		
+		else if (mouse_press(185,195,195,205) == 2)   //营运
+		{
+			if (num == 0)
+			{
+				MouseS = 1;
+				clrmous(MouseX, MouseY);
+				delay(10);
+				num = 8;
+			}
+			continue;
+		}
+		else if (mouse_press(185,195,195,205) == 1)
+		{
+			delay(150);
+			choose(190,200,&state5);
+			single(&state6,&state6,&state6,390,200,390,200,390,200);
+		}
+		
+		else if (mouse_press(385,195,395,205) == 2)   //非营运
+		{
+			if (num == 0)
+			{
+				MouseS = 1;
+				clrmous(MouseX, MouseY);
+				delay(10);
+				num = 9;
+			}
+			continue;
+		}
+		else if (mouse_press(385,195,395,205) == 1)
+		{
+			delay(150);
+			choose(390,200,&state6);
+			single(&state5,&state5,&state5,190,200,190,200,190,200);
 		}
 		
 		else
@@ -120,21 +253,27 @@ void drawmoreinfo()
 {
 	setbkcolor(LIGHTCYAN);
 	puthz(220,20,"更多信息",48,56,1);
-	
 	setfillstyle(1,15);
 	puthz(25,130,"品牌型号",24,28,8);
 	fillellipse(190,140,5,5);
-	puthz(200,130,"奥迪",24,28,8);
-	//fillellipse(290,140,5,5);
-	puthz(300,130,"宝马",24,28,8);
-	//fillellipse(390,140,5,5);
-	puthz(400,130,"奔驰",24,28,8);
-	//fillellipse(490,140,5,5);
-	puthz(500,130,"比亚迪",24,28,8);
+	fillellipse(290,140,5,5);
+	fillellipse(390,140,5,5);
+	fillellipse(490,140,5,5);
+	fillellipse(190,200,5,5);
+	fillellipse(390,200,5,5);
+	setcolor(8);
+	circle(190,140,5);
+	circle(290,140,5);
+	circle(390,140,5);
+	circle(490,140,5);
+	circle(190,200,5);
+	circle(390,200,5);
+	puthz(200,130,"红旗",24,28,8);
+	puthz(300,130,"奥迪",24,28,8);
+	puthz(400,130,"宝马",24,28,8);
+	puthz(500,130,"奔驰",24,28,8);
 	puthz(25,190,"使用性质",24,28,8);
-	//fillellipse(190,200,5,5);
 	puthz(200,190,"营运",24,28,8);
-	//fillellipse(390,200,5,5);
 	puthz(400,190,"非营运",24,28,8);
 	puthz(25,250,"座位数量",24,28,8);
 	bar(140,240,620,280);

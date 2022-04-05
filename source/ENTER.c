@@ -215,7 +215,6 @@ void enter(int *page)
 			captcha(code);
 			setcolor(1);
 			outtextxy(80,318,code);
-		    
 		}
 
 		else

@@ -64,8 +64,18 @@ void claim(int *page)
 			MouseS = 0;
 			if(state1 == 0 && state2 == 0 && state3 == 0 && state4 == 0 && state5 == 0 && state6 == 0)
 				puthz(220,185,"请选择场景！",16,18,4);
+			else
+			{
+				setfillstyle(1,LIGHTCYAN);
+				bar(220,185,420,205);
+			}
 			if(state7 == 0 && state8 == 0 && state9 == 0 && state10 == 0)
 				puthz(220,315,"请选择角色！",16,18,4);
+			else
+			{
+				setfillstyle(1,LIGHTCYAN);
+				bar(220,315,420,335);
+			}
 			if((state1 != 0 || state2 != 0 || state3 != 0 || state4 != 0 || state5 != 0 || state6 != 0) && (state7 != 0 || state8 != 0 || state9 != 0 || state10 != 0))
 			{
 				setfillstyle(1,LIGHTCYAN);
