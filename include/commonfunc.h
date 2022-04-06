@@ -10,6 +10,9 @@ void input (char* id, int x1, int y1, int charnum, int color, int flag);
 void coverhz (int x, int y, int color);
 //ÕÚ¸Ç×Ö·û
 
+void show_tickcross(int x1, int y1, int x2,int y2, int flag);
+//flag == 1 show tick, else cross,xy base on cross.
+
 void captcha (char* str);
 //5Î»ÑéÖ¤Âë
 

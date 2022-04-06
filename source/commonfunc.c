@@ -71,6 +71,36 @@ void coverhz(int x, int y, int color)
 	bar(x, y, x + 110, y + 30);
 }
 
+void show_tickcross(int x1, int y1, int x2,int y2, int flag)	//flag == 1 show tick, else cross,xy base on cross.
+{
+	if(flag == 1)
+	{	
+		setlinestyle(SOLID_LINE, 0, 3); 
+		setcolor(11);
+		line(x1,y1,x2,y2); 
+		line(x2,y1,x1,y2);
+		
+		setcolor(GREEN);
+		line(x1 + 24 -26, y1 + 9 +2 , x1 + 33 -26, y1 + 19 +2 );
+		line(x1 + 33 -26, y1 + 19 +2, x1 + 43 -26, y1 - 3 +2);
+	}
+	else
+	{
+		setcolor(11);
+		setlinestyle(SOLID_LINE, 0, 3); 
+		/*line(x1 + 24, y1 + 9, x1 + 33, y1 + 19);	//ori
+		line(x1 + 33, y1 + 19, x1 + 43, y1 - 3);
+		line(x1 + 20 - 22, y1 +	7, x1 + 29 -22, y1 + 17);
+		line(x1 + 28 -22, y1 + 17, x1 + 39 -22 , y1 - 5);*/
+		line(x1 + 24 -26, y1 + 9 +2 , x1 + 33 -26, y1 + 19 +2 );
+		line(x1 + 33 -26, y1 + 19 +2, x1 + 43 -26, y1 - 3 +2);
+		
+		setcolor(RED);
+		line(x1,y1,x2,y2); 
+		line(x2,y1,x1,y2);// x2 y1 x1 y2
+	}
+}
+
 void captcha (char* str){ //5 digits
 
 	char a,i,j;
@@ -156,14 +186,15 @@ int check_samename(char* name, int flag)	//flag 1--用户已被注册, 2--账号存在, 3-
 				case 1:
 					puthz(350,80,"用户已被注册",16 ,17 ,RED);
 					
-					setcolor(LIGHTCYAN);
-					setlinestyle(SOLID_LINE, 0, 3); 	
+					show_tickcross(592,105,607,125,0);
+					/*setcolor(LIGHTCYAN);
+					setlinestyle(SOLID_LINE, 0, 3); 
 					line(566 + 24, 130-23 + 9, 566 + 33, 130-23 + 19);
 					line(566 + 33, 130-23 + 19, 566 + 43, 130-23 - 3);
 					
 					setcolor(RED);
 					line(592,105,607,125);
-					line(607,105,592,125);
+					line(607,105,592,125);*/
 					break;
 					
 				case 2:
@@ -223,7 +254,8 @@ int check_username_dig(char* str,int x,int y) //4-12位用户名
 {
 	if(strlen(str) >=4 && strlen(str) <=12)
 	{
-		setlinestyle(SOLID_LINE, 0, 3); 
+		show_tickcross(592,105,607,125,1);
+		/*setlinestyle(SOLID_LINE, 0, 3); 
 		setcolor(LIGHTCYAN);
 		line(592,105,607,125);
 		line(607,105,592,125);
@@ -231,7 +263,7 @@ int check_username_dig(char* str,int x,int y) //4-12位用户名
 		setcolor(GREEN);
 		setlinestyle(SOLID_LINE, 0, 3); 
 		line(x + 24, y + 9, x + 33, y + 19);
-		line(x + 33, y + 19, x + 43, y - 3);
+		line(x + 33, y + 19, x + 43, y - 3);*/
 		return 1;
 	}
 	else if(strlen(str) < 4)
