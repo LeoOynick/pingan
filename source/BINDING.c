@@ -64,8 +64,39 @@ void binding(int *page)
 		else if (mouse_press(180,400,260,430) == 1)
 		{
 			MouseS = 0;
-			*page = 20;
-			return;
+			if(state1 == 0)
+				puthz(485,135,"ÇëÌîĞ´³µÅÆºÅÂë£¡",16,18,4);
+			else
+			{
+				setfillstyle(1,LIGHTCYAN);
+				bar(485,135,640,165);
+			}
+			if(state2 == 0)
+				puthz(485,195,"ÇëÌîĞ´³µ¼ÜºÅÂë£¡",16,18,4);
+			else
+			{
+				setfillstyle(1,LIGHTCYAN);
+				bar(485,195,640,225);
+			}
+			if(state3 == 0)
+				puthz(485,255,"ÇëÌîĞ´·¢¶¯»úºÅ£¡",16,18,4);
+			else
+			{
+				setfillstyle(1,LIGHTCYAN);
+				bar(485,255,640,285);
+			}
+			if(state4 == 0 || state5 == 0 || state6 == 0)
+				puthz(505,315,"ÇëÌîĞ´ÈÕÆÚ£¡",16,18,4);
+			else
+			{
+				setfillstyle(1,LIGHTCYAN);
+				bar(505,315,640,345);
+			}
+			if(state1 != 0 && state2 != 0 && state3 != 0 && state4 != 0 && state5 != 0 && state6 != 0)
+			{
+				*page = 20;
+				return;
+			}
 		}
 		
 		else if(mouse_press(380,400,460,430) == 2)		//·µ»Ø

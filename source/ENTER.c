@@ -65,12 +65,12 @@ void enter(int *page, User *u)
 		else if (mouse_press(180,400,260,430) == 1)
 		{
 			//MouseS = 0;
-			if(verify_login(name,password,code,inputcode) == 1)			//验证成功
-			{
+			/*if(verify_login(name,password,code,inputcode) == 1)			//验证成功
+			{*/
 				delay(1000);
 				*page = 6;
 				return;
-			}
+			/*}
 			else if(verify_login(name,password,code,inputcode) == 0)	//验证失败
 			{
 				delay(1000);
@@ -80,7 +80,7 @@ void enter(int *page, User *u)
 			else if(verify_login(name,password,code,inputcode) == 2)	//验证码不正确
 			{
 				continue;
-			}
+			}*/
 			
 		}
 		

@@ -11,6 +11,7 @@ void moreinfo(int *page)
 	int state4 = 0;
 	int state5 = 0;
 	int state6 = 0;
+	int state7 = 0;
 	
 	clrmous(MouseX, MouseY);
 	delay(100);
@@ -43,41 +44,45 @@ void moreinfo(int *page)
 			return;
 		}
 		
-		else if(mouse_press(180,400,260,430) == 2)		//提交
+		else if(mouse_press(180,370,260,400) == 2)		//提交
 		{
 			if (num == 0)
 			{
 				MouseS = 1;
 				clrmous(MouseX, MouseY);
 				delay(10);
-				button(180,400,260,430,15,10,1);
-				puthz(195,405,"提交",24,24,1);
+				button(180,370,260,400,15,10,1);
+				puthz(195,375,"提交",24,24,1);
 				num = 2;
 			}
 			continue;
 		}
-		else if (mouse_press(180,400,260,430) == 1)
+		else if (mouse_press(180,370,260,400) == 1)
 		{
 			MouseS = 0;
 			if(state1 == 0 && state2 == 0 && state3 == 0 && state4 == 0)
-				puthz(220,135,"请选择型号！",16,18,4);
+				puthz(25,160,"请选择型号！",16,18,4);
 			else
 			{
 				setfillstyle(1,LIGHTCYAN);
-				bar(220,135,420,155);
+				bar(25,160,200,185);
 			}
 			if(state5 == 0 && state6 == 0)
-				puthz(220,195,"请选择使用性质！",16,18,4);
+				puthz(25,220,"请选择使用性质！",16,18,4);
 			else
 			{
 				setfillstyle(1,LIGHTCYAN);
-				bar(220,195,420,215);
+				bar(25,220,200,240);
 			}
-			if((state1 != 0 || state2 != 0 || state3 != 0 || state4 != 0) && (state5 != 0 || state6 != 0))
+			if(state7 == 0)
+				puthz(140,285,"请填写座位数量！",16,18,4);
+			else
 			{
 				setfillstyle(1,LIGHTCYAN);
-				bar(220,135,420,155);
-				bar(220,195,420,335);
+				bar(140,285,300,310);
+			}
+			if((state1 != 0 || state2 != 0 || state3 != 0 || state4 != 0) && (state5 != 0 || state6 != 0) && state7 != 0)
+			{
 				puthz(280,435,"提交成功！",16,20,4);
 				delay(800);
 				*page = 8;
@@ -85,20 +90,20 @@ void moreinfo(int *page)
 			}			
 		}
 		
-		else if(mouse_press(380,400,460,430) == 2)		//返回
+		else if(mouse_press(380,370,460,400) == 2)		//返回
 		{
 			if (num == 0)
 			{
 				MouseS = 1;
 				clrmous(MouseX, MouseY);
 				delay(10);
-				button(380,400,460,430,15,12,1);
-				puthz(395,405,"返回",24,28,1);
+				button(380,370,460,400,15,12,1);
+				puthz(395,375,"返回",24,28,1);
 				num = 3;
 			}
 			continue;
 		}
-		else if (mouse_press(380,400,460,430) == 1)
+		else if (mouse_press(380,370,460,400) == 1)
 		{
 			MouseS = 0;
 		    *page = 19;
@@ -213,6 +218,31 @@ void moreinfo(int *page)
 			single(&state5,&state5,&state5,190,200,190,200,190,200);
 		}
 		
+		else if(mouse_press(290,240,500,280) == 2)		//座位数量
+		{
+			if (num == 0 && state7 == 0)
+			{
+				MouseS = 2;
+				clrmous(MouseX, MouseY);
+				delay(10);
+				button(290,240,500,280,8,15,1);
+				num = 10;
+			}
+			continue;
+		}
+		else if (mouse_press(290,240,500,280) == 1)
+		{
+			MouseS = 0;
+		    button(290,240,500,280,8,15,1);
+			seatnum[0] = '\0';
+			input(seatnum,340,245,4,15,2);
+			if(strlen(seatnum) != 0)
+				state7 = 1;
+			else
+				state7 = 0;
+			continue;
+		}
+		
 		else
 		{
 			if(num != 0)
@@ -232,16 +262,19 @@ void moreinfo(int *page)
 				else if(num == 2)
 				{
 					setfillstyle(1,2);
-					bar(180,400,260,430);
-					puthz(195,405,"提交",24,24,1);
+					bar(180,370,260,400);
+					puthz(195,375,"提交",24,24,1);
 				}
 				else if(num == 3)
 				{
 					setfillstyle(1,4);
-					bar(380,400,460,430);
-					puthz(395,405,"返回",24,28,1);
+					bar(380,370,460,400);
+					puthz(395,375,"返回",24,28,1);
 				}
-				
+				else if(num == 10 && state7 == 0)
+				{
+					button(290,240,500,280,15,15,1);
+				}
 				num=0;
 			}
 			continue;
@@ -275,15 +308,15 @@ void drawmoreinfo()
 	puthz(25,190,"使用性质",24,28,8);
 	puthz(200,190,"营运",24,28,8);
 	puthz(400,190,"非营运",24,28,8);
-	puthz(25,250,"座位数量",24,28,8);
-	bar(140,240,620,280);
+	puthz(140,250,"座位数量",24,28,8);
+	bar(290,240,500,280);
 	
 	setfillstyle(1,GREEN);
-	bar(180,400,260,430);
+	bar(180,370,260,400);
 	setfillstyle(1,4);
-	bar(380,400,460,430);
-	puthz(195,405,"提交",24,28,1);
-	puthz(395,405,"返回",24,28,1);
+	bar(380,370,460,400);
+	puthz(195,375,"提交",24,28,1);
+	puthz(395,375,"返回",24,28,1);
 	
 	setlinestyle(0,4,3);
 	setfillstyle(1,LIGHTGRAY);
