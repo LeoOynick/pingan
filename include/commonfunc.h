@@ -40,6 +40,10 @@ int check_id (char* str,int x,int y);
 void choose(int x,int y,int *state);
 //进行项目勾选
 
-void price(int *state1, int *state2, int *state3, int cost, char *charge, int x, int y);
+void single(int *state1, int *state2, int *state3, int x1, int y1, int x2, int y2, int x3, int y3);
+//实现单选（选择其中一项时其他几项清零）
+
+void price(int *state1, int *state2, int *state3, int *state4, int *state5, int *state6,
+			int cost1, int cost2, int cost3, int cost4, int cost5, int cost6, int cost, char *charge, int x, int y);
 //勾选之后显示价格
 #endif

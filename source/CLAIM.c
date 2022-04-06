@@ -62,7 +62,30 @@ void claim(int *page)
 		else if (mouse_press(180,400,260,430) == 1)
 		{
 			MouseS = 0;
-			puthz(220,435,"已提交管理员审核",16,20,1);
+			if(state1 == 0 && state2 == 0 && state3 == 0 && state4 == 0 && state5 == 0 && state6 == 0)
+				puthz(220,185,"请选择场景！",16,18,4);
+			else
+			{
+				setfillstyle(1,LIGHTCYAN);
+				bar(220,185,420,205);
+			}
+			if(state7 == 0 && state8 == 0 && state9 == 0 && state10 == 0)
+				puthz(220,315,"请选择角色！",16,18,4);
+			else
+			{
+				setfillstyle(1,LIGHTCYAN);
+				bar(220,315,420,335);
+			}
+			if((state1 != 0 || state2 != 0 || state3 != 0 || state4 != 0 || state5 != 0 || state6 != 0) && (state7 != 0 || state8 != 0 || state9 != 0 || state10 != 0))
+			{
+				setfillstyle(1,LIGHTCYAN);
+				bar(220,185,420,205);
+				bar(220,315,420,335);
+				puthz(240,435,"已提交管理员审核",16,20,4);
+				delay(800);
+				*page = 6;
+				return;
+			}
 		}
 		
 		else if(mouse_press(380,400,460,430) == 2)   //返回
@@ -220,6 +243,7 @@ void claim(int *page)
 		{
 			delay(150);
 			choose(120,360,&state7);
+			single(&state8,&state9,&state10,270,360,420,360,540,360);
 		}
 		
 		else if (mouse_press(265,355,275,365) == 2)   //次责方
@@ -237,6 +261,7 @@ void claim(int *page)
 		{
 			delay(150);
 			choose(270,360,&state8);
+			single(&state7,&state9,&state10,120,360,420,360,540,360);
 		}
 		
 		else if (mouse_press(415,355,425,365) == 2)   //无责方
@@ -254,6 +279,7 @@ void claim(int *page)
 		{
 			delay(150);
 			choose(420,360,&state9);
+			single(&state7,&state8,&state10,120,360,270,360,540,360);
 		}
 		
 		else if (mouse_press(535,355,545,365) == 2)   //伤者
@@ -271,6 +297,7 @@ void claim(int *page)
 		{
 			delay(150);
 			choose(540,360,&state10);
+			single(&state7,&state8,&state9,120,360,270,360,420,360);
 		}
 		
 		else
@@ -293,7 +320,7 @@ void claim(int *page)
 				{
 					setfillstyle(1,2);
 					bar(180,400,260,430);
-					puthz(195,405,"购买",24,28,1);
+					puthz(195,405,"提交",24,28,1);
 				}
 				else if(num == 3)
 				{
@@ -353,12 +380,6 @@ void drawclaim()
 	puthz(30,260,"有物品损失",24,28,8);
 	puthz(230,260,"车停放受损",24,28,8);
 	puthz(430,260,"代驾发生事故",24,28,8);
-	fillellipse(180,230,5,5);
-	fillellipse(380,230,5,5);
-	fillellipse(580,230,5,5);
-	fillellipse(180,270,5,5);
-	fillellipse(380,270,5,5);
-	fillellipse(600,270,5,5);
 	
 	puthz(20,310,"角色选择",24,28,1);
 	rectangle(20,340,620,380);

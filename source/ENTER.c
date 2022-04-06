@@ -216,7 +216,6 @@ void enter(int *page, User *u)
 			captcha(code);
 			setcolor(1);
 			outtextxy(80,318,code);
-		    
 		}
 
 		else
