@@ -60,7 +60,18 @@ void measure(int *page)
 		else if (mouse_press(180,400,260,430) == 1)
 		{
 			MouseS = 0;
-			price(&state1,&state2,&state3,&state4,&state5,&state6,1000,1500,600,800,800,3000,cost,charge,340,300);
+			if(state1 == 0 && state2 == 0 && state3 == 0 && state4 == 0 && state5 == 0 && state6 == 0)
+			{
+				setfillstyle(1,LIGHTCYAN);
+				bar(340,300,390,340);
+				puthz(220,165,"请选择损坏部位！",16,18,RED);
+			}
+			else
+			{
+				setfillstyle(1,LIGHTCYAN);
+				bar(220,165,400,185);
+				price(&state1,&state2,&state3,&state4,&state5,&state6,1000,1500,600,800,800,3000,cost,charge,340,300);
+			}
 		}
 		
 		else if(mouse_press(380,400,460,430) == 2)   //返回
