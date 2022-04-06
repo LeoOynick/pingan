@@ -1,10 +1,10 @@
-#ifndef _DATASTRUCT_H_
-#define _DATASTRUCT_H_
+#ifndef _DATA_H_
+#define _DATA_H_
 
 typedef struct userinfo
 {
-	char name[10];			//4-12位用户名称
-	char password[15];		//4-16位密码
+	char name[13];			//4-12位用户名称
+	char password[17];		//4-16位密码
 	char ID[19];			//18位身份证号码
 	char tele[12];			//11位电话号码
 }User;		//封装用户信息

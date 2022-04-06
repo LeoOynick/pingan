@@ -135,7 +135,7 @@ int check_samename(char* name, int flag)	//flag 1--用户已被注册, 2--账号存在, 3-
 	}
 	
 	fseek(fp,0,SEEK_END);
-	set_num = ftell(fp) / sizeof(User);	// total / sizeof user
+	set_num = ftell(fp) / sizeof(User);	// total / sizeof User
 	
 	for(i = 0; i < set_num ; i++)
 	{
@@ -157,7 +157,7 @@ int check_samename(char* name, int flag)	//flag 1--用户已被注册, 2--账号存在, 3-
 					puthz(350,80,"用户已被注册",16 ,17 ,RED);
 					
 					setcolor(LIGHTCYAN);
-					setlinestyle(SOLID_LINE, 0, 3); 	//566,130-23
+					setlinestyle(SOLID_LINE, 0, 3); 	
 					line(566 + 24, 130-23 + 9, 566 + 33, 130-23 + 19);
 					line(566 + 33, 130-23 + 19, 566 + 43, 130-23 - 3);
 					
@@ -167,7 +167,7 @@ int check_samename(char* name, int flag)	//flag 1--用户已被注册, 2--账号存在, 3-
 					break;
 					
 				case 2:
-					puthz(450, 110, "账号存在", 16, 17, RED);
+					puthz(430, 80, "账号存在", 16, 17, GREEN);
 					break;
 					
 				case 3:		//不输出
@@ -190,7 +190,7 @@ int check_samename(char* name, int flag)	//flag 1--用户已被注册, 2--账号存在, 3-
 				delay(3000);
 				exit(1);
 			}
-			return 0;
+			return 1;
 			
 		}
 		free(u);
@@ -207,7 +207,7 @@ int check_samename(char* name, int flag)	//flag 1--用户已被注册, 2--账号存在, 3-
 		delay(3000);
 		exit(1);
 	}
-	return 1;	
+	return 0;	
 }
 
 void judgeinput(char* str,int* state,int x,int y) //判断是否有输入

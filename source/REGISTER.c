@@ -76,7 +76,7 @@ void regist(int *page)
 			//return;
 			if(check_legal_reg(name,password,confirmpw,ID,tele,code,inputcode) == 1)
 			{
-				delay(1000); //remove when complete check_x function
+				delay(1000); 
 				*page = 3;
 				return;
 			}
@@ -440,7 +440,7 @@ int check_legal_reg(char* name, char* password, char* confirmpw,
 			format_tele = check_tele_dig(tele,566,370-23);
 			format_code = check_captcha(code,inputcode,566,430-23);
 			
-			if(!check_samename(name,1))	//检查重名
+			if(check_samename(name,1))	//检查重名
 			{
 				break;
 			}
@@ -470,7 +470,7 @@ int check_legal_reg(char* name, char* password, char* confirmpw,
 
 void write_userdata(char* name, char* pw, char* ID, char* tele)
 {
-	FILE *fp = NULL;
+	FILE *fp ;
 	User *u = NULL;
 	
 	if( (fp = fopen("Database\\UserData.dat", "rb+" )) == NULL )	//open userdata.dat in fp

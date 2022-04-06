@@ -1,17 +1,18 @@
 #include"common.h"
 #include"enter.h"
 
-void enter(int *page)
+void enter(int *page, User *u)
 {
 	int num=0;
 	char inputcode[6] = { '\0' };
-	char str[6] = { '\0' };
-	char name[15] = { '\0' };   //用户名（不超过12位）	
-	char password[20] = { '\0' };   //密码（不超过16位）
-	char code[6] = { '\0' };   //验证码（5位）
+	//char str[6] = { '\0' };
+	char name[13] = { '\0' };   //用户名（不超过12位）	
+	char password[17] = { '\0' };   //密码（不超过16位）
+	char code[6] = { '\0' };  //验证码（5位）
 	int state1 = 0;
 	int state2 = 0;
 	int state3 = 0;
+	memset(u,'\0',sizeof(User));
 	
 	clrmous(MouseX, MouseY);
 	delay(100);
@@ -353,8 +354,8 @@ int verify_user(char *name, char *password)
 	}
 	
 	fseek(fp,0,SEEK_END);
-	set_num = ftell(fp) / sizeof(User);	// total / sizeof user
-	
+	set_num = ftell(fp) / sizeof(User);// total / sizeof User
+		
 	for(i = 0; i < set_num ; i++)
 	{
 		if( (u = (User*)malloc(sizeof(User))) == NULL )	//allocate memory for u
@@ -367,9 +368,10 @@ int verify_user(char *name, char *password)
 		fseek(fp, i * sizeof(User), SEEK_SET);	//指向每隔一个User大小的
 		fread(u, sizeof(User), 1, fp);			//读取一个u
 		
-		if( strcmp(name,u->name) == 0) 			//用户名匹配
+		if(strcmp(name,u->name) == 0) 			//用户名匹配
 		{
-			if( strcmp(password, u->password) == 0)	//密码匹配
+			
+			if(strcmp(password, u->password) == 0)	//密码匹配
 			{
 				button(70,100,800,800,LIGHTCYAN,LIGHTCYAN,3);	//覆盖输入框
 				button(200,200,430,300,CYAN,LIGHTGRAY,3);				
@@ -381,7 +383,7 @@ int verify_user(char *name, char *password)
 					u = NULL;
 				}
 				
-				delay(1000);
+				//delay(1000);
 				
 				if (fclose(fp) != 0)
 				{
@@ -395,7 +397,7 @@ int verify_user(char *name, char *password)
 			{
 				button(70,100,800,800,LIGHTCYAN,LIGHTCYAN,3);	//覆盖输入框
 				button(190,200,440,300,CYAN,LIGHTGRAY,3);				
-				puthz(200,238, "用户名或密码错误！", 24, 28, BLUE);
+				puthz(200,238, "用户名或密码错误", 24, 28, BLUE);
 				
 				if (u != NULL)
 				{
@@ -405,26 +407,17 @@ int verify_user(char *name, char *password)
 				break;
 			}
 		}
-		else
-		{
-			button(70,100,800,800,LIGHTCYAN,LIGHTCYAN,3);	//覆盖输入框
-			button(190,200,440,300,CYAN,LIGHTGRAY,3);				
-			puthz(200,238, "用户名或密码错误！", 24, 28, BLUE);
-			
-			if (u != NULL)
-			{
-				free(u);
-				u = NULL;
-			}
-			break;
-		}
-		
+
 		if (u != NULL)
 		{
 			free(u);
 			u = NULL;
 		}
 	}
+	button(70,100,800,800,LIGHTCYAN,LIGHTCYAN,3);	//覆盖输入框
+	button(190,200,440,300,CYAN,LIGHTGRAY,3);				
+	puthz(200,238, "用户名或密码错误！", 24, 28, BLUE);
+	
 	
 	if (u != NULL)
 	{

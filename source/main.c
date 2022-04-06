@@ -4,11 +4,12 @@
 void main()
 {
 	int page = 0;
-	
 	int gdriver=VGA;
     int gmode=VGAHI;
-    initgraph(&gdriver,&gmode,"C:\\BORLANDC\\BGI");
-	
+	User u;
+    
+	memset(&u,'\0',sizeof(User));
+	initgraph(&gdriver,&gmode,"C:\\BORLANDC\\BGI");
 	mouseinit();
 	clrmous(MouseX, MouseY);
 	delay(100);
@@ -20,6 +21,7 @@ void main()
 		{	
 			case(0):   //初始界面
 				start(&page);
+				memset(&u,'\0',sizeof(User));
 				break;
 				
 			case(1):   //关闭按钮
@@ -32,7 +34,7 @@ void main()
 				break;
 				
 			case(3):   //用户登录
-				enter(&page);
+				enter(&page,&u);
 				break;
 				
 			case(4):   //管理员登录
