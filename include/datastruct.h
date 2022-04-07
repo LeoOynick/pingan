@@ -23,6 +23,9 @@ typedef struct carinfo
 	char licensenum[7];		//6位车牌号码
 	char caridnum[6];		//5位车架号码
 	char enginenum[6];		//5位发动机号
+	int type;				//车辆品牌型号
+	int nature;				//车辆使用性质
+	char seatnum[5];		//座位数量
 	Date regdate;			//车辆注册日期
 }Car;		//封装车辆信息
 
