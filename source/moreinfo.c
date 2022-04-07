@@ -325,3 +325,47 @@ void drawmoreinfo()
     line(610,0,640,30);
     line(640,0,610,30);
 }
+
+
+
+void write_cardata2(int type, int nature, char* seatnum)
+{
+	FILE *fp ;
+	Car *c = NULL;
+	
+	if( (fp = fopen("Database\\CarData.dat", "rb+" )) == NULL )	//open cardata.dat in fp
+	{
+		printf("Error! Can't Open \"CarData.dat\" File");
+		delay(1500);
+		exit(1);
+	}
+	
+	if( (c = (Car*)malloc(sizeof(Car))) == NULL )	//allocate memory for c
+	{
+		printf("Error - unable to allocate required memory");
+		delay(1500);
+		exit(1);
+	}
+	
+	memset(c,'\0',sizeof(Car));
+	
+	c->type = type;								//copy licensenum to C.licensenum
+	c->nature = nature; 
+	stpcpy(c->seatnum,seatnum);
+	fseek(fp,0,SEEK_END);
+	fwrite(c,sizeof(Car),1,fp);				//write c to *fp->file
+	
+	if (c != NULL)
+	{
+		free(c);
+		c = NULL;
+	}
+	
+	if (fclose(fp) != 0)
+	{
+		printf("\n cannot close CarData.dat");
+		delay(3000);
+		exit(1);
+	}
+	
+}
