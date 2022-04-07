@@ -1,7 +1,7 @@
 #include"common.h"
 #include"enter.h"
 
-void enter(int *page, User *u)
+void enter(int *page, User *u, int *usernum, int *carnum)
 {
 	int num=0;
 	char inputcode[6] = { '\0' };
@@ -65,9 +65,9 @@ void enter(int *page, User *u)
 		else if (mouse_press(180,400,260,430) == 1)
 		{
 			//MouseS = 0;
-			if(verify_login(u->name,u->password,code,inputcode) == 1)			//验证成功
+			/*if(verify_login(u->name,u->password,code,inputcode) == 1)		//验证成功
 			{
-				if(output_userinfo(u))
+				if(output_userinfo(u,usernum,carnum))
 				{
 					delay(1000);
 					*page = 6;
@@ -92,10 +92,10 @@ void enter(int *page, User *u)
 			{
 				continue;
 			}
-			/*
-			delay(1000);	//remove when release
-			*page = 6;
-			return;*/
+			
+			delay(1000);	//remove 		*/
+			*page = 6;		//when
+			return;			//release
 			
 		}
 		

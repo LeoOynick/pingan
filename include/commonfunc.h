@@ -22,8 +22,14 @@ int check_captcha (char* str1, char* str2,int x, int y);
 int check_samename(char* name, int flag);
 //flag 1--用户已被注册, 2--账号存在, 3--不输出
 
-int output_userinfo(User *us);
+int output_userinfo(User *us, int *usernum, int *carnum);
 //输出User资料到main
+
+int check_license_dig(char* str, int x, int y);
+
+
+int judge_samecar(char* new_car);
+
 
 int check_date(char* year, char* month, char* date, int x, int y);
 //判断日期是否正确

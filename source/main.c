@@ -4,12 +4,13 @@
 void main()
 {
 	int page = 0;
-	int gdriver=VGA;
-    int gmode=VGAHI;
+	int usernum = 0;
+	int carnum = -1;	// -1 means no car
 	User u;
-    
-	memset(&u,'\0',sizeof(User));
+	int gdriver =VGA,gmode =VGAHI;
+	
 	initgraph(&gdriver,&gmode,"C:\\BORLANDC\\BGI");
+	memset(&u,'\0',sizeof(User));
 	mouseinit();
 	clrmous(MouseX, MouseY);
 	delay(100);
@@ -34,7 +35,7 @@ void main()
 				break;
 				
 			case(3):   //用户登录
-				enter(&page,&u);
+				enter(&page,&u,&usernum,&carnum);
 				break;
 				
 			case(4):   //管理员登录

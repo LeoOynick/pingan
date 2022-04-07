@@ -241,6 +241,104 @@ int check_samename(char* name, int flag)	//flag 1--用户已被注册, 2--账号存在, 3-
 	return 0;	
 }
 
+int check_license_dig(char* str, int x, int y)
+{
+	if(strlen(str) == 6)
+	{
+		show_tickcross(592,105,607,125,1);
+		return 1;
+	}
+	else
+	{
+		puthz(x,y,"车牌有误",16,17,RED);
+		
+	}
+	return 0;
+}
+
+int judge_samecar(char* new_car) 
+{
+	int i,j;
+	int set_num;
+	FILE* fp;
+	User * u = NULL;
+	
+	if( (fp = fopen("Database\\UserData.dat", "rb+" )) == NULL )	//open Userdata.dat in fp
+	{
+		printf("Error! Can't Open \"UserData.dat\" File");
+		delay(1500);
+		exit(1);
+	}
+	
+	fseek(fp, 0, SEEK_END);
+	set_num = ftell(fp) / sizeof(User);
+	
+	for (i = 0; i < set_num; i++)
+	{
+		if( (u = (User*)malloc(sizeof(User))) == NULL )	//allocate memory for u
+		{
+			printf("Error - unable to allocate required memory");
+			delay(1500);
+			exit(1);
+		}
+		
+		fseek(fp, i * sizeof(User), SEEK_SET);
+		fread(u, sizeof(User), 1, fp);
+		
+		for(j = 0; j < 2; j++)
+		{
+			if (strcmp(u->car[j].licensenum, new_car) == 0)
+			{
+				puthz(547, 270, "车牌号已存在", 16, 17, RED);
+				if (u != NULL)
+				{
+					free(u);
+					u = NULL;
+				}
+				if (fclose(fp) != 0)
+				{
+					printf("\n cannot close Database.");
+					delay(3000);
+					exit(1);
+				}
+				return 0;
+			}
+		}
+		/*if (strcmp(u->car[0].licensenum, new_car) == 0 || strcmp(u->car[1].licensenum, new_car) == 0 || 
+			strcmp(u->car[2].licensenum, new_car) == 0 )
+		{
+			puthz(547, 270, "车牌号已存在", 16, 17, RED);
+			if (u != NULL)
+			{
+				free(u);
+				u = NULL;
+			}
+			if (fclose(fp) != 0)
+			{
+				printf("\n cannot close Database.");
+				delay(3000);
+				exit(1);
+			}
+			return 0;
+		}*/
+		free(u);
+		u = NULL;
+	}
+	if (u != NULL)
+	{
+		free(u);
+		u = NULL;
+	}
+	if (fclose(fp) != 0)
+	{
+		printf("\n cannot close Database.");
+		delay(3000);
+		exit(1);
+	}
+	return 1;
+}
+
+
 int check_date(char* year, char* month, char* date, int x, int y)
 {
 	struct tm *local;
@@ -302,9 +400,9 @@ int check_date(char* year, char* month, char* date, int x, int y)
 }
 
 
-int output_userinfo(User *us)
+int output_userinfo(User *us, int *usernum, int *carnum)
 {
-	int i;
+	int i,j;
 	int set_num;
 	FILE *fp;
 	User *u = NULL;
@@ -318,7 +416,7 @@ int output_userinfo(User *us)
 	
 	fseek(fp,0,SEEK_END);
 	set_num = ftell(fp) / sizeof(User);// total / sizeof User
-		
+	
 	for(i = 0; i < set_num ; i++)
 	{
 		if( (u = (User*)malloc(sizeof(User))) == NULL )	//allocate memory for u
@@ -338,7 +436,23 @@ int output_userinfo(User *us)
 			strcpy(us->password,u->password); 
 			strcpy(us->ID,u->ID); 
 			strcpy(us->tele,u->tele);
-			//car info
+			
+			for(j=2;j>-1;j--)
+			{
+				if(strlen(u->car[j].licensenum) == 0)
+				{
+					*carnum = j;
+				}
+				else
+				{
+					strcpy(us->car[j].licensenum,u->car[j].licensenum); 
+					strcpy(us->car[j].type,u->car[j].type);
+					strcpy(us->car[j].nature,u->car[j].nature);
+					strcpy(us->car[j].regdate.year,u->car[j].regdate.year);
+					strcpy(us->car[j].regdate.month,u->car[j].regdate.month);
+					strcpy(us->car[j].regdate.day,u->car[j].regdate.day);
+				}
+			}
 			
 			if (u != NULL)
 			{
@@ -351,6 +465,7 @@ int output_userinfo(User *us)
 				delay(2000);
 				exit(1);				
 			}
+			*usernum = i;
 			return 1;		//outputted
 		}
 		if (u != NULL)

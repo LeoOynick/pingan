@@ -1,13 +1,5 @@
-#ifndef _DATASTRUCT_H_
-#define _DATASTRUCT_H_
-
-typedef struct userinfo
-{
-	char name[13];			//4-12位用户名称
-	char password[17];		//4-16位密码
-	char ID[19];			//18位身份证号码
-	char tele[12];			//11位电话号码
-}User;		//封装用户信息
+#ifndef _DATA_H_
+#define _DATA_H_
 
 typedef struct datetime
 {
@@ -21,13 +13,19 @@ typedef struct datetime
 typedef struct carinfo
 {
 	char licensenum[7];		//6位车牌号码
-	char caridnum[6];		//5位车架号码
-	char enginenum[6];		//5位发动机号
-	int type;				//车辆品牌型号
-	int nature;				//车辆使用性质
-	char seatnum[5];		//座位数量
+	char type[3];			//车辆品牌型号
+	char nature[3];			//车辆使用性质
 	Date regdate;			//车辆注册日期
-}Car;		//封装车辆信息
+}Car;
+
+typedef struct userinfo
+{
+	char name[13];			//4-12位用户名称
+	char password[17];		//4-16位密码
+	char ID[19];			//18位身份证号码
+	char tele[12];			//11位电话号码
+	Car  car[3];			//每个用户最多三台车辆
+}User;		//封装用户信息
 
 typedef struct vioinfo
 {
@@ -37,6 +35,15 @@ typedef struct vioinfo
 	char viomoney[5];		//罚款金额（待用）
 	Date viotime;			//违章日期
 }Vio;		//封装违章信息
+
+typedef struct orderinfo
+{
+	char name[13];          //4-12位，用户名
+	char licensenum[7];		//6位，车牌号
+	char ordertype[3];      //订单类型
+	char ordertele[12];		//订单电话
+	Date ordertime;		 	//订单时间
+}Order;		//封装订单信息
 
 typedef struct insuranceinfo
 {
