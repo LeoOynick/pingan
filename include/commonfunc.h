@@ -23,7 +23,10 @@ int check_samename(char* name, int flag);
 //flag 1--用户已被注册, 2--账号存在, 3--不输出
 
 int output_userinfo(User *us);
+//输出User资料到main
 
+int check_date(char* year, char* month, char* date, int x, int y);
+//判断日期是否正确
 
 void judgeinput (char* str,int* state,int x,int y);
 //判断是否有输入
