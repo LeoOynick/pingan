@@ -78,9 +78,6 @@ void claim(int *page)
 			}
 			if((state1 != 0 || state2 != 0 || state3 != 0 || state4 != 0 || state5 != 0 || state6 != 0) && (state7 != 0 || state8 != 0 || state9 != 0 || state10 != 0))
 			{
-				setfillstyle(1,LIGHTCYAN);
-				bar(220,185,420,205);
-				bar(220,315,420,335);
 				puthz(240,435,"已提交管理员审核",16,20,4);
 				delay(800);
 				*page = 6;

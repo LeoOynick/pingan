@@ -58,10 +58,20 @@ void carserve(int *page)
 		else if (mouse_press(180,400,260,430) == 1)
 		{
 			MouseS = 0;
-			puthz(280,435,"提交成功！",16,20,RED);
-			delay(800);
-			*page = 7;
-			return;
+			if(state1 == 0 && state2 == 0 && state3 == 0 && state4 == 0)
+				puthz(220,225,"请选择项目！",16,18,4);
+			else
+			{
+				setfillstyle(1,LIGHTCYAN);
+				bar(220,225,420,245);
+			}
+			if(state1 != 0 || state2 != 0 || state3 != 0 || state4 != 0)
+			{
+				puthz(280,435,"提交成功！",16,20,RED);
+				delay(800);
+				*page = 7;
+				return;
+			}
 		}
 		
 		else if(mouse_press(380,400,460,430) == 2)   //返回
@@ -201,7 +211,13 @@ void carserve(int *page)
 			}
 			continue;
 		}
-		price(&state1,&state2,&state3,&state4,&state2,&state3,100,240,800,150,0,0,cost,charge,320,330);
+		if(state1 == 0 && state2 == 0 && state3 == 0 && state4 == 0)
+		{
+			setfillstyle(1,LIGHTCYAN);
+			bar(320,330,390,360);
+		}
+		else
+			price(&state1,&state2,&state3,&state4,&state2,&state3,100,240,800,150,0,0,cost,charge,320,330);
 	}
 }
 

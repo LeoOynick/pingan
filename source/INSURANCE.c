@@ -195,12 +195,13 @@ void insure(int *page)
 			}
 			continue;
 		}
-		price(&state1,&state2,&state3,&state1,&state2,&state3,1000,800,1200,0,0,0,cost,charge,150,350);
 		if(state1 == 0 && state2 == 0 && state3 == 0)
 		{
 			setfillstyle(1,LIGHTCYAN);
 			bar(150,350,190,395);
 		}
+		else
+			price(&state1,&state2,&state3,&state1,&state2,&state3,1000,800,1200,0,0,0,cost,charge,150,350);	
 	}
 }
 
