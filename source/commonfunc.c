@@ -307,7 +307,7 @@ int output_userinfo(User *us)
 	int i;
 	int set_num;
 	FILE *fp;
-	User *u;
+	User *u = NULL;
 	
 	if( (fp = fopen("Database\\UserData.dat", "rb+" )) == NULL )	//open userdata.dat in fp
 	{
@@ -331,7 +331,7 @@ int output_userinfo(User *us)
 		fseek(fp, i * sizeof(User), SEEK_SET);	//指向每隔一个User大小的
 		fread(u, sizeof(User), 1, fp);			//读取一个u
 		
-		if(strcmp(us->name,u->name))
+		if(strcmp(us->name,u->name) == 0)
 		{
 			memset(us,'\0',sizeof(User));              //先重置us
 			strcpy(us->name,u->name); 
@@ -339,19 +339,25 @@ int output_userinfo(User *us)
 			strcpy(us->ID,u->ID); 
 			strcpy(us->tele,u->tele);
 			//car info
+			
+			if (u != NULL)
+			{
+				free(u);
+				u = NULL;
+			}
+			if (fclose(fp) != 0)
+			{
+				printf("\n cannot close Database");
+				delay(2000);
+				exit(1);				
+			}
+			return 1;		//outputted
 		}
 		if (u != NULL)
 		{
 			free(u);
 			u = NULL;
 		}
-		if (fclose(fp) != 0)
-		{
-			printf("\n cannot close Database");
-			delay(2000);
-			exit(1);				
-		}
-		return 1;		//outputted
 	}
 	if (u != NULL)
 	{
