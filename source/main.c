@@ -46,15 +46,15 @@ void main()
 				break;
 				
 			case(6):   //主页
-				home(&page);
+				home(&page,&u);
 				break;
 				
 			case(7):   //服务
-				service(&page);
+				service(&page,&u);
 				break;
 				
 			case(8):   //我的
-				mine(&page);
+				mine(&page,&u);
 				break;
 				
 			case(9):   //买车险

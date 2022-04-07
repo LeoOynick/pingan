@@ -1,14 +1,14 @@
 #include"common.h"
 #include"mine.h"
 
-void mine(int *page)
+void mine(int *page, User *u)
 {
 	int num = 0;
 	
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
-	drawmine();
+	drawmine(u);
 	
 	while(1)
 	{
@@ -189,7 +189,7 @@ void mine(int *page)
 	}
 }
 
-void drawmine()
+void drawmine(User *u)
 {
 	setbkcolor(LIGHTCYAN);
 	setfillstyle(1,3);
@@ -198,6 +198,18 @@ void drawmine()
 	bar(520,420,640,480);
 	setfillstyle(1,15);
 	fillellipse(25,25,24,24);
+	
+	if(strlen(u->name) == 0)
+	{
+		outtextxy(60,24,"error");
+	}	
+	else
+	{
+		puthz(60, 17, "ÄúºÃ£¬", 16, 18, WHITE);
+		setcolor(WHITE);
+		settextstyle(3, HORIZ_DIR, 2); //2,3
+		outtextxy(110, 10, u->name);
+	}
 	
 	puthz(560,60,"ÍË³öµÇÂ¼",16,18,8);
 	setcolor(8);

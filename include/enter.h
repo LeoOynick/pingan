@@ -1,6 +1,6 @@
 #ifndef _ENTER_H_
 #define _ENTER_H_
-#include"data.h"
+#include "datastruct.h"
 
 void enter(int *page,User *u);
 void drawenter();

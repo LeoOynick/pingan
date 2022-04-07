@@ -241,6 +241,71 @@ int check_samename(char* name, int flag)	//flag 1--用户已被注册, 2--账号存在, 3-
 	return 0;	
 }
 
+int output_userinfo(User *us)
+{
+	int i;
+	int set_num;
+	FILE *fp;
+	User *u;
+	
+	if( (fp = fopen("Database\\UserData.dat", "rb+" )) == NULL )	//open userdata.dat in fp
+	{
+		printf("Error! Can't Open \"UserData.dat\" File");
+		delay(1500);
+		exit(1);
+	}
+	
+	fseek(fp,0,SEEK_END);
+	set_num = ftell(fp) / sizeof(User);// total / sizeof User
+		
+	for(i = 0; i < set_num ; i++)
+	{
+		if( (u = (User*)malloc(sizeof(User))) == NULL )	//allocate memory for u
+		{
+			printf("Error - unable to allocate required memory");
+			delay(1500);
+			exit(1);
+		}
+		
+		fseek(fp, i * sizeof(User), SEEK_SET);	//指向每隔一个User大小的
+		fread(u, sizeof(User), 1, fp);			//读取一个u
+		
+		if(strcmp(us->name,u->name))
+		{
+			memset(us,'\0',sizeof(User));              //先重置us
+			strcpy(us->name,u->name); 
+			strcpy(us->password,u->password); 
+			strcpy(us->ID,u->ID); 
+			strcpy(us->tele,u->tele);
+			//car info
+		}
+		if (u != NULL)
+		{
+			free(u);
+			u = NULL;
+		}
+		if (fclose(fp) != 0)
+		{
+			printf("\n cannot close Database");
+			delay(2000);
+			exit(1);				
+		}
+		return 1;		//outputted
+	}
+	if (u != NULL)
+	{
+		free(u);
+		u = NULL;
+	}
+	if (fclose(fp) != 0)
+	{
+		printf("\n cannot close Database");
+		delay(2000);
+		exit(1);				
+	}
+	return 0;	//output error
+}
+
 void judgeinput(char* str,int* state,int x,int y) //判断是否有输入
 {
 	if(strlen(str) == 0)

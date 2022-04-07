@@ -1,5 +1,5 @@
-#ifndef _DATA_H_
-#define _DATA_H_
+#ifndef _DATASTRUCT_H_
+#define _DATASTRUCT_H_
 
 typedef struct userinfo
 {

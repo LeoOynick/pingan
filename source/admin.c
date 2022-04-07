@@ -4,7 +4,6 @@
 void administ(int *page)
 {
 	int num=0;
-	char str[6] = { '\0' };
 	char password[20] = { '\0' };   //ÃÜÂë£¨²»³¬¹ı16Î»£©
 	int state = 0;
 	

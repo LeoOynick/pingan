@@ -13,7 +13,7 @@
 #include<time.h>
 #include"HZ.H"
 #include"mouse.h"
-#include"data.h"
+#include"datastruct.h"
 
 #define NUM0 0x5230
 #define NUM1 0x4f31

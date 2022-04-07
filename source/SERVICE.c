@@ -1,14 +1,14 @@
 #include"common.h"
 #include"service.h"
 
-void service(int *page)
+void service(int *page, User *u)
 {
 	int num = 0;
 	
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
-	drawservice();
+	drawservice(u);
 	
 	while(1)
 	{
@@ -315,7 +315,7 @@ void service(int *page)
 	}
 }
 
-void drawservice()
+void drawservice(User *u)
 {
 	setbkcolor(LIGHTCYAN);
 	setfillstyle(1,3);
@@ -328,8 +328,20 @@ void drawservice()
 	setcolor(9);
 	circle(25,15,15);
 	arc(25,72,60,120,40);
-    setcolor(8);
 	
+	if(strlen(u->name) == 0)
+	{
+		outtextxy(60,24,"error");
+	}	
+	else
+	{
+		puthz(60, 17, "您好，", 16, 18, WHITE);
+		setcolor(WHITE);
+		settextstyle(3, HORIZ_DIR, 2); //2,3
+		outtextxy(110, 10, u->name);
+	}
+	
+    setcolor(8);
 	puthz(125,185,"车辆服务",16,18,8);   //车辆服务
 	line(120,170,200,170);
 	line(120,170,120,140);

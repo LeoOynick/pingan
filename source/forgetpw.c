@@ -5,7 +5,6 @@ void forget(int *page)
 {
 	int num=0;
 	char inputcode[6] = { '\0' };
-	char str[6] = { '\0' };
 	char name[13] = { '\0' };   //用户名（不超过12位）	
 	char password[17] = { '\0' };   //重置密码（不超过16位）
 	char confirmpw[17] = { '\0' };   //确认密码
@@ -374,7 +373,7 @@ int verify_forgotpw_info(char* name, char* password, char* confirmpw,
 					char* ID, char* tele, char* code, char* inputcode)
 {
 	int inputed = 0;
-	int format_name = 0;   //判断输入字符是否符合要求
+	//int format_name = 0;   //判断输入字符是否符合要求
 	int format_pw = 0;
 	int format_Cpw = 0;
 	int format_ID = 0;

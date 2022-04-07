@@ -1,14 +1,14 @@
 #include"common.h"
 #include"home.h"
 
-void home(int *page)
+void home(int *page,User *u)
 {
 	int num = 0;
 	
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
-	drawhome();
+	drawhome(u);
 	
 	while(1)
 	{
@@ -392,7 +392,7 @@ void home(int *page)
 	}
 }
 
-void drawhome()
+void drawhome(User *u)
 {
 	setbkcolor(LIGHTCYAN);
 	setfillstyle(1,3);
@@ -405,8 +405,20 @@ void drawhome()
 	setcolor(9);
 	circle(25,15,15);
 	arc(25,72,60,120,40);
-    setcolor(8);
 	
+	if(strlen(u->name) == 0)
+	{
+		outtextxy(60,24,"error");
+	}	
+	else
+	{
+		puthz(60, 17, "ÄúºÃ£¬", 16, 18, WHITE);
+		setcolor(WHITE);
+		settextstyle(3, HORIZ_DIR, 2); //2,3
+		outtextxy(110, 10, u->name);
+	}
+	
+    setcolor(8);
 	puthz(135,185,"Âò³µÏÕ",16,18,8);   //Âò³µÏÕ
 	line(120,100,200,100);
 	line(120,100,120,150);

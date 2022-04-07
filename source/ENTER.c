@@ -6,8 +6,8 @@ void enter(int *page, User *u)
 	int num=0;
 	char inputcode[6] = { '\0' };
 	//char str[6] = { '\0' };
-	char name[13] = { '\0' };   //用户名（不超过12位）	
-	char password[17] = { '\0' };   //密码（不超过16位）
+	/*char name[13] = { '\0' };   //用户名（不超过12位）	
+	char password[17] = { '\0' };   //密码（不超过16位）*/
 	char code[6] = { '\0' };  //验证码（5位）
 	int state1 = 0;
 	int state2 = 0;
@@ -65,22 +65,37 @@ void enter(int *page, User *u)
 		else if (mouse_press(180,400,260,430) == 1)
 		{
 			//MouseS = 0;
-			/*if(verify_login(name,password,code,inputcode) == 1)			//验证成功
-			{*/
-				delay(1000);
-				*page = 6;
-				return;
-			/*}
-			else if(verify_login(name,password,code,inputcode) == 0)	//验证失败
+			if(verify_login(u->name,u->password,code,inputcode) == 1)			//验证成功
+			{
+				if(output_userinfo(u))
+				{
+					delay(1000);
+					*page = 6;
+					return;
+				}
+				else
+				{
+					closegraph();
+					printf("\"output_userinfo\"func error");
+					delay(1500);
+					exit(1);
+				}
+				
+			}
+			else if(verify_login(u->name,u->password,code,inputcode) == 0)	//验证失败
 			{
 				delay(1000);
 				*page = 3;
 				return;
 			}
-			else if(verify_login(name,password,code,inputcode) == 2)	//验证码不正确
+			else if(verify_login(u->name,u->password,code,inputcode) == 2)	//验证码不正确
 			{
 				continue;
-			}*/
+			}
+			/*
+			delay(1000);	//remove when release
+			*page = 6;
+			return;*/
 			
 		}
 		
@@ -138,9 +153,9 @@ void enter(int *page, User *u)
 		{
 			MouseS = 0;
 		    button(80,170,560,200,8,15,1);
-			name[0] = '\0';
-			input(name,85,172,12,15,2);
-			if(strlen(name) != 0)
+			u->name[0] = '\0';
+			input(u->name,85,172,12,15,2);
+			if(strlen(u->name) != 0)
 				state1 = 1;
 			else
 				state1 = 0;
@@ -163,9 +178,9 @@ void enter(int *page, User *u)
 		{
 			MouseS = 0;
 		    button(80,240,560,270,8,15,1);
-			password[0] = '\0';
-			input(password,85,242,16,15,1);
-			if(strlen(password) != 0)
+			u->password[0] = '\0';
+			input(u->password,85,242,16,15,1);
+			if(strlen(u->password) != 0)
 				state2 = 1;
 			else
 				state2 = 0;
@@ -381,8 +396,6 @@ int verify_user(char *name, char *password)
 					free(u);
 					u = NULL;
 				}
-				
-				//delay(1000);
 				
 				if (fclose(fp) != 0)
 				{
