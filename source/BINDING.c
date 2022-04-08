@@ -16,6 +16,10 @@ void binding(int *page)
 	int state4 = 0;
 	int state5 = 0;
 	int state6 = 0;
+	int state7 = 0;
+	int state8 = 0;
+	int state9 = 0;
+	int state10 = 0;
 	
 	clrmous(MouseX, MouseY);
 	delay(100);
@@ -48,7 +52,7 @@ void binding(int *page)
 			return;
 		}
 		
-		else if(mouse_press(180,400,260,430) == 2)		//下一步
+		else if(mouse_press(180,400,260,430) == 2)		//提交
 		{
 			if (num == 0)
 			{
@@ -56,7 +60,7 @@ void binding(int *page)
 				clrmous(MouseX, MouseY);
 				delay(10);
 				button(180,400,260,430,15,10,1);
-				puthz(185,405,"下一步",24,24,1);
+				puthz(195,405,"提交",24,24,1);
 				num = 2;
 			}
 			continue;
@@ -64,7 +68,7 @@ void binding(int *page)
 		else if (mouse_press(180,400,260,430) == 1)
 		{
 			MouseS = 0;
-			if(state1 == 0)
+			/*if(state1 == 0)
 				puthz(485,135,"请填写车牌号码！",16,18,4);
 			else
 			{
@@ -96,7 +100,7 @@ void binding(int *page)
 			{
 				*page = 20;
 				return;
-			}
+			}*/
 		}
 		
 		else if(mouse_press(380,400,460,430) == 2)		//返回
@@ -144,129 +148,191 @@ void binding(int *page)
 			continue;
 		}
 		
-		else if(mouse_press(275,180,480,220) == 2)		//车架号码
+
+		
+
+		
+		else if(mouse_press(255,180,340,220) == 2)		//年
 		{
 			if (num == 0 && state2 == 0)
 			{
 				MouseS = 2;
 				clrmous(MouseX, MouseY);
 				delay(10);
-				button(275,180,480,220,8,15,1);
+				button(255,180,340,220,8,15,1);
 				num = 5;
 			}
 			continue;
 		}
-		else if (mouse_press(275,180,480,220) == 1)
+		else if (mouse_press(255,180,340,220) == 1)
 		{
 			MouseS = 0;
-		    button(275,180,480,220,8,15,1);
-			caridnum[0] = '\0';
-			input(caridnum,280,185,5,15,2);
-			if(strlen(caridnum) != 0)
+		    button(255,180,340,220,8,15,1);
+			year[0] = '\0';
+			input(year,255,185,4,15,2);
+			if(strlen(year) != 0)
 				state2 = 1;
 			else
 				state2 = 0;
 			continue;
 		}
 		
-		else if(mouse_press(275,240,480,280) == 2)		//发动机号
+		else if(mouse_press(360,180,410,220) == 2)		//月
 		{
 			if (num == 0 && state3 == 0)
 			{
 				MouseS = 2;
 				clrmous(MouseX, MouseY);
 				delay(10);
-				button(275,240,480,280,8,15,1);
+				button(360,180,410,220,8,15,1);
 				num = 6;
 			}
 			continue;
 		}
-		else if (mouse_press(275,240,480,280) == 1)
+		else if (mouse_press(360,180,410,220) == 1)
 		{
 			MouseS = 0;
-		    button(275,240,480,280,8,15,1);
-			enginenum[0] = '\0';
-			input(enginenum,280,245,5,15,2);
-			if(strlen(enginenum) != 0)
+		    button(360,180,410,220,8,15,1);
+			month[0] = '\0';
+			input(month,360,185,2,15,2);
+			if(strlen(month) != 0)
 				state3 = 1;
 			else
 				state3 = 0;
 			continue;
 		}
 		
-		else if(mouse_press(255,300,340,340) == 2)		//年
+		else if(mouse_press(430,180,480,220) == 2)		//日
 		{
 			if (num == 0 && state4 == 0)
 			{
 				MouseS = 2;
 				clrmous(MouseX, MouseY);
 				delay(10);
-				button(255,300,340,340,8,15,1);
+				button(430,180,480,220,8,15,1);
 				num = 7;
 			}
 			continue;
 		}
-		else if (mouse_press(255,300,340,340) == 1)
+		else if (mouse_press(430,180,480,220) == 1)
 		{
 			MouseS = 0;
-		    button(255,300,340,340,8,15,1);
-			year[0] = '\0';
-			input(year,255,305,4,15,2);
-			if(strlen(year) != 0)
+		    button(430,180,480,220,8,15,1);
+			day[0] = '\0';
+			input(day,430,185,2,15,2);
+			if(strlen(day) != 0)
 				state4 = 1;
 			else
 				state4 = 0;
 			continue;
 		}
 		
-		else if(mouse_press(360,300,410,340) == 2)		//月
+		else if (mouse_press(185,255,195,265) == 2)   //红旗
 		{
-			if (num == 0 && state5 == 0)
+			if (num == 0)
 			{
-				MouseS = 2;
+				MouseS = 1;
 				clrmous(MouseX, MouseY);
 				delay(10);
-				button(360,300,410,340,8,15,1);
 				num = 8;
 			}
 			continue;
 		}
-		else if (mouse_press(360,300,410,340) == 1)
+		else if (mouse_press(185,255,195,265) == 1)
 		{
-			MouseS = 0;
-		    button(360,300,410,340,8,15,1);
-			month[0] = '\0';
-			input(month,360,305,2,15,2);
-			if(strlen(month) != 0)
-				state5 = 1;
-			else
-				state5 = 0;
-			continue;
+			delay(150);
+			choose(190,260,&state5);
+			single(&state6,&state7,&state8,290,260,390,260,490,260);
 		}
 		
-		else if(mouse_press(430,300,480,340) == 2)		//日
+		else if (mouse_press(285,255,295,265) == 2)   //奥迪
 		{
-			if (num == 0 && state6 == 0)
+			if (num == 0)
 			{
-				MouseS = 2;
+				MouseS = 1;
 				clrmous(MouseX, MouseY);
 				delay(10);
-				button(430,300,480,340,8,15,1);
 				num = 9;
 			}
 			continue;
 		}
-		else if (mouse_press(430,300,480,340) == 1)
+		else if (mouse_press(285,255,295,265) == 1)
 		{
-			MouseS = 0;
-		    button(430,300,480,340,8,15,1);
-			day[0] = '\0';
-			input(day,430,305,2,15,2);
-			if(strlen(day) != 0)
-				state6 = 1;
-			else
-				state6 = 0;
+			delay(150);
+			choose(290,260,&state6);
+			single(&state5,&state7,&state8,190,260,390,260,490,260);
+		}
+		
+		else if (mouse_press(385,255,395,265) == 2)   //宝马
+		{
+			if (num == 0)
+			{
+				MouseS = 1;
+				clrmous(MouseX, MouseY);
+				delay(10);
+				num = 10;
+			}
 			continue;
+		}
+		else if (mouse_press(385,255,395,265) == 1)
+		{
+			delay(150);
+			choose(390,260,&state7);
+			single(&state5,&state6,&state8,190,260,290,260,490,260);
+		}
+		
+		else if (mouse_press(485,255,495,265) == 2)   //奔驰
+		{
+			if (num == 0)
+			{
+				MouseS = 1;
+				clrmous(MouseX, MouseY);
+				delay(10);
+				num = 11;
+			}
+			continue;
+		}
+		else if (mouse_press(485,255,495,265) == 1)
+		{
+			delay(150);
+			choose(490,260,&state8);
+			single(&state5,&state6,&state7,190,260,290,260,390,260);
+		}
+		
+		else if (mouse_press(185,315,195,325) == 2)   //营运
+		{
+			if (num == 0)
+			{
+				MouseS = 1;
+				clrmous(MouseX, MouseY);
+				delay(10);
+				num = 12;
+			}
+			continue;
+		}
+		else if (mouse_press(185,315,195,325) == 1)
+		{
+			delay(150);
+			choose(190,320,&state9);
+			single(&state10,&state10,&state10,390,320,390,320,390,320);
+		}
+		
+		else if (mouse_press(385,315,395,325) == 2)   //非营运
+		{
+			if (num == 0)
+			{
+				MouseS = 1;
+				clrmous(MouseX, MouseY);
+				delay(10);
+				num = 13;
+			}
+			continue;
+		}
+		else if (mouse_press(385,315,395,325) == 1)
+		{
+			delay(150);
+			choose(390,320,&state10);
+			single(&state9,&state9,&state9,190,320,190,320,190,320);
 		}
 		
 		else
@@ -289,7 +355,7 @@ void binding(int *page)
 				{
 					setfillstyle(1,2);
 					bar(180,400,260,430);
-					puthz(185,405,"下一步",24,24,1);
+					puthz(195,405,"提交",24,24,1);
 				}
 				else if(num == 3)
 				{
@@ -302,25 +368,18 @@ void binding(int *page)
 				{
 					button(310,120,480,160,15,15,1);
 				}
+				
 				else if(num == 5 && state2 == 0)
 				{
-					button(275,180,480,220,15,15,1);
+					button(255,180,340,220,15,15,1);
 				}
 				else if(num == 6 && state3 == 0)
 				{
-					button(275,240,480,280,15,15,1);
+					button(360,180,410,220,15,15,1);
 				}
 				else if(num == 7 && state4 == 0)
 				{
-					button(255,300,340,340,15,15,1);
-				}
-				else if(num == 8 && state5 == 0)
-				{
-					button(360,300,410,340,15,15,1);
-				}
-				else if(num == 9 && state6 == 0)
-				{
-					button(430,300,480,340,15,15,1);
+					button(430,180,480,220,15,15,1);
 				}
 				num=0;
 			}
@@ -334,24 +393,40 @@ void drawbinding()
 	setbkcolor(LIGHTCYAN);
 	
 	puthz(220,20,"绑定车辆",48,56,1);
-	puthz(140,100,"请参照行驶证填写车辆信息",16,18,4);
 	setfillstyle(1,15);
 	bar(275,120,480,160);
 	puthz(160,130,"车牌号码",24,28,8);
 	puthz(280,130,"鄂",24,28,8);
-	bar(275,180,480,220);
-	puthz(160,190,"车架号码",24,28,8);
-	bar(275,240,480,280);
-	puthz(160,250,"发动机号",24,28,8);
-	bar(255,300,500,340);
-	puthz(140,310,"注册日期",24,28,8);
-	puthz(340,310,"年",24,28,8);
-	puthz(410,310,"月",24,28,8);
-	puthz(480,310,"日",24,28,8);
-	
+	puthz(60,250,"品牌型号",24,28,8);
+	fillellipse(190,260,5,5);
+	fillellipse(290,260,5,5);
+	fillellipse(390,260,5,5);
+	fillellipse(490,260,5,5);
+	fillellipse(190,320,5,5);
+	fillellipse(390,320,5,5);
+	setcolor(8);
+	circle(190,260,5);
+	circle(290,260,5);
+	circle(390,260,5);
+	circle(490,260,5);
+	circle(190,320,5);
+	circle(390,320,5);
+	puthz(200,250,"红旗",24,28,8);
+	puthz(300,250,"奥迪",24,28,8);
+	puthz(400,250,"宝马",24,28,8);
+	puthz(500,250,"奔驰",24,28,8);
+	puthz(60,310,"使用性质",24,28,8);
+	puthz(200,310,"营运",24,28,8);
+	puthz(400,310,"非营运",24,28,8);
+	bar(255,180,500,220);
+	puthz(140,190,"注册日期",24,28,8);
+	puthz(340,190,"年",24,28,8);
+	puthz(410,190,"月",24,28,8);
+	puthz(480,190,"日",24,28,8);
+		
 	setfillstyle(1,GREEN);
 	bar(180,400,260,430);
-	puthz(185,405,"下一步",24,24,1);
+	puthz(195,405,"提交",24,24,1);
 	setfillstyle(1,4);
 	bar(380,400,460,430);
 	puthz(395,405,"返回",24,28,1);
@@ -364,7 +439,73 @@ void drawbinding()
     line(640,0,610,30);
 }
 
-
+/*
+int check_legal_bin(char* licensenum, char* caridnum, char* enginenum, 
+					char* year, char* month, char* day)
+{
+	int i;
+	int inputed = 0;	//判断是否有输入
+	int format_licensenum = 0;   //判断输入字符是否符合要求
+	int format_caridnum = 0;
+	int format_enginenum = 0;
+	int format_year = 0;
+	int format_month = 0;
+	int format_day = 0;
+	
+	while(1)
+	{
+		coverhz(485,135,11);	//覆盖文字
+		coverhz(485,195,11);
+		coverhz(485,255,11);
+		coverhz(505,315,11);
+	
+		judgeinput(licensenum,&inputed,485,135);	//判断格式是否符合要求
+		judgeinput(caridnum,&inputed,485,195);
+		judgeinput(enginenum,&inputed,485,255);
+		judgeinput(year,&inputed,505,315);
+		judgeinput(month,&inputed,505,315);
+		judgeinput(day,&inputed,505,315);
+		
+		if(inputed == 1)
+		{
+			break;
+		}
+		else if(inputed == 0)
+		{
+			format_name = check_username_dig (name,566,130-23);	//若符合格式则为 1
+			format_pw = check_pw_dig (password,566,190-23);
+			format_Cpw = check_comfirmpw(password,confirmpw,566,250-23);
+			format_ID = check_id(ID,566,310-23);
+			format_tele = check_tele_dig(tele,566,370-23);
+			format_code = check_captcha(code,inputcode,566,430-23);
+			
+			if(check_samename(name,1))	//检查重名
+			{
+				break;
+			}
+			else
+			{
+				coverhz(350,68,11);
+				if(format_name != 1 || format_pw != 1 || format_Cpw != 1 
+					|| format_tele != 1 || format_code != 1 ||format_ID != 1)	
+				{
+					break;
+				}
+				else if(format_name == 1 && format_pw == 1 && format_Cpw == 1 
+					&& format_tele == 1 && format_code == 1 &&format_ID == 1)
+				{
+					write_userdata(name,password,ID,tele);
+					button(70,70,800,800,LIGHTCYAN,LIGHTCYAN,3);	//覆盖输入框
+					button(200,200,430,300,CYAN,LIGHTGRAY,3);				
+					puthz(256,238, "注册成功！", 24, 28, BLUE);
+					return 1;
+				}
+			}
+			
+		}
+	}
+	return 0;
+}
 
 void write_cardata(char* licensenum, char* caridnum, char* enginenum, char* year, char* month, char* day)
 {
@@ -409,4 +550,4 @@ void write_cardata(char* licensenum, char* caridnum, char* enginenum, char* year
 		exit(1);
 	}
 	
-}
+}*/

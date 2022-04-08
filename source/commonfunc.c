@@ -639,7 +639,7 @@ void choose(int x,int y,int *state)
 	if(*state == 0)
 	{
 		clrmous(MouseX, MouseY);
-		delay(10);
+		//delay(10);
 		setfillstyle(1,RED);
 		fillellipse(x,y,3,3);
 		*state = 1;
@@ -647,7 +647,7 @@ void choose(int x,int y,int *state)
 	else if(*state == 1)
 	{
 		clrmous(MouseX, MouseY);
-		delay(10);
+		//delay(10);
 		setfillstyle(1,15);
 		fillellipse(x,y,5,5);
 		setcolor(8);

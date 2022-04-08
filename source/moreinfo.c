@@ -1,4 +1,4 @@
-#include"common.h"
+/*#include"common.h"
 #include"moreinfo.h"
 
 void moreinfo(int *page)
@@ -368,4 +368,4 @@ void write_cardata2(int type, int nature, char* seatnum)
 		exit(1);
 	}
 	
-}
+}*/

@@ -101,10 +101,7 @@ void main()
 			case(19):   //添加车辆
 				binding(&page);
 				break;
-				
-			case(20):   //更多信息
-				moreinfo(&page);
-				break;
+
 		}
 	}
 }
