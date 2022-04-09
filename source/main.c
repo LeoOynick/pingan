@@ -5,7 +5,7 @@ void main()
 {
 	int page = 0;
 	int usernum = 0;
-	int carnum = -1;	// -1 means no car
+	int carnum = -1;
 	User u;
 	int gdriver =VGA,gmode =VGAHI;
 	
@@ -55,7 +55,7 @@ void main()
 				break;
 				
 			case(8):   //我的
-				mine(&page,&u);
+				mine(&page,&u,&usernum,&carnum);
 				break;
 				
 			case(9):   //买车险
@@ -99,7 +99,7 @@ void main()
 				break;
 				
 			case(19):   //添加车辆
-				binding(&page);
+				binding(&page,&u,&usernum,&carnum);
 				break;
 
 			case(20):   //订单查询

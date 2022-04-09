@@ -13,8 +13,8 @@ typedef struct datetime
 typedef struct carinfo
 {
 	char licensenum[7];		//6位车牌号码
-	char type[3];			//车辆品牌型号
-	char nature[3];			//车辆使用性质
+	char type[2];			//车辆品牌型号
+	char nature[2];			//车辆使用性质
 	Date regdate;			//车辆注册日期
 }Car;
 

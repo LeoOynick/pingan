@@ -243,101 +243,38 @@ int check_samename(char* name, int flag)	//flag 1--用户已被注册, 2--账号存在, 3-
 
 int check_license_dig(char* str, int x, int y)
 {
-	if(strlen(str) == 6)
+	int i;
+	if (strlen(str) != 6 )
 	{
-		show_tickcross(592,105,607,125,1);
-		return 1;
+		puthz(x, y, "车牌有误", 16, 17, RED);
+		return 0;
+	}
+	else if(str[0] < 'A' || str[0] > 'Z')
+	{
+		puthz(x, y, "第一位为大写字母", 16, 17, RED);
+		return 0;
 	}
 	else
 	{
-		puthz(x,y,"车牌有误",16,17,RED);
-		
-	}
-	return 0;
-}
-
-int judge_samecar(char* new_car) 
-{
-	int i,j;
-	int set_num;
-	FILE* fp;
-	User * u = NULL;
-	
-	if( (fp = fopen("Database\\UserData.dat", "rb+" )) == NULL )	//open Userdata.dat in fp
-	{
-		printf("Error! Can't Open \"UserData.dat\" File");
-		delay(1500);
-		exit(1);
-	}
-	
-	fseek(fp, 0, SEEK_END);
-	set_num = ftell(fp) / sizeof(User);
-	
-	for (i = 0; i < set_num; i++)
-	{
-		if( (u = (User*)malloc(sizeof(User))) == NULL )	//allocate memory for u
+		for (i = 0; i < 6; i++)
 		{
-			printf("Error - unable to allocate required memory");
-			delay(1500);
-			exit(1);
-		}
-		
-		fseek(fp, i * sizeof(User), SEEK_SET);
-		fread(u, sizeof(User), 1, fp);
-		
-		for(j = 0; j < 2; j++)
-		{
-			if (strcmp(u->car[j].licensenum, new_car) == 0)
+			if ((str[i] >= '0' && str[i] <= '9') || (str[i] >= 'A' && str[i] <= 'Z'))
 			{
-				puthz(547, 270, "车牌号已存在", 16, 17, RED);
-				if (u != NULL)
-				{
-					free(u);
-					u = NULL;
-				}
-				if (fclose(fp) != 0)
-				{
-					printf("\n cannot close Database.");
-					delay(3000);
-					exit(1);
-				}
+				continue;
+			}
+			else
+			{
+				puthz(x, y, "格式不正确", 16, 17, RED);
 				return 0;
 			}
 		}
-		/*if (strcmp(u->car[0].licensenum, new_car) == 0 || strcmp(u->car[1].licensenum, new_car) == 0 || 
-			strcmp(u->car[2].licensenum, new_car) == 0 )
-		{
-			puthz(547, 270, "车牌号已存在", 16, 17, RED);
-			if (u != NULL)
-			{
-				free(u);
-				u = NULL;
-			}
-			if (fclose(fp) != 0)
-			{
-				printf("\n cannot close Database.");
-				delay(3000);
-				exit(1);
-			}
-			return 0;
-		}*/
-		free(u);
-		u = NULL;
+		setcolor(GREEN);
+		setlinestyle(SOLID_LINE, 0, 3); 
+		line(x + 3, y + 8, x + 13, y + 18);
+		line(x + 13, y + 18, x + 23, y - 2);
+		return 1;
 	}
-	if (u != NULL)
-	{
-		free(u);
-		u = NULL;
-	}
-	if (fclose(fp) != 0)
-	{
-		printf("\n cannot close Database.");
-		delay(3000);
-		exit(1);
-	}
-	return 1;
 }
-
 
 int check_date(char* year, char* month, char* date, int x, int y)
 {
@@ -353,17 +290,17 @@ int check_date(char* year, char* month, char* date, int x, int y)
 	if (strlen(year) != 4)
 	{
 		puthz(x, y, "年份为四位", 16, 17, RED);
-		return 1;
+		return 0;
 	}
 	else if (strlen(month) != 2)
 	{
 		puthz(x, y, "月份为两位", 16, 17, RED);
-		return 1;
+		return 0;
 	}
 	else if (strlen(date) != 2)
 	{
 		puthz(x, y, "日期为两位", 16, 17, RED);
-		return 1;
+		return 0;
 	}
 	else
 	{
@@ -372,7 +309,7 @@ int check_date(char* year, char* month, char* date, int x, int y)
 			|| (atoi(year) == local->tm_year + 1900 && atoi(month) == local->tm_mon + 1 && atoi(date) > local->tm_mday))
 		{
 			puthz(x, y, "不能超出当前时间", 16, 17, RED);
-			return 1;
+			return 0;
 		}	
 		for (i = 0; i < 8; i++)
 		{
@@ -383,22 +320,128 @@ int check_date(char* year, char* month, char* date, int x, int y)
 			else
 			{
 				puthz(x, y, "格式不正确", 16, 17, RED);
-				return 1;
+				return 0;
 			}
 		}
 		if (atoi(month) < 1 || atoi(month) > 12 || atoi(date) < 1 || atoi(date) > 31)
 		{
 			puthz(x, y, "格式不正确", 16, 17, RED);
-			return 1;
+			return 0;
 		}
-		setcolor(BLUE);
+		setcolor(GREEN);
 		setlinestyle(SOLID_LINE, 0, 3); 
 		line(x + 3, y + 8, x + 13, y + 18);
 		line(x + 13, y + 18, x + 23, y - 2);
-		return 0;
+		return 1;
 	}
 }
 
+int show_car(User* u, int x,int y,int flag)		//显示车辆信息
+{
+	int i;
+	int j = 0;
+	int carnum = 0;
+	settextstyle(1, HORIZ_DIR, 2);
+	setlinestyle(SOLID_LINE,0,3);
+	
+	for(i = 0; i < 3; i++)
+	{
+		setcolor(DARKGRAY);
+		if(strlen(u->car[i].licensenum) != 0)
+		{
+			carnum++;
+			switch(u->car[i].type[0])
+			{
+				case '1':
+					puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "红旗", 24, 25, DARKGRAY);
+					break;
+				case '2':
+					puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "奥迪", 24, 25, DARKGRAY);
+					break;
+				case '3':
+					puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "宝马", 24, 25, DARKGRAY);
+					break;
+				case '4':
+					puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "奔驰", 24, 25, DARKGRAY);
+					break;
+			}
+			switch(u->car[i].nature[0])
+			{
+				case '1':
+					puthz(x + 150, y + 8 + (3 + 31 * flag) * i, "营运",16,17,DARKGRAY);
+					break;
+				case '2':
+					puthz(x + 150, y + 8 + (3 + 31 * flag) * i, "非营运",16,17,DARKGRAY);
+					break;
+			}
+			puthz(x + 65, y + 8 + (3 + 31 * flag) * i, "使用性质", 16, 18, DARKGRAY);
+			
+			puthz(x + 220, y + 5 + (3 + 31 * flag) * i, "车牌号码", 24, 25, WHITE);
+			puthz(x + 330, y + 5 + (3 + 31 * flag) * i, "鄂", 24, 25, DARKGRAY);
+			outtextxy(x + 357, y + 1 + (3 + 31 * flag) * i, u->car[i].licensenum);
+			
+			setcolor(LIGHTGRAY);
+			for( j = 0 ; j < carnum ; j++)
+			{
+				rectangle(x, y + (3 + 31 * flag) * i, x + 490, y + (3 + 31 * flag) * (i + 1));
+									
+			}
+			if(flag == 2)
+			{
+				puthz(122 -40, 205 + 65 * i, "注册日期", 24, 25, WHITE);
+				outtextxy(290-40, 205 + 65 * i, u->car[i].regdate.year);
+				puthz(350-40, 205 + 65 * i, "年", 24, 25, WHITE);
+				outtextxy(387-40, 205 + 65 * i, u->car[i].regdate.month);
+				puthz(430-40, 205 + 65 * i, "月", 24, 25, WHITE);
+				outtextxy(467-40, 205 + 65 * i, u->car[i].regdate.day);
+				puthz(510-40, 205 + 65 * i, "日", 24, 25, WHITE);
+			}
+		}
+	}
+	if( carnum < 3)
+	{
+		bar(20 ,160 + 90* j,620,200 + 90* j);
+		setcolor(8);
+		line(185 ,180 + 90* j,215,180 + 90* j);
+		line(200 ,165 + 90* j,200,195 + 90* j);
+		puthz(280 ,170 + 90* j,"立即添加车辆",24,28,8);	
+	}
+	return carnum;
+}
+
+void del_cardata(int* usernum,int flag)
+{
+	FILE* fp;
+	Car* c = NULL;
+	
+	if( (fp = fopen("Database\\UserData.dat", "rb+" )) == NULL )	//open userdata.dat in fp
+	{
+		printf("Error! Can't Open \"UserData.dat\" File");
+		delay(1500);
+		exit(1);
+	}
+	
+	if ((c = (Car*)malloc(sizeof(Car))) == NULL)
+	{
+		printf("Error - unable to allocate required memory");
+		delay(1500);
+		exit(1);
+	}
+	memset(c,'\0',sizeof(Car));
+	fseek(fp, (*usernum + 1) * sizeof(User) + (flag - 4) * sizeof(Car) , SEEK_SET);//跳转用户第一个空余车辆位置
+	fwrite(c, sizeof(Car), 1, fp);//把用户信息写入文件
+	if (c != NULL)
+	{
+		free(c);
+		c = NULL;
+	}
+	if (fclose(fp) != 0)
+	{
+		printf("\n cannot close UserData.dat");
+		delay(3000);
+		exit(1);
+	}
+}
 
 int output_userinfo(User *us, int *usernum, int *carnum)
 {
@@ -437,7 +480,7 @@ int output_userinfo(User *us, int *usernum, int *carnum)
 			strcpy(us->ID,u->ID); 
 			strcpy(us->tele,u->tele);
 			
-			for(j=2;j>-1;j--)
+			for(j = 2 ; j > -1 ; j--)
 			{
 				if(strlen(u->car[j].licensenum) == 0)
 				{

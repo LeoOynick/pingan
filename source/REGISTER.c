@@ -489,10 +489,10 @@ void write_userdata(char* name, char* pw, char* ID, char* tele)
 	
 	memset(u,'\0',sizeof(User));
 	
-	stpcpy(u->name,name);			//copy name to U.name
-	stpcpy(u->password,pw); 
-	stpcpy(u->ID,ID);
-	stpcpy(u->tele,tele);
+	strcpy(u->name,name);			//copy name to U.name
+	strcpy(u->password,pw); 
+	strcpy(u->ID,ID);
+	strcpy(u->tele,tele);
 	fseek(fp,0,SEEK_END);
 	fwrite(u,sizeof(User),1,fp);	//write u to *fp->file
 	
