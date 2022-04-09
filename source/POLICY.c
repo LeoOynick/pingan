@@ -1,14 +1,14 @@
 #include"common.h"
 #include"policy.h"
 
-void policy(int *page)
+void policy(int *page,User *u)
 {
 	int num = 0;
 	
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
-	drawpolicy();
+	drawpolicy(u);
 	
 	while(1)
 	{
@@ -127,7 +127,7 @@ void policy(int *page)
 	}
 }
 
-void drawpolicy()
+void drawpolicy(User *u)
 {
 	setbkcolor(LIGHTCYAN);
 	
@@ -165,4 +165,6 @@ void drawpolicy()
     setcolor(1);
     line(610,0,640,30);
     line(640,0,610,30);
+	
+	show_car(u,90,162,1);
 }

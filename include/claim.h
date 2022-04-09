@@ -1,8 +1,8 @@
 #ifndef _CLAIM_H_
 #define _CLAIM_H_
 
-void drawclaim();
-void claim(int *page);
+void drawclaim(User *u);
+void claim(int *page,User *u);
 
 #endif
 

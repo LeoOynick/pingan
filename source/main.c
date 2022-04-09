@@ -59,15 +59,15 @@ void main()
 				break;
 				
 			case(9):   //买车险
-				insure(&page);
+				insure(&page,&u);
 				break;
 				
 			case(10):   //查保单
-				policy(&page);
+				policy(&page,&u);
 				break;
 				
 			case(11):   //办理赔
-				claim(&page);
+				claim(&page,&u);
 				break;
 				
 			case(12):   //查违章

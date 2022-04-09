@@ -65,7 +65,7 @@ void enter(int *page, User *u, int *usernum, int *carnum)
 		else if (mouse_press(180,400,260,430) == 1)
 		{
 			//MouseS = 0;
-			/*if(verify_login(u->name,u->password,code,inputcode) == 1)		//验证成功
+			if(verify_login(u->name,u->password,code,inputcode) == 1)		//验证成功
 			{
 				if(output_userinfo(u,usernum,carnum))
 				{
@@ -75,7 +75,6 @@ void enter(int *page, User *u, int *usernum, int *carnum)
 				}
 				else
 				{
-					closegraph();
 					printf("\"output_userinfo\"func error");
 					delay(1500);
 					exit(1);
@@ -93,9 +92,9 @@ void enter(int *page, User *u, int *usernum, int *carnum)
 				continue;
 			}
 			
-			delay(1000);	//remove 		*/
+			/*delay(1000);	//remove 		
 			*page = 6;		//when
-			return;			//release
+			return;			//release*/
 			
 		}
 		

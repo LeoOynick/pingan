@@ -1,7 +1,7 @@
 #include"common.h"
 #include"claim.h"
 
-void claim(int *page)
+void claim(int *page,User *u)
 {
 	int num = 0;
 	int state1 = 0;
@@ -18,7 +18,7 @@ void claim(int *page)
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
-	drawclaim();
+	drawclaim(u);
 	
 	while(1)
 	{
@@ -338,7 +338,7 @@ void claim(int *page)
 	}
 }
 
-void drawclaim()
+void drawclaim(User *u)
 {
 	setbkcolor(LIGHTCYAN);
 	
@@ -403,4 +403,6 @@ void drawclaim()
     setcolor(1);
     line(610,0,640,30);
     line(640,0,610,30);
+	
+	show_car(u,78,122,1);
 }

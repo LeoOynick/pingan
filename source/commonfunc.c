@@ -336,7 +336,7 @@ int check_date(char* year, char* month, char* date, int x, int y)
 	}
 }
 
-int show_car(User* u, int x,int y,int flag)		//显示车辆信息
+int show_car(User* u, int x,int y,int flag, int *state)	//显示车辆信息
 {
 	int i;
 	int j = 0;
@@ -349,45 +349,105 @@ int show_car(User* u, int x,int y,int flag)		//显示车辆信息
 		setcolor(DARKGRAY);
 		if(strlen(u->car[i].licensenum) != 0)
 		{
+			if(strlen(u->car[*state].licensenum) == 0)
+			{
+				if(*state < 2)
+				{
+					*state ++;
+				}
+				else
+				{
+					*state = 0;
+				}
+			}
 			carnum++;
-			switch(u->car[i].type[0])
+			if(flag == 2)
 			{
-				case '1':
-					puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "红旗", 24, 25, DARKGRAY);
-					break;
-				case '2':
-					puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "奥迪", 24, 25, DARKGRAY);
-					break;
-				case '3':
-					puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "宝马", 24, 25, DARKGRAY);
-					break;
-				case '4':
-					puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "奔驰", 24, 25, DARKGRAY);
-					break;
+				switch(u->car[i].type[0])
+				{
+					case '1':
+						puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "红旗", 24, 25, DARKGRAY);
+						break;
+					case '2':
+						puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "奥迪", 24, 25, DARKGRAY);
+						break;
+					case '3':
+						puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "宝马", 24, 25, DARKGRAY);
+						break;
+					case '4':
+						puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "奔驰", 24, 25, DARKGRAY);
+						break;
+				}
 			}
-			switch(u->car[i].nature[0])
+			else if (flag != 2 && carnum == 1)
 			{
-				case '1':
-					puthz(x + 150, y + 8 + (3 + 31 * flag) * i, "营运",16,17,DARKGRAY);
-					break;
-				case '2':
-					puthz(x + 150, y + 8 + (3 + 31 * flag) * i, "非营运",16,17,DARKGRAY);
-					break;
-			}
-			puthz(x + 65, y + 8 + (3 + 31 * flag) * i, "使用性质", 16, 18, DARKGRAY);
-			
-			puthz(x + 220, y + 5 + (3 + 31 * flag) * i, "车牌号码", 24, 25, WHITE);
-			puthz(x + 330, y + 5 + (3 + 31 * flag) * i, "鄂", 24, 25, DARKGRAY);
-			outtextxy(x + 357, y + 1 + (3 + 31 * flag) * i, u->car[i].licensenum);
-			
-			setcolor(LIGHTGRAY);
-			for( j = 0 ; j < carnum ; j++)
-			{
-				rectangle(x, y + (3 + 31 * flag) * i, x + 490, y + (3 + 31 * flag) * (i + 1));
-									
+				switch(u->car[*state].type[0])
+				{
+					case '1':
+						puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "红旗", 24, 25, DARKGRAY);
+						break;
+					case '2':
+						puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "奥迪", 24, 25, DARKGRAY);
+						break;
+					case '3':
+						puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "宝马", 24, 25, DARKGRAY);
+						break;
+					case '4':
+						puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "奔驰", 24, 25, DARKGRAY);
+						break;	
+				}
 			}
 			if(flag == 2)
 			{
+				switch(u->car[i].nature[0])
+				{
+					case '1':
+						puthz(x + 150, y + 8 + (3 + 31 * flag) * i, "营运",16,17,DARKGRAY);
+						break;
+					case '2':
+						puthz(x + 150, y + 8 + (3 + 31 * flag) * i, "非营运",16,17,DARKGRAY);
+						break;
+				}
+			}
+			else
+			{
+				if(carnum == 1)
+				{
+					switch(u->car[*state].nature[0])
+					{
+						case '1':
+							puthz(x + 150, y + 8 + (3 + 31 * flag) * i, "营运",16,17,DARKGRAY);
+							break;
+						case '2':
+							puthz(x + 150, y + 8 + (3 + 31 * flag) * i, "非营运",16,17,DARKGRAY);
+							break;
+					}
+				}
+			}
+			if(flag == 2)
+			{
+				puthz(x + 65, y + 8 + (3 + 31 * flag) * i, "使用性质", 16, 18, DARKGRAY);
+				puthz(x + 220, y + 5 + (3 + 31 * flag) * i, "车牌号码", 24, 25, DARKGRAY);
+				puthz(x + 330, y + 5 + (3 + 31 * flag) * i, "鄂", 24, 25, DARKGRAY);
+				outtextxy(x + 357, y + 2 + (3 + 31 * flag) * i, u->car[i].licensenum);
+			}
+			else
+			{
+				if(carnum == 1)
+				{
+					puthz(x + 65, y + 8 + (3 + 31 * flag) * i, "使用性质", 16, 18, DARKGRAY);
+					puthz(x + 220, y + 5 + (3 + 31 * flag) * i, "车牌号码", 24, 25, DARKGRAY);
+					puthz(x + 330, y + 5 + (3 + 31 * flag) * i, "鄂", 24, 25, DARKGRAY);
+					outtextxy(x + 357, y + 2 + (3 + 31 * flag) * i, u->car[*state].licensenum);
+				}
+			}
+			if(flag ==2)
+			{ 
+				setcolor(LIGHTGRAY);
+				for( j = 0 ; j < carnum ; j++)
+				{
+					rectangle(x, y + (3 + 31 * flag) * i, x + 490, y + (3 + 31 * flag) * (i + 1));
+				}
 				puthz(122 -40, 205 + 65 * i, "注册日期", 24, 25, WHITE);
 				outtextxy(290-40, 205 + 65 * i, u->car[i].regdate.year);
 				puthz(350-40, 205 + 65 * i, "年", 24, 25, WHITE);
@@ -398,7 +458,7 @@ int show_car(User* u, int x,int y,int flag)		//显示车辆信息
 			}
 		}
 	}
-	if( carnum < 3)
+	if( carnum < 3 && flag == 2)
 	{
 		bar(20 ,160 + 90* j,620,200 + 90* j);
 		setcolor(8);

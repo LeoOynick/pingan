@@ -16,7 +16,7 @@ void show_tickcross(int x1, int y1, int x2,int y2, int flag);
 void captcha (char* str);
 //5Î»ÑéÖ¤Âë
 
-int show_car(User* u, int x,int y,int flag);
+int show_car(User* u, int x,int y,int flag, int *state);
 
 void del_cardata(int* usernum,int flag);
 

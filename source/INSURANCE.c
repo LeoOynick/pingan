@@ -1,19 +1,20 @@
 #include"common.h"
 #include"insurance.h"
 
-void insure(int *page)
+void insure(int *page, User *u)
 {
 	int num = 0;
 	int state1 = 0;
 	int state2 = 0;
 	int state3 = 0;
 	int cost = 0;
+	int carid = 0;
 	char charge[5];
 	
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
-	drawinsure();
+	drawinsure(u,&carid);
 	
 	while(1)
 	{
@@ -107,8 +108,18 @@ void insure(int *page)
 		}
 		else if (mouse_press(520,135,600,155) == 1)
 		{
-			MouseS = 0;
-
+			delay(130);
+			if(carid < 2)
+			{
+				carid += 1;
+			}
+			else
+			{
+				carid = 0;
+			}
+			setfillstyle(1,15);
+			bar(20,160,620,200);
+			show_car(u,78,162,1,&carid);
 		}
 		
 		else if (mouse_press(535,235,545,245) == 2)   //»ù±¾ÏÕ
@@ -205,7 +216,7 @@ void insure(int *page)
 	}
 }
 
-void drawinsure()
+void drawinsure(User *u,int *state)
 {
 	setbkcolor(LIGHTCYAN);
 	
@@ -269,4 +280,6 @@ void drawinsure()
     setcolor(1);
     line(610,0,640,30);
     line(640,0,610,30);
+	
+	show_car(u,78,162,1,state);
 }
