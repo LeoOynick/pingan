@@ -44,7 +44,7 @@ void start(int *page)
 				clrmous(MouseX, MouseY);
 				delay(10);
 				button(400,160,560,220,15,LIGHTGREEN,3);
-				puthz(420,180,"用户注册",24,28,1);
+				puthz(420+6,180-2,"用户注册",24,28,1);
 				num = 2;
 			}
 			continue;
@@ -64,7 +64,7 @@ void start(int *page)
 				clrmous(MouseX, MouseY);
 				delay(10);
 				button(400,260,560,320,15,LIGHTGREEN,3);
-				puthz(420,280,"用户登录",24,28,1);
+				puthz(420+6,280-2,"用户登录",24,28,1);
 				num = 3;
 			}
 			continue;
@@ -84,7 +84,7 @@ void start(int *page)
 				clrmous(MouseX, MouseY);
 				delay(10);
 				button(400,360,560,420,15,LIGHTGREEN,3);
-				puthz(410,380,"管理员登录",24,28,1);
+				puthz(410+4,380-2,"管理员登录",24,28,1);
 				num = 4;
 			}
 			continue;
@@ -116,19 +116,19 @@ void start(int *page)
 				{
 					setfillstyle(1,YELLOW);
 					bar(400,160,560,220);
-					puthz(420,180,"用户注册",24,28,1);
+					puthz(420+6,180-2,"用户注册",24,28,1);
 				}
 				else if(num == 3)
 				{
 					setfillstyle(1,YELLOW);
 					bar(400,260,560,320);
-					puthz(420,280,"用户登录",24,28,1);
+					puthz(420+6,280-2,"用户登录",24,28,1);
 				}
 				else if(num == 4)
 				{
 					setfillstyle(1,YELLOW);
 					bar(400,360,560,420);
-					puthz(410,380,"管理员登录",24,28,1);
+					puthz(410+4,380-2,"管理员登录",24,28,1);
 				}
 				num = 0;
 			}
@@ -146,9 +146,9 @@ void drawstart()
     bar(400,160,560,220);
     bar(400,260,560,320);
     bar(400,360,560,420);
-    puthz(420,180,"用户注册",24,28,1);
-    puthz(420,280,"用户登录",24,28,1);
-    puthz(410,380,"管理员登录",24,28,1);
+    puthz(420 +6,180-2,"用户注册",24,28,1);
+    puthz(420+6,280-2,"用户登录",24,28,1);
+    puthz(410+4,380-2,"管理员登录",24,28,1);
     puthz(220,40,"欢迎进入",48,56,1);
     puthz(140,80, "平安好车主系统",48,56,1);
     puthz(105,360,"用车就上好车主！",24,28,5);

@@ -399,6 +399,9 @@ int verify_forgotpw_info(char* name, char* password, char* confirmpw,
 		/*coverhz(350,68,11);
 		coverhz(355,68,11);*/
 		coverhz(430,68,11);
+		
+		setfillstyle(SOLID_FILL,11);
+		bar(590, 80, 637, 450);
 		if(inputed == 1)
 		{
 			break;
@@ -494,6 +497,7 @@ int change_userpw(char* name, char* password, char* confirmpw,
 	fseek(fp,0,SEEK_END);
 	set_num = ftell(fp) / sizeof(User);	// total / sizeof User
 	
+	
 	for(i = 0; i < set_num ; i++)
 	{
 		if( (u = (User*)malloc(sizeof(User))) == NULL )	//allocate memory for u
@@ -508,6 +512,7 @@ int change_userpw(char* name, char* password, char* confirmpw,
 		
 		if(strcmp(name,u->name) == 0) 			//ÓÃ»§ÃûÆ¥Åä
 		{
+			
 			if(strcmp(ID,u->ID) != 0) 
 			{
 				//coverhz(430,260,11);
@@ -529,7 +534,9 @@ int change_userpw(char* name, char* password, char* confirmpw,
 			}
 			else if(strcmp(ID,u->ID) == 0)
 			{
-				coverhz(430,250,11);
+				//coverhz(430,250,11);
+				setfillstyle(SOLID_FILL,11);
+				bar(430, 252, 540, 278);
 				show_tickcross(592,285,607,305,1);
 				/*setcolor(11);
 				line(592,105,607,125);
@@ -549,7 +556,9 @@ int change_userpw(char* name, char* password, char* confirmpw,
 			}
 			else if (strcmp(tele,u->tele) == 0)
 			{
-				coverhz(430,310,11);
+				//coverhz(430,310,11);
+				setfillstyle(SOLID_FILL,11);
+				bar(430, 312, 540, 338);
 				show_tickcross(592,345,607,365,1);
 				/*setcolor(11);
 				line(592,125,607,145);

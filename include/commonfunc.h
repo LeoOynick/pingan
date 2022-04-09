@@ -16,6 +16,10 @@ void show_tickcross(int x1, int y1, int x2,int y2, int flag);
 void captcha (char* str);
 //5位验证码
 
+int show_car(User* u, int x,int y,int flag);
+
+void del_cardata(int* usernum,int flag);
+
 int check_captcha (char* str1, char* str2,int x, int y);
 //判断验证码是否正确
 

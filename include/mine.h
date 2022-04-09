@@ -1,7 +1,7 @@
 #ifndef _MINE_H_
 #define _MINE_H_
 
-void mine(int *page, User *u);
-void drawmine(User *u);
+void mine(int *page, User *u, int *usernum, int *carnum);
+void drawmine(User *u, int * usernum, int *carnum, int *buttonpos);
 
 #endif

@@ -1,14 +1,14 @@
 #include"common.h"
 #include"mine.h"
 
-void mine(int *page, User *u)
+void mine(int *page, User *u, int *usernum, int *carnum)
 {
 	int num = 0;
-	
+	int buttonpos = 0;
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
-	drawmine(u);
+	drawmine(u,usernum,carnum,&buttonpos);
 	
 	while(1)
 	{
@@ -90,7 +90,7 @@ void mine(int *page, User *u)
 			return;
 		}
 		
-		else if(mouse_press(20,160,620,200) == 2)   //添加车辆
+		else if((buttonpos < 3) &&(mouse_press(20,160+ 90* buttonpos,620,200+ 90* buttonpos) == 2))   //添加车辆
 		{
 			if (num == 0)
 			{
@@ -100,14 +100,28 @@ void mine(int *page, User *u)
 				num = 4;
 			}	
 		}
-		else if(mouse_press(20,160,620,200) == 1)
+		else if((buttonpos < 3) && (mouse_press(20,160+ 90* buttonpos,620,200+ 90* buttonpos) == 1))
 		{
-			MouseS = 0;
-			*page = 19;
-			return;
+			/*if(*carnum == -1)
+			{
+				button(0,0,900,900,LIGHTCYAN,LIGHTCYAN,3);	//覆盖
+				button(200,200-20,430,300-20,CYAN,LIGHTGRAY,3);				
+				puthz(235,238-20, "绑定已达上限", 24, 28, BLUE);
+				delay(1500);
+				*page = 8;
+				return;
+				//puthz(280, 200, "绑定已达上限", 32, 34, RED);
+			}
+			else
+			{*/
+
+				MouseS = 0;
+				*page = 19;
+				return;
+			//}
 		}
 		
-		else if(mouse_press(520,135,600,155) == 2)   //车辆管理
+		else if(mouse_press(520,135-20,600,155) == 2)   //车辆管理
 		{
 			if (num == 0)
 			{
@@ -117,7 +131,7 @@ void mine(int *page, User *u)
 				num = 5;
 			}	
 		}
-		else if(mouse_press(520,135,600,155) == 1)
+		else if(mouse_press(520,135-20,600,155) == 1)
 		{
 			MouseS = 0;
 			//*page = 2;
@@ -137,7 +151,7 @@ void mine(int *page, User *u)
 		else if(mouse_press(540,60,630,80) == 1)
 		{
 			MouseS = 0;
-			delay(1000);
+			delay(500);
 			*page = 0;
 			return;
 		}
@@ -189,8 +203,9 @@ void mine(int *page, User *u)
 	}
 }
 
-void drawmine(User *u)
+void drawmine(User *u, int * usernum, int *carnum, int *buttonpos)
 {
+	output_userinfo(u,usernum,carnum);
 	setbkcolor(LIGHTCYAN);
 	setfillstyle(1,3);
 	bar(0,0,654,50);
@@ -240,18 +255,19 @@ void drawmine(User *u)
 	line(477,440,477,444);
 	puthz(463,460,"我的",16,20,8);
 	
-	puthz(20,120,"我的爱车",24,28,1);
-	puthz(520,135,"车辆管理",16,18,8);
-	line(600,142,595,137);
-	line(600,142,595,147);
-	setfillstyle(1,15);
+	puthz(20,120-10,"我的爱车",24,28,1);
+	puthz(520,135-20,"车辆管理",16,18,8);
+	line(600,142-20,595,137-20);
+	line(600,142-20,595,147-20);
+	
+	/*setfillstyle(1,15);
 	bar(20,160,620,200);
 	setcolor(8);
 	line(185,180,215,180);
 	line(200,165,200,195);
-	puthz(280,170,"立即添加车辆",24,28,8);
+	puthz(280,170,"立即添加车辆",24,28,8);*/
 	
-	
+	*buttonpos = show_car(u,80, 170, 2);
 	
 	setfillstyle(1,LIGHTGRAY);
     bar(610,0,640,30);
