@@ -80,24 +80,24 @@ void adclaim(int *page)
 			return;
 		}
 		
-		else if(mouse_press(280,100,440,140) == 2)		//车牌号码
+		else if(mouse_press(300,100,470,140) == 2)		//车牌号码
 		{
 			if (num == 0 && state == 0)
 			{
 				MouseS = 2;
 				clrmous(MouseX, MouseY);
 				delay(10);
-				button(280,100,440,140,8,15,1);
+				button(300,100,470,140,8,15,1);
 				num = 4;
 			}
 			continue;
 		}
-		else if (mouse_press(280,100,440,140) == 1)
+		else if (mouse_press(300,100,470,140) == 1)
 		{
 			MouseS = 0;
-		    button(280,100,440,140,8,15,1);
+		    button(300,100,470,140,8,15,1);
 			licensenum[0] = '\0';
-			input(licensenum,280,105,6,15,2);
+			input(licensenum,300,105,6,15,2);
 			if(strlen(licensenum) != 0)
 				state = 1;
 			else
@@ -153,7 +153,7 @@ void adclaim(int *page)
 				}	
 				else if(num == 4 && state == 0)
 				{
-					button(280,100,440,140,15,15,1);
+					button(300,100,470,140,15,15,1);
 				}
 				
 				num = 0;
@@ -176,11 +176,10 @@ void drawadclaim()
 	bar(520,420,640,480);
 		
 	puthz(150,20,"用户理赔审批",48,56,1);
-	puthz(110,110,"输入车牌",24,28,1);
+	puthz(140,110,"输入车牌",24,28,1);
 	setfillstyle(1,15);
-	bar(240,100,440,140);
-	puthz(250,110,"鄂",24,28,1);
-		
+	bar(260,100,470,140);
+	puthz(270,110,"鄂",24,28,1);
 	setcolor(8);
 	puthz(463,430,"理赔",16,20,8);
 	puthz(463,450,"审批",16,20,8);

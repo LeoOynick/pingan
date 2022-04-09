@@ -3,5 +3,6 @@
 
 void advio(int *page);
 void drawvio();
+void drawadd();
 
 #endif 
