@@ -138,6 +138,7 @@ void claim(int *page)
 		{
 			delay(150);
 			choose(180,230,&state1);
+			single(&state2,&state3,&state4,&state5,&state6,380,230,580,230,180,270,380,270,600,270);
 		}
 		
 		else if (mouse_press(375,225,385,235) == 2)   //撞了别人车
@@ -155,6 +156,7 @@ void claim(int *page)
 		{
 			delay(150);
 			choose(380,230,&state2);
+			single(&state1,&state3,&state4,&state5,&state6,180,230,580,230,180,270,380,270,600,270);
 		}
 		
 		else if (mouse_press(575,225,585,235) == 2)   //有人受伤了
@@ -172,6 +174,7 @@ void claim(int *page)
 		{
 			delay(150);
 			choose(580,230,&state3);
+			single(&state1,&state2,&state4,&state5,&state6,180,230,380,230,180,270,380,270,600,270);
 		}
 		
 		else if (mouse_press(175,265,185,275) == 2)   //有物品损失
@@ -189,6 +192,7 @@ void claim(int *page)
 		{
 			delay(150);
 			choose(180,270,&state4);
+			single(&state1,&state2,&state3,&state5,&state6,180,230,380,230,580,230,380,270,600,270);
 		}
 		
 		else if (mouse_press(375,265,385,275) == 2)   //车停放受损
@@ -206,6 +210,7 @@ void claim(int *page)
 		{
 			delay(150);
 			choose(380,270,&state5);
+			single(&state1,&state2,&state3,&state4,&state6,180,230,380,230,580,230,180,270,600,270);
 		}
 		
 		else if (mouse_press(595,265,605,275) == 2)   //代驾发生事故
@@ -222,7 +227,8 @@ void claim(int *page)
 		else if (mouse_press(595,265,605,275) == 1)
 		{
 			delay(150);
-			choose(580,270,&state6);
+			choose(600,270,&state6);
+			single(&state1,&state2,&state3,&state4,&state5,180,230,380,230,580,230,180,270,380,270);
 		}
 		
 		else if (mouse_press(115,355,125,365) == 2)   //主责方
@@ -240,7 +246,7 @@ void claim(int *page)
 		{
 			delay(150);
 			choose(120,360,&state7);
-			single(&state8,&state9,&state10,270,360,420,360,540,360);
+			single(&state8,&state9,&state10,&state9,&state10,270,360,420,360,540,360,420,360,540,360);
 		}
 		
 		else if (mouse_press(265,355,275,365) == 2)   //次责方
@@ -258,7 +264,7 @@ void claim(int *page)
 		{
 			delay(150);
 			choose(270,360,&state8);
-			single(&state7,&state9,&state10,120,360,420,360,540,360);
+			single(&state7,&state9,&state10,&state9,&state10,120,360,420,360,540,360,420,360,540,360);
 		}
 		
 		else if (mouse_press(415,355,425,365) == 2)   //无责方
@@ -276,7 +282,7 @@ void claim(int *page)
 		{
 			delay(150);
 			choose(420,360,&state9);
-			single(&state7,&state8,&state10,120,360,270,360,540,360);
+			single(&state7,&state8,&state10,&state8,&state10,120,360,270,360,540,360,270,360,540,360);
 		}
 		
 		else if (mouse_press(535,355,545,365) == 2)   //伤者
@@ -294,7 +300,7 @@ void claim(int *page)
 		{
 			delay(150);
 			choose(540,360,&state10);
-			single(&state7,&state8,&state9,120,360,270,360,420,360);
+			single(&state7,&state8,&state9,&state8,&state9,120,360,270,360,420,360,270,360,420,360);
 		}
 		
 		else

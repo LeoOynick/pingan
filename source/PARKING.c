@@ -140,7 +140,7 @@ void parking(int *page)
 		{
 			MouseS = 0;
 		    choose(160,280,&state1);
-			single(&state2,&state2,&state3,320,280,320,280,480,280);
+			single(&state2,&state2,&state3,&state2,&state3,320,280,320,280,480,280,320,280,480,280);
 		}
 		
 		else if(mouse_press(315,275,325,285) == 2)   //高铁
@@ -158,7 +158,7 @@ void parking(int *page)
 		{
 			MouseS = 0;
 		    choose(320,280,&state2);
-			single(&state1,&state1,&state3,160,280,160,280,480,280);
+			single(&state1,&state1,&state3,&state1,&state3,160,280,160,280,480,280,160,280,480,280);
 		}
 		
 		else if(mouse_press(475,275,485,285) == 2)   //高校
@@ -176,7 +176,7 @@ void parking(int *page)
 		{
 			MouseS = 0;
 		    choose(480,280,&state3);
-			single(&state1,&state1,&state2,160,280,160,280,320,280);			
+			single(&state1,&state1,&state2,&state1,&state2,160,280,160,280,320,280,160,280,320,280);			
 		}
 		
 		else if(mouse_press(255,300,340,340) == 2)		//年

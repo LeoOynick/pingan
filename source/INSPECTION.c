@@ -125,7 +125,7 @@ void inspect(int *page)
 		{
 			delay(150);
 			choose(140,310,&state1);
-			single(&state2,&state2,&state3,320,310,320,310,500,310);
+			single(&state2,&state2,&state3,&state2,&state3,320,310,320,310,500,310,320,310,500,310);
 		}
 		
 		else if (mouse_press(315,305,325,315) == 2)   //普通年检
@@ -143,7 +143,7 @@ void inspect(int *page)
 		{
 			delay(150);
 			choose(320,310,&state2);
-			single(&state1,&state1,&state3,140,310,140,310,500,310);
+			single(&state1,&state1,&state3,&state1,&state3,140,310,140,310,500,310,140,310,500,310);
 		}
 		
 		else if (mouse_press(495,305,505,315) == 2)   //特快年检
@@ -161,7 +161,7 @@ void inspect(int *page)
 		{
 			delay(150);
 			choose(500,310,&state3);
-			single(&state1,&state1,&state2,140,310,140,310,320,310);
+			single(&state1,&state1,&state2,&state1,&state2,140,310,140,310,320,310,140,310,320,310);
 		}
 		
 		else

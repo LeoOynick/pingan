@@ -242,7 +242,7 @@ void binding(int *page)
 		{
 			delay(150);
 			choose(190,260,&state5);
-			single(&state6,&state7,&state8,290,260,390,260,490,260);
+			single(&state6,&state7,&state8,&state7,&state8,290,260,390,260,490,260,390,260,490,260);
 		}
 		
 		else if (mouse_press(285,255,295,265) == 2)   //奥迪
@@ -260,7 +260,7 @@ void binding(int *page)
 		{
 			delay(150);
 			choose(290,260,&state6);
-			single(&state5,&state7,&state8,190,260,390,260,490,260);
+			single(&state5,&state7,&state8,&state7,&state8,190,260,390,260,490,260,390,260,490,260);
 		}
 		
 		else if (mouse_press(385,255,395,265) == 2)   //宝马
@@ -278,7 +278,7 @@ void binding(int *page)
 		{
 			delay(150);
 			choose(390,260,&state7);
-			single(&state5,&state6,&state8,190,260,290,260,490,260);
+			single(&state5,&state6,&state8,&state6,&state8,190,260,290,260,490,260,290,260,490,260);
 		}
 		
 		else if (mouse_press(485,255,495,265) == 2)   //奔驰
@@ -296,7 +296,7 @@ void binding(int *page)
 		{
 			delay(150);
 			choose(490,260,&state8);
-			single(&state5,&state6,&state7,190,260,290,260,390,260);
+			single(&state5,&state6,&state7,&state6,&state7,190,260,290,260,390,260,290,260,390,260);
 		}
 		
 		else if (mouse_press(185,315,195,325) == 2)   //营运
@@ -314,7 +314,7 @@ void binding(int *page)
 		{
 			delay(150);
 			choose(190,320,&state9);
-			single(&state10,&state10,&state10,390,320,390,320,390,320);
+			single(&state10,&state10,&state10,&state10,&state10,390,320,390,320,390,320,390,320,390,320);
 		}
 		
 		else if (mouse_press(385,315,395,325) == 2)   //非营运
@@ -332,7 +332,7 @@ void binding(int *page)
 		{
 			delay(150);
 			choose(390,320,&state10);
-			single(&state9,&state9,&state9,190,320,190,320,190,320);
+			single(&state9,&state9,&state9,&state9,&state9,190,320,190,320,190,320,190,320,190,320);
 		}
 		
 		else

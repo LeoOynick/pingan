@@ -639,7 +639,7 @@ void choose(int x,int y,int *state)
 	if(*state == 0)
 	{
 		clrmous(MouseX, MouseY);
-		//delay(10);
+		delay(10);
 		setfillstyle(1,RED);
 		fillellipse(x,y,3,3);
 		*state = 1;
@@ -647,7 +647,7 @@ void choose(int x,int y,int *state)
 	else if(*state == 1)
 	{
 		clrmous(MouseX, MouseY);
-		//delay(10);
+		delay(10);
 		setfillstyle(1,15);
 		fillellipse(x,y,5,5);
 		setcolor(8);
@@ -656,7 +656,8 @@ void choose(int x,int y,int *state)
 	}
 }
 
-void single(int *state1, int *state2, int *state3, int x1, int y1, int x2, int y2, int x3, int y3)
+void single(int *state1, int *state2, int *state3, int *state4, int *state5, int x1, int y1,
+			int x2, int y2, int x3, int y3, int x4, int y4, int x5, int y5)
 {
 	if(*state1 == 1)
 		choose(x1,y1,state1);
@@ -664,6 +665,10 @@ void single(int *state1, int *state2, int *state3, int x1, int y1, int x2, int y
 		choose(x2,y2,state2);
 	if(*state3 == 1)
 		choose(x3,y3,state3);
+	if(*state4 == 1)
+		choose(x4,y4,state4);
+	if(*state5 == 1)
+		choose(x5,y5,state5);
 }
 
 void price(int *state1, int *state2, int *state3, int *state4, int *state5, int *state6, 

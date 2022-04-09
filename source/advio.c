@@ -271,7 +271,7 @@ void advio(int *page)
 		{
 			delay(150);
 			choose(190,220,&state5);
-			single(&state6,&state7,&state8,290,220,390,220,490,220);
+			single(&state6,&state7,&state8,&state7,&state8,290,220,390,220,490,220,390,220,490,220);
 		}
 		
 		else if (mouse_press(285,215,295,225) == 2 && state == 1)   //³¬ÔØ
@@ -289,7 +289,7 @@ void advio(int *page)
 		{
 			delay(150);
 			choose(290,220,&state6);
-			single(&state5,&state7,&state8,190,220,390,220,490,220);
+			single(&state5,&state7,&state8,&state7,&state8,190,220,390,220,490,220,390,220,490,220);
 		}
 		
 		else if (mouse_press(385,215,395,225) == 2 && state == 1)   //¾Æ¼İ
@@ -307,7 +307,7 @@ void advio(int *page)
 		{
 			delay(150);
 			choose(390,220,&state7);
-			single(&state5,&state6,&state8,190,220,290,220,490,220);
+			single(&state5,&state6,&state8,&state6,&state8,190,220,290,220,490,220,290,220,490,220);
 		}
 		
 		else if (mouse_press(485,215,495,225) == 2 && state == 1)   //´³ºìµÆ
@@ -325,7 +325,7 @@ void advio(int *page)
 		{
 			delay(150);
 			choose(490,220,&state8);
-			single(&state5,&state6,&state7,190,220,290,220,390,220);
+			single(&state5,&state6,&state7,&state6,&state7,190,220,290,220,390,220,290,220,390,220);
 		}
 		
 		else if(mouse_press(340,250,425,290) == 2 && state == 1)		//·£¿î

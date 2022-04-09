@@ -123,6 +123,26 @@ void adclaim(int *page)
 			return;
 		}
 		
+		else if(mouse_press(490,105,550,135) == 2)		//确认
+		{
+			if (num == 0)
+			{
+				MouseS = 1;
+				clrmous(MouseX, MouseY);
+				delay(10);
+				button(490,105,550,135,15,8,1);
+				puthz(505,113,"确认",16,18,15);
+				num = 6;
+			}
+			continue;
+		}
+		else if (mouse_press(490,105,550,135) == 1)
+		{
+			MouseS = 0;
+		    
+			
+		}
+		
 		else
 		{
 			if(num != 0)
@@ -155,7 +175,11 @@ void adclaim(int *page)
 				{
 					button(300,100,470,140,15,15,1);
 				}
-				
+				else if(num == 6)
+				{
+					button(490,105,550,135,7,7,1);
+					puthz(505,113,"确认",16,18,1);
+				}
 				num = 0;
 			}
 			continue;
@@ -180,6 +204,9 @@ void drawadclaim()
 	setfillstyle(1,15);
 	bar(260,100,470,140);
 	puthz(270,110,"鄂",24,28,1);
+	setfillstyle(1,7);
+	bar(490,105,550,135);
+	puthz(505,113,"确认",16,18,1);
 	setcolor(8);
 	puthz(463,430,"理赔",16,20,8);
 	puthz(463,450,"审批",16,20,8);

@@ -55,7 +55,8 @@ int check_id (char* str,int x,int y);
 void choose(int x,int y,int *state);
 //进行项目勾选
 
-void single(int *state1, int *state2, int *state3, int x1, int y1, int x2, int y2, int x3, int y3);
+void single(int *state1, int *state2, int *state3, int *state4, int *state5, int x1, int y1,
+			int x2, int y2, int x3, int y3, int x4, int y4, int x5, int y5);
 //实现单选（选择其中一项时其他几项清零）
 
 void price(int *state1, int *state2, int *state3, int *state4, int *state5, int *state6,
