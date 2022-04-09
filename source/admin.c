@@ -54,7 +54,7 @@ void administ(int *page)
 		else if (mouse_press(180,400,260,430) == 1)
 		{
 			MouseS = 0;
-			//*page = 0;
+			*page = 20;
 			return;
 		}
 		

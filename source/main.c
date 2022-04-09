@@ -102,6 +102,17 @@ void main()
 				binding(&page);
 				break;
 
+			case(20):   //订单查询
+				adorder(&page);
+				break;
+			
+			case(21):   //违章管理
+				advio(&page);
+				break;
+				
+			case(22):   //理赔审批
+				adclaim(&page);
+				break;
 		}
 	}
 }

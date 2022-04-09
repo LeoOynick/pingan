@@ -2,7 +2,9 @@
 #define _MAIN_H_
 
 #include "admin.h"
-#include "ainfo.h"
+#include "adorder.h"
+#include "adclaim.h"
+#include "advio.h"
 #include "binding.h"
 #include "carservice.h"
 #include "claim.h"
