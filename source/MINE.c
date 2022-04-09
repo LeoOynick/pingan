@@ -90,7 +90,7 @@ void mine(int *page, User *u, int *usernum, int *carnum)
 			return;
 		}
 		
-		else if(mouse_press(20,160+ 90* buttonpos,620,200+ 90* buttonpos) == 2)   //添加车辆
+		else if((buttonpos < 3) &&(mouse_press(20,160+ 90* buttonpos,620,200+ 90* buttonpos) == 2))   //添加车辆
 		{
 			if (num == 0)
 			{
@@ -100,7 +100,7 @@ void mine(int *page, User *u, int *usernum, int *carnum)
 				num = 4;
 			}	
 		}
-		else if(mouse_press(20,160+ 90* buttonpos,620,200+ 90* buttonpos) == 1)
+		else if((buttonpos < 3) && (mouse_press(20,160+ 90* buttonpos,620,200+ 90* buttonpos) == 1))
 		{
 			/*if(*carnum == -1)
 			{
@@ -121,7 +121,7 @@ void mine(int *page, User *u, int *usernum, int *carnum)
 			//}
 		}
 		
-		else if(mouse_press(520,135,600,155) == 2)   //车辆管理
+		else if(mouse_press(520,135-20,600,155) == 2)   //车辆管理
 		{
 			if (num == 0)
 			{
@@ -131,7 +131,7 @@ void mine(int *page, User *u, int *usernum, int *carnum)
 				num = 5;
 			}	
 		}
-		else if(mouse_press(520,135,600,155) == 1)
+		else if(mouse_press(520,135-20,600,155) == 1)
 		{
 			MouseS = 0;
 			//*page = 2;
