@@ -1,9 +1,10 @@
 #include"common.h"
 #include"parking.h"
 
-void parking(int *page)
+void parking(int *page,User *u)
 {
 	int num = 0;
+	int carid = 0;
 	char year[5];       //预约年份
 	char month[3];     //预约月份
 	char day[3];     //预约日期
@@ -17,7 +18,7 @@ void parking(int *page)
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
-	drawparking();
+	drawparking(u,&carid);
 	
 	while(1)
 	{
@@ -120,9 +121,18 @@ void parking(int *page)
 		}
 		else if (mouse_press(520,95,600,115) == 1)
 		{
-			MouseS = 0;
-		    //*page = 6;
-			return;
+			delay(130);
+			if(carid < 2)
+			{
+				carid += 1;
+			}
+			else
+			{
+				carid = 0;
+			}
+			setfillstyle(1,15);
+			bar(20,120,620,160);
+			show_car(u,90,122,1,&carid);
 		}
 		
 		else if(mouse_press(155,275,165,285) == 2)   //机场
@@ -301,7 +311,7 @@ void parking(int *page)
 	}
 }
 
-void drawparking()
+void drawparking(User *u , int *carid)
 {
 	setbkcolor(LIGHTCYAN);
 	puthz(200,20,"预约停车",48,56,1);
@@ -352,4 +362,5 @@ void drawparking()
     setcolor(1);
     line(610,0,640,30);
     line(640,0,610,30);
+	show_car(u,90,122,1,&carid);
 }

@@ -1,7 +1,7 @@
 #ifndef _VIOLATION_H_
 #define _VIOLATION_H_
 
-void drawviolate();
-void violate(int *page);
+void drawviolate(User *u, int *carid);
+void violate(int *page, User *u);
 
 #endif

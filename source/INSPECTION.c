@@ -1,9 +1,10 @@
 #include"common.h"
 #include"inspection.h"
 
-void inspect(int *page)
+void inspect(int *page, User *u)
 {
 	int num = 0;
+	int carid = 0;
 	int state1 = 0;
 	int state2 = 0;
 	int state3 = 0;
@@ -13,7 +14,7 @@ void inspect(int *page)
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
-	drawinspect();
+	drawinspect(u,&carid);
 	
 	while(1)
 	{
@@ -106,8 +107,18 @@ void inspect(int *page)
 		}
 		else if (mouse_press(520,135,600,155) == 1)
 		{
-			MouseS = 0;
-		    
+			delay(130);
+			if(carid < 2)
+			{
+				carid += 1;
+			}
+			else
+			{
+				carid = 0;
+			}
+			setfillstyle(1,15);
+			bar(20,160,620,200);
+			show_car(u,90,162,1,&carid);
 		}
 		
 		else if (mouse_press(135,305,145,315) == 2)   //新车免检
@@ -206,7 +217,7 @@ void inspect(int *page)
 	}
 }
 
-void drawinspect()
+void drawinspect(User* u, int *carid)
 {
 	setbkcolor(LIGHTCYAN);	
 	puthz(220,20,"年检代办",48,56,1);
@@ -250,4 +261,5 @@ void drawinspect()
     setcolor(1);
     line(610,0,640,30);
     line(640,0,610,30);
+	show_car(u,90,162,1,carid);
 }

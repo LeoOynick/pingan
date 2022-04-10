@@ -71,11 +71,11 @@ void main()
 				break;
 				
 			case(12):   //查违章
-				violate(&page);
+				violate(&page,&u);
 				break;
 				
 			case(13):   //停车·缴费
-				parking(&page);
+				parking(&page,&u);
 				break;
 				
 			case(14):   //车损测算
@@ -83,15 +83,15 @@ void main()
 				break;
 			
 			case(15):   //车辆服务
-				carserve(&page);
+				carserve(&page,&u);
 				break;
 				
 			case(16):   //年检代办
-				inspect(&page);
+				inspect(&page,&u);
 				break;
 				
 			case(17):   //道路救援
-				rescue(&page);
+				rescue(&page,&u);
 				break;
 				
 			case(18):   //服务地图

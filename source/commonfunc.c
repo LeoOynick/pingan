@@ -340,6 +340,7 @@ int show_car(User* u, int x,int y,int flag, int *state)	//显示车辆信息
 {
 	int i;
 	int j = 0;
+	int a = 0;
 	int carnum = 0;
 	settextstyle(1, HORIZ_DIR, 2);
 	setlinestyle(SOLID_LINE,0,3);
@@ -349,7 +350,7 @@ int show_car(User* u, int x,int y,int flag, int *state)	//显示车辆信息
 		setcolor(DARKGRAY);
 		if(strlen(u->car[i].licensenum) != 0)
 		{
-			if(strlen(u->car[*state].licensenum) == 0)
+			while(strlen(u->car[*state].licensenum) == 0 && a < 3)
 			{
 				if(*state < 2)
 				{
@@ -359,7 +360,9 @@ int show_car(User* u, int x,int y,int flag, int *state)	//显示车辆信息
 				{
 					*state = 0;
 				}
+				a++;
 			}
+				
 			carnum++;
 			if(flag == 2)
 			{

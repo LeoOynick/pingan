@@ -1,9 +1,10 @@
 #include"common.h"
 #include"carservice.h"
 
-void carserve(int *page)
+void carserve(int *page, User *u)
 {
 	int num = 0;
+	int carid = 0;
 	int state1 = 0;
 	int state2 = 0;
 	int state3 = 0;
@@ -14,7 +15,7 @@ void carserve(int *page)
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
-	drawcarserve();
+	drawcarserve(u,&carid);
 	
 	while(1)
 	{
@@ -107,8 +108,18 @@ void carserve(int *page)
 		}
 		else if (mouse_press(520,135,600,155) == 1)
 		{
-			MouseS = 0;
-		    
+			delay(130);
+			if(carid < 2)
+			{
+				carid += 1;
+			}
+			else
+			{
+				carid = 0;
+			}
+			setfillstyle(1,15);
+			bar(20,160,620,200);
+			show_car(u,90,162,1,&carid);
 		}
 		
 		else if (mouse_press(95,290,105,300) == 2)   //洗车
@@ -221,7 +232,7 @@ void carserve(int *page)
 	}
 }
 
-void drawcarserve()
+void drawcarserve(User *u,int *carid)
 {
 	setbkcolor(LIGHTCYAN);
 	puthz(220,20,"车辆服务",48,56,1);
@@ -269,4 +280,6 @@ void drawcarserve()
     setcolor(1);
     line(610,0,640,30);
     line(640,0,610,30);
+	
+	show_car(u,90,162,1,carid);
 }

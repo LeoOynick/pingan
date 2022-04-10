@@ -4,11 +4,11 @@
 void policy(int *page,User *u)
 {
 	int num = 0;
-	
+	int carid = 0;
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
-	drawpolicy(u);
+	drawpolicy(u,&carid);
 	
 	while(1)
 	{
@@ -87,9 +87,18 @@ void policy(int *page,User *u)
 		}
 		else if (mouse_press(520,135,600,155) == 1)
 		{
-			MouseS = 0;
-		    //*page = 6;
-			return;
+			delay(130);
+			if(carid < 2)
+			{
+				carid += 1;
+			}
+			else
+			{
+				carid = 0;
+			}
+			setfillstyle(1,15);
+			bar(20,160,620,200);
+			show_car(u,90,162,1,&carid);
 		}
 		
 		else
@@ -127,7 +136,7 @@ void policy(int *page,User *u)
 	}
 }
 
-void drawpolicy(User *u)
+void drawpolicy(User *u, int* state)
 {
 	setbkcolor(LIGHTCYAN);
 	
@@ -166,5 +175,5 @@ void drawpolicy(User *u)
     line(610,0,640,30);
     line(640,0,610,30);
 	
-	show_car(u,90,162,1);
+	show_car(u,90,162,1,state);
 }

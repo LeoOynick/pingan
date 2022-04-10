@@ -4,6 +4,7 @@
 void claim(int *page,User *u)
 {
 	int num = 0;
+	int carid = 0;
 	int state1 = 0;
 	int state2 = 0;
 	int state3 = 0;
@@ -18,7 +19,7 @@ void claim(int *page,User *u)
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
-	drawclaim(u);
+	drawclaim(u,&carid);
 	
 	while(1)
 	{
@@ -118,9 +119,18 @@ void claim(int *page,User *u)
 		}
 		else if (mouse_press(520,95,600,115) == 1)
 		{
-			MouseS = 0;
-		    //*page = 6;
-			return;
+			delay(130);
+			if(carid < 2)
+			{
+				carid += 1;
+			}
+			else
+			{
+				carid = 0;
+			}
+			setfillstyle(1,15);
+			bar(20,120,620,160);
+			show_car(u,78,122,1,&carid);
 		}
 		
 		else if (mouse_press(175,225,185,235) == 2)   //×Ô¼º¹Ð²äÁË
@@ -338,7 +348,7 @@ void claim(int *page,User *u)
 	}
 }
 
-void drawclaim(User *u)
+void drawclaim(User *u, int *carid)
 {
 	setbkcolor(LIGHTCYAN);
 	
@@ -404,5 +414,5 @@ void drawclaim(User *u)
     line(610,0,640,30);
     line(640,0,610,30);
 	
-	show_car(u,78,122,1);
+	show_car(u,78,122,1,carid);
 }
