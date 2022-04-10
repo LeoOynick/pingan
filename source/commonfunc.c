@@ -323,9 +323,8 @@ int check_date(char* year, char* month, char* date, int x, int y)
 				return 0;
 			}
 		}
-		if (atoi(month) < 1 || atoi(month) > 12 || atoi(date) < 1 || atoi(date) > 31)
+		if(legal_date(atoi(year),atoi(month),atoi(date),x,y) == 0)
 		{
-			puthz(x, y, "格式不正确", 16, 17, RED);
 			return 0;
 		}
 		setcolor(GREEN);
@@ -334,6 +333,45 @@ int check_date(char* year, char* month, char* date, int x, int y)
 		line(x + 13, y + 18, x + 23, y - 2);
 		return 1;
 	}
+}
+
+int legal_date(int year, int month, int date, int x, int y)
+{
+	if(month < 1 || month > 12)
+	{
+		puthz(x, y, "日期不合法", 16, 17, RED);
+		return 0;
+	}
+	else if((month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) && (date < 1 || date > 31))
+	{
+		puthz(x, y, "日期不合法", 16, 17, RED);
+		return 0;
+	}
+	else if((month == 4 || month == 6 || month == 9 || month == 11) && (date < 1 || date > 30))
+	{
+		puthz(x, y, "日期不合法", 16, 17, RED);
+		return 0;
+	}
+	else
+	{
+		if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+		{
+			if(date < 1 || date > 29)
+			{
+				puthz(x, y, "日期不合法", 16, 17, RED);
+				return 0;
+			}
+		}
+		else
+		{
+			if(date < 1 || date > 28)
+			{
+				puthz(x, y, "日期不合法", 16, 17, RED);
+				return 0;
+			}
+		}
+	}
+	return 1;
 }
 
 int show_car(User* u, int x,int y,int flag, int *state)	//显示车辆信息

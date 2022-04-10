@@ -152,7 +152,7 @@ void drawpolicy(User *u, int* state)
 	bar(20,160,620,200);
 	setlinestyle(0,4,3);
 	setcolor(15);
-	rectangle(80,200,560,320);
+	rectangle(80,240,560,320);
 	puthz(90,250,"保额：",24,28,1);
 	puthz(260,250,"万元",24,28,1);
 	puthz(90,290,"保障期至：",24,28,1);

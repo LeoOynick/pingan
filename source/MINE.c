@@ -207,6 +207,10 @@ void drawmine(User *u, int * usernum, int *carnum, int *buttonpos)
 {
 	output_userinfo(u,usernum,carnum);
 	setbkcolor(LIGHTCYAN);
+	puthz(560,60,"ÍË³öµÇÂ¼",16,18,8);
+	setcolor(8);
+	arc(550,67,100,440,7);
+	line(550,63,550,58);
 	setfillstyle(1,3);
 	bar(0,0,654,50);
 	bar(0,420,440,480);
@@ -225,11 +229,6 @@ void drawmine(User *u, int * usernum, int *carnum, int *buttonpos)
 		settextstyle(3, HORIZ_DIR, 2); //2,3
 		outtextxy(110, 10, u->name);
 	}
-	
-	puthz(560,60,"ÍË³öµÇÂ¼",16,18,8);
-	setcolor(8);
-	arc(550,67,100,440,7);
-	line(550,63,550,58);
 	
 	setlinestyle(0,4,3);
 	setcolor(9);

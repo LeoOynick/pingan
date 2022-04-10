@@ -38,6 +38,9 @@ int judge_samecar(char* new_car);
 int check_date(char* year, char* month, char* date, int x, int y);
 //判断日期是否正确
 
+int legal_date(int year, int month, int date, int x, int y);
+//判断日期是否合法
+
 void judgeinput (char* str,int* state,int x,int y);
 //判断是否有输入
 
