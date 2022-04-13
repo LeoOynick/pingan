@@ -15,6 +15,8 @@ void claim(int *page,User *u)
 	int state8 = 0;
 	int state9 = 0;
 	int state10 = 0;
+	int scene = 0;
+	int character = 0;
 	
 	clrmous(MouseX, MouseY);
 	delay(100);
@@ -77,8 +79,12 @@ void claim(int *page,User *u)
 				setfillstyle(1,LIGHTCYAN);
 				bar(220,315,420,335);
 			}
-			if((state1 != 0 || state2 != 0 || state3 != 0 || state4 != 0 || state5 != 0 || state6 != 0) && (state7 != 0 || state8 != 0 || state9 != 0 || state10 != 0))
+			if((state1 != 0 || state2 != 0 || state3 != 0 || state4 != 0 || state5 != 0 || state6 != 0) 
+				&& (state7 != 0 || state8 != 0 || state9 != 0 || state10 != 0) && (strlen(u->car[carid].licensenum)!= 0))
 			{
+				scene = whichscenes(state1,state2,state3,state4,state5,state6);
+				character = whichcharacter(state7,state8,state9,state10);
+				write_claimdata(u,carid,scene,character);
 				puthz(240,435,"已提交管理员审核",16,20,4);
 				delay(800);
 				*page = 6;
@@ -415,4 +421,86 @@ void drawclaim(User *u, int *carid)
     line(640,0,610,30);
 	
 	show_car(u,78,122,1,carid);
+}
+
+int whichscenes(int state1 ,int state2 ,int state3 , int state4 ,int state5 ,int state6)
+{
+	if(state1 == 1)	return 1;
+	if(state2 == 1)	return 2;
+	if(state3 == 1)	return 3;
+	if(state4 == 1)	return 4;
+	if(state5 == 1)	return 5;
+	if(state6 == 1)	return 6;
+	return 0;
+}
+
+int whichcharacter(int state7,int state8,int state9,int state10)
+{
+	if(state7 == 1)		return 1;
+	if(state8 == 1)		return 2;
+	if(state9 == 1)		return 3;
+	if(state10 == 1)	return 4;
+	return 0;
+}
+
+void write_claimdata(User *u,int carid,int scene,int character)
+{
+	struct tm *local;
+    time_t t;
+	FILE *fp;
+	Claim *c = NULL;
+	char str[5];
+	char scene_str[2];
+	char character_str[2];
+	char state[2] = {'00','\0'};
+	scene_str[0] = '0' + scene;
+	character_str[0] = '0' + character;
+	scene_str[1] = '\0';
+	character_str[1] = '\0';
+	t=time(NULL);
+	local=localtime(&t);
+
+	if( (fp = fopen("Database\\ClaData.dat", "rb+" )) == NULL )	//open ClaimData.dat in fp
+	{
+		closegraph();
+		printf("Error! Can't Open \"ClaimData.dat\" File");
+		delay(1500);
+		exit(1);
+	}
+	
+	if( (c = (Claim*)malloc(sizeof(Claim))) == NULL )	//allocate memory for u
+	{
+		closegraph();
+		printf("Error - unable to allocate required memory for Claim");
+		delay(1500);
+		exit(1);
+	}
+	
+	strcpy(c->licensenum, u->car[carid].licensenum);
+	strcpy(c->scenetype,scene_str);
+	strcpy(c->charactertype,character_str);
+	local=localtime(&t);
+	itoa(local->tm_year + 1900, str, 10);
+	strcpy(c->claimdate.year, str);
+	itoa(local->tm_mon + 1, str, 10);
+	strcpy(c->claimdate.month, str);
+	itoa(local->tm_mday, str, 10);
+	strcpy(c->claimdate.day, str);
+	strcpy(c->state,state);
+	
+	fseek(fp,0,SEEK_END);			//跳转用户第一个空余车辆位置
+	fwrite(c,sizeof(Claim),1,fp);	//write c to *fp->file
+	
+	if (c != NULL)
+	{
+		free(c);
+		c = NULL;
+	}
+	
+	if (fclose(fp) != 0)
+	{
+		printf("\n cannot close CarData.dat");
+		delay(3000);
+		exit(1);
+	}
 }

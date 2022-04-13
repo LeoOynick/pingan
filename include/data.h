@@ -29,26 +29,25 @@ typedef struct userinfo
 
 typedef struct vioinfo
 {
-	char name[13];			//4-12位用户名称
 	char licensenum[7];		//6位车牌号码
 	char viotype[5];		//处罚类型
 	char viomoney[5];		//罚款金额（待用）
 	Date viotime;			//违章日期
 }Vio;		//封装违章信息
 
-typedef struct orderinfo
+typedef struct claiminfo
 {
-	char name[13];          //4-12位，用户名
 	char licensenum[7];		//6位，车牌号
-	char ordertype[3];      //订单类型
-	char ordertele[12];		//订单电话
-	Date ordertime;		 	//订单时间
-}Order;		//封装订单信息
+	char scenetype[2];      
+	char charactertype[2];
+	Date claimdate;		 	//订单时间
+	char state[2];
+}Claim;		//封装信息
 
 typedef struct insuranceinfo
 {
 	char licensenum[7];		//6位车牌号码
-	char insurancetype[4];	//3种保险类型
+	char insurancetype[2];	//3种保险类型 //char insurancetype[4];
 	Date insuranceenddate;	//保险单到期日
 }Insurance;	//封装保险单信息
 
