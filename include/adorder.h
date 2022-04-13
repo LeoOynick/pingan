@@ -3,5 +3,6 @@
 
 void adorder(int *page);
 void draworder();
+void ad_insurance(char *licensenum);
 
 #endif 

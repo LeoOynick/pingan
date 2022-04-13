@@ -251,7 +251,7 @@ void search_insurance(User *u, int carid)
 					puthz(50,330,"交强险",24,28,1);
 					puthz(150, 335 ,"保额", 16, 17, BLUE);
 					setcolor(DARKGRAY);
-					outtextxy(200,330,"1.0");
+					outtextxy(200,330,"1.5");
 					puthz(240, 335 , "万元", 16, 17, BLUE);
 					puthz(300, 335 , "保障期至", 16, 17, BLUE);
 					outtextxy(380, 330, in->insuranceenddate.year);
