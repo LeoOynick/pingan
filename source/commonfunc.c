@@ -500,7 +500,7 @@ int show_car(User* u, int x,int y,int flag, int *state)	//显示车辆信息
 				puthz(510-40, 205 + 65 * i, "日", 24, 25, BLUE);
 			}
 		}
-		if(flag!=2)
+		if(flag!=2 && carnum == 0)
 		{
 			puthz(x + 165,y + 4, "请添加车辆", 24, 28, DARKGRAY);
 		}
