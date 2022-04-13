@@ -143,7 +143,7 @@ void adorder(int *page)
 		else if (mouse_press(190,380,250,410) == 1)
 		{
 			MouseS = 0;
-			ad_parking(licensenum);
+			//ad_parking(licensenum);
 		}
 		
 		else if(mouse_press(290,380,350,410) == 2)		//·şÎñ
