@@ -121,7 +121,10 @@ void adorder(int *page)
 		else if (mouse_press(90,380,150,410) == 1)
 		{
 			MouseS = 0;
-		    ad_insurance(licensenum);
+			if(strlen(licensenum) == 0)
+				puthz(260,150,"请输入车牌！",16,18,RED);
+			else
+				ad_insurance(licensenum);
 		}
 		
 		else if(mouse_press(190,380,250,410) == 2)		//停车
@@ -140,8 +143,7 @@ void adorder(int *page)
 		else if (mouse_press(190,380,250,410) == 1)
 		{
 			MouseS = 0;
-		    
-			
+			ad_parking(licensenum);
 		}
 		
 		else if(mouse_press(290,380,350,410) == 2)		//服务
@@ -290,6 +292,7 @@ void draworder()
 {
 	setbkcolor(LIGHTCYAN);
 	puthz(560,60,"退出登录",16,18,8);
+	setlinestyle(0,4,1);
 	setcolor(8);
 	arc(550,67,100,440,7);
 	line(550,63,550,58);
@@ -452,3 +455,5 @@ void ad_insurance(char *licensenum)
 		exit(1);				
 	}
 }
+
+//void ad_parking(char *licensenum)

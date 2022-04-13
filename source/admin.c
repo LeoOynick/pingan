@@ -54,8 +54,26 @@ void administ(int *page)
 		else if (mouse_press(180,400,260,430) == 1)
 		{
 			MouseS = 0;
-			*page = 20;
-			return;
+			if(strlen(password) == 0)
+				puthz(565,245,"Œ¥ ‰»Î£°",16,18,RED);
+			else if(strcmp(password,"pingan") == 0)
+			{
+				button(70,100,800,800,LIGHTCYAN,LIGHTCYAN,3);	//∏≤∏« ‰»ÎøÚ
+				button(200,200,430,300,CYAN,LIGHTGRAY,3);				
+				puthz(256,238, "µ«¬º≥…π¶£°", 24, 28, BLUE);
+				delay(1000);
+				*page = 20;
+				return;
+			}
+			else
+			{
+				button(70,100,800,800,LIGHTCYAN,LIGHTCYAN,3);	//∏≤∏« ‰»ÎøÚ
+				button(190,200,440,300,CYAN,LIGHTGRAY,3);				
+				puthz(260,238, "√‹¬Î¥ÌŒÛ", 24, 28, BLUE);
+				delay(1000);
+				*page = 4;
+				return;
+			}
 		}
 		
 		else if(mouse_press(380,400,460,430) == 2)   //∑µªÿ

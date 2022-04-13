@@ -52,6 +52,13 @@ typedef struct insuranceinfo
 	Date insuranceenddate;	//保险单到期日
 }Insurance;	//封装保险单信息
 
+typedef struct parkinginfo
+{
+	char licensenum[7];		//6位车牌号码
+	char parkplace[4];	//3个停车地点
+	Date parkingdate;	//停车日期
+}Parking;	//封装停车预约信息
+
 #endif
 	
 	
