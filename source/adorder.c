@@ -367,7 +367,7 @@ void ad_insurance(char *licensenum)
 		setlinestyle(SOLID_LINE, 0, 3);
 		settextstyle(1,0,2);
 		
-		if(licensenum == "\0")
+		if(strlen(licensenum) == 0)
 		{
 			puthz(260,150,"«Î ‰»Î≥µ≈∆£°",16,18,RED);
 			insurance_found = 1;
