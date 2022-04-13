@@ -67,6 +67,7 @@ void binding(int *page,User* u, int *usernum, int *carnum)
 		}
 		else if (mouse_press(180,400,260,430) == 1)
 		{
+			MouseS = 0;
 			if(check_legal_addcar(licensenum,year,month,day,type,nature,usernum,carnum))
 			{					
 				output_userinfo(u,usernum,carnum);
@@ -519,7 +520,7 @@ int check_legal_addcar(char* licensenum, char* year, char* month, char* day,
 				format_licensenum = check_license_dig (licensenum,525,130);	//若符合格式则为 1
 				format_date = check_date(year,month,day,525,193);
 			
-				if(format_licensenum != 1 || format_date != 1)	
+				if(format_licensenum != 1 || format_date != 1 || type == 0 || nature == 0)	
 				{
 					break;
 				}

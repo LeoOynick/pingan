@@ -47,7 +47,6 @@ typedef struct orderinfo
 
 typedef struct insuranceinfo
 {
-	char name[13];			//4-12位用户名称
 	char licensenum[7];		//6位车牌号码
 	char insurancetype[4];	//3种保险类型
 	Date insuranceenddate;	//保险单到期日

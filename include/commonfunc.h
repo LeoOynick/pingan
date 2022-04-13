@@ -18,7 +18,6 @@ void captcha (char* str);
 
 int show_car(User* u, int x,int y,int flag, int *state);
 
-void del_cardata(int* usernum,int flag);
 
 int check_captcha (char* str1, char* str2,int x, int y);
 //判断验证码是否正确

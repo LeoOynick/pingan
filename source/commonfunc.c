@@ -388,11 +388,12 @@ int show_car(User* u, int x,int y,int flag, int *state)	//显示车辆信息
 		setcolor(DARKGRAY);
 		if(strlen(u->car[i].licensenum) != 0)
 		{
+			
 			while(strlen(u->car[*state].licensenum) == 0 && a < 3)
 			{
 				if(*state < 2)
 				{
-					*state ++;
+					*state += 1;
 				}
 				else
 				{
@@ -407,16 +408,16 @@ int show_car(User* u, int x,int y,int flag, int *state)	//显示车辆信息
 				switch(u->car[i].type[0])
 				{
 					case '1':
-						puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "红旗", 24, 25, DARKGRAY);
+						puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "红旗", 24, 25, BLUE);
 						break;
 					case '2':
-						puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "奥迪", 24, 25, DARKGRAY);
+						puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "奥迪", 24, 25, BLUE);
 						break;
 					case '3':
-						puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "宝马", 24, 25, DARKGRAY);
+						puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "宝马", 24, 25, BLUE);
 						break;
 					case '4':
-						puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "奔驰", 24, 25, DARKGRAY);
+						puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "奔驰", 24, 25, BLUE);
 						break;
 				}
 			}
@@ -467,8 +468,8 @@ int show_car(User* u, int x,int y,int flag, int *state)	//显示车辆信息
 			}
 			if(flag == 2)
 			{
-				puthz(x + 65, y + 8 + (3 + 31 * flag) * i, "使用性质", 16, 18, DARKGRAY);
-				puthz(x + 220, y + 5 + (3 + 31 * flag) * i, "车牌号码", 24, 25, DARKGRAY);
+				puthz(x + 65, y + 8 + (3 + 31 * flag) * i, "使用性质", 16, 18, BLUE);
+				puthz(x + 220, y + 5 + (3 + 31 * flag) * i, "车牌号码", 24, 25, BLUE);
 				puthz(x + 330, y + 5 + (3 + 31 * flag) * i, "鄂", 24, 25, DARKGRAY);
 				outtextxy(x + 357, y + 2 + (3 + 31 * flag) * i, u->car[i].licensenum);
 			}
@@ -484,64 +485,27 @@ int show_car(User* u, int x,int y,int flag, int *state)	//显示车辆信息
 			}
 			if(flag ==2)
 			{ 
-				setcolor(LIGHTGRAY);
+				setcolor(WHITE);
 				for( j = 0 ; j < carnum ; j++)
 				{
 					rectangle(x, y + (3 + 31 * flag) * i, x + 490, y + (3 + 31 * flag) * (i + 1));
 				}
-				puthz(122 -40, 205 + 65 * i, "注册日期", 24, 25, WHITE);
+				setcolor(DARKGRAY);
+				puthz(122 -40, 205 + 65 * i, "注册日期", 24, 25, BLUE);
 				outtextxy(290-40, 205 + 65 * i, u->car[i].regdate.year);
-				puthz(350-40, 205 + 65 * i, "年", 24, 25, WHITE);
+				puthz(350-40, 205 + 65 * i, "年", 24, 25, BLUE);
 				outtextxy(387-40, 205 + 65 * i, u->car[i].regdate.month);
-				puthz(430-40, 205 + 65 * i, "月", 24, 25, WHITE);
+				puthz(430-40, 205 + 65 * i, "月", 24, 25, BLUE);
 				outtextxy(467-40, 205 + 65 * i, u->car[i].regdate.day);
-				puthz(510-40, 205 + 65 * i, "日", 24, 25, WHITE);
+				puthz(510-40, 205 + 65 * i, "日", 24, 25, BLUE);
 			}
 		}
-	}
-	if( carnum < 3 && flag == 2)
-	{
-		bar(20 ,160 + 90* j,620,200 + 90* j);
-		setcolor(8);
-		line(185 ,180 + 90* j,215,180 + 90* j);
-		line(200 ,165 + 90* j,200,195 + 90* j);
-		puthz(280 ,170 + 90* j,"立即添加车辆",24,28,8);	
+		if(flag!=2)
+		{
+			puthz(x + 165,y + 4, "请添加车辆", 24, 28, DARKGRAY);
+		}
 	}
 	return carnum;
-}
-
-void del_cardata(int* usernum,int flag)
-{
-	FILE* fp;
-	Car* c = NULL;
-	
-	if( (fp = fopen("Database\\UserData.dat", "rb+" )) == NULL )	//open userdata.dat in fp
-	{
-		printf("Error! Can't Open \"UserData.dat\" File");
-		delay(1500);
-		exit(1);
-	}
-	
-	if ((c = (Car*)malloc(sizeof(Car))) == NULL)
-	{
-		printf("Error - unable to allocate required memory");
-		delay(1500);
-		exit(1);
-	}
-	memset(c,'\0',sizeof(Car));
-	fseek(fp, (*usernum + 1) * sizeof(User) + (flag - 4) * sizeof(Car) , SEEK_SET);//跳转用户第一个空余车辆位置
-	fwrite(c, sizeof(Car), 1, fp);//把用户信息写入文件
-	if (c != NULL)
-	{
-		free(c);
-		c = NULL;
-	}
-	if (fclose(fp) != 0)
-	{
-		printf("\n cannot close UserData.dat");
-		delay(3000);
-		exit(1);
-	}
 }
 
 int output_userinfo(User *us, int *usernum, int *carnum)

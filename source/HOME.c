@@ -233,6 +233,7 @@ void home(int *page,User *u)
 		}
 		else if(mouse_press(280,420,360,480) == 1)
 		{
+			MouseS = 0;
 			*page = 7;
 			return;
 		}

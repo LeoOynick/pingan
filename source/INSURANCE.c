@@ -57,7 +57,7 @@ void insure(int *page, User *u)
 		}
 		else if (mouse_press(180,400,260,430) == 1)
 		{
-			MouseS = 0;
+			//MouseS = 0;
 			if(state1 == 0 && state2 == 0 && state3 == 0)
 			{
 				setfillstyle(1,LIGHTCYAN);
@@ -68,6 +68,7 @@ void insure(int *page, User *u)
 			{
 				setfillstyle(1,LIGHTCYAN);
 				bar(270,435,390,455);
+				write_insurancedata(u,carid,state1,state2,state3);
 				puthz(280,435,"购买成功！",16,20,RED);
 				delay(800);
 				*page = 6;
@@ -283,3 +284,80 @@ void drawinsure(User *u,int *state)
 	
 	show_car(u,78,162,1,state);
 }
+
+void write_insurancedata(User* u, int carid, int state1, int state2, int state3)
+{
+	FILE *fp;
+	Insurance *in = NULL;
+	struct tm *local;
+    time_t t;
+	int i;
+	char str[5];
+	t=time(NULL);
+    local=localtime(&t);
+	
+	if( (fp = fopen("Database\\InsData.dat", "rb+" )) == NULL )	//open InsuranceData.dat in fp
+	{
+		closegraph();
+		printf("Error! Can't Open \"InsuranceData.dat\" File");
+		delay(1500);
+		exit(1);
+	}
+	
+	if( (in = (Insurance*)malloc(sizeof(Insurance))) == NULL )	//allocate memory for u
+	{
+		closegraph();
+		printf("Error - unable to allocate required memory");
+		delay(1500);
+		exit(1);
+	}
+	
+	memset(in,'\0',sizeof(Insurance));
+	strcpy(in->licensenum, u->car[carid].licensenum);
+	local=localtime(&t);
+	itoa(local->tm_year + 1900 + 5, str, 10);
+	strcpy(in->insuranceenddate.year, str);
+	itoa(local->tm_mon + 1, str, 10);
+	strcpy(in->insuranceenddate.month, str);
+	itoa(local->tm_mday, str, 10);
+	strcpy(in->insuranceenddate.day, str);
+	
+	for(i = 0; i < 3; i++)
+	{
+		if(state1 != 0)
+		{
+			in->insurancetype[0] = '1';
+			state1 = 0;
+		}
+		else if(state2 != 0)
+		{
+			in->insurancetype[0] = '2';
+			state2 = 0;
+		}
+		else if(state3 != 0)
+		{
+			in->insurancetype[0] = '3';
+			state3 = 0;
+		}
+		if(in->insurancetype[0] != '0')
+		{
+			fseek(fp, 0, SEEK_END);				//跳转至文件末尾
+			fwrite(in, sizeof(Insurance), 1, fp);	//把车险信息写入文件
+			in->insurancetype[0] = '0';
+		}
+	}
+	if (in != NULL)
+	{
+		free(in);
+		in = NULL;
+	}
+	
+	if (fclose(fp) != 0)
+	{
+		printf("\n cannot close InsuranceData.dat");
+		delay(3000);
+		exit(1);
+	}
+	
+}
+	

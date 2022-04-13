@@ -89,8 +89,8 @@ void mine(int *page, User *u, int *usernum, int *carnum)
 			*page = 7;
 			return;
 		}
-		
-		else if((buttonpos < 3) &&(mouse_press(20,160+ 90* buttonpos,620,200+ 90* buttonpos) == 2))   //添加车辆
+		else if(strlen(u->car[0].licensenum) == 0 && strlen(u->car[1].licensenum) == 0 
+				&& strlen(u->car[2].licensenum) == 0 &&(mouse_press(20,160+ 90* 0,620,200+ 90* 0) == 2))   //添加车辆 //2 = buttonpos
 		{
 			if (num == 0)
 			{
@@ -100,44 +100,49 @@ void mine(int *page, User *u, int *usernum, int *carnum)
 				num = 4;
 			}	
 		}
-		else if((buttonpos < 3) && (mouse_press(20,160+ 90* buttonpos,620,200+ 90* buttonpos) == 1))
+		else if(strlen(u->car[0].licensenum) == 0 && strlen(u->car[1].licensenum) == 0 
+				&& strlen(u->car[2].licensenum) == 0 && (mouse_press(20,160+ 90* 0,620,200+ 90* 0) == 1))
 		{
-			/*if(*carnum == -1)
-			{
-				button(0,0,900,900,LIGHTCYAN,LIGHTCYAN,3);	//覆盖
-				button(200,200-20,430,300-20,CYAN,LIGHTGRAY,3);				
-				puthz(235,238-20, "绑定已达上限", 24, 28, BLUE);
-				delay(1500);
-				*page = 8;
-				return;
-				//puthz(280, 200, "绑定已达上限", 32, 34, RED);
-			}
-			else
-			{*/
-
 				MouseS = 0;
 				*page = 19;
 				return;
-			//}
 		}
-		
-		else if(mouse_press(520,135-20,600,155) == 2)   //车辆管理
+		else if(strlen(u->car[0].licensenum) != 0 && strlen(u->car[1].licensenum) == 0 
+				&&(mouse_press(20,160+ 90* 1,620,200+ 90* 1) == 2))   //添加车辆 //2 = buttonpos
 		{
 			if (num == 0)
 			{
 				MouseS = 1;
 				clrmous(MouseX, MouseY);
 				delay(10);
-				num = 5;
+				num = 4;
 			}	
 		}
-		else if(mouse_press(520,135-20,600,155) == 1)
+		else if(strlen(u->car[0].licensenum) != 0 && strlen(u->car[1].licensenum) == 0 
+				&& (mouse_press(20,160+ 90* 1,620,200+ 90* 1) == 1))
 		{
-			MouseS = 0;
-			//*page = 2;
-			return;
+				MouseS = 0;
+				*page = 19;
+				return;
 		}
-		
+		else if(strlen(u->car[0].licensenum) != 0 && strlen(u->car[1].licensenum) != 0 
+				&& strlen(u->car[2].licensenum) == 0 &&(mouse_press(20,160+ 90* 2,620,200+ 90* 2) == 2))   //添加车辆 //2 = buttonpos
+		{
+			if (num == 0)
+			{
+				MouseS = 1;
+				clrmous(MouseX, MouseY);
+				delay(10);
+				num = 4;
+			}	
+		}
+		else if(strlen(u->car[0].licensenum) != 0 && strlen(u->car[1].licensenum) != 0
+				&& strlen(u->car[2].licensenum) == 0&& (mouse_press(20,160+ 90* 2,620,200+ 90* 2) == 1))
+		{
+				MouseS = 0;
+				*page = 19;
+				return;
+		}
 		else if(mouse_press(540,60,630,80) == 2)   //退出登录
 		{
 			if (num == 0)
@@ -155,7 +160,69 @@ void mine(int *page, User *u, int *usernum, int *carnum)
 			*page = 0;
 			return;
 		}
-		
+		else if((mouse_press(510,205,558,228) == 2) && strlen(u->car[0].licensenum) != 0) //bar(560 - 50, 202 + 3 + 65 * i, 608-50, 225+3 + 65 * i);
+		{
+			if (num == 0)
+			{
+				MouseS = 1;
+				clrmous(MouseX, MouseY);
+				delay(10);
+				button(510,205,558,228, WHITE, LIGHTRED);
+				puthz(568 -50, 206 + 3 + 65 * 0, "删除", 16, 18, WHITE);
+				num = 7;
+			}
+		}
+		else if((mouse_press(510,205,558,228) == 1) && strlen(u->car[0].licensenum) != 0)
+		{
+			MouseS = 0;
+			del_cardata(usernum,1);
+			output_userinfo(u,usernum,carnum);
+			buttonpos = show_car(u,80, 170, 2);
+			*page = 8;
+			return;
+		}
+		else if((mouse_press(510,270,558,293) == 2) && strlen(u->car[1].licensenum) != 0) //bar(560 - 50, 202 + 3 + 65 * i, 608-50, 225+3 + 65 * i);
+		{
+			if (num == 0)
+			{
+				MouseS = 1;
+				clrmous(MouseX, MouseY);
+				delay(10);
+				button(510,270,558,293, WHITE, LIGHTRED);
+				puthz(568 -50, 206 + 3 + 65 * 1, "删除", 16, 18, WHITE);
+				num = 8;
+			}
+		}
+		else if((mouse_press(510,270,558,293) == 1) && strlen(u->car[1].licensenum) != 0)
+		{
+			MouseS = 0;
+			del_cardata(usernum,2);
+			output_userinfo(u,usernum,carnum);
+			buttonpos = show_car(u,80, 170, 2);
+			*page = 8;
+			return;
+		}
+		else if((mouse_press(510,335,558,358) == 2) && strlen(u->car[2].licensenum) != 0) //bar(560 - 50, 202 + 3 + 65 * i, 608-50, 225+3 + 65 * i);
+		{
+			if (num == 0)
+			{
+				MouseS = 1;
+				clrmous(MouseX, MouseY);
+				delay(10);
+				button(510,335,558,358, WHITE, LIGHTRED);
+				puthz(568 -50, 206 + 3 + 65 * 2, "删除", 16, 18, WHITE);
+				num = 9;
+			}
+		}
+		else if(mouse_press(510,335,558,358) == 1 && strlen(u->car[2].licensenum) != 0)
+		{
+			MouseS = 0;
+			del_cardata(usernum,3);
+			output_userinfo(u,usernum,carnum);
+			buttonpos = show_car(u,80, 170, 2);
+			*page = 8;
+			return;
+		}
 		else
 		{
 			if(num != 0)
@@ -196,6 +263,24 @@ void mine(int *page, User *u, int *usernum, int *carnum)
 				    circle(320,445,4);
 				    puthz(303,460,"服务",16,20,15);
 				}
+				else if (num == 7 && strlen(u->car[0].licensenum) != 0)
+				{
+					setfillstyle(1,RED);
+					bar(560 - 50, 202 + 3 + 65 * 0, 608-50, 225+3 + 65 * 0);
+					puthz(568 -50, 206 + 3 + 65 * 0, "删除", 16, 18, WHITE);
+				}
+				else if (num == 8 && strlen(u->car[1].licensenum) != 0)
+				{
+					setfillstyle(1,RED);
+					bar(560 - 50, 202 + 3 + 65 * 1, 608-50, 225+3 + 65 * 1);
+					puthz(568 -50, 206 + 3 + 65 * 1, "删除", 16, 18, WHITE);
+				}
+				else if (num == 9 && strlen(u->car[2].licensenum) != 0)
+				{
+					setfillstyle(1,RED);
+					bar(560 - 50, 202 + 3 + 65 * 2, 608-50, 225+3 + 65 * 2);
+					puthz(568 -50, 206 + 3 + 65 * 2, "删除", 16, 18, WHITE);
+				}
                 num = 0;				
 			}
 			continue;
@@ -205,6 +290,7 @@ void mine(int *page, User *u, int *usernum, int *carnum)
 
 void drawmine(User *u, int * usernum, int *carnum, int *buttonpos)
 {
+	int i,j;
 	output_userinfo(u,usernum,carnum);
 	setbkcolor(LIGHTCYAN);
 	puthz(560,60,"退出登录",16,18,8);
@@ -255,11 +341,11 @@ void drawmine(User *u, int * usernum, int *carnum, int *buttonpos)
 	puthz(463,460,"我的",16,20,8);
 	
 	puthz(20,120-10,"我的爱车",24,28,1);
-	puthz(520,135-20,"车辆管理",16,18,8);
+	/*puthz(520,135-20,"车辆管理",16,18,8);
 	line(600,142-20,595,137-20);
 	line(600,142-20,595,147-20);
 	
-	/*setfillstyle(1,15);
+	setfillstyle(1,15);
 	bar(20,160,620,200);
 	setcolor(8);
 	line(185,180,215,180);
@@ -273,4 +359,120 @@ void drawmine(User *u, int * usernum, int *carnum, int *buttonpos)
     setcolor(1);
     line(610,0,640,30);
     line(640,0,610,30);
+	
+	/*setfillstyle(1, RED);
+	if(strlen(u->car[0].licensenum) != 0)
+	{
+		bar(560 - 50, 202 + 3 + 65 * 0, 608-50, 225+3 + 65 * 0);
+		puthz(568 -50, 206 + 3 + 65 * 0, "删除", 16, 18, WHITE);
+	}
+	if(strlen(u->car[1].licensenum) != 0)
+	{
+		bar(560 - 50, 202 + 3 + 65 * 1, 608-50, 225+3 + 65 * 1);
+		puthz(568 -50, 206 + 3 + 65 * 1, "删除", 16, 18, WHITE);
+	}
+	if(strlen(u->car[2].licensenum) != 0)
+	{
+		bar(560 - 50, 202 + 3 + 65 * 2, 608-50, 225+3 + 65 * 2);
+		puthz(568 -50, 206 + 3 + 65 * 2, "删除", 16, 18, WHITE);
+	}
+	
+		setfillstyle(1, WHITE);
+		setcolor(DARKGRAY);
+		bar(20 ,160 + 90* 2,620,200 + 90* 2);
+		setcolor(8);
+		line(185 ,180 + 90* 2,215,180 + 90* 2);
+		line(200 ,165 + 90* 2,200,195 + 90* 2);
+		puthz(280 ,170 + 90* 2,"立即添加车辆",24,28,2);
+	/*if( *buttonpos != 3) //*buttonpos != 3
+	{
+		
+	}*/
+	if(strlen(u->car[0].licensenum) != 0)
+	{
+		setfillstyle(1, RED);
+		bar(560 - 50, 202 + 3 + 65 * 0, 608-50, 225+3 + 65 * 0);
+		puthz(568 -50, 206 + 3 + 65 * 0, "删除", 16, 18, WHITE);
+		setfillstyle(1, WHITE);
+	}
+	if(strlen(u->car[1].licensenum) != 0)
+	{
+		setfillstyle(1, RED);
+		bar(560 - 50, 202 + 3 + 65 * 1, 608-50, 225+3 + 65 * 1);
+		puthz(568 -50, 206 + 3 + 65 * 1, "删除", 16, 18, WHITE);
+		setfillstyle(1, WHITE);
+	}
+	if(strlen(u->car[2].licensenum) != 0)
+	{
+		setfillstyle(1, RED);
+		bar(560 - 50, 202 + 3 + 65 * 2, 608-50, 225+3 + 65 * 2);
+		puthz(568 -50, 206 + 3 + 65 * 2, "删除", 16, 18, WHITE);
+	}
+	if(strlen(u->car[0].licensenum) == 0 && strlen(u->car[1].licensenum) == 0 && strlen(u->car[2].licensenum) == 0)
+	{
+		setfillstyle(1, WHITE);
+		setcolor(DARKGRAY);
+		bar(20 ,160 + 90* 0,620,200 + 90* 0);
+		setcolor(8);
+		line(185 ,180 + 90* 0,215,180 + 90* 0);
+		line(200 ,165 + 90* 0,200,195 + 90* 0);
+		puthz(280 ,170 + 90* 0,"立即添加车辆",24,28,8);
+	}
+	else if (strlen(u->car[0].licensenum) != 0 && strlen(u->car[1].licensenum) == 0 ) // + && strlen(u->car[2].licensenum) == 0
+	{
+		setfillstyle(1, WHITE);
+		setcolor(DARKGRAY);
+		bar(20 ,160 + 90* 1,620,200 + 90* 1);
+		setcolor(8);
+		line(185 ,180 + 90* 1,215,180 + 90* 1);
+		line(200 ,165 + 90* 1,200,195 + 90* 1);
+		puthz(280 ,170 + 90* 1,"立即添加车辆",24,28,8);
+	}
+	else if (strlen(u->car[0].licensenum) != 0 && strlen(u->car[1].licensenum) != 0 && strlen(u->car[2].licensenum) == 0)
+	{
+		setfillstyle(1, WHITE);
+		setcolor(DARKGRAY);
+		bar(20 ,160 + 90* 2,620,200 + 90* 2);
+		setcolor(8);
+		line(185 ,180 + 90* 2,215,180 + 90* 2);
+		line(200 ,165 + 90* 2,200,195 + 90* 2);
+		puthz(280 ,170 + 90* 2,"立即添加车辆",24,28,8);
+	}
+	else if (strlen(u->car[0].licensenum) != 0 && strlen(u->car[1].licensenum) != 0 && strlen(u->car[2].licensenum) != 0)
+	{}
+
+}
+
+void del_cardata(int* usernum,int flag)
+{
+	FILE* fp;
+	Car* c = NULL;
+	
+	if( (fp = fopen("Database\\UserData.dat", "rb+" )) == NULL )	//open userdata.dat in fp
+	{
+		printf("Error! Can't Open \"UserData.dat\" File");
+		delay(1500);
+		exit(1);
+	}
+	
+	if ((c = (Car*)malloc(sizeof(Car))) == NULL)
+	{
+		printf("Error - unable to allocate required memory");
+		delay(1500);
+		exit(1);
+	}
+	memset(c,'\0',sizeof(Car));
+	fseek(fp, (*usernum + 1) * sizeof(User) + (flag - 4) * sizeof(Car) , SEEK_SET);//跳转用户第一个空余车辆位置
+	fwrite(c, sizeof(Car), 1, fp);//把用户信息写入文件
+	if (c != NULL)
+	{
+		free(c);
+		c = NULL;
+	}
+	if (fclose(fp) != 0)
+	{
+		printf("\n cannot close UserData.dat");
+		delay(3000);
+		exit(1);
+	}
 }
