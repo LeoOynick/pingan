@@ -4,11 +4,10 @@
 void mine(int *page, User *u, int *usernum, int *carnum)
 {
 	int num = 0;
-	int buttonpos = 0;
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
-	drawmine(u,usernum,carnum,&buttonpos);
+	drawmine(u,usernum,carnum);
 	
 	while(1)
 	{
@@ -90,7 +89,7 @@ void mine(int *page, User *u, int *usernum, int *carnum)
 			return;
 		}
 		else if(strlen(u->car[0].licensenum) == 0 && strlen(u->car[1].licensenum) == 0 
-				&& strlen(u->car[2].licensenum) == 0 &&(mouse_press(20,160+ 90* 0,620,200+ 90* 0) == 2))   //添加车辆 //2 = buttonpos
+				&& strlen(u->car[2].licensenum) == 0 &&(mouse_press(20,160+ 90* 0,620,200+ 90* 0) == 2))   //添加车辆
 		{
 			if (num == 0)
 			{
@@ -108,7 +107,7 @@ void mine(int *page, User *u, int *usernum, int *carnum)
 				return;
 		}
 		else if(strlen(u->car[0].licensenum) != 0 && strlen(u->car[1].licensenum) == 0 
-				&&(mouse_press(20,160+ 90* 1,620,200+ 90* 1) == 2))   //添加车辆 //2 = buttonpos
+				&&(mouse_press(20,160+ 90* 1,620,200+ 90* 1) == 2))   //添加车辆 
 		{
 			if (num == 0)
 			{
@@ -126,7 +125,7 @@ void mine(int *page, User *u, int *usernum, int *carnum)
 				return;
 		}
 		else if(strlen(u->car[0].licensenum) != 0 && strlen(u->car[1].licensenum) != 0 
-				&& strlen(u->car[2].licensenum) == 0 &&(mouse_press(20,160+ 90* 2,620,200+ 90* 2) == 2))   //添加车辆 //2 = buttonpos
+				&& strlen(u->car[2].licensenum) == 0 &&(mouse_press(20,160+ 90* 2,620,200+ 90* 2) == 2))   //添加车辆 //2 = rescue
 		{
 			if (num == 0)
 			{
@@ -177,7 +176,7 @@ void mine(int *page, User *u, int *usernum, int *carnum)
 			MouseS = 0;
 			del_cardata(usernum,1);
 			output_userinfo(u,usernum,carnum);
-			buttonpos = show_car(u,80, 170, 2);
+			show_car(u,80, 170, 2);
 			*page = 8;
 			return;
 		}
@@ -198,7 +197,7 @@ void mine(int *page, User *u, int *usernum, int *carnum)
 			MouseS = 0;
 			del_cardata(usernum,2);
 			output_userinfo(u,usernum,carnum);
-			buttonpos = show_car(u,80, 170, 2);
+			show_car(u,80, 170, 2);
 			*page = 8;
 			return;
 		}
@@ -219,7 +218,7 @@ void mine(int *page, User *u, int *usernum, int *carnum)
 			MouseS = 0;
 			del_cardata(usernum,3);
 			output_userinfo(u,usernum,carnum);
-			buttonpos = show_car(u,80, 170, 2);
+			show_car(u,80, 170, 2);
 			*page = 8;
 			return;
 		}
@@ -288,7 +287,7 @@ void mine(int *page, User *u, int *usernum, int *carnum)
 	}
 }
 
-void drawmine(User *u, int * usernum, int *carnum, int *buttonpos)
+void drawmine(User *u, int * usernum, int *carnum)
 {
 	int i,j;
 	output_userinfo(u,usernum,carnum);
@@ -339,20 +338,8 @@ void drawmine(User *u, int * usernum, int *carnum, int *buttonpos)
 	line(483,440,483,444);
 	line(477,440,477,444);
 	puthz(463,460,"我的",16,20,8);
-	
 	puthz(20,120-10,"我的爱车",24,28,1);
-	/*puthz(520,135-20,"车辆管理",16,18,8);
-	line(600,142-20,595,137-20);
-	line(600,142-20,595,147-20);
-	
-	setfillstyle(1,15);
-	bar(20,160,620,200);
-	setcolor(8);
-	line(185,180,215,180);
-	line(200,165,200,195);
-	puthz(280,170,"立即添加车辆",24,28,8);*/
-	
-	*buttonpos = show_car(u,80, 170, 2);
+	show_car(u,80, 170, 2);
 	
 	setfillstyle(1,LIGHTGRAY);
     bar(610,0,640,30);
@@ -360,34 +347,6 @@ void drawmine(User *u, int * usernum, int *carnum, int *buttonpos)
     line(610,0,640,30);
     line(640,0,610,30);
 	
-	/*setfillstyle(1, RED);
-	if(strlen(u->car[0].licensenum) != 0)
-	{
-		bar(560 - 50, 202 + 3 + 65 * 0, 608-50, 225+3 + 65 * 0);
-		puthz(568 -50, 206 + 3 + 65 * 0, "删除", 16, 18, WHITE);
-	}
-	if(strlen(u->car[1].licensenum) != 0)
-	{
-		bar(560 - 50, 202 + 3 + 65 * 1, 608-50, 225+3 + 65 * 1);
-		puthz(568 -50, 206 + 3 + 65 * 1, "删除", 16, 18, WHITE);
-	}
-	if(strlen(u->car[2].licensenum) != 0)
-	{
-		bar(560 - 50, 202 + 3 + 65 * 2, 608-50, 225+3 + 65 * 2);
-		puthz(568 -50, 206 + 3 + 65 * 2, "删除", 16, 18, WHITE);
-	}
-	
-		setfillstyle(1, WHITE);
-		setcolor(DARKGRAY);
-		bar(20 ,160 + 90* 2,620,200 + 90* 2);
-		setcolor(8);
-		line(185 ,180 + 90* 2,215,180 + 90* 2);
-		line(200 ,165 + 90* 2,200,195 + 90* 2);
-		puthz(280 ,170 + 90* 2,"立即添加车辆",24,28,2);
-	/*if( *buttonpos != 3) //*buttonpos != 3
-	{
-		
-	}*/
 	if(strlen(u->car[0].licensenum) != 0)
 	{
 		setfillstyle(1, RED);
