@@ -316,9 +316,12 @@ int verify_login(char *name, char *password, char *code, char *inputcode)
 	
 	while(1)
 	{
+		
 		coverhz(566,200-23,11);
 		coverhz(566,270-23,11);
 		coverhz(566,340-23,11);
+		//setfillstyle(SOLID_FILL,11);
+		//bar(590, 80, 637, 450);
 		
 		judgeinput(name,&inputed,566,200-23);
 		judgeinput(password,&inputed,566,270-23);
@@ -404,7 +407,7 @@ int verify_user(char *name, char *password)
 				}
 				return 1;
 			}
-			else if( strcmp(password, u->password) != 0 )	//√‹¬Î≤ª∆•≈‰
+			/*else if( strcmp(password, u->password) != 0 )	//√‹¬Î≤ª∆•≈‰
 			{
 				button(70,100,800,800,LIGHTCYAN,LIGHTCYAN,3);	//∏≤∏« ‰»ÎøÚ
 				button(190,200,440,300,CYAN,LIGHTGRAY,3);				
@@ -416,7 +419,7 @@ int verify_user(char *name, char *password)
 					u = NULL;
 				}
 				break;
-			}
+			}*/
 		}
 
 		if (u != NULL)

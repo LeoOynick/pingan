@@ -388,7 +388,10 @@ int verify_forgotpw_info(char* name, char* password, char* confirmpw,
 		coverhz(566,310-23,11);
 		coverhz(566,370-23,11);
 		coverhz(566,430-23,11);
-	
+		coverhz(430,68,11);
+		setfillstyle(SOLID_FILL,11);
+		bar(590, 80, 637, 450);
+		
 		judgeinput(name,&inputed,566,130-23);	//判断格式是否符合要求
 		judgeinput(password,&inputed,566,190-23);
 		judgeinput(confirmpw,&inputed,566,250-23);
@@ -396,12 +399,6 @@ int verify_forgotpw_info(char* name, char* password, char* confirmpw,
 		judgeinput(tele,&inputed,566,370-23);
 		judgeinput(inputcode,&inputed,566,430-23);
 		
-		/*coverhz(350,68,11);
-		coverhz(355,68,11);*/
-		coverhz(430,68,11);
-		
-		setfillstyle(SOLID_FILL,11);
-		bar(590, 80, 637, 450);
 		if(inputed == 1)
 		{
 			break;
@@ -412,53 +409,25 @@ int verify_forgotpw_info(char* name, char* password, char* confirmpw,
 			{
 				puthz(430, 80, "账号不存在", 16, 17, RED);
 				show_tickcross(592,105,607,125,0);
-				/*setlinestyle(SOLID_LINE, 0, 3);
-				setcolor(11);
-				line(566 + 24, 130-23 + 9, 566 + 33, 130-23 + 19);
-				line(566 + 33, 130-23 + 19, 566 + 43, 130-23 - 3);
-				setcolor(RED);
-				line(592,105,607,125);
-				line(607,105,592,125);*/
-				/*format_name = check_username_dig (name,566,130-23);	//若符合格式则为 1
-				format_pw = check_pw_dig (password,566,190-23);
-				format_Cpw = check_comfirmpw(password,confirmpw,566,250-23);
-				format_ID = check_id(ID,566,310-23);
-				format_tele = check_tele_dig(tele,566,370-23);
-				format_code = check_captcha(code,inputcode,566,430-23);*/
-				
 				break;
-				
 			}
 			else if(check_samename(name,2))
 			{
-				
 				show_tickcross(592,105,607,125,1);
-				/*setlinestyle(SOLID_LINE, 0, 3); 
-				setcolor(11);
-				line(592,105,607,125);
-				line(607,105,592,125);
-				
-				setcolor(GREEN);
-				line(566 + 24, 130-23 + 9, 566 + 33, 130-23 + 19);
-				line(566 + 33, 130-23 + 19, 566 + 43, 130-23 - 3);*/
-				
-				//format_name = check_username_dig (name,566,130-23);	//若符合格式则为 1
 				format_pw = check_pw_dig (password,566,190-23);
 				format_Cpw = check_comfirmpw(password,confirmpw,566,250-23);
 				format_ID = check_id(ID,566,310-23);
 				format_tele = check_tele_dig(tele,566,370-23);
 				format_code = check_captcha(code,inputcode,566,430-23);
 			
-				
-				if(format_pw != 1 || format_Cpw != 1 
-					|| format_tele != 1 || format_code != 1 ||format_ID != 1)	
+				if(format_pw != 1 || format_Cpw != 1 || format_tele != 1 
+					|| format_code != 1 ||format_ID != 1)	
 				{
 					break;
 				}
-				else if(format_pw == 1 && format_Cpw == 1 
-					&& format_tele == 1 && format_code == 1 &&format_ID == 1)
+				else if(format_pw == 1 && format_Cpw == 1 && format_tele == 1 
+						&& format_code == 1 &&format_ID == 1)
 				{
-					
 					if(change_userpw(name,password,confirmpw,ID,tele))
 					{
 						button(70,70,800,800,LIGHTCYAN,LIGHTCYAN,3);	//覆盖输入框
@@ -515,55 +484,26 @@ int change_userpw(char* name, char* password, char* confirmpw,
 			
 			if(strcmp(ID,u->ID) != 0) 
 			{
-				//coverhz(430,260,11);
 				puthz(430, 260, "证件不匹配", 16, 17, RED);
-				
-				
-				/*setcolor(LIGHTCYAN);
-				setlinestyle(SOLID_LINE, 0, 3); 
-				line(566 + 24, 130-23 + 9, 566 + 33, 130-23 + 19);
-				line(566 + 33, 130-23 + 19, 566 + 43, 130-23 - 3);
-					
-				setcolor(RED);
-				line(592,105,607,125);
-				line(607,105,592,125);*/
 				show_tickcross(592,285,607,305,0);
-				/*setcolor(RED);
-				line(592,285,607,305);
-				line(607,285,592,305);*/
 			}
 			else if(strcmp(ID,u->ID) == 0)
 			{
-				//coverhz(430,250,11);
 				setfillstyle(SOLID_FILL,11);
 				bar(430, 252, 540, 278);
 				show_tickcross(592,285,607,305,1);
-				/*setcolor(11);
-				line(592,105,607,125);
-				line(607,105,592,125);
-				check_id(ID,566,310-23);*/
 			}
 			
 			if(strcmp(tele,u->tele) != 0)
 			{
-				//coverhz(566,310-23,11);
 				puthz(430, 320, "电话不匹配", 16, 17, RED);
-				
 				show_tickcross(592,345,607,365,0);
-				/*setcolor(RED);
-				line(592,345,607,365);
-				line(607,345,592,365);*/
 			}
 			else if (strcmp(tele,u->tele) == 0)
 			{
-				//coverhz(430,310,11);
 				setfillstyle(SOLID_FILL,11);
 				bar(430, 312, 540, 338);
 				show_tickcross(592,345,607,365,1);
-				/*setcolor(11);
-				line(592,125,607,145);
-				line(607,125,592,145);
-				check_tele_dig(tele,566,370-23);*/
 			}
 			
 			if((strcmp(ID,u->ID) == 0) && (strcmp(tele,u->tele) == 0))
@@ -585,7 +525,6 @@ int change_userpw(char* name, char* password, char* confirmpw,
 						printf("\n cannot close Database");
 						exit(1);
 					}
-					//delay(2000);
 					return 1;
 				}
 			}

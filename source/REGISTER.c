@@ -419,6 +419,8 @@ int check_legal_reg(char* name, char* password, char* confirmpw,
 		coverhz(566,310-23,11);
 		coverhz(566,370-23,11);
 		coverhz(566,430-23,11);
+		setfillstyle(SOLID_FILL,11);
+		bar(590, 80, 637, 450);
 	
 		judgeinput(name,&inputed,566,130-23);	//判断格式是否符合要求
 		judgeinput(password,&inputed,566,190-23);

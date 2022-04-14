@@ -125,7 +125,7 @@ void mine(int *page, User *u, int *usernum, int *carnum)
 				return;
 		}
 		else if(strlen(u->car[0].licensenum) != 0 && strlen(u->car[1].licensenum) != 0 
-				&& strlen(u->car[2].licensenum) == 0 &&(mouse_press(20,160+ 90* 2,620,200+ 90* 2) == 2))   //添加车辆 //2 = rescue
+				&& strlen(u->car[2].licensenum) == 0 &&(mouse_press(20,160+ 90* 2,620,200+ 90* 2) == 2))   //添加车辆
 		{
 			if (num == 0)
 			{
@@ -311,7 +311,7 @@ void drawmine(User *u, int * usernum, int *carnum)
 	{
 		puthz(60, 17, "您好，", 16, 18, WHITE);
 		setcolor(WHITE);
-		settextstyle(3, HORIZ_DIR, 2); //2,3
+		settextstyle(3, HORIZ_DIR, 2);
 		outtextxy(110, 10, u->name);
 	}
 	
