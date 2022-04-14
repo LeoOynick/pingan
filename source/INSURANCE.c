@@ -68,6 +68,10 @@ void insure(int *page, User *u)
 			{
 				setfillstyle(1,LIGHTCYAN);
 				bar(270,435,390,455);
+			}
+			if ((strlen(u->car[carid].licensenum)!= 0 && (state1 != 0 || state2 != 0 || state3 != 0)))
+			{
+				
 				write_insurancedata(u,carid,state1,state2,state3);
 				puthz(280,435,"¹ºÂò³É¹¦£¡",16,20,RED);
 				delay(800);

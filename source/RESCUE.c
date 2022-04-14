@@ -66,8 +66,7 @@ void rescue(int *page, User *u)
 				setfillstyle(1,LIGHTCYAN);
 				bar(220,225,420,245);
 			}
-			if(state1 != 0 || state2 != 0 || state3 != 0 || state4 != 0 
-				&& (strlen(u->car[carid].licensenum)!= 0))
+			if((state1 != 0 || state2 != 0 || state3 != 0 || state4 != 0 )&& (strlen(u->car[carid].licensenum)!= 0))
 			{
 				write_rescuedata(u,carid,state1,state2,state3,state4);
 				puthz(280,435,"提交成功！",16,20,RED);
