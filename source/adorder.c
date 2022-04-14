@@ -121,10 +121,7 @@ void adorder(int *page)
 		else if (mouse_press(90,380,150,410) == 1)
 		{
 			MouseS = 0;
-			if(strlen(licensenum) == 0)
-				puthz(260,150,"请输入车牌！",16,18,RED);
-			else
-				ad_insurance(licensenum);
+			ad_insurance(licensenum);
 		}
 		
 		else if(mouse_press(190,380,250,410) == 2)		//停车
@@ -143,7 +140,7 @@ void adorder(int *page)
 		else if (mouse_press(190,380,250,410) == 1)
 		{
 			MouseS = 0;
-			//ad_parking(licensenum);
+			ad_parking(licensenum);
 		}
 		
 		else if(mouse_press(290,380,350,410) == 2)		//服务
@@ -162,8 +159,7 @@ void adorder(int *page)
 		else if (mouse_press(290,380,350,410) == 1)
 		{
 			MouseS = 0;
-		    
-			
+		    //ad_sevice(licensenum);
 		}
 		
 		else if(mouse_press(390,380,450,410) == 2)		//年检
@@ -182,8 +178,7 @@ void adorder(int *page)
 		else if (mouse_press(390,380,450,410) == 1)
 		{
 			MouseS = 0;
-		    
-			
+		    ad_inspect(licensenum);
 		}
 		
 		else if(mouse_press(490,380,550,410) == 2)		//救援
@@ -355,10 +350,10 @@ void ad_insurance(char *licensenum)
 	button(20,150,800,375,11,11,1);
 	for (i = 0; i < set_num; i++)
 	{
-		if( (in = (Insurance*)malloc(sizeof(Insurance))) == NULL )	//allocate memory for u
+		if( (in = (Insurance*)malloc(sizeof(Insurance))) == NULL )	
 		{
 			closegraph();
-			printf("Error - unable to allocate required memory in policy.c for in");
+			printf("Error - unable to allocate required memory in adorder.c for in");
 			delay(1500);
 			exit(1);
 		}
@@ -450,10 +445,279 @@ void ad_insurance(char *licensenum)
 	}
 	if (fclose(fp) != 0)
 	{
-		printf("\n cannot close PolData");
+		printf("\n cannot close InsData");
 		delay(2000);
 		exit(1);				
 	}
 }
 
-//void ad_parking(char *licensenum)
+void ad_parking(char *licensenum)
+{
+	int i,j;
+	int set_num;
+	int parking_found = 0;
+	FILE *fp;
+	Parking *pa = NULL;
+	
+	if( (fp = fopen("Database\\ParkData.dat", "rb+" )) == NULL )	//open ParkingData.dat in fp
+	{
+		closegraph();
+		printf("Error! Can't Open \"ParkData.dat\" File");
+		delay(1500);
+		exit(1);
+	}
+	
+	fseek(fp, 0, SEEK_END);
+	set_num = ftell(fp) / sizeof(Parking);
+	button(20,150,800,375,11,11,1);
+	for (i = 0; i < set_num; i++)
+	{
+		if( (pa = (Parking*)malloc(sizeof(Parking))) == NULL )	
+		{
+			closegraph();
+			printf("Error - unable to allocate required memory in adorder.c for in");
+			delay(1500);
+			exit(1);
+		}
+		
+		fseek(fp, i * sizeof(Parking), SEEK_SET);
+		fread(pa, sizeof(Parking), 1, fp);
+		
+		setcolor(WHITE);
+		setlinestyle(SOLID_LINE, 0, 3);
+		settextstyle(1,0,2);
+		
+		if(strlen(licensenum) == 0)
+		{
+			puthz(260,150,"请输入车牌！",16,18,RED);
+			parking_found = 1;
+		}
+		if (strcmp(licensenum, pa->licensenum) == 0)
+		{
+			puthz(140,180,"日期：",24,28,1);
+			setcolor(DARKGRAY);
+			outtextxy(290,180,pa->parkingdate.year);
+			puthz(350, 185 , "年", 16, 17, BLUE);
+			outtextxy(390, 180 , pa->parkingdate.month);
+			puthz(405, 185 , "月", 16, 17, BLUE);
+			outtextxy(445, 180 , pa->parkingdate.day);
+			puthz(480, 185 , "日", 16, 17, BLUE);
+			puthz(140,230,"地点：",24,28,1);
+			switch(pa->parkplace[0])
+			{
+				case '1':
+					puthz(290,230,"武汉天河机场",24,28,1);
+					parking_found = 1;
+					break;
+				case '2':
+					puthz(290,230,"武汉火车站",24,28,1);
+					parking_found = 1;
+					break;
+				case '3':
+					puthz(290,230,"华中科技大学",24,28,1);
+					parking_found = 1;
+					break;
+			}
+		}
+		free(pa);
+		pa = NULL;
+	}
+	if(parking_found == 0)
+	{
+		puthz(160,260, "此车辆没有预约任何停车", 24, 28, DARKGRAY);
+	}
+	
+	if (pa != NULL)
+	{
+		free(pa);
+		pa = NULL;
+	}
+	if (fclose(fp) != 0)
+	{
+		printf("\n cannot close ParkData");
+		delay(2000);
+		exit(1);				
+	}
+}
+
+/*void ad_sevice(char *licensenum)
+{
+	int i,j;
+	int set_num;
+	int service_found = 0;
+	FILE *fp;
+	Service *se = NULL;
+	
+	if( (fp = fopen("Database\\ServData.dat", "rb+" )) == NULL )	//open ServData.dat in fp
+	{
+		closegraph();
+		printf("Error! Can't Open \"ServData.dat\" File");
+		delay(1500);
+		exit(1);
+	}
+	
+	fseek(fp, 0, SEEK_END);
+	set_num = ftell(fp) / sizeof(Service);
+	button(20,150,800,375,11,11,1);
+	for (i = 0; i < set_num; i++)
+	{
+		if( (se = (Service*)malloc(sizeof(Service))) == NULL )	
+		{
+			closegraph();
+			printf("Error - unable to allocate required memory in adorder.c for in");
+			delay(1500);
+			exit(1);
+		}
+		
+		fseek(fp, i * sizeof(Service), SEEK_SET);
+		fread(se, sizeof(Service), 1, fp);
+		
+		setcolor(WHITE);
+		setlinestyle(SOLID_LINE, 0, 3);
+		settextstyle(1,0,2);
+		
+		if(strlen(licensenum) == 0)
+		{
+			puthz(260,150,"请输入车牌！",16,18,RED);
+			service_found = 1;
+		}
+		if (strcmp(licensenum, se->licensenum) == 0)
+		{
+			puthz(140,180,"日期：",24,28,1);
+			setcolor(DARKGRAY);
+			outtextxy(290,180,se->servicedate.year);
+			puthz(350, 185 , "年", 16, 17, BLUE);
+			outtextxy(390, 180 , se->servicedate.month);
+			puthz(405, 185 , "月", 16, 17, BLUE);
+			outtextxy(445, 180 , se->servicedate.day);
+			puthz(480, 185 , "日", 16, 17, BLUE);
+			puthz(140,230,"服务类型：",24,28,1);
+			switch(se->servicetype[0])
+			{
+				case '1':
+					puthz(300,230,"洗车",24,28,1);
+					service_found = 1;
+					break;
+				case '2':
+					puthz(300,230,"加油",24,28,1);
+					service_found = 1;
+					break;
+				case '3':
+					puthz(300,230,"保养",24,28,1);
+					service_found = 1;
+					break;
+				case '4':
+					puthz(300,230,"挪车",24,28,1);
+					service_found = 1;
+					break;
+			}
+		}
+		free(se);
+		se = NULL;
+	}
+	if(service_found == 0)
+	{
+		puthz(160,260, "此车辆没有申请任何服务", 24, 28, DARKGRAY);
+	}
+	
+	if (se != NULL)
+	{
+		free(se);
+		se = NULL;
+	}
+	if (fclose(fp) != 0)
+	{
+		printf("\n cannot close ServData");
+		delay(2000);
+		exit(1);				
+	}
+}*/
+
+void ad_inspect(char *licensenum)
+{
+	int i,j;
+	int set_num;
+	int service_found = 0;
+	FILE *fp;
+	Service *ip = NULL;
+	
+	if( (fp = fopen("Database\\InspData.dat", "rb+" )) == NULL )	//open InspData.dat in fp
+	{
+		closegraph();
+		printf("Error! Can't Open \"InspData.dat\" File");
+		delay(1500);
+		exit(1);
+	}
+	
+	fseek(fp, 0, SEEK_END);
+	set_num = ftell(fp) / sizeof(Service);
+	button(20,150,800,375,11,11,1);
+	for (i = 0; i < set_num; i++)
+	{
+		if( (ip = (Service*)malloc(sizeof(Service))) == NULL )	
+		{
+			closegraph();
+			printf("Error - unable to allocate required memory in adorder.c for in");
+			delay(1500);
+			exit(1);
+		}
+		
+		fseek(fp, i * sizeof(Service), SEEK_SET);
+		fread(ip, sizeof(Service), 1, fp);
+		
+		setcolor(WHITE);
+		setlinestyle(SOLID_LINE, 0, 3);
+		settextstyle(1,0,2);
+		
+		if(strlen(licensenum) == 0)
+		{
+			puthz(260,150,"请输入车牌！",16,18,RED);
+			service_found = 1;
+		}
+		if (strcmp(licensenum, ip->licensenum) == 0)
+		{
+			puthz(140,180,"日期：",24,28,1);
+			setcolor(DARKGRAY);
+			outtextxy(290,180,ip->servicedate.year);
+			puthz(350, 185 , "年", 16, 17, BLUE);
+			outtextxy(390, 180 , ip->servicedate.month);
+			puthz(405, 185 , "月", 16, 17, BLUE);
+			outtextxy(445, 180 , ip->servicedate.day);
+			puthz(480, 185 , "日", 16, 17, BLUE);
+			puthz(140,230,"类型：",24,28,1);
+			switch(ip->servicetype[0])
+			{
+				case '1':
+					puthz(290,230,"新车免检",24,28,1);
+					service_found = 1;
+					break;
+				case '2':
+					puthz(290,230,"普通年检",24,28,1);
+					service_found = 1;
+					break;
+				case '3':
+					puthz(290,230,"特快年检",24,28,1);
+					service_found = 1;
+					break;
+			}
+		}
+		free(ip);
+		ip = NULL;
+	}
+	if(service_found == 0)
+	{
+		puthz(160,260, "此车辆没有预约任何停车", 24, 28, DARKGRAY);
+	}
+	
+	if (ip != NULL)
+	{
+		free(ip);
+		ip = NULL;
+	}
+	if (fclose(fp) != 0)
+	{
+		printf("\n cannot close ParkData");
+		delay(2000);
+		exit(1);				
+	}
+}

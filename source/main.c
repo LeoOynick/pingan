@@ -74,7 +74,7 @@ void main()
 				violate(&page,&u);
 				break;
 				
-			case(13):   //停车·缴费
+			case(13):   //预约停车
 				parking(&page,&u);
 				break;
 				

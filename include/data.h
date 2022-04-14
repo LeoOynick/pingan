@@ -38,11 +38,11 @@ typedef struct vioinfo
 typedef struct claiminfo
 {
 	char licensenum[7];		//6位，车牌号
-	char scenetype[2];      
-	char charactertype[2];
-	Date claimdate;		 	//订单时间
-	char state[2];
-}Claim;		//封装信息
+	char scenetype[2];      //场景
+	char charactertype[2];		//角色
+	Date claimdate;		 	//时间
+	char state[2];		//审核状态（0未审核，1通过，2拒绝）
+}Claim;		//封装理赔信息
 
 typedef struct insuranceinfo
 {
