@@ -66,8 +66,10 @@ void carserve(int *page, User *u)
 				setfillstyle(1,LIGHTCYAN);
 				bar(220,225,420,245);
 			}
-			if(state1 != 0 || state2 != 0 || state3 != 0 || state4 != 0)
+			if((state1 != 0 || state2 != 0 || state3 != 0 || state4 != 0)
+				&& (strlen(u->car[carid].licensenum)!= 0))
 			{
+				write_servicedata(u,carid,state1,state2,state3,state4);
 				puthz(280,435,"提交成功！",16,20,RED);
 				delay(800);
 				*page = 7;
@@ -283,3 +285,85 @@ void drawcarserve(User *u,int *carid)
 	
 	show_car(u,90,162,1,carid);
 }
+
+void write_servicedata(User *u, int carid, int service1,int service2,int service3,int service4)
+{
+	FILE *fp;
+	Service *s;
+	struct tm *local;
+    time_t t;
+	int i;
+	char str[5];
+	t=time(NULL);
+    local=localtime(&t);
+	
+	if( (fp = fopen("Database\\ServData.dat", "wb+" )) == NULL )	//open ServData.dat in fp
+	{
+		closegraph();
+		printf("Error! Can't Open \"ServData.dat\" File");
+		delay(1500);
+		exit(1);
+	}
+	
+	if( (s = (Service*)malloc(sizeof(Service))) == NULL )	//allocate memory for s
+	{
+		printf("Error - unable to allocate required memory for service");
+		delay(1500);
+		exit(1);
+	}
+	
+	memset(s,'\0',sizeof(Service));
+	strcpy(s->licensenum, u->car[carid].licensenum);
+	local=localtime(&t);
+	itoa(local->tm_year + 1900, str, 10);
+	strcpy(s->servicedate.year, str);
+	itoa(local->tm_mon + 1, str, 10);
+	strcpy(s->servicedate.month, str);
+	itoa(local->tm_mday, str, 10);
+	strcpy(s->servicedate.day, str);
+	
+	for(i = 0; i < 4; i++)
+	{
+		if(service1 != 0)
+		{
+			s->servicetype[0] = '1';
+			service1 = 0;
+		}
+		else if(service2 != 0)
+		{
+			s->servicetype[0] = '2';
+			service2 = 0;
+		}
+		else if(service3 != 0)
+		{
+			s->servicetype[0] = '3';
+			service3 = 0;
+		}
+		else if(service4 != 0)
+		{
+			s->servicetype[0] = '4';
+			service4 = 0;
+		}
+		if(s->servicetype[0] != '0')
+		{
+			fseek(fp, 0, SEEK_END);				//跳转至文件末尾
+			fwrite(s, sizeof(Service), 1, fp);	//把车险信息写入文件
+			s->servicetype[0] = '0';
+		}
+	}
+	
+	if (s != NULL)
+	{
+		free(s);
+		s = NULL;
+	}
+	
+	if (fclose(fp) != 0)
+	{
+		printf("\n cannot close ServData.dat");
+		delay(3000);
+		exit(1);
+	}
+	
+}
+	

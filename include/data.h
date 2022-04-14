@@ -47,16 +47,23 @@ typedef struct claiminfo
 typedef struct insuranceinfo
 {
 	char licensenum[7];		//6位车牌号码
-	char insurancetype[2];	//3种保险类型 //char insurancetype[4];
+	char insurancetype[2];	//保险类型	//char insurancetype[4];
 	Date insuranceenddate;	//保险单到期日
 }Insurance;	//封装保险单信息
 
 typedef struct parkinginfo
 {
 	char licensenum[7];		//6位车牌号码
-	char parkplace[2];	//3个停车地点
+	char parkplace[2];	//停车地点
 	Date parkingdate;	//停车日期
 }Parking;	//封装停车预约信息
+
+typedef struct serviceinfo
+{
+	char licensenum[7];		//6位车牌号码
+	char servicetype[2];	//服务类型
+	Date servicedate;	//服务日期
+}Service;	//封装服务信息
 
 #endif
 	

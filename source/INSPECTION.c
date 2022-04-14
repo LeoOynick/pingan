@@ -65,8 +65,9 @@ void inspect(int *page, User *u)
 				setfillstyle(1,LIGHTCYAN);
 				bar(220,225,420,245);
 			}
-			if(state1 != 0 || state2 != 0 || state3 != 0)
+			if((state1 != 0 || state2 != 0 || state3 != 0) && (strlen(u->car[carid].licensenum)!= 0))
 			{
+				write_inspectingdata(u,carid,state1,state2,state3);
 				puthz(280,435,"提交成功！",16,20,RED);
 				delay(800);
 				*page = 7;
@@ -262,4 +263,75 @@ void drawinspect(User* u, int *carid)
     line(610,0,640,30);
     line(640,0,610,30);
 	show_car(u,90,162,1,carid);
+}
+
+void write_inspectingdata(User *u, int carid, int inspect1,int inspect2, int inspect3)
+{
+	FILE *fp;
+	Parking *p;
+	struct tm *local;
+    time_t t;
+	int i;
+	int inspect = 0;
+	char str[5];
+	char inspecting_str_type[2];
+	t=time(NULL);
+    local=localtime(&t);
+	
+	if( (fp = fopen("Database\\InspData.dat", "rb+" )) == NULL )	//open InspData.dat in fp
+	{
+		closegraph();
+		printf("Error! Can't Open \"InspData.dat\" File");
+		delay(1500);
+		exit(1);
+	}
+	
+	if( (p = (Parking*)malloc(sizeof(Parking))) == NULL )	//allocate memory for p
+	{
+		printf("Error - unable to allocate required memory for inspect");
+		delay(1500);
+		exit(1);
+	}
+	
+	if(inspect1 == 1)
+	{
+		inspect = 1;
+	}
+	else if(inspect2 == 1)
+	{
+		inspect = 2;
+	}
+	else if(inspect3 == 1)
+	{
+		inspect = 3;
+	}
+	inspecting_str_type[0] = '0' + inspect;
+	inspecting_str_type[1] = '\0';
+	
+	strcpy(p->licensenum, u->car[carid].licensenum);		//copy licensenum to C.licensenum
+	strcpy(p->parkplace,inspecting_str_type);
+	local=localtime(&t);
+	itoa(local->tm_year + 1900, str, 10);
+	strcpy(p->parkingdate.year,str);
+	itoa(local->tm_mon + 1, str, 10);
+	strcpy(p->parkingdate.month,str);
+	itoa(local->tm_mday, str, 10);
+	strcpy(p->parkingdate.day,str);
+	
+	fseek(fp,0,SEEK_END);			
+	fwrite(p,sizeof(Parking),1,fp);	//write c to *fp->file
+	
+	if (p != NULL)
+	{
+		free(p);
+		p = NULL;
+	}
+	
+	if (fclose(fp) != 0)
+	{
+		printf("\n cannot close InspData.dat");
+		delay(3000);
+		exit(1);
+	}
+	
 }

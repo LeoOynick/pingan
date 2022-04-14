@@ -335,6 +335,66 @@ int check_date(char* year, char* month, char* date, int x, int y)
 	}
 }
 
+int check_date_after(char* year, char* month, char* date, int x, int y)
+{
+	struct tm *local;
+    time_t t;
+	int i;
+	char str[9]={ '\0' };
+	t=time(NULL);
+	local=localtime(&t);
+	strcat(str, year);
+	strcat(str, month);
+	strcat(str, date);
+	if (strlen(year) != 4)
+	{
+		puthz(x, y, "年份为四位", 16, 17, RED);
+		return 0;
+	}
+	else if (strlen(month) != 2)
+	{
+		puthz(x, y, "月份为两位", 16, 17, RED);
+		return 0;
+	}
+	else if (strlen(date) != 2)
+	{
+		puthz(x, y, "日期为两位", 16, 17, RED);
+		return 0;
+	}
+	else
+	{
+		if (atoi(year) < local->tm_year + 1900 
+			|| (atoi(year) == local->tm_year + 1900 && atoi(month) < local->tm_mon + 1)
+			|| (atoi(year) == local->tm_year + 1900 && atoi(month) == local->tm_mon + 1 && atoi(date) < local->tm_mday))
+		{
+			puthz(x, y, "请选择将来的时间", 16, 17, RED);
+			return 0;
+		}	
+		for (i = 0; i < 8; i++)
+		{
+			if (str[i] >= '0' && str[i] <= '9')
+			{
+				continue;
+			}
+			else
+			{
+				puthz(x, y, "格式不正确", 16, 17, RED);
+				return 0;
+			}
+		}
+		if(legal_date(atoi(year),atoi(month),atoi(date),x,y) == 0)
+		{
+			return 0;
+		}
+		setcolor(GREEN);
+		setlinestyle(SOLID_LINE, 0, 3); 
+		line(x + 3, y + 8, x + 13, y + 18);
+		line(x + 13, y + 18, x + 23, y - 2);
+		return 1;
+	}
+}
+
+
 int legal_date(int year, int month, int date, int x, int y)
 {
 	if(month < 1 || month > 12)

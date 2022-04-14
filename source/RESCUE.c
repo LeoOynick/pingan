@@ -66,8 +66,10 @@ void rescue(int *page, User *u)
 				setfillstyle(1,LIGHTCYAN);
 				bar(220,225,420,245);
 			}
-			if(state1 != 0 || state2 != 0 || state3 != 0 || state4 != 0)
+			if(state1 != 0 || state2 != 0 || state3 != 0 || state4 != 0 
+				&& (strlen(u->car[carid].licensenum)!= 0))
 			{
+				write_rescuedata(u,carid,state1,state2,state3,state4);
 				puthz(280,435,"提交成功！",16,20,RED);
 				delay(800);
 				*page = 7;
@@ -282,3 +284,85 @@ void drawrescue(User* u, int* carid)
     line(640,0,610,30);
 	show_car(u,90,162,1,carid);
 }
+
+void write_rescuedata(User *u, int carid, int rescue1,int rescue2,int rescue3,int rescue4)
+{
+	FILE *fp;
+	Service *s;
+	struct tm *local;
+    time_t t;
+	int i;
+	char str[5];
+	t=time(NULL);
+    local=localtime(&t);
+	
+	if( (fp = fopen("Database\\RescData.dat", "wb+" )) == NULL )	//open RescData.dat in fp
+	{
+		closegraph();
+		printf("Error! Can't Open \"RescData.dat\" File");
+		delay(1500);
+		exit(1);
+	}
+	
+	if( (s = (Service*)malloc(sizeof(Service))) == NULL )	//allocate memory for s
+	{
+		printf("Error - unable to allocate required memory for service");
+		delay(1500);
+		exit(1);
+	}
+	
+	memset(s,'\0',sizeof(Service));
+	strcpy(s->licensenum, u->car[carid].licensenum);
+	local=localtime(&t);
+	itoa(local->tm_year + 1900, str, 10);
+	strcpy(s->servicedate.year, str);
+	itoa(local->tm_mon + 1, str, 10);
+	strcpy(s->servicedate.month, str);
+	itoa(local->tm_mday, str, 10);
+	strcpy(s->servicedate.day, str);
+	
+	for(i = 0; i < 4; i++)
+	{
+		if(rescue1 != 0)
+		{
+			s->servicetype[0] = '1';
+			rescue1 = 0;
+		}
+		else if(rescue2 != 0)
+		{
+			s->servicetype[0] = '2';
+			rescue2 = 0;
+		}
+		else if(rescue3 != 0)
+		{
+			s->servicetype[0] = '3';
+			rescue3 = 0;
+		}
+		else if(rescue4 != 0)
+		{
+			s->servicetype[0] = '4';
+			rescue4 = 0;
+		}
+		if(s->servicetype[0] != '0')
+		{
+			fseek(fp, 0, SEEK_END);				//跳转至文件末尾
+			fwrite(s, sizeof(Service), 1, fp);	//把车险信息写入文件
+			s->servicetype[0] = '0';
+		}
+	}
+	
+	if (s != NULL)
+	{
+		free(s);
+		s = NULL;
+	}
+	
+	if (fclose(fp) != 0)
+	{
+		printf("\n cannot close RescData.dat");
+		delay(3000);
+		exit(1);
+	}
+	
+}
+	

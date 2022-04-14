@@ -3,5 +3,7 @@
 
 void carserve(int *page, User *u);
 void drawcarserve(User *u, int *carid);
+void write_servicedata(User *u, int carid, int service1,int service2,int service3,int service4);
+
 
 #endif

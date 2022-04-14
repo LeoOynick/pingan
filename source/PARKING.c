@@ -5,9 +5,10 @@ void parking(int *page,User *u)
 {
 	int num = 0;
 	int carid = 0;
-	char year[5];       //预约年份
-	char month[3];     //预约月份
-	char day[3];     //预约日期
+	char year[5];		//预约年份
+	char month[3];		//预约月份
+	char day[3];		//预约日期
+	int state_date = 0;
 	int state1 = 0;
 	int state2 = 0;
 	int state3 = 0;
@@ -69,15 +70,18 @@ void parking(int *page,User *u)
 				setfillstyle(1,LIGHTCYAN);
 				bar(220,185,420,205);
 			}
-			if(state4 == 0 || state5 == 0 || state6 == 0)
+			if((state4 == 0 || state5 == 0 || state6 == 0))
 				puthz(220,345,"请填写时间！",16,18,4);
 			else
 			{
 				setfillstyle(1,LIGHTCYAN);
 				bar(220,345,420,365);
+				if(check_date_after(year,month,day,220,345)) state_date = 1;
 			}
-			if((state1 != 0 || state2 != 0 || state3 != 0) && (state4 != 0 && state5 != 0 && state6 != 0))
+			if((state1 != 0 || state2 != 0 || state3 != 0) && (state4 != 0 && state5 != 0 && state6 != 0)
+				&& state_date == 1 && (strlen(u->car[carid].licensenum)!= 0))
 			{
+				write_parkingdata(u,carid,state1,state2,state3,year,month,day);
 				setfillstyle(1,LIGHTCYAN);
 				bar(220,185,420,205);
 				bar(220,345,420,365);
@@ -364,3 +368,68 @@ void drawparking(User *u , int *carid)
     line(640,0,610,30);
 	show_car(u,90,122,1,&carid);
 }
+
+void write_parkingdata(User *u, int carid, int place1,int place2, int place3,
+					char* year, char* month, char* day)
+{
+	FILE *fp;
+	Parking *p;
+	int place = 0;
+	char parking_str_type[2];
+	
+	
+	if( (fp = fopen("Database\\ParkData.dat", "rb+" )) == NULL )	//open ParkData.dat in fp
+	{
+		closegraph();
+		printf("Error! Can't Open \"ParkData.dat\" File");
+		delay(1500);
+		exit(1);
+	}
+	
+	if( (p = (Parking*)malloc(sizeof(Parking))) == NULL )	//allocate memory for p
+	{
+		printf("Error - unable to allocate required memory for parking");
+		delay(1500);
+		exit(1);
+	}
+	
+	if(place1 == 1)
+	{
+		place = 1;
+	}
+	else if(place2 == 1)
+	{
+		place = 2;
+	}
+	else if(place3 == 1)
+	{
+		place = 3;
+	}
+	parking_str_type[0] = '0' + place;
+	parking_str_type[1] = '\0';
+	
+	strcpy(p->licensenum, u->car[carid].licensenum);		//copy licensenum to C.licensenum
+	strcpy(p->parkplace,parking_str_type);
+	strcpy(p->parkingdate.year,year);
+	strcpy(p->parkingdate.month,month);
+	strcpy(p->parkingdate.day,day);
+	
+	fseek(fp,0,SEEK_END);			
+	fwrite(p,sizeof(Parking),1,fp);	//write c to *fp->file
+	
+	if (p != NULL)
+	{
+		free(p);
+		p = NULL;
+	}
+	
+	if (fclose(fp) != 0)
+	{
+		printf("\n cannot close UserData.dat");
+		delay(3000);
+		exit(1);
+	}
+	
+}
+	
+	

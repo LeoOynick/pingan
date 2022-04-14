@@ -40,6 +40,8 @@ int check_date(char* year, char* month, char* date, int x, int y);
 int legal_date(int year, int month, int date, int x, int y);
 //判断日期是否合法
 
+int check_date_after(char* year, char* month, char* date, int x, int y);
+
 void judgeinput (char* str,int* state,int x,int y);
 //判断是否有输入
 

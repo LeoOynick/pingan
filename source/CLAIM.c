@@ -488,7 +488,7 @@ void write_claimdata(User *u,int carid,int scene,int character)
 	strcpy(c->claimdate.day, str);
 	strcpy(c->state,state);
 	
-	fseek(fp,0,SEEK_END);			//跳转用户第一个空余车辆位置
+	fseek(fp,0,SEEK_END);			//跳转第一个位置
 	fwrite(c,sizeof(Claim),1,fp);	//write c to *fp->file
 	
 	if (c != NULL)
