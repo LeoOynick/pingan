@@ -124,6 +124,24 @@ void mine(int *page, User *u, int *usernum, int *carnum)
 				*page = 19;
 				return;
 		}
+		else if(strlen(u->car[0].licensenum) == 0 && strlen(u->car[1].licensenum) == 0
+				&& strlen(u->car[2].licensenum) != 0 &&(mouse_press(20,160+ 90* 1,620,200+ 90* 1) == 2))   //添加车辆 
+		{
+			if (num == 0)
+			{
+				MouseS = 1;
+				clrmous(MouseX, MouseY);
+				delay(10);
+				num = 4;
+			}	
+		}
+		else if(strlen(u->car[0].licensenum) == 0 && strlen(u->car[1].licensenum) == 0 
+				&& strlen(u->car[2].licensenum) != 0 && (mouse_press(20,160+ 90* 1,620,200+ 90* 1) == 1))
+		{
+				MouseS = 0;
+				*page = 19;
+				return;
+		}
 		else if(strlen(u->car[0].licensenum) != 0 && strlen(u->car[1].licensenum) != 0 
 				&& strlen(u->car[2].licensenum) == 0 &&(mouse_press(20,160+ 90* 2,620,200+ 90* 2) == 2))   //添加车辆
 		{
@@ -378,6 +396,16 @@ void drawmine(User *u, int * usernum, int *carnum)
 		puthz(280 ,170 + 90* 0,"立即添加车辆",24,28,8);
 	}
 	else if (strlen(u->car[0].licensenum) != 0 && strlen(u->car[1].licensenum) == 0 ) // + && strlen(u->car[2].licensenum) == 0
+	{
+		setfillstyle(1, WHITE);
+		setcolor(DARKGRAY);
+		bar(20 ,160 + 90* 1,620,200 + 90* 1);
+		setcolor(8);
+		line(185 ,180 + 90* 1,215,180 + 90* 1);
+		line(200 ,165 + 90* 1,200,195 + 90* 1);
+		puthz(280 ,170 + 90* 1,"立即添加车辆",24,28,8);
+	}
+	else if (strlen(u->car[0].licensenum) == 0 && strlen(u->car[1].licensenum) == 0 && strlen(u->car[2].licensenum) != 0) // + && strlen(u->car[2].licensenum) == 0
 	{
 		setfillstyle(1, WHITE);
 		setcolor(DARKGRAY);

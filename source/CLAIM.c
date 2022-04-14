@@ -452,7 +452,9 @@ void write_claimdata(User *u,int carid,int scene,int character)
 	char str[5];
 	char scene_str[2];
 	char character_str[2];
-	char state[2] = {'00','\0'};
+	char state[2];
+	state[0] = '0';
+	state[1] = '\0';
 	scene_str[0] = '0' + scene;
 	character_str[0] = '0' + character;
 	scene_str[1] = '\0';
