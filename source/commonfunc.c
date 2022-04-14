@@ -486,16 +486,16 @@ int show_car(User* u, int x,int y,int flag, int *state)	//显示车辆信息
 				switch(u->car[*state].type[0])
 				{
 					case '1':
-						puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "红旗", 24, 25, DARKGRAY);
+						puthz(x + 2, y + 5 + (3 + 31 * flag) * 0, "红旗", 24, 25, DARKGRAY);
 						break;
 					case '2':
-						puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "奥迪", 24, 25, DARKGRAY);
+						puthz(x + 2, y + 5 + (3 + 31 * flag) * 0, "奥迪", 24, 25, DARKGRAY);
 						break;
 					case '3':
-						puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "宝马", 24, 25, DARKGRAY);
+						puthz(x + 2, y + 5 + (3 + 31 * flag) * 0, "宝马", 24, 25, DARKGRAY);
 						break;
 					case '4':
-						puthz(x + 2, y + 5 + (3 + 31 * flag) * i, "奔驰", 24, 25, DARKGRAY);
+						puthz(x + 2, y + 5 + (3 + 31 * flag) * 0, "奔驰", 24, 25, DARKGRAY);
 						break;	
 				}
 			}
@@ -518,10 +518,10 @@ int show_car(User* u, int x,int y,int flag, int *state)	//显示车辆信息
 					switch(u->car[*state].nature[0])
 					{
 						case '1':
-							puthz(x + 150, y + 8 + (3 + 31 * flag) * i, "营运",16,17,DARKGRAY);
+							puthz(x + 150, y + 8 + (3 + 31 * flag) * 0, "营运",16,17,DARKGRAY);
 							break;
 						case '2':
-							puthz(x + 150, y + 8 + (3 + 31 * flag) * i, "非营运",16,17,DARKGRAY);
+							puthz(x + 150, y + 8 + (3 + 31 * flag) * 0, "非营运",16,17,DARKGRAY);
 							break;
 					}
 				}
@@ -537,10 +537,10 @@ int show_car(User* u, int x,int y,int flag, int *state)	//显示车辆信息
 			{
 				if(carnum == 1)
 				{
-					puthz(x + 65, y + 8 + (3 + 31 * flag) * i, "使用性质", 16, 18, DARKGRAY);
-					puthz(x + 220, y + 5 + (3 + 31 * flag) * i, "车牌号码", 24, 25, DARKGRAY);
-					puthz(x + 330, y + 5 + (3 + 31 * flag) * i, "鄂", 24, 25, DARKGRAY);
-					outtextxy(x + 357, y + 2 + (3 + 31 * flag) * i, u->car[*state].licensenum);
+					puthz(x + 65, y + 8 + (3 + 31 * flag) * 0, "使用性质", 16, 18, DARKGRAY);
+					puthz(x + 220, y + 5 + (3 + 31 * flag) * 0, "车牌号码", 24, 25, DARKGRAY);
+					puthz(x + 330, y + 5 + (3 + 31 * flag) * 0, "鄂", 24, 25, DARKGRAY);
+					outtextxy(x + 357, y + 2 + (3 + 31 * flag) * 0, u->car[*state].licensenum);
 				}
 			}
 			if(flag ==2)
@@ -560,10 +560,10 @@ int show_car(User* u, int x,int y,int flag, int *state)	//显示车辆信息
 				puthz(510-40, 205 + 65 * i, "日", 24, 25, BLUE);
 			}
 		}
-		if(flag!=2 && carnum == 0)
-		{
-			puthz(x + 165,y + 4, "请添加车辆", 24, 28, DARKGRAY);
-		}
+	}
+	if(flag!=2 && strlen(u->car[*state].licensenum) == 0)
+	{
+		puthz(x + 165,y + 4, "请添加车辆", 24, 28, DARKGRAY);
 	}
 	return carnum;
 }

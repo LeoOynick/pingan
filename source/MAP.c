@@ -90,7 +90,7 @@ void map(int *page)
 void drawmap()
 {
 	setbkcolor(LIGHTCYAN);
-	/*puthz(220,20,"服务地图",48,56,1);
+	puthz(220,20,"服务地图",48,56,1);
 	setfillstyle(1,15);
 	bar(20,70,620,420);
 	setfillstyle(1,LIGHTGREEN);
@@ -126,10 +126,10 @@ void drawmap()
     bar(610,0,640,30);
     setcolor(1);
     line(610,0,640,30);
-    line(640,0,610,30);*/
+    line(640,0,610,30);
 	
 	setfillstyle(1,4);
 	bar(280,430,360,460);
 	puthz(295,435,"返回",24,28,1);
-	putbmp(30,62,"c:\\pingan\\bmp\\petrol.bmp");
+	//putbmp(30,62,"c:\\pingan\\bmp\\petrol.bmp");
 }
