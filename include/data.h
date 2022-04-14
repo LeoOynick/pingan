@@ -30,9 +30,10 @@ typedef struct userinfo
 typedef struct vioinfo
 {
 	char licensenum[7];		//6位车牌号码
-	char viotype[5];		//处罚类型
-	char viomoney[5];		//罚款金额（待用）
-	Date viotime;			//违章日期
+	char viotype[2];		//违章类型
+	char viomoney[5];		//罚款金额
+	char viopoint[5];		//扣分
+	Date viodate;			//违章日期
 }Vio;		//封装违章信息
 
 typedef struct claiminfo

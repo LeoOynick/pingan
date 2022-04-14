@@ -15,6 +15,7 @@ void advio(int *page)
 	int state8 = 0;
 	int state9 = 0;
 	int state10 = 0;
+	int state_date = 0;
 	char licensenum[7];
 	char year[5];
 	char month[3];
@@ -139,7 +140,10 @@ void advio(int *page)
 		    setfillstyle(1,LIGHTCYAN);
 			bar(0,150,640,378);
 			state = 0;
-			
+			if(strlen(licensenum) == 0)
+				puthz(260,150,"请输入车牌！",16,18,RED);
+			else
+				refer_violatedata(licensenum);
 		}
 		
 		else if(mouse_press(390,380,450,410) == 2)		//添加
@@ -158,9 +162,13 @@ void advio(int *page)
 		else if (mouse_press(390,380,450,410) == 1)
 		{
 			MouseS = 0;
-			drawadd();
-			state = 1;
-			
+			if(strlen(licensenum) == 0)
+				puthz(260,150,"请输入车牌！",16,18,RED);
+			else
+			{
+				drawadd();
+				state = 1;
+			}
 		}
 		
 		else if(mouse_press(540,60,630,80) == 2)   //退出登录
@@ -394,7 +402,64 @@ void advio(int *page)
 		else if (mouse_press(290,345,350,375) == 1 && state == 1)
 		{
 			MouseS = 0;
-			
+			if(state2 == 0 || state3 == 0 || state4 == 0)
+				puthz(510,165,"请输入日期！",16,18,RED);
+			else
+			{
+				setfillstyle(1,11);
+				bar(510,165,640,210);
+				if(check_date(year,month,day,510,165)) state_date = 1;
+			}
+			if(state5 == 0 && state6 == 0 && state7 == 0 && state8 == 0)
+				puthz(520,240,"请选择类型！",16,18,RED);
+			else
+			{
+				setfillstyle(1,11);
+				bar(520,240,640,260);
+			}
+			if(state9 == 0)
+			{
+				setfillstyle(1,11);
+				bar(470,265,640,295);
+				puthz(470,265,"请填写罚款金额！",16,18,RED);
+			}
+			else if(strlen(fine) != 4)
+			{
+				setfillstyle(1,11);
+				bar(470,265,640,295);
+				puthz(470,265,"金额为四位",16,18,RED);
+			}
+			else
+			{
+				setfillstyle(1,11);
+				bar(470,265,640,295);
+			}
+			if(state10 == 0)
+			{
+				setfillstyle(1,11);
+				bar(470,315,640,345);
+				puthz(470,315,"请填写扣分分数！",16,18,RED);
+			}
+			else if(strlen(point) != 2)
+			{
+				setfillstyle(1,11);
+				bar(470,315,640,345);
+				puthz(470,315,"分数为两位",16,18,RED);
+			}
+			else
+			{
+				setfillstyle(1,11);
+				bar(470,315,640,345);
+			}
+			if(state_date == 1 && (state5 != 0 || state6 != 0 || state7 != 0 || state8 != 0)
+				&& strlen(fine) == 4 && strlen(point) == 2)
+			{
+				write_violatedata(licensenum,state5,state6,state7,state8,year,month,day,fine,point);
+				puthz(280,388,"提交成功！",16,20,4);
+				delay(800);
+				*page = 21;
+				return;
+			}
 		}
 
 		else
@@ -542,4 +607,167 @@ void drawadd()
 	setfillstyle(1,7);
 	bar(290,345,350,375);
 	puthz(305,353,"提交",16,18,1);
+}
+
+void write_violatedata(char *licensenum, int type1,int type2, int type3, int type4,
+					char* year, char* month, char* day, char* fine, char* point)
+{
+	FILE *fp;
+	Vio *v;
+	int type = 0;
+	char violate_str_type[2];
+	
+	
+	if( (fp = fopen("Database\\VioData.dat", "rb+" )) == NULL )	//open VioData.dat in fp
+	{
+		closegraph();
+		printf("Error! Can't Open \"VioData.dat\" File");
+		delay(1500);
+		exit(1);
+	}
+	
+	if( (v = (Vio*)malloc(sizeof(Vio))) == NULL )	//allocate memory for v
+	{
+		printf("Error - unable to allocate required memory for violate");
+		delay(1500);
+		exit(1);
+	}
+	
+	if(type1 == 1)
+	{
+		type = 1;
+	}
+	else if(type2 == 1)
+	{
+		type = 2;
+	}
+	else if(type3 == 1)
+	{
+		type = 3;
+	}
+	else if(type4 == 1)
+	{
+		type = 4;
+	}
+	violate_str_type[0] = '0' + type;
+	violate_str_type[1] = '\0';
+	
+	strcpy(v->licensenum, licensenum);		//copy licensenum to C.licensenum
+	strcpy(v->viotype,violate_str_type);
+	strcpy(v->viodate.year,year);
+	strcpy(v->viodate.month,month);
+	strcpy(v->viodate.day,day);
+	strcpy(v->viomoney,fine);
+	strcpy(v->viopoint,point);
+	
+	fseek(fp,0,SEEK_END);			
+	fwrite(v,sizeof(Vio),1,fp);	//write c to *fp->file
+	
+	if (v != NULL)
+	{
+		free(v);
+		v = NULL;
+	}
+	
+	if (fclose(fp) != 0)
+	{
+		printf("\n cannot close VioData.dat");
+		delay(3000);
+		exit(1);
+	}
+}
+
+void refer_violatedata(char *licensenum)
+{
+	int i,j;
+	int set_num;
+	int violate_found = 0;
+	FILE *fp;
+	Vio *vi = NULL;
+	
+	if( (fp = fopen("Database\\VioData.dat", "rb+" )) == NULL )	//open VioData.dat in fp
+	{
+		closegraph();
+		printf("Error! Can't Open \"VioData.dat\" File");
+		delay(1500);
+		exit(1);
+	}
+	
+	fseek(fp, 0, SEEK_END);
+	set_num = ftell(fp) / sizeof(Vio);
+	button(20,145,800,377,11,11,1);
+	for (i = 0; i < set_num; i++)
+	{
+		if( (vi = (Vio*)malloc(sizeof(Vio))) == NULL )	
+		{
+			closegraph();
+			printf("Error - unable to allocate required memory in advio.c for in");
+			delay(1500);
+			exit(1);
+		}
+		
+		fseek(fp, i * sizeof(Vio), SEEK_SET);
+		fread(vi, sizeof(Vio), 1, fp);
+		
+		setcolor(WHITE);
+		setlinestyle(SOLID_LINE, 0, 3);
+		settextstyle(1,0,2);
+		
+		if (strcmp(licensenum, vi->licensenum) == 0)
+		{
+			puthz(140,180,"日期：",24,28,1);
+			setcolor(DARKGRAY);
+			outtextxy(290,180,vi->viodate.year);
+			puthz(350, 185 , "年", 16, 17, BLUE);
+			outtextxy(375, 180 , vi->viodate.month);
+			puthz(415, 185 , "月", 16, 17, BLUE);
+			outtextxy(445, 180 , vi->viodate.day);
+			puthz(480, 185 , "日", 16, 17, BLUE);
+			puthz(140,230,"类型：",24,28,1);
+			switch(vi->viotype[0])
+			{
+				case '1':
+					puthz(380,230,"超速",24,28,1);
+					violate_found = 1;
+					break;
+				case '2':
+					puthz(380,230,"超载",24,28,1);
+					violate_found = 1;
+					break;
+				case '3':
+					puthz(380,230,"酒驾",24,28,1);
+					violate_found = 1;
+					break;
+				case '4':
+					puthz(380,230,"闯红灯",24,28,1);
+					violate_found = 1;
+					break;
+			}
+			puthz(140,280,"处罚：",24,28,1);
+			puthz(240,280,"罚款",24,28,1);
+			outtextxy(300,280,vi->viomoney);
+			puthz(360,285,"元",16,18,1);
+			puthz(420,280,"扣分",24,28,1);
+			outtextxy(490,280,vi->viopoint);
+			puthz(540,285,"分",16,18,1);
+		}
+		free(vi);
+		vi = NULL;
+	}
+	if(violate_found == 0)
+	{
+		puthz(160,260, "此车辆没有任何违章记录", 24, 28, DARKGRAY);
+	}
+	
+	if (vi != NULL)
+	{
+		free(vi);
+		vi = NULL;
+	}
+	if (fclose(fp) != 0)
+	{
+		printf("\n cannot close VioData");
+		delay(2000);
+		exit(1);				
+	}
 }

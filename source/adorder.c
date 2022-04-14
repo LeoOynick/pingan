@@ -121,7 +121,10 @@ void adorder(int *page)
 		else if (mouse_press(90,380,150,410) == 1)
 		{
 			MouseS = 0;
-			ad_insurance(licensenum);
+			if(strlen(licensenum) == 0)
+				puthz(260,150,"请输入车牌！",16,18,RED);
+			else
+				ad_insurance(licensenum);
 		}
 		
 		else if(mouse_press(190,380,250,410) == 2)		//停车
@@ -140,7 +143,10 @@ void adorder(int *page)
 		else if (mouse_press(190,380,250,410) == 1)
 		{
 			MouseS = 0;
-			ad_parking(licensenum);
+			if(strlen(licensenum) == 0)
+				puthz(260,150,"请输入车牌！",16,18,RED);
+			else
+				ad_parking(licensenum);
 		}
 		
 		else if(mouse_press(290,380,350,410) == 2)		//服务
@@ -159,7 +165,10 @@ void adorder(int *page)
 		else if (mouse_press(290,380,350,410) == 1)
 		{
 			MouseS = 0;
-		    //ad_sevice(licensenum);
+			if(strlen(licensenum) == 0)
+				puthz(260,150,"请输入车牌！",16,18,RED);
+			else
+				ad_sevice(licensenum);
 		}
 		
 		else if(mouse_press(390,380,450,410) == 2)		//年检
@@ -178,7 +187,10 @@ void adorder(int *page)
 		else if (mouse_press(390,380,450,410) == 1)
 		{
 			MouseS = 0;
-		    ad_inspect(licensenum);
+			if(strlen(licensenum) == 0)
+				puthz(260,150,"请输入车牌！",16,18,RED);
+			else
+				ad_inspect(licensenum);
 		}
 		
 		else if(mouse_press(490,380,550,410) == 2)		//救援
@@ -197,8 +209,10 @@ void adorder(int *page)
 		else if (mouse_press(490,380,550,410) == 1)
 		{
 			MouseS = 0;
-		    
-			
+		    if(strlen(licensenum) == 0)
+				puthz(260,150,"请输入车牌！",16,18,RED);
+			else
+				ad_rescue(licensenum);
 		}
 		
 		else if(mouse_press(540,60,630,80) == 2)   //退出登录
@@ -347,7 +361,7 @@ void ad_insurance(char *licensenum)
 	
 	fseek(fp, 0, SEEK_END);
 	set_num = ftell(fp) / sizeof(Insurance);
-	button(20,150,800,375,11,11,1);
+	button(20,145,800,375,11,11,1);
 	for (i = 0; i < set_num; i++)
 	{
 		if( (in = (Insurance*)malloc(sizeof(Insurance))) == NULL )	
@@ -365,11 +379,6 @@ void ad_insurance(char *licensenum)
 		setlinestyle(SOLID_LINE, 0, 3);
 		settextstyle(1,0,2);
 		
-		if(strlen(licensenum) == 0)
-		{
-			puthz(260,150,"请输入车牌！",16,18,RED);
-			insurance_found = 1;
-		}
 		if (strcmp(licensenum, in->licensenum) == 0)
 		{
 			switch(in->insurancetype[0])
@@ -469,7 +478,7 @@ void ad_parking(char *licensenum)
 	
 	fseek(fp, 0, SEEK_END);
 	set_num = ftell(fp) / sizeof(Parking);
-	button(20,150,800,375,11,11,1);
+	button(20,145,800,375,11,11,1);
 	for (i = 0; i < set_num; i++)
 	{
 		if( (pa = (Parking*)malloc(sizeof(Parking))) == NULL )	
@@ -487,18 +496,13 @@ void ad_parking(char *licensenum)
 		setlinestyle(SOLID_LINE, 0, 3);
 		settextstyle(1,0,2);
 		
-		if(strlen(licensenum) == 0)
-		{
-			puthz(260,150,"请输入车牌！",16,18,RED);
-			parking_found = 1;
-		}
 		if (strcmp(licensenum, pa->licensenum) == 0)
 		{
 			puthz(140,180,"日期：",24,28,1);
 			setcolor(DARKGRAY);
 			outtextxy(290,180,pa->parkingdate.year);
 			puthz(350, 185 , "年", 16, 17, BLUE);
-			outtextxy(390, 180 , pa->parkingdate.month);
+			outtextxy(375, 180 , pa->parkingdate.month);
 			puthz(405, 185 , "月", 16, 17, BLUE);
 			outtextxy(445, 180 , pa->parkingdate.day);
 			puthz(480, 185 , "日", 16, 17, BLUE);
@@ -540,7 +544,7 @@ void ad_parking(char *licensenum)
 	}
 }
 
-/*void ad_sevice(char *licensenum)
+void ad_sevice(char *licensenum)
 {
 	int i,j;
 	int set_num;
@@ -558,7 +562,7 @@ void ad_parking(char *licensenum)
 	
 	fseek(fp, 0, SEEK_END);
 	set_num = ftell(fp) / sizeof(Service);
-	button(20,150,800,375,11,11,1);
+	button(20,145,800,375,11,11,1);
 	for (i = 0; i < set_num; i++)
 	{
 		if( (se = (Service*)malloc(sizeof(Service))) == NULL )	
@@ -576,38 +580,56 @@ void ad_parking(char *licensenum)
 		setlinestyle(SOLID_LINE, 0, 3);
 		settextstyle(1,0,2);
 		
-		if(strlen(licensenum) == 0)
-		{
-			puthz(260,150,"请输入车牌！",16,18,RED);
-			service_found = 1;
-		}
 		if (strcmp(licensenum, se->licensenum) == 0)
 		{
-			puthz(140,180,"日期：",24,28,1);
-			setcolor(DARKGRAY);
-			outtextxy(290,180,se->servicedate.year);
-			puthz(350, 185 , "年", 16, 17, BLUE);
-			outtextxy(390, 180 , se->servicedate.month);
-			puthz(405, 185 , "月", 16, 17, BLUE);
-			outtextxy(445, 180 , se->servicedate.day);
-			puthz(480, 185 , "日", 16, 17, BLUE);
-			puthz(140,230,"服务类型：",24,28,1);
 			switch(se->servicetype[0])
 			{
 				case '1':
-					puthz(300,230,"洗车",24,28,1);
+					rectangle(120,150,520,200);
+					puthz(140,163,"洗车",24,28,1);
+					setcolor(DARKGRAY);
+					outtextxy(300,163,se->servicedate.year);
+					puthz(360, 167 , "年", 16, 17, BLUE);
+					outtextxy(395, 163 , se->servicedate.month);
+					puthz(415, 167 , "月", 16, 17, BLUE);
+					outtextxy(450, 163 , se->servicedate.day);
+					puthz(480, 167 , "日", 16, 17, BLUE);
 					service_found = 1;
 					break;
 				case '2':
-					puthz(300,230,"加油",24,28,1);
+					rectangle(120,200,520,250);
+					puthz(140,213,"加油",24,28,1);
+					setcolor(DARKGRAY);
+					outtextxy(300,213,se->servicedate.year);
+					puthz(360, 217 , "年", 16, 17, BLUE);
+					outtextxy(395, 213 , se->servicedate.month);
+					puthz(415, 217 , "月", 16, 17, BLUE);
+					outtextxy(450, 213 , se->servicedate.day);
+					puthz(480, 217 , "日", 16, 17, BLUE);
 					service_found = 1;
 					break;
 				case '3':
-					puthz(300,230,"保养",24,28,1);
+					rectangle(120,250,520,300);
+					puthz(140,263,"保养",24,28,1);
+					setcolor(DARKGRAY);
+					outtextxy(300,263,se->servicedate.year);
+					puthz(360, 267 , "年", 16, 17, BLUE);
+					outtextxy(395, 263 , se->servicedate.month);
+					puthz(415, 267 , "月", 16, 17, BLUE);
+					outtextxy(450, 263 , se->servicedate.day);
+					puthz(480, 267 , "日", 16, 17, BLUE);
 					service_found = 1;
 					break;
 				case '4':
-					puthz(300,230,"挪车",24,28,1);
+					rectangle(120,300,520,350);
+					puthz(140,313,"挪车",24,28,1);
+					setcolor(DARKGRAY);
+					outtextxy(300,313,se->servicedate.year);
+					puthz(360, 317 , "年", 16, 17, BLUE);
+					outtextxy(395, 313 , se->servicedate.month);
+					puthz(415, 317 , "月", 16, 17, BLUE);
+					outtextxy(450, 313 , se->servicedate.day);
+					puthz(480, 317 , "日", 16, 17, BLUE);
 					service_found = 1;
 					break;
 			}
@@ -631,7 +653,7 @@ void ad_parking(char *licensenum)
 		delay(2000);
 		exit(1);				
 	}
-}*/
+}
 
 void ad_inspect(char *licensenum)
 {
@@ -651,7 +673,7 @@ void ad_inspect(char *licensenum)
 	
 	fseek(fp, 0, SEEK_END);
 	set_num = ftell(fp) / sizeof(Service);
-	button(20,150,800,375,11,11,1);
+	button(20,145,800,375,11,11,1);
 	for (i = 0; i < set_num; i++)
 	{
 		if( (ip = (Service*)malloc(sizeof(Service))) == NULL )	
@@ -669,11 +691,6 @@ void ad_inspect(char *licensenum)
 		setlinestyle(SOLID_LINE, 0, 3);
 		settextstyle(1,0,2);
 		
-		if(strlen(licensenum) == 0)
-		{
-			puthz(260,150,"请输入车牌！",16,18,RED);
-			service_found = 1;
-		}
 		if (strcmp(licensenum, ip->licensenum) == 0)
 		{
 			puthz(140,180,"日期：",24,28,1);
@@ -706,7 +723,7 @@ void ad_inspect(char *licensenum)
 	}
 	if(service_found == 0)
 	{
-		puthz(160,260, "此车辆没有预约任何停车", 24, 28, DARKGRAY);
+		puthz(160,260, "此车辆没有申请任何年检", 24, 28, DARKGRAY);
 	}
 	
 	if (ip != NULL)
@@ -717,6 +734,117 @@ void ad_inspect(char *licensenum)
 	if (fclose(fp) != 0)
 	{
 		printf("\n cannot close ParkData");
+		delay(2000);
+		exit(1);				
+	}
+}
+
+void ad_rescue(char *licensenum)
+{
+	int i,j;
+	int set_num;
+	int service_found = 0;
+	FILE *fp;
+	Service *re = NULL;
+	
+	if( (fp = fopen("Database\\RescData.dat", "rb+" )) == NULL )	//open RescData.dat in fp
+	{
+		closegraph();
+		printf("Error! Can't Open \"RescData.dat\" File");
+		delay(1500);
+		exit(1);
+	}
+	
+	fseek(fp, 0, SEEK_END);
+	set_num = ftell(fp) / sizeof(Service);
+	button(20,145,800,375,11,11,1);
+	for (i = 0; i < set_num; i++)
+	{
+		if( (re = (Service*)malloc(sizeof(Service))) == NULL )	
+		{
+			closegraph();
+			printf("Error - unable to allocate required memory in adorder.c for in");
+			delay(1500);
+			exit(1);
+		}
+		
+		fseek(fp, i * sizeof(Service), SEEK_SET);
+		fread(re, sizeof(Service), 1, fp);
+		
+		setcolor(WHITE);
+		setlinestyle(SOLID_LINE, 0, 3);
+		settextstyle(1,0,2);
+		
+		if (strcmp(licensenum, re->licensenum) == 0)
+		{
+			switch(re->servicetype[0])
+			{
+				case '1':
+					rectangle(120,150,520,200);
+					puthz(140,163,"接电",24,28,1);
+					setcolor(DARKGRAY);
+					outtextxy(300,163,re->servicedate.year);
+					puthz(360, 167 , "年", 16, 17, BLUE);
+					outtextxy(395, 163 , re->servicedate.month);
+					puthz(415, 167 , "月", 16, 17, BLUE);
+					outtextxy(450, 163 , re->servicedate.day);
+					puthz(480, 167 , "日", 16, 17, BLUE);
+					service_found = 1;
+					break;
+				case '2':
+					rectangle(120,200,520,250);
+					puthz(140,213,"换胎",24,28,1);
+					setcolor(DARKGRAY);
+					outtextxy(300,213,re->servicedate.year);
+					puthz(360, 217 , "年", 16, 17, BLUE);
+					outtextxy(395, 213 , re->servicedate.month);
+					puthz(415, 217 , "月", 16, 17, BLUE);
+					outtextxy(450, 213 , re->servicedate.day);
+					puthz(480, 217 , "日", 16, 17, BLUE);
+					service_found = 1;
+					break;
+				case '3':
+					rectangle(120,250,520,300);
+					puthz(140,263,"故障拖车",24,28,1);
+					setcolor(DARKGRAY);
+					outtextxy(300,263,re->servicedate.year);
+					puthz(360, 267 , "年", 16, 17, BLUE);
+					outtextxy(395, 263 , re->servicedate.month);
+					puthz(415, 267 , "月", 16, 17, BLUE);
+					outtextxy(450, 263 , re->servicedate.day);
+					puthz(480, 267 , "日", 16, 17, BLUE);
+					service_found = 1;
+					break;
+				case '4':
+					rectangle(120,300,520,350);
+					puthz(140,313,"紧急脱困",24,28,1);
+					setcolor(DARKGRAY);
+					outtextxy(300,313,re->servicedate.year);
+					puthz(360, 317 , "年", 16, 17, BLUE);
+					outtextxy(395, 313 , re->servicedate.month);
+					puthz(415, 317 , "月", 16, 17, BLUE);
+					outtextxy(450, 313 , re->servicedate.day);
+					puthz(480, 317 , "日", 16, 17, BLUE);
+					service_found = 1;
+					break;
+			}
+		}
+		free(re);
+		re = NULL;
+	}
+	if(service_found == 0)
+	{
+		puthz(160,260, "此车辆没有申请任何救援", 24, 28, DARKGRAY);
+	}
+	
+	if (re != NULL)
+	{
+		free(re);
+		re = NULL;
+	}
+	if (fclose(fp) != 0)
+	{
+		printf("\n cannot close RescData");
 		delay(2000);
 		exit(1);				
 	}

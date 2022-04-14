@@ -429,7 +429,6 @@ void write_parkingdata(User *u, int carid, int place1,int place2, int place3,
 		delay(3000);
 		exit(1);
 	}
-	
 }
 	
 	
