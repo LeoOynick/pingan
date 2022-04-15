@@ -16,7 +16,7 @@ void advio(int *page)
 	int state9 = 0;
 	int state10 = 0;
 	int state_date = 0;
-	char licensenum[7];
+	char licensenum[7] = "\0";
 	char year[5];
 	char month[3];
 	char day[3];
@@ -162,6 +162,8 @@ void advio(int *page)
 		else if (mouse_press(390,380,450,410) == 1)
 		{
 			MouseS = 0;
+			setfillstyle(1,LIGHTCYAN);
+			bar(0,150,640,378);
 			if(strlen(licensenum) == 0)
 				puthz(260,150,"请输入车牌！",16,18,RED);
 			else
@@ -577,6 +579,8 @@ void drawvio()
 
 void drawadd()
 {
+	setfillstyle(1,11);
+	bar(0,145,640,377);
 	setfillstyle(1,15);
 	bar(255,150,500,190);
 	puthz(140,160,"违章日期",24,28,1);
@@ -681,10 +685,13 @@ void refer_violatedata(char *licensenum)
 {
 	int i,j;
 	int set_num;
+	int max_num = 0;
 	int violate_found = 0;
 	FILE *fp;
 	Vio *vi = NULL;
 	
+	setfillstyle(1,LIGHTCYAN);
+	bar(0,150,640,378);
 	if( (fp = fopen("Database\\VioData.dat", "rb+" )) == NULL )	//open VioData.dat in fp
 	{
 		closegraph();
@@ -708,52 +715,67 @@ void refer_violatedata(char *licensenum)
 		
 		fseek(fp, i * sizeof(Vio), SEEK_SET);
 		fread(vi, sizeof(Vio), 1, fp);
-		
-		setcolor(WHITE);
-		setlinestyle(SOLID_LINE, 0, 3);
-		settextstyle(1,0,2);
-		
 		if (strcmp(licensenum, vi->licensenum) == 0)
 		{
-			puthz(140,180,"日期：",24,28,1);
-			setcolor(DARKGRAY);
-			outtextxy(290,180,vi->viodate.year);
-			puthz(350, 185 , "年", 16, 17, BLUE);
-			outtextxy(375, 180 , vi->viodate.month);
-			puthz(415, 185 , "月", 16, 17, BLUE);
-			outtextxy(445, 180 , vi->viodate.day);
-			puthz(480, 185 , "日", 16, 17, BLUE);
-			puthz(140,230,"类型：",24,28,1);
-			switch(vi->viotype[0])
-			{
-				case '1':
-					puthz(380,230,"超速",24,28,1);
-					violate_found = 1;
-					break;
-				case '2':
-					puthz(380,230,"超载",24,28,1);
-					violate_found = 1;
-					break;
-				case '3':
-					puthz(380,230,"酒驾",24,28,1);
-					violate_found = 1;
-					break;
-				case '4':
-					puthz(380,230,"闯红灯",24,28,1);
-					violate_found = 1;
-					break;
-			}
-			puthz(140,280,"处罚：",24,28,1);
-			puthz(240,280,"罚款",24,28,1);
-			outtextxy(300,280,vi->viomoney);
-			puthz(360,285,"元",16,18,1);
-			puthz(420,280,"扣分",24,28,1);
-			outtextxy(490,280,vi->viopoint);
-			puthz(540,285,"分",16,18,1);
+			if(i != 0)	max_num = i;
 		}
 		free(vi);
-		vi = NULL;
 	}
+	if( (vi = (Vio*)malloc(sizeof(Vio))) == NULL )	
+	{
+		closegraph();
+		printf("Error - unable to allocate required memory in advio.c for in");
+		delay(1500);
+		exit(1);
+	}
+	fseek(fp, max_num * sizeof(Vio), SEEK_SET);
+	fread(vi, sizeof(Vio), 1, fp);
+		
+	setcolor(WHITE);
+	setlinestyle(SOLID_LINE, 0, 3);
+	settextstyle(1,0,2);
+	
+	if (strcmp(licensenum, vi->licensenum) == 0)
+	{
+		puthz(140,180,"日期：",24,28,1);
+		setcolor(DARKGRAY);
+		outtextxy(290,180,vi->viodate.year);
+		puthz(350, 185 , "年", 16, 17, BLUE);
+		outtextxy(375, 180 , vi->viodate.month);
+		puthz(415, 185 , "月", 16, 17, BLUE);
+		outtextxy(445, 180 , vi->viodate.day);
+		puthz(480, 185 , "日", 16, 17, BLUE);
+		puthz(140,230,"类型：",24,28,1);
+		switch(vi->viotype[0])
+		{
+			case '1':
+				puthz(380,230,"超速",24,28,1);
+				violate_found = 1;
+				break;
+			case '2':
+				puthz(380,230,"超载",24,28,1);
+				violate_found = 1;
+				break;
+			case '3':
+				puthz(380,230,"酒驾",24,28,1);
+				violate_found = 1;
+				break;
+			case '4':
+				puthz(380,230,"闯红灯",24,28,1);
+				violate_found = 1;
+				break;
+		}
+		puthz(140,280,"处罚：",24,28,1);
+		puthz(240,280,"罚款",24,28,1);
+		outtextxy(300,280,vi->viomoney);
+		puthz(360,285,"元",16,18,1);
+		puthz(420,280,"扣分",24,28,1);
+		outtextxy(490,280,vi->viopoint);
+		puthz(540,285,"分",16,18,1);
+	}
+	free(vi);
+	vi = NULL;
+	
 	if(violate_found == 0)
 	{
 		puthz(160,260, "此车辆没有任何违章记录", 24, 28, DARKGRAY);

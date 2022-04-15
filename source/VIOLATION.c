@@ -52,6 +52,9 @@ void violate(int *page, User *u)
 		else if (mouse_press(180,400,260,430) == 1)
 		{
 			MouseS = 0;
+			setfillstyle(1,LIGHTCYAN);
+			bar(0,170,640,378);
+			search_vio(u,carid);
 		}
 		
 		else if(mouse_press(380,400,460,430) == 2)   //返回
@@ -74,7 +77,7 @@ void violate(int *page, User *u)
 			return;
 		}
 		
-		else if (mouse_press(520,135,600,155) == 2)   //切换车辆
+		else if (mouse_press(520,95,600,115) == 2)   //切换车辆
 		{
 			if (num == 0)
 			{
@@ -85,7 +88,7 @@ void violate(int *page, User *u)
 			}
 			continue;
 		}
-		else if (mouse_press(520,135,600,155) == 1)
+		else if (mouse_press(520,95,600,115) == 1)
 		{
 			delay(130);
 			if(carid < 2)
@@ -97,8 +100,8 @@ void violate(int *page, User *u)
 				carid = 0;
 			}
 			setfillstyle(1,15);
-			bar(20,160,620,200);
-			show_car(u,90,162,1,&carid);
+			bar(20,120,620,160);
+			show_car(u,90,122,1,&carid);
 		}
 		
 		else
@@ -141,23 +144,16 @@ void drawviolate(User *u, int *carid)
 	setbkcolor(LIGHTCYAN);
 	
 	puthz(240,20,"查违章",48,56,1);
-	puthz(20,120,"车辆信息",24,28,1);
-	puthz(520,135,"切换车辆",16,18,8);
+	puthz(20,80,"车辆信息",24,28,1);
+	puthz(520,95,"切换车辆",16,18,8);
 	setcolor(8);
-	line(500,140,515,140);
-	line(515,140,510,135);
-	line(500,145,515,145);
-	line(500,145,505,150);
+	line(500,100,515,100);
+	line(515,100,510,95);
+	line(500,105,515,105);
+	line(500,105,505,110);
 	setfillstyle(1,15);
-	bar(20,160,620,200);
+	bar(20,120,620,160);
 	setlinestyle(0,4,3);
-	setcolor(15);
-	rectangle(80,210,240,250);
-	rectangle(240,210,400,250);
-	rectangle(400,210,560,250);
-	puthz(130,220,"日期",24,28,1);
-	puthz(270,220,"违章类型",24,28,1);
-	puthz(450,220,"处罚",24,28,1);
 	
 	setfillstyle(1,GREEN);
 	bar(180,400,260,430);
@@ -171,5 +167,116 @@ void drawviolate(User *u, int *carid)
     setcolor(1);
     line(610,0,640,30);
     line(640,0,610,30);
-	show_car(u,90,162,1,&carid);
+	show_car(u,90,122,1,&carid);
+}
+
+void search_vio(User *u, int carid)
+{
+	int i,j;
+	int set_num;
+	int max_num = 0;
+	int violate_found = 0;
+	FILE *fp;
+	Vio *vi = NULL;
+	
+	if( (fp = fopen("Database\\VioData.dat", "rb+" )) == NULL )	//open VioData.dat in fp
+	{
+		closegraph();
+		printf("Error! Can't Open \"VioData.dat\" File");
+		delay(1500);
+		exit(1);
+	}
+	
+	fseek(fp, 0, SEEK_END);
+	set_num = ftell(fp) / sizeof(Vio);
+	button(20,170,800,377,11,11,1);
+	for (i = 0; i < set_num; i++)
+	{
+		if( (vi = (Vio*)malloc(sizeof(Vio))) == NULL )	
+		{
+			closegraph();
+			printf("Error - unable to allocate required memory in advio.c for in");
+			delay(1500);
+			exit(1);
+		}
+		
+		fseek(fp, i * sizeof(Vio), SEEK_SET);
+		fread(vi, sizeof(Vio), 1, fp);
+		if (strcmp(u->car[carid].licensenum, vi->licensenum) == 0)
+		{
+			if(i != 0)	max_num = i;
+		}
+		free(vi);
+	}
+	if( (vi = (Vio*)malloc(sizeof(Vio))) == NULL )	
+	{
+		closegraph();
+		printf("Error - unable to allocate required memory in advio.c for in");
+		delay(1500);
+		exit(1);
+	}
+	fseek(fp, max_num * sizeof(Vio), SEEK_SET);
+	fread(vi, sizeof(Vio), 1, fp);
+		
+	setcolor(WHITE);
+	setlinestyle(SOLID_LINE, 0, 3);
+	settextstyle(1,0,2);
+	
+	if (strcmp(u->car[carid].licensenum, vi->licensenum) == 0)
+	{
+		puthz(140,180,"日期：",24,28,1);
+		setcolor(DARKGRAY);
+		outtextxy(290,180,vi->viodate.year);
+		puthz(350, 185 , "年", 16, 17, BLUE);
+		outtextxy(375, 180 , vi->viodate.month);
+		puthz(415, 185 , "月", 16, 17, BLUE);
+		outtextxy(445, 180 , vi->viodate.day);
+		puthz(480, 185 , "日", 16, 17, BLUE);
+		puthz(140,230,"类型：",24,28,1);
+		switch(vi->viotype[0])
+		{
+			case '1':
+				puthz(380,230,"超速",24,28,1);
+				violate_found = 1;
+				break;
+			case '2':
+				puthz(380,230,"超载",24,28,1);
+				violate_found = 1;
+				break;
+			case '3':
+				puthz(380,230,"酒驾",24,28,1);
+				violate_found = 1;
+				break;
+			case '4':
+				puthz(380,230,"闯红灯",24,28,1);
+				violate_found = 1;
+				break;
+		}
+		puthz(140,280,"处罚：",24,28,1);
+		puthz(240,280,"罚款",24,28,1);
+		outtextxy(300,280,vi->viomoney);
+		puthz(360,285,"元",16,18,1);
+		puthz(420,280,"扣分",24,28,1);
+		outtextxy(490,280,vi->viopoint);
+		puthz(540,285,"分",16,18,1);
+	}
+	free(vi);
+	vi = NULL;
+	
+	if(violate_found == 0)
+	{
+		puthz(160,260, "此车辆没有任何违章记录", 24, 28, DARKGRAY);
+	}
+	
+	if (vi != NULL)
+	{
+		free(vi);
+		vi = NULL;
+	}
+	if (fclose(fp) != 0)
+	{
+		printf("\n cannot close VioData");
+		delay(2000);
+		exit(1);				
+	}
 }

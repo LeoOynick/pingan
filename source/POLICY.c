@@ -203,15 +203,12 @@ void search_insurance(User *u, int carid)
 		fseek(fp, i * sizeof(Insurance), SEEK_SET);
 		fread(in, sizeof(Insurance), 1, fp);
 		
-		setcolor(WHITE);
-		setlinestyle(SOLID_LINE, 0, 3);
-		settextstyle(1,0,2);
-		
 		if (strcmp(u->car[carid].licensenum, in->licensenum) == 0)
 		{
 			switch(in->insurancetype[0])
 			{
 				case '1':
+					button(380,230,570,265,11,11,1);
 					puthz(50,230,"基本险",24,28,1);
 					puthz(150, 235 ,"保额", 16, 17, BLUE);
 					setcolor(DARKGRAY);
@@ -226,10 +223,12 @@ void search_insurance(User *u, int carid)
 					puthz(570, 235 , "日", 16, 17, BLUE);
 					settextstyle(1,0,1);
 					setcolor(WHITE);
+					setlinestyle(SOLID_LINE, 0, 3);
 					rectangle(40, 220 , 40 + 560, 220 + (3 + 31 * 1.5 ) * (0 + 1));
 					insurance_found = 1;
 					break;
 				case '2':
+					button(380,280,570,315,11,11,1);
 					puthz(50,280,"商业险",24,28,1);
 					puthz(150, 285 ,"保额", 16, 17, BLUE);
 					setcolor(DARKGRAY);
@@ -244,10 +243,12 @@ void search_insurance(User *u, int carid)
 					puthz(570, 285 , "日", 16, 17, BLUE);
 					settextstyle(1,0,1);
 					setcolor(WHITE);
+					setlinestyle(SOLID_LINE, 0, 3);
 					rectangle(40, 220 + (3 + 31 * 1.5 ) * 1 , 40 + 560, 220 + (3 + 31 * 1.5 ) * 2);
 					insurance_found = 1;
 					break;
 				case '3':
+					button(380,330,570,365,11,11,1);
 					puthz(50,330,"交强险",24,28,1);
 					puthz(150, 335 ,"保额", 16, 17, BLUE);
 					setcolor(DARKGRAY);
@@ -262,6 +263,7 @@ void search_insurance(User *u, int carid)
 					puthz(570, 335 , "日", 16, 17, BLUE);
 					settextstyle(1,0,1);
 					setcolor(WHITE);
+					setlinestyle(SOLID_LINE, 0, 3);
 					rectangle(40, 220 + (3 + 31 * 1.5 ) * 2 , 40 + 560, 220 + (3 + 31 * 1.5 ) * 3);
 					insurance_found = 1;
 					break;

@@ -375,15 +375,12 @@ void ad_insurance(char *licensenum)
 		fseek(fp, i * sizeof(Insurance), SEEK_SET);
 		fread(in, sizeof(Insurance), 1, fp);
 		
-		setcolor(WHITE);
-		setlinestyle(SOLID_LINE, 0, 3);
-		settextstyle(1,0,2);
-		
 		if (strcmp(licensenum, in->licensenum) == 0)
 		{
 			switch(in->insurancetype[0])
 			{
 				case '1':
+					button(380,210,570,245,11,11,1);
 					puthz(50,210,"基本险",24,28,1);
 					puthz(150, 215 ,"保额", 16, 17, BLUE);
 					setcolor(DARKGRAY);
@@ -398,10 +395,12 @@ void ad_insurance(char *licensenum)
 					puthz(570, 215 , "日", 16, 17, BLUE);
 					settextstyle(1,0,1);
 					setcolor(WHITE);
+					setlinestyle(SOLID_LINE, 0, 3);
 					rectangle(40, 200 , 40 + 560, 200 + (3 + 31 * 1.5 ) * (0 + 1));
 					insurance_found = 1;
 					break;
 				case '2':
+					button(380,260,570,295,11,11,1);
 					puthz(50,260,"商业险",24,28,1);
 					puthz(150, 265 ,"保额", 16, 17, BLUE);
 					setcolor(DARKGRAY);
@@ -416,10 +415,12 @@ void ad_insurance(char *licensenum)
 					puthz(570, 265 , "日", 16, 17, BLUE);
 					settextstyle(1,0,1);
 					setcolor(WHITE);
+					setlinestyle(SOLID_LINE, 0, 3);
 					rectangle(40, 200 + (3 + 31 * 1.5 ) * 1 , 40 + 560, 200 + (3 + 31 * 1.5 ) * 2);
 					insurance_found = 1;
 					break;
 				case '3':
+					button(380,310,570,345,11,11,1);
 					puthz(50,310,"交强险",24,28,1);
 					puthz(150, 315 ,"保额", 16, 17, BLUE);
 					setcolor(DARKGRAY);
@@ -434,6 +435,7 @@ void ad_insurance(char *licensenum)
 					puthz(570, 315 , "日", 16, 17, BLUE);
 					settextstyle(1,0,1);
 					setcolor(WHITE);
+					setlinestyle(SOLID_LINE, 0, 3);
 					rectangle(40, 200 + (3 + 31 * 1.5 ) * 2 , 40 + 560, 200 + (3 + 31 * 1.5 ) * 3);
 					insurance_found = 1;
 					break;
@@ -464,6 +466,7 @@ void ad_parking(char *licensenum)
 {
 	int i,j;
 	int set_num;
+	int max_num = 0;
 	int parking_found = 0;
 	FILE *fp;
 	Parking *pa = NULL;
@@ -491,41 +494,57 @@ void ad_parking(char *licensenum)
 		
 		fseek(fp, i * sizeof(Parking), SEEK_SET);
 		fread(pa, sizeof(Parking), 1, fp);
-		
-		setcolor(WHITE);
-		setlinestyle(SOLID_LINE, 0, 3);
-		settextstyle(1,0,2);
-		
 		if (strcmp(licensenum, pa->licensenum) == 0)
 		{
-			puthz(140,180,"日期：",24,28,1);
-			setcolor(DARKGRAY);
-			outtextxy(290,180,pa->parkingdate.year);
-			puthz(350, 185 , "年", 16, 17, BLUE);
-			outtextxy(375, 180 , pa->parkingdate.month);
-			puthz(405, 185 , "月", 16, 17, BLUE);
-			outtextxy(445, 180 , pa->parkingdate.day);
-			puthz(480, 185 , "日", 16, 17, BLUE);
-			puthz(140,230,"地点：",24,28,1);
-			switch(pa->parkplace[0])
-			{
-				case '1':
-					puthz(290,230,"武汉天河机场",24,28,1);
-					parking_found = 1;
-					break;
-				case '2':
-					puthz(290,230,"武汉火车站",24,28,1);
-					parking_found = 1;
-					break;
-				case '3':
-					puthz(290,230,"华中科技大学",24,28,1);
-					parking_found = 1;
-					break;
-			}
+			if(i != 0)	max_num = i;
 		}
 		free(pa);
-		pa = NULL;
 	}
+	
+	if( (pa = (Parking*)malloc(sizeof(Parking))) == NULL )	
+	{
+		closegraph();
+		printf("Error - unable to allocate required memory in adorder.c for in");
+		delay(1500);
+		exit(1);
+	}
+	
+	fseek(fp,max_num * sizeof(Parking), SEEK_SET);
+	fread(pa, sizeof(Parking), 1, fp);
+		
+	setcolor(WHITE);
+	setlinestyle(SOLID_LINE, 0, 3);
+	settextstyle(1,0,2);
+		
+	if (strcmp(licensenum, pa->licensenum) == 0)
+	{
+		puthz(140,180,"日期：",24,28,1);
+		setcolor(DARKGRAY);
+		outtextxy(290,180,pa->parkingdate.year);
+		puthz(350, 185 , "年", 16, 17, BLUE);
+		outtextxy(375, 180 , pa->parkingdate.month);
+		puthz(405, 185 , "月", 16, 17, BLUE);
+		outtextxy(445, 180 , pa->parkingdate.day);
+		puthz(480, 185 , "日", 16, 17, BLUE);
+		puthz(140,230,"地点：",24,28,1);
+		switch(pa->parkplace[0])
+		{
+			case '1':
+				puthz(290,230,"武汉天河机场",24,28,1);
+				parking_found = 1;
+				break;
+			case '2':
+				puthz(290,230,"武汉火车站",24,28,1);
+				parking_found = 1;
+				break;
+			case '3':
+				puthz(290,230,"华中科技大学",24,28,1);
+				parking_found = 1;
+				break;
+		}
+	}
+	free(pa);
+	pa = NULL;
 	if(parking_found == 0)
 	{
 		puthz(160,260, "此车辆没有预约任何停车", 24, 28, DARKGRAY);
@@ -576,15 +595,14 @@ void ad_sevice(char *licensenum)
 		fseek(fp, i * sizeof(Service), SEEK_SET);
 		fread(se, sizeof(Service), 1, fp);
 		
-		setcolor(WHITE);
-		setlinestyle(SOLID_LINE, 0, 3);
 		settextstyle(1,0,2);
-		
 		if (strcmp(licensenum, se->licensenum) == 0)
 		{
 			switch(se->servicetype[0])
 			{
 				case '1':
+					button(300,163,480,195,11,11,3);
+					setcolor(WHITE);
 					rectangle(120,150,520,200);
 					puthz(140,163,"洗车",24,28,1);
 					setcolor(DARKGRAY);
@@ -597,6 +615,8 @@ void ad_sevice(char *licensenum)
 					service_found = 1;
 					break;
 				case '2':
+					button(300,213,480,245,11,11,3);
+					setcolor(WHITE);
 					rectangle(120,200,520,250);
 					puthz(140,213,"加油",24,28,1);
 					setcolor(DARKGRAY);
@@ -609,6 +629,8 @@ void ad_sevice(char *licensenum)
 					service_found = 1;
 					break;
 				case '3':
+					button(300,263,480,295,11,11,3);
+					setcolor(WHITE);
 					rectangle(120,250,520,300);
 					puthz(140,263,"保养",24,28,1);
 					setcolor(DARKGRAY);
@@ -621,6 +643,8 @@ void ad_sevice(char *licensenum)
 					service_found = 1;
 					break;
 				case '4':
+					button(300,313,480,345,11,11,3);
+					setcolor(WHITE);
 					rectangle(120,300,520,350);
 					puthz(140,313,"挪车",24,28,1);
 					setcolor(DARKGRAY);
@@ -659,6 +683,7 @@ void ad_inspect(char *licensenum)
 {
 	int i,j;
 	int set_num;
+	int max_num = 0;
 	int service_found = 0;
 	FILE *fp;
 	Service *ip = NULL;
@@ -686,41 +711,57 @@ void ad_inspect(char *licensenum)
 		
 		fseek(fp, i * sizeof(Service), SEEK_SET);
 		fread(ip, sizeof(Service), 1, fp);
-		
-		setcolor(WHITE);
-		setlinestyle(SOLID_LINE, 0, 3);
-		settextstyle(1,0,2);
-		
 		if (strcmp(licensenum, ip->licensenum) == 0)
 		{
-			puthz(140,180,"日期：",24,28,1);
-			setcolor(DARKGRAY);
-			outtextxy(290,180,ip->servicedate.year);
-			puthz(350, 185 , "年", 16, 17, BLUE);
-			outtextxy(390, 180 , ip->servicedate.month);
-			puthz(405, 185 , "月", 16, 17, BLUE);
-			outtextxy(445, 180 , ip->servicedate.day);
-			puthz(480, 185 , "日", 16, 17, BLUE);
-			puthz(140,230,"类型：",24,28,1);
-			switch(ip->servicetype[0])
-			{
-				case '1':
-					puthz(290,230,"新车免检",24,28,1);
-					service_found = 1;
-					break;
-				case '2':
-					puthz(290,230,"普通年检",24,28,1);
-					service_found = 1;
-					break;
-				case '3':
-					puthz(290,230,"特快年检",24,28,1);
-					service_found = 1;
-					break;
-			}
+			if(i != 0)	max_num = i;
 		}
 		free(ip);
-		ip = NULL;
 	}
+		
+	if( (ip = (Service*)malloc(sizeof(Service))) == NULL )	
+	{
+		closegraph();
+		printf("Error - unable to allocate required memory in adorder.c for in");
+		delay(1500);
+		exit(1);
+	}
+	fseek(fp, max_num * sizeof(Service), SEEK_SET);
+	fread(ip, sizeof(Service), 1, fp);
+		
+	setcolor(WHITE);
+	setlinestyle(SOLID_LINE, 0, 3);
+	settextstyle(1,0,2);
+		
+	if (strcmp(licensenum, ip->licensenum) == 0)
+	{
+		puthz(140,180,"日期：",24,28,1);
+		setcolor(DARKGRAY);
+		outtextxy(290,180,ip->servicedate.year);
+		puthz(350, 185 , "年", 16, 17, BLUE);
+		outtextxy(390, 180 , ip->servicedate.month);
+		puthz(405, 185 , "月", 16, 17, BLUE);
+		outtextxy(445, 180 , ip->servicedate.day);
+		puthz(480, 185 , "日", 16, 17, BLUE);
+		puthz(140,230,"类型：",24,28,1);
+		switch(ip->servicetype[0])
+		{
+			case '1':
+				puthz(290,230,"新车免检",24,28,1);
+				service_found = 1;
+				break;
+			case '2':
+				puthz(290,230,"普通年检",24,28,1);
+				service_found = 1;
+				break;
+			case '3':
+				puthz(290,230,"特快年检",24,28,1);
+				service_found = 1;
+				break;
+		}
+	}
+	free(ip);
+	ip = NULL;
+	
 	if(service_found == 0)
 	{
 		puthz(160,260, "此车辆没有申请任何年检", 24, 28, DARKGRAY);
@@ -771,15 +812,14 @@ void ad_rescue(char *licensenum)
 		fseek(fp, i * sizeof(Service), SEEK_SET);
 		fread(re, sizeof(Service), 1, fp);
 		
-		setcolor(WHITE);
-		setlinestyle(SOLID_LINE, 0, 3);
 		settextstyle(1,0,2);
-		
 		if (strcmp(licensenum, re->licensenum) == 0)
 		{
 			switch(re->servicetype[0])
 			{
 				case '1':
+					button(300,163,480,195);
+					setcolor(WHITE);
 					rectangle(120,150,520,200);
 					puthz(140,163,"接电",24,28,1);
 					setcolor(DARKGRAY);
@@ -792,6 +832,8 @@ void ad_rescue(char *licensenum)
 					service_found = 1;
 					break;
 				case '2':
+					button(300,213,480,245);
+					setcolor(WHITE);
 					rectangle(120,200,520,250);
 					puthz(140,213,"换胎",24,28,1);
 					setcolor(DARKGRAY);
@@ -804,6 +846,8 @@ void ad_rescue(char *licensenum)
 					service_found = 1;
 					break;
 				case '3':
+					button(300,263,480,295);
+					setcolor(WHITE);
 					rectangle(120,250,520,300);
 					puthz(140,263,"故障拖车",24,28,1);
 					setcolor(DARKGRAY);
@@ -816,6 +860,8 @@ void ad_rescue(char *licensenum)
 					service_found = 1;
 					break;
 				case '4':
+					button(300,313,480,345);
+					setcolor(WHITE);
 					rectangle(120,300,520,350);
 					puthz(140,313,"紧急脱困",24,28,1);
 					setcolor(DARKGRAY);
