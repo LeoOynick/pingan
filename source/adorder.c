@@ -818,7 +818,7 @@ void ad_rescue(char *licensenum)
 			switch(re->servicetype[0])
 			{
 				case '1':
-					button(300,163,480,195);
+					button(300,163,480,195,11,11,3);
 					setcolor(WHITE);
 					rectangle(120,150,520,200);
 					puthz(140,163,"Ω”µÁ",24,28,1);
@@ -832,7 +832,7 @@ void ad_rescue(char *licensenum)
 					service_found = 1;
 					break;
 				case '2':
-					button(300,213,480,245);
+					button(300,213,480,245,11,11,3);
 					setcolor(WHITE);
 					rectangle(120,200,520,250);
 					puthz(140,213,"ªªÃ•",24,28,1);
@@ -846,7 +846,7 @@ void ad_rescue(char *licensenum)
 					service_found = 1;
 					break;
 				case '3':
-					button(300,263,480,295);
+					button(300,263,480,295,11,11,3);
 					setcolor(WHITE);
 					rectangle(120,250,520,300);
 					puthz(140,263,"π ’œÕœ≥µ",24,28,1);
@@ -860,7 +860,7 @@ void ad_rescue(char *licensenum)
 					service_found = 1;
 					break;
 				case '4':
-					button(300,313,480,345);
+					button(300,313,480,345,11,11,3);
 					setcolor(WHITE);
 					rectangle(120,300,520,350);
 					puthz(140,313,"ΩÙº±Õ—¿ß",24,28,1);
