@@ -467,6 +467,7 @@ void ad_parking(char *licensenum)
 	int i,j;
 	int set_num;
 	int max_num = 0;
+	int n = 0;
 	int parking_found = 0;
 	FILE *fp;
 	Parking *pa = NULL;
@@ -482,7 +483,7 @@ void ad_parking(char *licensenum)
 	fseek(fp, 0, SEEK_END);
 	set_num = ftell(fp) / sizeof(Parking);
 	button(20,145,800,375,11,11,1);
-	for (i = 0; i < set_num; i++)
+	for(i = set_num - 1;i >= 0;i--)
 	{
 		if( (pa = (Parking*)malloc(sizeof(Parking))) == NULL )	
 		{
@@ -494,57 +495,41 @@ void ad_parking(char *licensenum)
 		
 		fseek(fp, i * sizeof(Parking), SEEK_SET);
 		fread(pa, sizeof(Parking), 1, fp);
+	
+		setcolor(WHITE);
+		setlinestyle(SOLID_LINE, 0, 3);
+		settextstyle(1,0,2);
 		if (strcmp(licensenum, pa->licensenum) == 0)
 		{
-			if(i != 0)	max_num = i;
+			rectangle(50,170 + 50 * n,590,220 + 50 * n);
+			setcolor(DARKGRAY);
+			outtextxy(60,180 + 50 * n,pa->parkingdate.year);
+			puthz(120, 185 + 50 * n , "年", 16, 17, BLUE);
+			outtextxy(145, 180 + 50 * n , pa->parkingdate.month);
+			puthz(175, 185 + 50 * n , "月", 16, 17, BLUE);
+			outtextxy(215, 180 + 50 * n , pa->parkingdate.day);
+			puthz(250, 185 + 50 * n , "日", 16, 17, BLUE);
+			switch(pa->parkplace[0])
+			{
+				case '1':
+					puthz(320,180 + 50 * n,"地点：武汉天河机场",24,28,1);
+					parking_found = 1;
+					break;
+				case '2':
+					puthz(320,180 + 50 * n,"地点：武汉火车站",24,28,1);
+					parking_found = 1;
+					break;
+				case '3':
+					puthz(320,180 + 50 * n,"地点：华中科技大学",24,28,1);
+					parking_found = 1;
+					break;
+			}
 		}
 		free(pa);
+		pa = NULL;
+		n++;
+		if(n >= 3)	break;
 	}
-	
-	if( (pa = (Parking*)malloc(sizeof(Parking))) == NULL )	
-	{
-		closegraph();
-		printf("Error - unable to allocate required memory in adorder.c for in");
-		delay(1500);
-		exit(1);
-	}
-	
-	fseek(fp,max_num * sizeof(Parking), SEEK_SET);
-	fread(pa, sizeof(Parking), 1, fp);
-		
-	setcolor(WHITE);
-	setlinestyle(SOLID_LINE, 0, 3);
-	settextstyle(1,0,2);
-		
-	if (strcmp(licensenum, pa->licensenum) == 0)
-	{
-		puthz(140,180,"日期：",24,28,1);
-		setcolor(DARKGRAY);
-		outtextxy(290,180,pa->parkingdate.year);
-		puthz(350, 185 , "年", 16, 17, BLUE);
-		outtextxy(375, 180 , pa->parkingdate.month);
-		puthz(405, 185 , "月", 16, 17, BLUE);
-		outtextxy(445, 180 , pa->parkingdate.day);
-		puthz(480, 185 , "日", 16, 17, BLUE);
-		puthz(140,230,"地点：",24,28,1);
-		switch(pa->parkplace[0])
-		{
-			case '1':
-				puthz(290,230,"武汉天河机场",24,28,1);
-				parking_found = 1;
-				break;
-			case '2':
-				puthz(290,230,"武汉火车站",24,28,1);
-				parking_found = 1;
-				break;
-			case '3':
-				puthz(290,230,"华中科技大学",24,28,1);
-				parking_found = 1;
-				break;
-		}
-	}
-	free(pa);
-	pa = NULL;
 	if(parking_found == 0)
 	{
 		puthz(160,260, "此车辆没有预约任何停车", 24, 28, DARKGRAY);

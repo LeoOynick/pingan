@@ -412,7 +412,7 @@ int legal_date(int year, int month, int date, int x, int y)
 		puthz(x, y, "日期不合法", 16, 17, RED);
 		return 0;
 	}
-	else
+	else if(month == 2)
 	{
 		if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
 		{

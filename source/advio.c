@@ -191,7 +191,7 @@ void advio(int *page)
 			return;
 		}
 		
-		if(mouse_press(255,150,340,190) == 2 && state == 1)		//年
+		else if(mouse_press(255,150,340,190) == 2 && state == 1)		//年
 		{
 			if (num == 0 && state2 == 0)
 			{
@@ -685,7 +685,7 @@ void refer_violatedata(char *licensenum)
 {
 	int i,j;
 	int set_num;
-	int max_num = 0;
+	int n = 0;
 	int violate_found = 0;
 	FILE *fp;
 	Vio *vi = NULL;
@@ -703,7 +703,7 @@ void refer_violatedata(char *licensenum)
 	fseek(fp, 0, SEEK_END);
 	set_num = ftell(fp) / sizeof(Vio);
 	button(20,145,800,377,11,11,1);
-	for (i = 0; i < set_num; i++)
+	for (i = set_num - 1;i >= 0;i--)
 	{
 		if( (vi = (Vio*)malloc(sizeof(Vio))) == NULL )	
 		{
@@ -712,69 +712,54 @@ void refer_violatedata(char *licensenum)
 			delay(1500);
 			exit(1);
 		}
-		
 		fseek(fp, i * sizeof(Vio), SEEK_SET);
 		fread(vi, sizeof(Vio), 1, fp);
+		
+		setcolor(WHITE);
+		setlinestyle(SOLID_LINE, 0, 3);
+		settextstyle(1,0,2);
+	
 		if (strcmp(licensenum, vi->licensenum) == 0)
 		{
-			if(i != 0)	max_num = i;
+			rectangle(20,170 + 50 * n,620,220 + 50 * n);
+			setcolor(DARKGRAY);
+			outtextxy(30,180 + 50 * n,vi->viodate.year);
+			puthz(90, 185 + 50 * n , "年", 16, 17, BLUE);
+			outtextxy(115, 180 + 50 * n , vi->viodate.month);
+			puthz(145, 185 + 50 * n , "月", 16, 17, BLUE);
+			outtextxy(170, 180 + 50 * n , vi->viodate.day);
+			puthz(200, 185 + 50 * n , "日", 16, 17, BLUE);
+			switch(vi->viotype[0])
+			{
+				case '1':
+					puthz(260,180 + 50 * n,"超速",24,28,1);
+					violate_found = 1;
+					break;
+				case '2':
+					puthz(260,180 + 50 * n,"超载",24,28,1);
+					violate_found = 1;
+					break;
+				case '3':
+					puthz(260,180 + 50 * n,"酒驾",24,28,1);
+					violate_found = 1;
+					break;
+				case '4':
+					puthz(260,180 + 50 * n,"闯红灯",24,28,1);
+					violate_found = 1;
+					break;
+			}
+			puthz(360,185 + 50 * n,"罚款",16,18,1);
+			outtextxy(400,180 + 50 * n,vi->viomoney);
+			puthz(460,185 + 50 * n,"元",16,18,1);
+			puthz(510,185 + 50 * n,"扣分",16,18,1);
+			outtextxy(550,180 + 50 * n,vi->viopoint);
+			puthz(580,185 + 50 * n,"分",16,18,1);
 		}
 		free(vi);
+		vi = NULL;
+		n++;
+		if(n >= 3)	break;
 	}
-	if( (vi = (Vio*)malloc(sizeof(Vio))) == NULL )	
-	{
-		closegraph();
-		printf("Error - unable to allocate required memory in advio.c for in");
-		delay(1500);
-		exit(1);
-	}
-	fseek(fp, max_num * sizeof(Vio), SEEK_SET);
-	fread(vi, sizeof(Vio), 1, fp);
-		
-	setcolor(WHITE);
-	setlinestyle(SOLID_LINE, 0, 3);
-	settextstyle(1,0,2);
-	
-	if (strcmp(licensenum, vi->licensenum) == 0)
-	{
-		puthz(140,180,"日期：",24,28,1);
-		setcolor(DARKGRAY);
-		outtextxy(290,180,vi->viodate.year);
-		puthz(350, 185 , "年", 16, 17, BLUE);
-		outtextxy(375, 180 , vi->viodate.month);
-		puthz(415, 185 , "月", 16, 17, BLUE);
-		outtextxy(445, 180 , vi->viodate.day);
-		puthz(480, 185 , "日", 16, 17, BLUE);
-		puthz(140,230,"类型：",24,28,1);
-		switch(vi->viotype[0])
-		{
-			case '1':
-				puthz(380,230,"超速",24,28,1);
-				violate_found = 1;
-				break;
-			case '2':
-				puthz(380,230,"超载",24,28,1);
-				violate_found = 1;
-				break;
-			case '3':
-				puthz(380,230,"酒驾",24,28,1);
-				violate_found = 1;
-				break;
-			case '4':
-				puthz(380,230,"闯红灯",24,28,1);
-				violate_found = 1;
-				break;
-		}
-		puthz(140,280,"处罚：",24,28,1);
-		puthz(240,280,"罚款",24,28,1);
-		outtextxy(300,280,vi->viomoney);
-		puthz(360,285,"元",16,18,1);
-		puthz(420,280,"扣分",24,28,1);
-		outtextxy(490,280,vi->viopoint);
-		puthz(540,285,"分",16,18,1);
-	}
-	free(vi);
-	vi = NULL;
 	
 	if(violate_found == 0)
 	{
