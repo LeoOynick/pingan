@@ -154,6 +154,7 @@ void drawviolate(User *u, int *carid)
 	setfillstyle(1,15);
 	bar(20,120,620,160);
 	setlinestyle(0,4,3);
+	puthz(160,280, "请点击“查询”以查询违章", 24, 28, DARKGRAY);
 	
 	setfillstyle(1,GREEN);
 	bar(180,400,260,430);
