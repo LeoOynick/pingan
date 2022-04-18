@@ -102,6 +102,9 @@ void violate(int *page, User *u)
 			setfillstyle(1,15);
 			bar(20,120,620,160);
 			show_car(u,90,122,1,&carid);
+			setfillstyle(1,11);
+			bar(0,180,640,400);
+			puthz(160,280, "请点击“查询”以查询违章", 24, 28, DARKGRAY);
 		}
 		
 		else
@@ -191,7 +194,7 @@ void search_vio(User *u, int carid)
 	fseek(fp, 0, SEEK_END);
 	set_num = ftell(fp) / sizeof(Vio);
 	button(20,170,800,377,11,11,1);
-	for (i = 0; i < set_num; i++)
+	for (i = set_num - 1; i >= 0; i--)
 	{
 		if( (vi = (Vio*)malloc(sizeof(Vio))) == NULL )	
 		{
@@ -208,39 +211,39 @@ void search_vio(User *u, int carid)
 		settextstyle(1,0,2);
 		if (strcmp(u->car[carid].licensenum, vi->licensenum) == 0)
 		{
-			rectangle(20,170 + 50 * n,620,220 + 50 * n);
+			rectangle(20,200 + 50 * n,620,250 + 50 * n);
 			setcolor(DARKGRAY);
-			outtextxy(30,180 + 50 * n,vi->viodate.year);
-			puthz(90, 185 + 50 * n , "年", 16, 17, BLUE);
-			outtextxy(115, 180 + 50 * n , vi->viodate.month);
-			puthz(145, 185 + 50 * n , "月", 16, 17, BLUE);
-			outtextxy(170, 180 + 50 * n , vi->viodate.day);
-			puthz(200, 185 + 50 * n , "日", 16, 17, BLUE);
+			outtextxy(30,210 + 50 * n,vi->viodate.year);
+			puthz(90, 215 + 50 * n , "年", 16, 17, BLUE);
+			outtextxy(115, 210 + 50 * n , vi->viodate.month);
+			puthz(145, 215 + 50 * n , "月", 16, 17, BLUE);
+			outtextxy(170, 210 + 50 * n , vi->viodate.day);
+			puthz(200, 215 + 50 * n , "日", 16, 17, BLUE);
 			switch(vi->viotype[0])
 			{
 				case '1':
-					puthz(260,180 + 50 * n,"超速",24,28,1);
+					puthz(260,210 + 50 * n,"超速",24,28,1);
 					violate_found = 1;
 					break;
 				case '2':
-					puthz(260,180 + 50 * n,"超载",24,28,1);
+					puthz(260,210 + 50 * n,"超载",24,28,1);
 					violate_found = 1;
 					break;
 				case '3':
-					puthz(260,180 + 50 * n,"酒驾",24,28,1);
+					puthz(260,210 + 50 * n,"酒驾",24,28,1);
 					violate_found = 1;
 					break;
 				case '4':
-					puthz(260,180 + 50 * n,"闯红灯",24,28,1);
+					puthz(260,210 + 50 * n,"闯红灯",24,28,1);
 					violate_found = 1;
 					break;
 			}
-			puthz(360,185 + 50 * n,"罚款",16,18,1);
-			outtextxy(400,180 + 50 * n,vi->viomoney);
-			puthz(460,185 + 50 * n,"元",16,18,1);
-			puthz(510,185 + 50 * n,"扣分",16,18,1);
-			outtextxy(550,180 + 50 * n,vi->viopoint);
-			puthz(580,185 + 50 * n,"分",16,18,1);
+			puthz(360,215 + 50 * n,"罚款",16,18,1);
+			outtextxy(400,210 + 50 * n,vi->viomoney);
+			puthz(460,215 + 50 * n,"元",16,18,1);
+			puthz(510,215 + 50 * n,"扣分",16,18,1);
+			outtextxy(550,210 + 50 * n,vi->viopoint);
+			puthz(580,215 + 50 * n,"分",16,18,1);
 		}
 		free(vi);
 		vi = NULL;
