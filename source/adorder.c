@@ -380,6 +380,7 @@ void ad_insurance(char *licensenum)
 			switch(in->insurancetype[0])
 			{
 				case '1':
+					settextstyle(1,0,1);
 					button(380,210,570,245,11,11,1);
 					puthz(50,210,"基本险",24,28,1);
 					puthz(150, 215 ,"保额", 16, 17, BLUE);
@@ -393,13 +394,13 @@ void ad_insurance(char *licensenum)
 					puthz(505, 215 , "月", 16, 17, BLUE);
 					outtextxy(535, 210 , in->insuranceenddate.day);
 					puthz(570, 215 , "日", 16, 17, BLUE);
-					settextstyle(1,0,1);
 					setcolor(WHITE);
 					setlinestyle(SOLID_LINE, 0, 3);
 					rectangle(40, 200 , 40 + 560, 200 + (3 + 31 * 1.5 ) * (0 + 1));
 					insurance_found = 1;
 					break;
 				case '2':
+					settextstyle(1,0,1);
 					button(380,260,570,295,11,11,1);
 					puthz(50,260,"商业险",24,28,1);
 					puthz(150, 265 ,"保额", 16, 17, BLUE);
@@ -413,13 +414,13 @@ void ad_insurance(char *licensenum)
 					puthz(505, 265 , "月", 16, 17, BLUE);
 					outtextxy(535, 260 , in->insuranceenddate.day);
 					puthz(570, 265 , "日", 16, 17, BLUE);
-					settextstyle(1,0,1);
 					setcolor(WHITE);
 					setlinestyle(SOLID_LINE, 0, 3);
 					rectangle(40, 200 + (3 + 31 * 1.5 ) * 1 , 40 + 560, 200 + (3 + 31 * 1.5 ) * 2);
 					insurance_found = 1;
 					break;
 				case '3':
+					settextstyle(1,0,1);
 					button(380,310,570,345,11,11,1);
 					puthz(50,310,"交强险",24,28,1);
 					puthz(150, 315 ,"保额", 16, 17, BLUE);
@@ -433,7 +434,6 @@ void ad_insurance(char *licensenum)
 					puthz(505, 315 , "月", 16, 17, BLUE);
 					outtextxy(535, 310 , in->insuranceenddate.day);
 					puthz(570, 315 , "日", 16, 17, BLUE);
-					settextstyle(1,0,1);
 					setcolor(WHITE);
 					setlinestyle(SOLID_LINE, 0, 3);
 					rectangle(40, 200 + (3 + 31 * 1.5 ) * 2 , 40 + 560, 200 + (3 + 31 * 1.5 ) * 3);
@@ -466,7 +466,6 @@ void ad_parking(char *licensenum)
 {
 	int i,j;
 	int set_num;
-	int max_num = 0;
 	int n = 0;
 	int parking_found = 0;
 	FILE *fp;
