@@ -69,11 +69,6 @@ void regist(int *page)
 		else if (mouse_press(180,440,260,470) == 1)
 		{
 			MouseS = 0;
-			/*if(flag1 == 1 && flag2 == 1 && flag3 == 1 && flag4 == 1 && flag5 == 1 && flag6 == 1)
-			{
-				puthz(120,445,"注册成功！",24,28,RED);
-			}*/
-			//return;
 			if(check_legal_reg(name,password,confirmpw,ID,tele,code,inputcode) == 1)
 			{
 				delay(1000); 
@@ -124,10 +119,6 @@ void regist(int *page)
 				state1 = 1;
 			else
 				state1 = 0;
-			/*if(strlen(name) >= 4 && strlen(name) <= 12)
-				flag1 = 1;
-			else
-				flag1 = 0;*/
 			continue;
 		}
 		
@@ -153,10 +144,6 @@ void regist(int *page)
 				state2 = 1;
 			else
 				state2 = 0;
-			/*if(strlen(password) >= 4 && strlen(password) <= 16)
-				flag2 = 1;
-			else
-				flag2 = 0;*/
 			continue;
 		}
 		
@@ -182,10 +169,6 @@ void regist(int *page)
 				state3 = 1;
 			else
 				state3 = 0;
-			/*if(confirmpw == password)
-				flag3 = 1;
-			else
-				flag3 = 0;*/
 			continue;
 		}
 		
@@ -211,10 +194,6 @@ void regist(int *page)
 				state4 = 1;
 			else
 				state4 = 0;
-			/*if(strlen(ID) == 18)
-				flag4 = 1;
-			else
-				flag4 = 0;*/
 			continue;
 		}
 		
@@ -240,10 +219,6 @@ void regist(int *page)
 				state5 = 1;
 			else
 				state5 = 0;
-			/*if(strlen(tele) == 11)
-				flag5 = 1;
-			else
-				flag5 = 0;*/
 			continue;
 		}
 		else if(mouse_press(160,400,560,430) == 2)		//验证码
@@ -268,10 +243,6 @@ void regist(int *page)
 				state6 = 1;
 			else
 				state6 = 0;
-			/*if(inputcode == code)
-				flag6 = 1;
-			else
-				flag6 = 0;*/
 			continue;
 		}
 		

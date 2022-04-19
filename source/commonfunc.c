@@ -1,7 +1,12 @@
 #include "common.h"
 #include "commonfunc.h"
 
-
+/*********************************************
+FUNCTION:button
+DESCRIPTION：画按钮
+INPUT:x1,x2,y1,y2,framecolor,fillcolor,framewidth
+RETURN:无
+***********************************************/
 void button (int x1,int y1,int x2,int y2,int framecolor,int fillcolor,int framewidth){
 	clrmous(MouseX, MouseY); //防止画图函数与鼠标重叠
 	delay(10);
@@ -65,13 +70,28 @@ void input(char* id, int x1, int y1, int charnum, int color, int flag)//输入的字
 	}
 }
 
+/*********************************************
+FUNCTION:coverhz
+DESCRIPTION：覆盖汉字
+INPUT:id,x,y,color
+RETURN:无
+***********************************************/
 void coverhz(int x, int y, int color)
 {
 	setfillstyle(SOLID_FILL,color);
 	bar(x, y, x + 110, y + 30);
 }
 
-void show_tickcross(int x1, int y1, int x2,int y2, int flag)	//flag == 1 show tick, else cross,xy base on cross.
+/*********************************************
+FUNCTION:show_tickcross
+DESCRIPTION：显示勾或叉;
+			flag == 1 show tick,
+			else cross,
+			xy base on cross
+INPUT:x1,x2,y1,y2,flag
+RETURN:无
+***********************************************/
+void show_tickcross(int x1, int y1, int x2,int y2, int flag)
 {
 	if(flag == 1)
 	{	
@@ -79,7 +99,6 @@ void show_tickcross(int x1, int y1, int x2,int y2, int flag)	//flag == 1 show ti
 		setcolor(11);
 		line(x1,y1,x2,y2); 
 		line(x2,y1,x1,y2);
-		
 		setcolor(GREEN);
 		line(x1 + 24 -26, y1 + 9 +2 , x1 + 33 -26, y1 + 19 +2 );
 		line(x1 + 33 -26, y1 + 19 +2, x1 + 43 -26, y1 - 3 +2);
@@ -88,20 +107,21 @@ void show_tickcross(int x1, int y1, int x2,int y2, int flag)	//flag == 1 show ti
 	{
 		setcolor(11);
 		setlinestyle(SOLID_LINE, 0, 3); 
-		/*line(x1 + 24, y1 + 9, x1 + 33, y1 + 19);	//ori
-		line(x1 + 33, y1 + 19, x1 + 43, y1 - 3);
-		line(x1 + 20 - 22, y1 +	7, x1 + 29 -22, y1 + 17);
-		line(x1 + 28 -22, y1 + 17, x1 + 39 -22 , y1 - 5);*/
 		line(x1 + 24 -26, y1 + 9 +2 , x1 + 33 -26, y1 + 19 +2 );
 		line(x1 + 33 -26, y1 + 19 +2, x1 + 43 -26, y1 - 3 +2);
 		
 		setcolor(RED);
 		line(x1,y1,x2,y2); 
-		line(x2,y1,x1,y2);// x2 y1 x1 y2
+		line(x2,y1,x1,y2);
 	}
 }
-
-void captcha (char* str){ //5 digits
+/*********************************************
+FUNCTION:captcha
+DESCRIPTION：生成验证码
+INPUT:str
+RETURN:无
+***********************************************/
+void captcha (char* str){
 
 	char a,i,j;
 	srand(time(NULL));
@@ -129,7 +149,13 @@ void captcha (char* str){ //5 digits
 	
 }
 
-int check_captcha(char* str1, char* str2,int x, int y) //return 1 for match else return 0
+/*********************************************
+FUNCTION:check_captcha
+DESCRIPTION：验证输入的验证码
+INPUT:str1,str2,x,y
+RETURN:return 1 for match else return 0
+***********************************************/
+int check_captcha(char* str1, char* str2,int x, int y)
 {
 	if(strcmp(str1,str2) != 0)
 	{
@@ -150,7 +176,14 @@ int check_captcha(char* str1, char* str2,int x, int y) //return 1 for match else
 	return 0;
 }
 
-int check_samename(char* name, int flag)	//flag 1--用户已被注册, 2--账号存在, 3--不输出
+/*********************************************
+FUNCTION:check_samename
+DESCRIPTION：检查重复用户名
+INPUT:	name,flag
+		flag 1--用户已被注册, 2--账号存在, 3--不输出
+RETURN:return 1 for match else return 0
+***********************************************/
+int check_samename(char* name, int flag)
 {
 	int i;
 	int set_num;
@@ -176,7 +209,7 @@ int check_samename(char* name, int flag)	//flag 1--用户已被注册, 2--账号存在, 3-
 			exit(1);
 		}
 		
-		fseek(fp, i * sizeof(User), SEEK_SET);	//指向每隔一个User大小的
+		fseek(fp, i * sizeof(User), SEEK_SET);	//指向每隔一个User大小的User结构
 		fread(u, sizeof(User), 1, fp);			//读取一个u
 		
 		if( strcmp(name,u->name) == 0) 
@@ -187,14 +220,6 @@ int check_samename(char* name, int flag)	//flag 1--用户已被注册, 2--账号存在, 3-
 					puthz(350,80,"用户已被注册",16 ,17 ,RED);
 					
 					show_tickcross(592,105,607,125,0);
-					/*setcolor(LIGHTCYAN);
-					setlinestyle(SOLID_LINE, 0, 3); 
-					line(566 + 24, 130-23 + 9, 566 + 33, 130-23 + 19);
-					line(566 + 33, 130-23 + 19, 566 + 43, 130-23 - 3);
-					
-					setcolor(RED);
-					line(592,105,607,125);
-					line(607,105,592,125);*/
 					break;
 					
 				case 2:
@@ -217,7 +242,7 @@ int check_samename(char* name, int flag)	//flag 1--用户已被注册, 2--账号存在, 3-
 			}
 			if (fclose(fp) != 0)
 			{
-				printf("\n cannot close Database.");
+				printf("\n cannot close \"UserData.dat\" File.");
 				delay(3000);
 				exit(1);
 			}
@@ -234,13 +259,19 @@ int check_samename(char* name, int flag)	//flag 1--用户已被注册, 2--账号存在, 3-
 	}
 	if (fclose(fp) != 0)
 	{
-		printf("\n cannot close Database.");
+		printf("\n cannot close \"UserData.dat\" File.");
 		delay(3000);
 		exit(1);
 	}
 	return 0;	
 }
 
+/*********************************************
+FUNCTION:check_license_dig
+DESCRIPTION：检查车牌号格式
+INPUT:	str,x,y
+RETURN:return 1 for ok else return 0
+***********************************************/
 int check_license_dig(char* str, int x, int y)
 {
 	int i;
@@ -276,6 +307,12 @@ int check_license_dig(char* str, int x, int y)
 	}
 }
 
+/*********************************************
+FUNCTION:check_date
+DESCRIPTION：检查日期格式
+INPUT:	year,month,date,x,y
+RETURN:return 1 for ok else return 0
+***********************************************/
 int check_date(char* year, char* month, char* date, int x, int y)
 {
 	struct tm *local;
@@ -335,6 +372,12 @@ int check_date(char* year, char* month, char* date, int x, int y)
 	}
 }
 
+/*********************************************
+FUNCTION:check_date
+DESCRIPTION：检查日期格式（今天之后的日期）
+INPUT:	year,month,date,x,y
+RETURN:return 1 for ok else return 0
+***********************************************/
 int check_date_after(char* year, char* month, char* date, int x, int y)
 {
 	struct tm *local;
@@ -394,7 +437,12 @@ int check_date_after(char* year, char* month, char* date, int x, int y)
 	}
 }
 
-
+/*********************************************
+FUNCTION:check_date
+DESCRIPTION：检查日期格式（闰年）
+INPUT:	year,month,date,x,y
+RETURN:return 1 for ok else return 0
+***********************************************/
 int legal_date(int year, int month, int date, int x, int y)
 {
 	if(month < 1 || month > 12)
@@ -434,6 +482,12 @@ int legal_date(int year, int month, int date, int x, int y)
 	return 1;
 }
 
+/*********************************************
+FUNCTION:show_car
+DESCRIPTION：输出车辆信息
+INPUT:	User* u,x,y,flag,*state
+RETURN:return 1 for ok else return 0
+***********************************************/
 int show_car(User* u, int x,int y,int flag, int *state)	//显示车辆信息
 {
 	int i;
@@ -568,6 +622,12 @@ int show_car(User* u, int x,int y,int flag, int *state)	//显示车辆信息
 	return carnum;
 }
 
+/*********************************************
+FUNCTION:output_userinfo
+DESCRIPTION：输出user资料到main
+INPUT:	User *us,*usernum,*carnum
+RETURN:return 1 for ok else return 0
+***********************************************/
 int output_userinfo(User *us, int *usernum, int *carnum)
 {
 	int i,j;
@@ -656,6 +716,12 @@ int output_userinfo(User *us, int *usernum, int *carnum)
 	return 0;	//output error
 }
 
+/*********************************************
+FUNCTION:judgeinput
+DESCRIPTION：输出user资料到main
+INPUT:	str,*state,x,y
+RETURN: 无
+***********************************************/
 void judgeinput(char* str,int* state,int x,int y) //判断是否有输入
 {
 	if(strlen(str) == 0)
@@ -665,33 +731,32 @@ void judgeinput(char* str,int* state,int x,int y) //判断是否有输入
 	}
 }
 
+/*********************************************
+FUNCTION:check_username_dig
+DESCRIPTION：检查用户名格式
+INPUT:	str,x,y
+RETURN: return 1 for ok else return 0
+***********************************************/
 int check_username_dig(char* str,int x,int y) //4-12位用户名
 {
 	if(strlen(str) >=4 && strlen(str) <=12)
 	{
 		show_tickcross(592,105,607,125,1);
-		/*setlinestyle(SOLID_LINE, 0, 3); 
-		setcolor(LIGHTCYAN);
-		line(592,105,607,125);
-		line(607,105,592,125);
-		
-		setcolor(GREEN);
-		setlinestyle(SOLID_LINE, 0, 3); 
-		line(x + 24, y + 9, x + 33, y + 19);
-		line(x + 33, y + 19, x + 43, y - 3);*/
 		return 1;
 	}
 	else if(strlen(str) < 4)
 	{
 		puthz(x,y,"检查长度",16,17,RED);
-		/*setcolor(RED);
-		settextjustify(LEFT_TEXT, TOP_TEXT);
-		settextstyle(1,HORIZ_DIR,2);
-		outtextxy(x+72,y-5,">4!");*/
 	}
 	return 0;
 }
 
+/*********************************************
+FUNCTION:check_comfirmpw
+DESCRIPTION：检查重复密码格式
+INPUT:	str1,str2,x,y
+RETURN: return 1 for ok else return 0
+***********************************************/
 int check_comfirmpw(char* str1,char* str2,int x,int y)
 {
 	if(strcmp(str1,str2) == 0) //same
@@ -710,6 +775,12 @@ int check_comfirmpw(char* str1,char* str2,int x,int y)
 	return 0;
 }
 
+/*********************************************
+FUNCTION:check_pw_dig
+DESCRIPTION：检查密码格式
+INPUT:	str,x,y
+RETURN: return 1 for ok else return 0
+***********************************************/
 int check_pw_dig(char* str,int x,int y)
 {
 	if(strlen(str) >=4 && strlen(str) <=16)
@@ -724,14 +795,16 @@ int check_pw_dig(char* str,int x,int y)
 	else if(strlen(str) < 4)
 	{
 		puthz(x,y,"检查长度",16,17,RED);
-		/*setcolor(RED);
-		settextjustify(LEFT_TEXT, TOP_TEXT);
-		settextstyle(1,HORIZ_DIR,1);
-		outtextxy(x+53,y-5,">4!");*/
 	}
 	return 0;
 }
 
+/*********************************************
+FUNCTION:check_tele_dig
+DESCRIPTION：检查手机号码格式
+INPUT:	str,x,y
+RETURN: return 1 for ok else return 0
+***********************************************/
 int check_tele_dig(char* str,int x,int y)
 {
 	int i;
@@ -763,6 +836,12 @@ int check_tele_dig(char* str,int x,int y)
 	return 1;
 }
 
+/*********************************************
+FUNCTION:check_tele_dig
+DESCRIPTION：检查身份证格式
+INPUT:	str,x,y
+RETURN: return 1 for ok else return 0
+***********************************************/
 int check_id(char* str,int x,int y)
 {
 	int i;
@@ -801,6 +880,12 @@ int check_id(char* str,int x,int y)
 	}
 }
 
+/*********************************************
+FUNCTION:choose
+DESCRIPTION：选择并修改state
+INPUT:	x,y,*state
+RETURN: 无
+***********************************************/
 void choose(int x,int y,int *state)	
 {
 	delay(150);
@@ -824,6 +909,12 @@ void choose(int x,int y,int *state)
 	}
 }
 
+/*********************************************
+FUNCTION:single
+DESCRIPTION：单选并修改state
+INPUT:	*state1,*state2,*state3,*state4,*state5,x1,y1,x2,y2,x3,y3,x4,y4,x5,y5
+RETURN: 无
+***********************************************/
 void single(int *state1, int *state2, int *state3, int *state4, int *state5, int x1, int y1,
 			int x2, int y2, int x3, int y3, int x4, int y4, int x5, int y5)
 {
@@ -839,6 +930,13 @@ void single(int *state1, int *state2, int *state3, int *state4, int *state5, int
 		choose(x5,y5,state5);
 }
 
+/*********************************************
+FUNCTION:price
+DESCRIPTION：根据state变量显示金额
+INPUT:	*state1, *state2, *state3, *state4, *state5, *state6, 
+			cost1, cost2, cost3, cost4, cost5, cost6, cost, char *charge, x, y
+RETURN: 无
+***********************************************/
 void price(int *state1, int *state2, int *state3, int *state4, int *state5, int *state6, 
 			int cost1, int cost2, int cost3, int cost4, int cost5, int cost6, int cost, char *charge, int x, int y)
 {

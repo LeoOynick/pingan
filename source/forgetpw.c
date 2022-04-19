@@ -5,13 +5,13 @@ void forget(int *page)
 {
 	int num=0;
 	char inputcode[6] = { '\0' };
-	char name[13] = { '\0' };   //用户名（不超过12位）	
-	char password[17] = { '\0' };   //重置密码（不超过16位）
-	char confirmpw[17] = { '\0' };   //确认密码
-	char ID[19] = { '\0' };   //身份证号（18位）
-	char tele[12] = { '\0' };   //电话号码（11位）
-	char code[6] = { '\0' };   //验证码（5位）
-	int state1 = 0;
+	char name[13] = { '\0' };		//用户名（不超过12位）	
+	char password[17] = { '\0' };	//重置密码（不超过16位）
+	char confirmpw[17] = { '\0' };	//确认密码
+	char ID[19] = { '\0' };			//身份证号（18位）
+	char tele[12] = { '\0' };		//电话号码（11位）
+	char code[6] = { '\0' };		//验证码（5位）
+	int state1 = 0;					//判断内容输入状态的参数
 	int state2 = 0;
 	int state3 = 0;
 	int state4 = 0;
@@ -24,8 +24,8 @@ void forget(int *page)
 	drawforget();
 	
 	settextstyle(0,0,2);
-	captcha(code);
-	outtextxy(80,407,code);
+	captcha(code);					//生成验证码
+	outtextxy(80,407,code);			//输出验证码
 	
 	while(1)
 	{
@@ -373,8 +373,7 @@ int verify_forgotpw_info(char* name, char* password, char* confirmpw,
 					char* ID, char* tele, char* code, char* inputcode)
 {
 	int inputed = 0;
-	//int format_name = 0;   //判断输入字符是否符合要求
-	int format_pw = 0;
+	int format_pw = 0;			//判断输入字符是否符合要求
 	int format_Cpw = 0;
 	int format_ID = 0;
 	int format_tele = 0;
@@ -476,7 +475,7 @@ int change_userpw(char* name, char* password, char* confirmpw,
 			exit(1);
 		}
 		
-		fseek(fp, i * sizeof(User), SEEK_SET);	//指向每隔一个User大小的
+		fseek(fp, i * sizeof(User), SEEK_SET);	//指向每隔一个User大小的User结构
 		fread(u, sizeof(User), 1, fp);			//读取一个u
 		
 		if(strcmp(name,u->name) == 0) 			//用户名匹配
@@ -529,7 +528,6 @@ int change_userpw(char* name, char* password, char* confirmpw,
 				}
 			}
 		}
-		
 		if (u != NULL)
 		{
 			free(u);

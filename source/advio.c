@@ -4,7 +4,7 @@
 void advio(int *page)
 {
 	int num = 0;
-	int state = 0;
+	int state = 0;				//判断内容输入状态的参数
 	int state1 = 0;
 	int state2 = 0;
 	int state3 = 0;
@@ -16,12 +16,12 @@ void advio(int *page)
 	int state9 = 0;
 	int state10 = 0;
 	int state_date = 0;
-	char licensenum[7] = "\0";
-	char year[5];
-	char month[3];
-	char day[3];
-	char fine[5];
-	char point[3];
+	char licensenum[7] = "\0";	//6位车牌号码
+	char year[5];				//4位年份
+	char month[3];				//2位月份
+	char day[3];				//2位日
+	char fine[5];				//罚款金额
+	char point[3];				//扣分
 	
 	clrmous(MouseX, MouseY);
 	delay(100);
@@ -48,13 +48,13 @@ void advio(int *page)
 		    }
 			continue;
 		}
-		else if(mouse_press(610,0,640,30) == 1) //exit
+		else if(mouse_press(610,0,640,30) == 1)		//exit
 		{
 			*page = 1;
 			return;
 		}
 		
-		else if(mouse_press(120,420,200,480) == 2)   //订单查询
+		else if(mouse_press(120,420,200,480) == 2)	//订单查询
 		{
 			if (num == 0)
 		    {
@@ -75,7 +75,7 @@ void advio(int *page)
 			return;
 		}
 		
-		else if(mouse_press(440,420,520,480) == 2)   //理赔审批
+		else if(mouse_press(440,420,520,480) == 2)	//理赔审批
 		{
 			if (num == 0)
 		    {
@@ -96,7 +96,7 @@ void advio(int *page)
 			return;
 		}
 		
-		else if(mouse_press(300,100,470,140) == 2)		//车牌号码
+		else if(mouse_press(300,100,470,140) == 2)	//车牌号码
 		{
 			if (num == 0 && state1 == 0)
 			{
@@ -121,7 +121,7 @@ void advio(int *page)
 			continue;
 		}		
 		
-		else if(mouse_press(190,380,250,410) == 2)		//查询
+		else if(mouse_press(190,380,250,410) == 2)	//查询
 		{
 			if (num == 0)
 			{
@@ -146,7 +146,7 @@ void advio(int *page)
 				refer_violatedata(licensenum);
 		}
 		
-		else if(mouse_press(390,380,450,410) == 2)		//添加
+		else if(mouse_press(390,380,450,410) == 2)	//添加
 		{
 			if (num == 0)
 			{
@@ -173,7 +173,7 @@ void advio(int *page)
 			}
 		}
 		
-		else if(mouse_press(540,60,630,80) == 2)   //退出登录
+		else if(mouse_press(540,60,630,80) == 2)	//退出登录
 		{
 			if (num == 0)
 			{
@@ -191,7 +191,7 @@ void advio(int *page)
 			return;
 		}
 		
-		else if(mouse_press(255,150,340,190) == 2 && state == 1)		//年
+		else if(mouse_press(255,150,340,190) == 2 && state == 1)	//年
 		{
 			if (num == 0 && state2 == 0)
 			{
@@ -216,7 +216,7 @@ void advio(int *page)
 			continue;
 		}
 		
-		else if(mouse_press(360,150,410,190) == 2 && state == 1)		//月
+		else if(mouse_press(360,150,410,190) == 2 && state == 1)	//月
 		{
 			if (num == 0 && state3 == 0)
 			{
@@ -241,7 +241,7 @@ void advio(int *page)
 			continue;
 		}
 		
-		else if(mouse_press(430,150,480,190) == 2 && state == 1)		//日
+		else if(mouse_press(430,150,480,190) == 2 && state == 1)	//日
 		{
 			if (num == 0 && state4 == 0)
 			{
@@ -266,7 +266,7 @@ void advio(int *page)
 			continue;
 		}
 		
-		else if (mouse_press(185,215,195,225) == 2 && state == 1)   //超速
+		else if (mouse_press(185,215,195,225) == 2 && state == 1)	//超速
 		{
 			if (num == 0)
 			{
@@ -284,7 +284,7 @@ void advio(int *page)
 			single(&state6,&state7,&state8,&state7,&state8,290,220,390,220,490,220,390,220,490,220);
 		}
 		
-		else if (mouse_press(285,215,295,225) == 2 && state == 1)   //超载
+		else if (mouse_press(285,215,295,225) == 2 && state == 1)	//超载
 		{
 			if (num == 0)
 			{
@@ -302,7 +302,7 @@ void advio(int *page)
 			single(&state5,&state7,&state8,&state7,&state8,190,220,390,220,490,220,390,220,490,220);
 		}
 		
-		else if (mouse_press(385,215,395,225) == 2 && state == 1)   //酒驾
+		else if (mouse_press(385,215,395,225) == 2 && state == 1)	//酒驾
 		{
 			if (num == 0)
 			{
@@ -320,7 +320,7 @@ void advio(int *page)
 			single(&state5,&state6,&state8,&state6,&state8,190,220,290,220,490,220,290,220,490,220);
 		}
 		
-		else if (mouse_press(485,215,495,225) == 2 && state == 1)   //闯红灯
+		else if (mouse_press(485,215,495,225) == 2 && state == 1)	//闯红灯
 		{
 			if (num == 0)
 			{
@@ -338,7 +338,7 @@ void advio(int *page)
 			single(&state5,&state6,&state7,&state6,&state7,190,220,290,220,390,220,290,220,390,220);
 		}
 		
-		else if(mouse_press(340,250,425,290) == 2 && state == 1)		//罚款
+		else if(mouse_press(340,250,425,290) == 2 && state == 1)	//罚款
 		{
 			if (num == 0 && state9 == 0)
 			{
@@ -363,7 +363,7 @@ void advio(int *page)
 			continue;
 		}
 		
-		else if(mouse_press(340,300,425,340) == 2 && state == 1)		//扣分
+		else if(mouse_press(340,300,425,340) == 2 && state == 1)	//扣分
 		{
 			if (num == 0 && state9 == 0)
 			{
@@ -388,7 +388,7 @@ void advio(int *page)
 			continue;
 		}
 		
-		else if(mouse_press(290,345,350,375) == 2 && state == 1)		//提交
+		else if(mouse_press(290,345,350,375) == 2 && state == 1)	//提交
 		{
 			if (num == 0)
 			{
@@ -656,7 +656,7 @@ void write_violatedata(char *licensenum, int type1,int type2, int type3, int typ
 	violate_str_type[0] = '0' + type;
 	violate_str_type[1] = '\0';
 	
-	strcpy(v->licensenum, licensenum);		//copy licensenum to C.licensenum
+	strcpy(v->licensenum, licensenum);	//copy licensenum to v.licensenum
 	strcpy(v->viotype,violate_str_type);
 	strcpy(v->viodate.year,year);
 	strcpy(v->viodate.month,month);
@@ -665,7 +665,7 @@ void write_violatedata(char *licensenum, int type1,int type2, int type3, int typ
 	strcpy(v->viopoint,point);
 	
 	fseek(fp,0,SEEK_END);			
-	fwrite(v,sizeof(Vio),1,fp);	//write c to *fp->file
+	fwrite(v,sizeof(Vio),1,fp);			//write v to *fp->file
 	
 	if (v != NULL)
 	{
@@ -708,7 +708,7 @@ void refer_violatedata(char *licensenum)
 		if( (vi = (Vio*)malloc(sizeof(Vio))) == NULL )	
 		{
 			closegraph();
-			printf("Error - unable to allocate required memory in advio.c for in");
+			printf("Error - unable to allocate required memory in advio.c for vi");
 			delay(1500);
 			exit(1);
 		}

@@ -1,12 +1,12 @@
 #include"common.h"
 #include"adclaim.h"
 
-void adclaim(int *page)
+void adclaim(int *page)			//管理员理赔界面
 {
 	int num = 0;
-	int state = 0;
-	int state1 = 0;
-	char licensenum[7];
+	int state = 0;				//判断是否已输出资料状态的参数
+	int state1 = 0;				//判断内容输入状态的参数
+	char licensenum[7];			//6位车牌号码
 	
 	clrmous(MouseX, MouseY);
 	delay(100);
@@ -16,7 +16,7 @@ void adclaim(int *page)
 	while(1)
 	{
 		newmouse(&MouseX,&MouseY,&press);
-		if(mouse_press(610,0,640,30) == 2)   //退出
+		if(mouse_press(610,0,640,30) == 2)			//退出
 		{
 			if (num == 0)
 		    {
@@ -33,13 +33,13 @@ void adclaim(int *page)
 		    }
 			continue;
 		}
-		else if(mouse_press(610,0,640,30) == 1) //exit
+		else if(mouse_press(610,0,640,30) == 1)		//exit
 		{
 			*page = 1;
 			return;
 		}
 		
-		else if(mouse_press(120,420,200,480) == 2)   //订单查询
+		else if(mouse_press(120,420,200,480) == 2)	//订单查询
 		{
 			if (num == 0)
 		    {
@@ -60,7 +60,7 @@ void adclaim(int *page)
 			return;
 		}
 		
-		else if(mouse_press(280,420,360,480) == 2)   //违章管理
+		else if(mouse_press(280,420,360,480) == 2)	//违章管理
 		{
 			if (num == 0)
 		    {
@@ -81,7 +81,7 @@ void adclaim(int *page)
 			return;
 		}
 		
-		else if(mouse_press(300,100,470,140) == 2)		//车牌号码
+		else if(mouse_press(300,100,470,140) == 2)	//车牌号码
 		{
 			if (num == 0 && state1 == 0)
 			{
@@ -106,7 +106,7 @@ void adclaim(int *page)
 			continue;
 		}		
 		
-		else if(mouse_press(540,60,630,80) == 2)   //退出登录
+		else if(mouse_press(540,60,630,80) == 2)	//退出登录
 		{
 			if (num == 0)
 			{
@@ -124,7 +124,7 @@ void adclaim(int *page)
 			return;
 		}
 		
-		else if(mouse_press(490,105,550,135) == 2)		//确认
+		else if(mouse_press(490,105,550,135) == 2)	//确认
 		{
 			if (num == 0)
 			{
@@ -145,7 +145,7 @@ void adclaim(int *page)
 			state = 1;
 		}
 		
-		else if(mouse_press(190,380,250,410) == 2 && state == 1)		//通过
+		else if(mouse_press(190,380,250,410) == 2 && state == 1)	//通过
 		{
 			if (num == 0)
 			{
@@ -167,7 +167,7 @@ void adclaim(int *page)
 			*page = 22;
 			return;
 		}
-		else if(mouse_press(390,380,450,410) == 2 && state == 1)		//拒绝
+		else if(mouse_press(390,380,450,410) == 2 && state == 1)	//拒绝
 		{
 			if (num == 0)
 			{
@@ -323,7 +323,7 @@ void check(char *licensenum)
 		fread(cl, sizeof(Claim), 1, fp);
 		if (strcmp(licensenum, cl->licensenum) == 0)
 		{
-			if(i != 0)	max_num = i;
+			if(i != 0)	max_num = i;				//寻找最新数据
 		}
 		free(cl);
 	}
@@ -490,9 +490,9 @@ void pass(char *licensenum, int state)
 	strcpy(cl1->claimdate.year,cl->claimdate.year);
 	strcpy(cl1->claimdate.month,cl->claimdate.month);
 	strcpy(cl1->claimdate.day,cl->claimdate.day);
-	strcpy(cl1->state,str);
+	strcpy(cl1->state,str);								//修改State
 	fseek(fp, max_num * sizeof(Claim), SEEK_SET);
-	fwrite(cl1,sizeof(Claim),1,fp);	//write c to *fp->file
+	fwrite(cl1,sizeof(Claim),1,fp);						//write cl1 to *fp->file
 	
 	if (cl != NULL)
 	{

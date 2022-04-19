@@ -4,7 +4,7 @@
 void measure(int *page)
 {
 	int num = 0;
-	int state1 = 0;
+	int state1 = 0;		//判断内容输入状态的参数
 	int state2 = 0;
 	int state3 = 0;
 	int state4 = 0;

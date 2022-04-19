@@ -16,7 +16,7 @@ typedef struct carinfo
 	char type[2];			//车辆品牌型号
 	char nature[2];			//车辆使用性质
 	Date regdate;			//车辆注册日期
-}Car;
+}Car;		//封装车辆信息
 
 typedef struct userinfo
 {

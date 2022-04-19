@@ -4,11 +4,11 @@
 void insure(int *page, User *u)
 {
 	int num = 0;
-	int state1 = 0;
+	int state1 = 0;		//判断内容输入状态的参数
 	int state2 = 0;
 	int state3 = 0;
 	int cost = 0;
-	int carid = 0;
+	int carid = 0;		//showcar中第几辆车辆
 	char charge[5];
 	
 	clrmous(MouseX, MouseY);
@@ -19,7 +19,7 @@ void insure(int *page, User *u)
 	while(1)
 	{
 		newmouse(&MouseX,&MouseY,&press);
-		if(mouse_press(610,0,640,30) == 2)   //退出
+		if(mouse_press(610,0,640,30) == 2)	//退出
 		{
 			if (num == 0)
 		    {
@@ -42,7 +42,7 @@ void insure(int *page, User *u)
 			return;
 		}
 		
-		else if(mouse_press(180,400,260,430) == 2)   //购买
+		else if(mouse_press(180,400,260,430) == 2)	//购买
 		{
 			if (num == 0)
 			{
@@ -80,7 +80,7 @@ void insure(int *page, User *u)
 			}
 		}
 		
-		else if(mouse_press(380,400,460,430) == 2)   //返回
+		else if(mouse_press(380,400,460,430) == 2)	//返回
 		{
 			if (num == 0)
 			{
@@ -100,7 +100,7 @@ void insure(int *page, User *u)
 			return;
 		}
 		
-		else if (mouse_press(520,135,600,155) == 2)   //切换车辆
+		else if (mouse_press(520,135,600,155) == 2)	//切换车辆
 		{
 			if (num == 0)
 			{
@@ -127,7 +127,7 @@ void insure(int *page, User *u)
 			show_car(u,78,162,1,&carid);
 		}
 		
-		else if (mouse_press(535,235,545,245) == 2)   //基本险
+		else if (mouse_press(535,235,545,245) == 2)	//基本险
 		{
 			if (num == 0)
 			{
@@ -144,7 +144,7 @@ void insure(int *page, User *u)
 			choose(540,240,&state1);
 		}
 		
-		else if (mouse_press(535,275,545,285) == 2)   //商业险
+		else if (mouse_press(535,275,545,285) == 2)	//商业险
 		{
 			
 			if (num == 0)
@@ -162,7 +162,7 @@ void insure(int *page, User *u)
 			choose(540,280,&state2);
 		}
 		
-		else if (mouse_press(535,315,545,325) == 2)   //交强险
+		else if (mouse_press(535,315,545,325) == 2)	//交强险
 		{
 			if (num == 0)
 			{
@@ -286,7 +286,7 @@ void drawinsure(User *u,int *state)
     line(610,0,640,30);
     line(640,0,610,30);
 	
-	show_car(u,78,162,1,state);
+	show_car(u,78,162,1,state);	//输出车辆信息
 }
 
 void write_insurancedata(User* u, int carid, int state1, int state2, int state3)

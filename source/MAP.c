@@ -5,7 +5,6 @@
 void map(int *page)
 {
 	int num=0;
-	
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();

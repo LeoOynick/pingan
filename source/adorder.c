@@ -1,11 +1,11 @@
 #include"common.h"
 #include"adorder.h"
 
-void adorder(int *page)
+void adorder(int *page)				//管理员订单界面
 {
 	int num = 0;
 	int state = 0;
-	char licensenum[7] = "\0";
+	char licensenum[7] = "\0";		//6位车牌号码
 	
 	clrmous(MouseX, MouseY);
 	delay(100);
@@ -15,7 +15,7 @@ void adorder(int *page)
 	while(1)
 	{
 		newmouse(&MouseX,&MouseY,&press);
-		if(mouse_press(610,0,640,30) == 2)   //退出
+		if(mouse_press(610,0,640,30) == 2)			//退出
 		{
 			if (num == 0)
 		    {
@@ -32,13 +32,13 @@ void adorder(int *page)
 		    }
 			continue;
 		}
-		else if(mouse_press(610,0,640,30) == 1) //exit
+		else if(mouse_press(610,0,640,30) == 1)		//exit
 		{
 			*page = 1;
 			return;
 		}
 		
-		else if(mouse_press(280,420,360,480) == 2)   //违章管理
+		else if(mouse_press(280,420,360,480) == 2)	//违章管理
 		{
 			if (num == 0)
 		    {
@@ -59,7 +59,7 @@ void adorder(int *page)
 			return;
 		}
 		
-		else if(mouse_press(440,420,520,480) == 2)   //理赔审批
+		else if(mouse_press(440,420,520,480) == 2)	//理赔审批
 		{
 			if (num == 0)
 		    {
@@ -80,7 +80,7 @@ void adorder(int *page)
 			return;
 		}
 		
-		else if(mouse_press(300,100,470,140) == 2)		//车牌号码
+		else if(mouse_press(300,100,470,140) == 2)	//车牌号码
 		{
 			if (num == 0 && state == 0)
 			{
@@ -105,7 +105,7 @@ void adorder(int *page)
 			continue;
 		}		
 		
-		else if(mouse_press(90,380,150,410) == 2)		//保单
+		else if(mouse_press(90,380,150,410) == 2)	//保单
 		{
 			if (num == 0)
 			{
@@ -127,7 +127,7 @@ void adorder(int *page)
 				ad_insurance(licensenum);
 		}
 		
-		else if(mouse_press(190,380,250,410) == 2)		//停车
+		else if(mouse_press(190,380,250,410) == 2)	//停车
 		{
 			if (num == 0)
 			{
@@ -149,7 +149,7 @@ void adorder(int *page)
 				ad_parking(licensenum);
 		}
 		
-		else if(mouse_press(290,380,350,410) == 2)		//服务
+		else if(mouse_press(290,380,350,410) == 2)	//服务
 		{
 			if (num == 0)
 			{
@@ -171,7 +171,7 @@ void adorder(int *page)
 				ad_sevice(licensenum);
 		}
 		
-		else if(mouse_press(390,380,450,410) == 2)		//年检
+		else if(mouse_press(390,380,450,410) == 2)	//年检
 		{
 			if (num == 0)
 			{
@@ -193,7 +193,7 @@ void adorder(int *page)
 				ad_inspect(licensenum);
 		}
 		
-		else if(mouse_press(490,380,550,410) == 2)		//救援
+		else if(mouse_press(490,380,550,410) == 2)	//救援
 		{
 			if (num == 0)
 			{
@@ -215,7 +215,7 @@ void adorder(int *page)
 				ad_rescue(licensenum);
 		}
 		
-		else if(mouse_press(540,60,630,80) == 2)   //退出登录
+		else if(mouse_press(540,60,630,80) == 2)	//退出登录
 		{
 			if (num == 0)
 			{
@@ -758,7 +758,7 @@ void ad_inspect(char *licensenum)
 	}
 	if (fclose(fp) != 0)
 	{
-		printf("\n cannot close ParkData");
+		printf("\n cannot close InspData");
 		delay(2000);
 		exit(1);				
 	}

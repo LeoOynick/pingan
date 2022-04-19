@@ -171,7 +171,7 @@ void drawpolicy(User *u, int* state)
     line(610,0,640,30);
     line(640,0,610,30);
 	
-	show_car(u,90,162-10,1,state);
+	show_car(u,90,162-10,1,state);	//输出车辆信息
 }
 
 void search_insurance(User *u, int carid)

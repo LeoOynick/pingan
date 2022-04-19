@@ -4,8 +4,8 @@
 void claim(int *page,User *u)
 {
 	int num = 0;
-	int carid = 0;
-	int state1 = 0;
+	int carid = 0;		//showcar中第几辆车辆
+	int state1 = 0;		//判断内容输入状态的参数
 	int state2 = 0;
 	int state3 = 0;
 	int state4 = 0;
@@ -15,8 +15,8 @@ void claim(int *page,User *u)
 	int state8 = 0;
 	int state9 = 0;
 	int state10 = 0;
-	int scene = 0;
-	int character = 0;
+	int scene = 0;		//场景
+	int character = 0;	//角色
 	
 	clrmous(MouseX, MouseY);
 	delay(100);
@@ -26,7 +26,7 @@ void claim(int *page,User *u)
 	while(1)
 	{
 		newmouse(&MouseX,&MouseY,&press);
-		if(mouse_press(610,0,640,30) == 2)   //退出
+		if(mouse_press(610,0,640,30) == 2)		//退出
 		{
 			if (num == 0)
 		    {
@@ -49,7 +49,7 @@ void claim(int *page,User *u)
 			return;
 		}
 		
-		else if(mouse_press(180,400,260,430) == 2)   //提交
+		else if(mouse_press(180,400,260,430) == 2)	//提交
 		{
 			if (num == 0)
 			{
@@ -92,7 +92,7 @@ void claim(int *page,User *u)
 			}
 		}
 		
-		else if(mouse_press(380,400,460,430) == 2)   //返回
+		else if(mouse_press(380,400,460,430) == 2)	//返回
 		{
 			if (num == 0)
 			{
@@ -112,7 +112,7 @@ void claim(int *page,User *u)
 			return;
 		}
 		
-		else if (mouse_press(520,95,600,115) == 2)   //切换车辆
+		else if (mouse_press(520,95,600,115) == 2)	//切换车辆
 		{
 			if (num == 0)
 			{
@@ -139,7 +139,7 @@ void claim(int *page,User *u)
 			show_car(u,78,122,1,&carid);
 		}
 		
-		else if (mouse_press(175,225,185,235) == 2)   //自己剐蹭了
+		else if (mouse_press(175,225,185,235) == 2)	//自己剐蹭了
 		{
 			if (num == 0)
 			{
@@ -157,7 +157,7 @@ void claim(int *page,User *u)
 			single(&state2,&state3,&state4,&state5,&state6,380,230,580,230,180,270,380,270,600,270);
 		}
 		
-		else if (mouse_press(375,225,385,235) == 2)   //撞了别人车
+		else if (mouse_press(375,225,385,235) == 2)	//撞了别人车
 		{
 			if (num == 0)
 			{
@@ -175,7 +175,7 @@ void claim(int *page,User *u)
 			single(&state1,&state3,&state4,&state5,&state6,180,230,580,230,180,270,380,270,600,270);
 		}
 		
-		else if (mouse_press(575,225,585,235) == 2)   //有人受伤了
+		else if (mouse_press(575,225,585,235) == 2)	//有人受伤了
 		{
 			if (num == 0)
 			{
@@ -193,7 +193,7 @@ void claim(int *page,User *u)
 			single(&state1,&state2,&state4,&state5,&state6,180,230,380,230,180,270,380,270,600,270);
 		}
 		
-		else if (mouse_press(175,265,185,275) == 2)   //有物品损失
+		else if (mouse_press(175,265,185,275) == 2)	//有物品损失
 		{
 			if (num == 0)
 			{
@@ -211,7 +211,7 @@ void claim(int *page,User *u)
 			single(&state1,&state2,&state3,&state5,&state6,180,230,380,230,580,230,380,270,600,270);
 		}
 		
-		else if (mouse_press(375,265,385,275) == 2)   //车停放受损
+		else if (mouse_press(375,265,385,275) == 2)	//车停放受损
 		{
 			if (num == 0)
 			{
@@ -229,7 +229,7 @@ void claim(int *page,User *u)
 			single(&state1,&state2,&state3,&state4,&state6,180,230,380,230,580,230,180,270,600,270);
 		}
 		
-		else if (mouse_press(595,265,605,275) == 2)   //代驾发生事故
+		else if (mouse_press(595,265,605,275) == 2)	//代驾发生事故
 		{
 			if (num == 0)
 			{
@@ -247,7 +247,7 @@ void claim(int *page,User *u)
 			single(&state1,&state2,&state3,&state4,&state5,180,230,380,230,580,230,180,270,380,270);
 		}
 		
-		else if (mouse_press(115,355,125,365) == 2)   //主责方
+		else if (mouse_press(115,355,125,365) == 2)	//主责方
 		{
 			if (num == 0)
 			{
@@ -265,7 +265,7 @@ void claim(int *page,User *u)
 			single(&state8,&state9,&state10,&state9,&state10,270,360,420,360,540,360,420,360,540,360);
 		}
 		
-		else if (mouse_press(265,355,275,365) == 2)   //次责方
+		else if (mouse_press(265,355,275,365) == 2)	//次责方
 		{
 			if (num == 0)
 			{
@@ -283,7 +283,7 @@ void claim(int *page,User *u)
 			single(&state7,&state9,&state10,&state9,&state10,120,360,420,360,540,360,420,360,540,360);
 		}
 		
-		else if (mouse_press(415,355,425,365) == 2)   //无责方
+		else if (mouse_press(415,355,425,365) == 2)	//无责方
 		{
 			if (num == 0)
 			{
@@ -301,7 +301,7 @@ void claim(int *page,User *u)
 			single(&state7,&state8,&state10,&state8,&state10,120,360,270,360,540,360,270,360,540,360);
 		}
 		
-		else if (mouse_press(535,355,545,365) == 2)   //伤者
+		else if (mouse_press(535,355,545,365) == 2)	//伤者
 		{
 			if (num == 0)
 			{
@@ -420,7 +420,7 @@ void drawclaim(User *u, int *carid)
     line(610,0,640,30);
     line(640,0,610,30);
 	
-	show_car(u,78,122,1,carid);
+	show_car(u,78,122,1,carid);		//输出车辆信息
 }
 
 int whichscenes(int state1 ,int state2 ,int state3 , int state4 ,int state5 ,int state6)
@@ -470,7 +470,7 @@ void write_claimdata(User *u,int carid,int scene,int character)
 		exit(1);
 	}
 	
-	if( (c = (Claim*)malloc(sizeof(Claim))) == NULL )	//allocate memory for u
+	if( (c = (Claim*)malloc(sizeof(Claim))) == NULL )	//allocate memory for c
 	{
 		closegraph();
 		printf("Error - unable to allocate required memory for Claim");
@@ -501,7 +501,7 @@ void write_claimdata(User *u,int carid,int scene,int character)
 	
 	if (fclose(fp) != 0)
 	{
-		printf("\n cannot close CarData.dat");
+		printf("\n cannot close ClaData.dat");
 		delay(3000);
 		exit(1);
 	}

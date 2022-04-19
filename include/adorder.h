@@ -3,10 +3,10 @@
 
 void adorder(int *page);
 void draworder();
-void ad_insurance(char *licensenum);
-void ad_parking(char *licensenum);
-void ad_sevice(char *licensenum);
-void ad_inspect(char *licensenum);
-void ad_rescue(char *licensenum);
+void ad_insurance(char *licensenum);	//输出保单资料
+void ad_parking(char *licensenum);		//输出停车资料
+void ad_sevice(char *licensenum);		//输出服务资料
+void ad_inspect(char *licensenum);		//输出年检资料
+void ad_rescue(char *licensenum);		//输出救援资料
 
 #endif 

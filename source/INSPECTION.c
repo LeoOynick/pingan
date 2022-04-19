@@ -4,8 +4,8 @@
 void inspect(int *page, User *u)
 {
 	int num = 0;
-	int carid = 0;
-	int state1 = 0;
+	int carid = 0;		//showcar中第几辆车辆
+	int state1 = 0;		//判断内容输入状态的参数
 	int state2 = 0;
 	int state3 = 0;
 	int cost = 0;
@@ -19,7 +19,7 @@ void inspect(int *page, User *u)
 	while(1)
 	{
 		newmouse(&MouseX,&MouseY,&press);
-		if(mouse_press(610,0,640,30) == 2)   //退出
+		if(mouse_press(610,0,640,30) == 2)		//退出
 		{
 			if (num == 0)
 		    {
@@ -42,7 +42,7 @@ void inspect(int *page, User *u)
 			return;
 		}
 		
-		else if(mouse_press(180,400,260,430) == 2)   //提交
+		else if(mouse_press(180,400,260,430) == 2)	//提交
 		{
 			if (num == 0)
 			{
@@ -65,7 +65,8 @@ void inspect(int *page, User *u)
 				setfillstyle(1,LIGHTCYAN);
 				bar(220,225,420,245);
 			}
-			if((state1 != 0 || state2 != 0 || state3 != 0) && (strlen(u->car[carid].licensenum)!= 0))
+			if((state1 != 0 || state2 != 0 || state3 != 0) 
+				&& (strlen(u->car[carid].licensenum)!= 0))
 			{
 				write_inspectingdata(u,carid,state1,state2,state3);
 				puthz(280,435,"提交成功！",16,20,RED);
@@ -75,7 +76,7 @@ void inspect(int *page, User *u)
 			}
 		}
 		
-		else if(mouse_press(380,400,460,430) == 2)   //返回
+		else if(mouse_press(380,400,460,430) == 2)	//返回
 		{
 			if (num == 0)
 			{
@@ -95,7 +96,7 @@ void inspect(int *page, User *u)
 			return;
 		}
 		
-		else if (mouse_press(520,135,600,155) == 2)   //切换车辆
+		else if (mouse_press(520,135,600,155) == 2)	//切换车辆
 		{
 			if (num == 0)
 			{
@@ -122,7 +123,7 @@ void inspect(int *page, User *u)
 			show_car(u,90,162,1,&carid);
 		}
 		
-		else if (mouse_press(135,305,145,315) == 2)   //新车免检
+		else if (mouse_press(135,305,145,315) == 2)	//新车免检
 		{
 			if (num == 0)
 			{
@@ -140,7 +141,7 @@ void inspect(int *page, User *u)
 			single(&state2,&state2,&state3,&state2,&state3,320,310,320,310,500,310,320,310,500,310);
 		}
 		
-		else if (mouse_press(315,305,325,315) == 2)   //普通年检
+		else if (mouse_press(315,305,325,315) == 2)	//普通年检
 		{
 			if (num == 0)
 			{
@@ -158,7 +159,7 @@ void inspect(int *page, User *u)
 			single(&state1,&state1,&state3,&state1,&state3,140,310,140,310,500,310,140,310,500,310);
 		}
 		
-		else if (mouse_press(495,305,505,315) == 2)   //特快年检
+		else if (mouse_press(495,305,505,315) == 2)	//特快年检
 		{
 			if (num == 0)
 			{
@@ -262,7 +263,7 @@ void drawinspect(User* u, int *carid)
     setcolor(1);
     line(610,0,640,30);
     line(640,0,610,30);
-	show_car(u,90,162,1,carid);
+	show_car(u,90,162,1,carid);		//输出车辆信息
 }
 
 void write_inspectingdata(User *u, int carid, int inspect1,int inspect2, int inspect3)
@@ -308,7 +309,7 @@ void write_inspectingdata(User *u, int carid, int inspect1,int inspect2, int ins
 	inspecting_str_type[0] = '0' + inspect;
 	inspecting_str_type[1] = '\0';
 	
-	strcpy(p->licensenum, u->car[carid].licensenum);		//copy licensenum to C.licensenum
+	strcpy(p->licensenum, u->car[carid].licensenum);		//copy u->car[carid]licensenum to p.licensenum
 	strcpy(p->parkplace,inspecting_str_type);
 	local=localtime(&t);
 	itoa(local->tm_year + 1900, str, 10);
@@ -319,7 +320,7 @@ void write_inspectingdata(User *u, int carid, int inspect1,int inspect2, int ins
 	strcpy(p->parkingdate.day,str);
 	
 	fseek(fp,0,SEEK_END);			
-	fwrite(p,sizeof(Parking),1,fp);	//write c to *fp->file
+	fwrite(p,sizeof(Parking),1,fp);	//write p to *fp->file
 	
 	if (p != NULL)
 	{

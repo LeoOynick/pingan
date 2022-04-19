@@ -229,8 +229,8 @@ void mine(int *page, User *u, int *usernum, int *carnum)
 		{
 			MouseS = 0;
 			del_cardata(usernum,1);
-			output_userinfo(u,usernum,carnum);
-			show_car(u,80, 170, 2);
+			//output_userinfo(u,usernum,carnum);
+			//show_car(u,80, 170, 2);
 			*page = 8;
 			return;
 		}
@@ -250,8 +250,8 @@ void mine(int *page, User *u, int *usernum, int *carnum)
 		{
 			MouseS = 0;
 			del_cardata(usernum,2);
-			output_userinfo(u,usernum,carnum);
-			show_car(u,80, 170, 2);
+			//output_userinfo(u,usernum,carnum);
+			//show_car(u,80, 170, 2);
 			*page = 8;
 			return;
 		}
@@ -271,8 +271,8 @@ void mine(int *page, User *u, int *usernum, int *carnum)
 		{
 			MouseS = 0;
 			del_cardata(usernum,3);
-			output_userinfo(u,usernum,carnum);
-			show_car(u,80, 170, 2);
+			//output_userinfo(u,usernum,carnum);
+			//show_car(u,80, 170, 2);
 			*page = 8;
 			return;
 		}

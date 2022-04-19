@@ -171,7 +171,7 @@ void drawviolate(User *u, int *carid)
     setcolor(1);
     line(610,0,640,30);
     line(640,0,610,30);
-	show_car(u,90,122,1,&carid);
+	show_car(u,90,122,1,&carid);	//输出车辆信息
 }
 
 void search_vio(User *u, int carid)

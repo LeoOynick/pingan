@@ -4,8 +4,8 @@
 void adclaim(int *page);
 void drawadclaim();
 void drawcheck();
-void check(char *licensenum);
-void pass(char *licensenum, int state);
+void check(char *licensenum);				//输出理赔资料
+void pass(char *licensenum, int state);		//审核理赔资料
 
 
 #endif 

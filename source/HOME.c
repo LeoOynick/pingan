@@ -4,7 +4,6 @@
 void home(int *page,User *u)
 {
 	int num = 0;
-	
 	clrmous(MouseX, MouseY);
 	delay(100);
 	cleardevice();
@@ -13,7 +12,7 @@ void home(int *page,User *u)
 	while(1)
 	{
 		newmouse(&MouseX,&MouseY,&press);
-		if(mouse_press(610,0,640,30) == 2)   //退出
+		if(mouse_press(610,0,640,30) == 2)			//退出
 		{
 			if (num == 0)
 		    {
@@ -30,7 +29,7 @@ void home(int *page,User *u)
 		    }
 			continue;
 		}
-		else if(mouse_press(610,0,640,30) == 1) //exit
+		else if(mouse_press(610,0,640,30) == 1)		//exit
 		{
 			*page = 1;
 			return;
@@ -65,7 +64,7 @@ void home(int *page,User *u)
 			return;
 		}
 		
-		else if(mouse_press(275,95,365,205) == 2)   //查保单
+		else if(mouse_press(275,95,365,205) == 2)	//查保单
 		{
 			if (num == 0)
 		    {
@@ -94,7 +93,7 @@ void home(int *page,User *u)
 			return;
 		}
 		
-		else if(mouse_press(435,95,525,205) == 2)   //办理赔
+		else if(mouse_press(435,95,525,205) == 2)	//办理赔
 		{
 			if (num == 0)
 		    {
@@ -126,7 +125,7 @@ void home(int *page,User *u)
 			return;
 		}
 		
-		else if(mouse_press(115,255,205,365) == 2)   //查违章
+		else if(mouse_press(115,255,205,365) == 2)	//查违章
 		{
 			if (num == 0)
 		    {
@@ -155,7 +154,7 @@ void home(int *page,User *u)
 			return;
 		}
 		
-		else if(mouse_press(275,255,365,365) == 2)   //预约停车
+		else if(mouse_press(275,255,365,365) == 2)	//预约停车
 		{
 			if (num == 0)
 		    {
@@ -184,7 +183,7 @@ void home(int *page,User *u)
 			return;
 		}
 		
-		else if(mouse_press(435,255,525,365) == 2)   //车损测算
+		else if(mouse_press(435,255,525,365) == 2)	//车损测算
 		{
 			if (num == 0)
 		    {
@@ -212,7 +211,7 @@ void home(int *page,User *u)
 			return;
 		}
 		
-		else if(mouse_press(280,420,360,480) == 2)   //服务
+		else if(mouse_press(280,420,360,480) == 2)	//服务
 		{
 			if (num == 0)
 		    {
@@ -238,7 +237,7 @@ void home(int *page,User *u)
 			return;
 		}
 		
-		else if(mouse_press(440,420,520,480) == 2)   //我的
+		else if(mouse_press(440,420,520,480) == 2)	//我的
 		{
 			if (num == 0)
 		    {
@@ -415,12 +414,12 @@ void drawhome(User *u)
 	{
 		puthz(60, 17, "您好，", 16, 18, WHITE);
 		setcolor(WHITE);
-		settextstyle(3, HORIZ_DIR, 2); //2,3
+		settextstyle(3, HORIZ_DIR, 2);
 		outtextxy(110, 10, u->name);
 	}
 	
     setcolor(8);
-	puthz(135,185,"买车险",16,18,8);   //买车险
+	puthz(135,185,"买车险",16,18,8);	//买车险
 	line(120,100,200,100);
 	line(120,100,120,150);
 	line(200,100,200,150);
@@ -429,7 +428,7 @@ void drawhome(User *u)
 	line(140,130,150,150);
 	line(150,150,190,120);
 	
-	puthz(295,185,"查保单",16,18,8);   //查保单
+	puthz(295,185,"查保单",16,18,8);	//查保单
 	line(280,100,280,180);
 	line(360,100,360,180);
 	line(280,100,360,100);
@@ -438,7 +437,7 @@ void drawhome(User *u)
 	circle(310,130,15);
 	line(320,140,340,160);
 	
-	puthz(455,185,"办理赔",16,18,8);   //办理赔
+	puthz(455,185,"办理赔",16,18,8);	//办理赔
 	line(440,100,520,100);
 	line(440,100,440,180);
 	line(440,180,480,180);
@@ -450,7 +449,7 @@ void drawhome(User *u)
 	line(480,130,470,120);
 	line(480,130,490,120);
 	
-	puthz(135,345,"查违章",16,18,8);   //查违章
+	puthz(135,345,"查违章",16,18,8);	//查违章
 	circle(160,300,40);
 	line(200,340,190,330);
 	line(140,300,180,300);
@@ -459,7 +458,7 @@ void drawhome(User *u)
 	line(180,310,170,320);
 	line(160,280,160,325);
 	
-	puthz(285,345,"预约停车",16,18,8);   //预约停车
+	puthz(285,345,"预约停车",16,18,8);	//预约停车
 	arc(320,300,0,180,40);
 	line(320,340,280,300);
 	line(320,340,360,300);
@@ -468,7 +467,7 @@ void drawhome(User *u)
 	arc(330,290,270,450,10);
 	line(310,280,310,320);
 	
-	puthz(445,345,"车损测算",16,18,8);   //车损测算
+	puthz(445,345,"车损测算",16,18,8);	//车损测算
 	rectangle(440,260,520,340);
 	line(450,330,510,270);
 	line(465,270,465,300);

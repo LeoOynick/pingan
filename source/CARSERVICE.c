@@ -4,12 +4,12 @@
 void carserve(int *page, User *u)
 {
 	int num = 0;
-	int carid = 0;
-	int state1 = 0;
+	int carid = 0;		//showcar中第几架车辆
+	int state1 = 0;		//判断内容输入状态的参数
 	int state2 = 0;
 	int state3 = 0;
 	int state4 = 0;
-	int cost = 0;
+	int cost = 0;		//总金额
 	char charge[5];
 	
 	clrmous(MouseX, MouseY);
@@ -20,7 +20,7 @@ void carserve(int *page, User *u)
 	while(1)
 	{
 		newmouse(&MouseX,&MouseY,&press);
-		if(mouse_press(610,0,640,30) == 2)   //退出
+		if(mouse_press(610,0,640,30) == 2)			//退出
 		{
 			if (num == 0)
 		    {
@@ -43,7 +43,7 @@ void carserve(int *page, User *u)
 			return;
 		}
 		
-		else if(mouse_press(180,400,260,430) == 2)   //提交
+		else if(mouse_press(180,400,260,430) == 2)	//提交
 		{
 			if (num == 0)
 			{
@@ -77,7 +77,7 @@ void carserve(int *page, User *u)
 			}
 		}
 		
-		else if(mouse_press(380,400,460,430) == 2)   //返回
+		else if(mouse_press(380,400,460,430) == 2)	//返回
 		{
 			if (num == 0)
 			{
@@ -97,7 +97,7 @@ void carserve(int *page, User *u)
 			return;
 		}
 		
-		else if (mouse_press(520,135,600,155) == 2)   //切换车辆
+		else if (mouse_press(520,135,600,155) == 2)	//切换车辆
 		{
 			if (num == 0)
 			{
@@ -124,7 +124,7 @@ void carserve(int *page, User *u)
 			show_car(u,90,162,1,&carid);
 		}
 		
-		else if (mouse_press(95,290,105,300) == 2)   //洗车
+		else if (mouse_press(95,290,105,300) == 2)	//洗车
 		{
 			if (num == 0)
 			{
@@ -141,7 +141,7 @@ void carserve(int *page, User *u)
 			choose(100,295,&state1);
 		}
 		
-		else if (mouse_press(245,290,255,300) == 2)   //加油
+		else if (mouse_press(245,290,255,300) == 2)	//加油
 		{
 			if (num == 0)
 			{
@@ -158,7 +158,7 @@ void carserve(int *page, User *u)
 			choose(250,295,&state2);
 		}
 		
-		else if (mouse_press(395,290,405,300) == 2)   //保养
+		else if (mouse_press(395,290,405,300) == 2)	//保养
 		{
 			if (num == 0)
 			{
@@ -175,7 +175,7 @@ void carserve(int *page, User *u)
 			choose(400,295,&state3);
 		}
 		
-		else if (mouse_press(545,290,555,300) == 2)   //挪车
+		else if (mouse_press(545,290,555,300) == 2)	//挪车
 		{
 			if (num == 0)
 			{
@@ -283,7 +283,7 @@ void drawcarserve(User *u,int *carid)
     line(610,0,640,30);
     line(640,0,610,30);
 	
-	show_car(u,90,162,1,carid);
+	show_car(u,90,162,1,carid);		//输出车辆资料
 }
 
 void write_servicedata(User *u, int carid, int service1,int service2,int service3,int service4)

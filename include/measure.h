@@ -2,6 +2,6 @@
 #define _MEASURE_H_
 
 void drawmeasure();
-void measure(int *page);
+void measure(int *page);	//测车损界面
 
 #endif

@@ -5,12 +5,12 @@ void binding(int *page,User* u, int *usernum, int *carnum)
 {
 	int num=0;
 	char licensenum[7] = { '\0' };	//6位车牌号码
-	char year[5] = { '\0' };			//注册年份
-	char month[3] = { '\0' };			//注册月份
+	char year[5] = { '\0' };		//注册年份
+	char month[3] = { '\0' };		//注册月份
 	char day[3] = { '\0' };			//注册日期
-	int type = 0;
-	int nature = 0;
-	int state1 = 0;			//判断是否有字符输入
+	int type = 0;					//型号
+	int nature = 0;					//性质
+	int state1 = 0;					//判断内容输入状态的参数
 	int state2 = 0;
 	int state3 = 0;
 	int state4 = 0;
@@ -29,7 +29,7 @@ void binding(int *page,User* u, int *usernum, int *carnum)
 	while(1)
 	{
 		newmouse(&MouseX,&MouseY,&press);
-		if(mouse_press(610,0,640,30) == 2)		//退出
+		if(mouse_press(610,0,640,30) == 2)			//退出
 		{
 			if (num == 0)
 		    {
@@ -52,7 +52,7 @@ void binding(int *page,User* u, int *usernum, int *carnum)
 			return;
 		}
 		
-		else if(mouse_press(180,400,260,430) == 2)		//提交
+		else if(mouse_press(180,400,260,430) == 2)	//提交
 		{
 			if (num == 0)
 			{
@@ -76,7 +76,7 @@ void binding(int *page,User* u, int *usernum, int *carnum)
 				return;
 			}
 		}
-		else if(mouse_press(380,400,460,430) == 2)		//返回
+		else if(mouse_press(380,400,460,430) == 2)	//返回
 		{
 			if (num == 0)
 			{
@@ -95,7 +95,7 @@ void binding(int *page,User* u, int *usernum, int *carnum)
 		    *page = 8;
 			return;
 		}
-		else if(mouse_press(310,120,480,160) == 2)		//车牌号码
+		else if(mouse_press(310,120,480,160) == 2)	//车牌号码
 		{
 			if (num == 0 && state1 == 0)
 			{
@@ -119,7 +119,7 @@ void binding(int *page,User* u, int *usernum, int *carnum)
 				state1 = 0;
 			continue;
 		}
-		else if(mouse_press(255,180,340,220) == 2)		//年
+		else if(mouse_press(255,180,340,220) == 2)	//年
 		{
 			if (num == 0 && state2 == 0)
 			{
@@ -144,7 +144,7 @@ void binding(int *page,User* u, int *usernum, int *carnum)
 			continue;
 		}
 		
-		else if(mouse_press(360,180,410,220) == 2)		//月
+		else if(mouse_press(360,180,410,220) == 2)	//月
 		{
 			if (num == 0 && state3 == 0)
 			{
@@ -169,7 +169,7 @@ void binding(int *page,User* u, int *usernum, int *carnum)
 			continue;
 		}
 		
-		else if(mouse_press(430,180,480,220) == 2)		//日
+		else if(mouse_press(430,180,480,220) == 2)	//日
 		{
 			if (num == 0 && state4 == 0)
 			{
@@ -194,7 +194,7 @@ void binding(int *page,User* u, int *usernum, int *carnum)
 			continue;
 		}
 		
-		else if (mouse_press(185,255,195,265) == 2)   //红旗
+		else if (mouse_press(185,255,195,265) == 2)	//红旗
 		{
 			if (num == 0)
 			{
@@ -213,7 +213,7 @@ void binding(int *page,User* u, int *usernum, int *carnum)
 			type = 1;
 		}
 		
-		else if (mouse_press(285,255,295,265) == 2)   //奥迪
+		else if (mouse_press(285,255,295,265) == 2)	//奥迪
 		{
 			if (num == 0)
 			{
@@ -232,7 +232,7 @@ void binding(int *page,User* u, int *usernum, int *carnum)
 			type = 2;
 		}
 		
-		else if (mouse_press(385,255,395,265) == 2)   //宝马
+		else if (mouse_press(385,255,395,265) == 2)	//宝马
 		{
 			if (num == 0)
 			{
@@ -251,7 +251,7 @@ void binding(int *page,User* u, int *usernum, int *carnum)
 			type = 3;
 		}
 		
-		else if (mouse_press(485,255,495,265) == 2)   //奔驰
+		else if (mouse_press(485,255,495,265) == 2)	//奔驰
 		{
 			if (num == 0)
 			{
@@ -270,7 +270,7 @@ void binding(int *page,User* u, int *usernum, int *carnum)
 			type = 4;
 		}
 		
-		else if (mouse_press(185,315,195,325) == 2)   //营运
+		else if (mouse_press(185,315,195,325) == 2)	//营运
 		{
 			if (num == 0)
 			{
@@ -289,7 +289,7 @@ void binding(int *page,User* u, int *usernum, int *carnum)
 			nature = 1;
 		}
 		
-		else if (mouse_press(385,315,395,325) == 2)   //非营运
+		else if (mouse_press(385,315,395,325) == 2)	//非营运
 		{
 			if (num == 0)
 			{
@@ -364,8 +364,7 @@ void binding(int *page,User* u, int *usernum, int *carnum)
 void drawbinding()
 {	
 	setbkcolor(LIGHTCYAN);
-	
-	puthz(218,20,"绑定车辆",48,56,1); //220
+	puthz(218,20,"绑定车辆",48,56,1);
 	setfillstyle(1,15);
 	bar(275,120,480,160);
 	puthz(160,130,"车牌号码",24,28,8);
@@ -469,7 +468,7 @@ int check_samecar(char* new_car)
 	}
 	if (fclose(fp) != 0)
 	{
-		printf("\n cannot close Database.");
+		printf("\n cannot close \"UserData.dat\" File.");
 		delay(3000);
 		exit(1);
 	}
@@ -481,8 +480,8 @@ int check_legal_addcar(char* licensenum, char* year, char* month, char* day,
 						int type, int nature, int *usernum, int *carnum)
 {
 	int i;
-	int inputed = 0;	//判断是否有输入
-	int format_licensenum = 0;   //判断输入字符是否符合要求
+	int inputed = 0;				//判断是否有输入
+	int format_licensenum = 0;		//判断输入字符是否符合要求
 	int format_date = 0;
 	char choice_str_type[2];
 	char choice_str_nature[2];
@@ -515,7 +514,7 @@ int check_legal_addcar(char* licensenum, char* year, char* month, char* day,
 		}
 		else if(inputed == 0)
 		{
-			if(check_samecar(licensenum) == 0)	//检查重
+			if(check_samecar(licensenum) == 0)	//检查重复车辆
 			{
 				format_licensenum = check_license_dig (licensenum,525,130);	//若符合格式则为 1
 				format_date = check_date(year,month,day,525,193);
@@ -566,14 +565,14 @@ void write_cardata(char* licensenum, char* year, char* month, char* day,
 	
 	memset(c,'\0',sizeof(Car));
 	
-	strcpy(c->licensenum,licensenum);			//copy licensenum to C.licensenum
+	strcpy(c->licensenum,licensenum);			//copy licensenum to c.licensenum
 	strcpy(c->regdate.year,year);
 	strcpy(c->regdate.month,month);
 	strcpy(c->regdate.day,day);
 	strcpy(c->type,choice_str_type);
 	strcpy(c->nature,choice_str_nature);
 	fseek(fp, (*usernum + 1) * sizeof(User) + (*carnum - 3) * sizeof(Car) , SEEK_SET);//跳转用户第一个空余车辆位置
-	fwrite(c,sizeof(Car),1,fp);	//write c to *fp->file
+	fwrite(c,sizeof(Car),1,fp);					//write c to *fp->file
 	
 	if (c != NULL)
 	{

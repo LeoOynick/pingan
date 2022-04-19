@@ -4,11 +4,8 @@
 void enter(int *page, User *u, int *usernum, int *carnum)
 {
 	int num=0;
-	char inputcode[6] = { '\0' };
-	//char str[6] = { '\0' };
-	/*char name[13] = { '\0' };   //用户名（不超过12位）	
-	char password[17] = { '\0' };   //密码（不超过16位）*/
-	char code[6] = { '\0' };  //验证码（5位）
+	char inputcode[6] = { '\0' };	//输入的验证码
+	char code[6] = { '\0' };		//验证码（5位）
 	int state1 = 0;
 	int state2 = 0;
 	int state3 = 0;
@@ -20,8 +17,8 @@ void enter(int *page, User *u, int *usernum, int *carnum)
 	drawenter();
 	
 	settextstyle(0,0,2);
-	captcha(code);
-	outtextxy(80,318,code);
+	captcha(code);					//生成验证码
+	outtextxy(80,318,code);			//输出验证码
 	
 	while(1)
 	{
@@ -91,13 +88,7 @@ void enter(int *page, User *u, int *usernum, int *carnum)
 			{
 				continue;
 			}
-			
-			/*delay(1000);	//remove 		
-			*page = 6;		//when
-			return;			//release*/
-			
 		}
-		
 		else if(mouse_press(380,400,460,430) == 2)   //返回
 		{
 			if (num == 0)
@@ -376,12 +367,12 @@ int verify_user(char *name, char *password)
 	{
 		if( (u = (User*)malloc(sizeof(User))) == NULL )	//allocate memory for u
 		{
-			printf("Error - unable to allocate required memory");
+			printf("Error - unable to allocate required memory for u in verify_user");
 			delay(1500);
 			exit(1);
 		}
 		
-		fseek(fp, i * sizeof(User), SEEK_SET);	//指向每隔一个User大小的
+		fseek(fp, i * sizeof(User), SEEK_SET);	//指向每隔一个User大小的User结构
 		fread(u, sizeof(User), 1, fp);			//读取一个u
 		
 		if(strcmp(name,u->name) == 0) 			//用户名匹配
@@ -407,21 +398,7 @@ int verify_user(char *name, char *password)
 				}
 				return 1;
 			}
-			/*else if( strcmp(password, u->password) != 0 )	//密码不匹配
-			{
-				button(70,100,800,800,LIGHTCYAN,LIGHTCYAN,3);	//覆盖输入框
-				button(190,200,440,300,CYAN,LIGHTGRAY,3);				
-				puthz(200,238, "用户名或密码错误", 24, 28, BLUE);
-				
-				if (u != NULL)
-				{
-					free(u);
-					u = NULL;
-				}
-				break;
-			}*/
 		}
-
 		if (u != NULL)
 		{
 			free(u);
@@ -431,14 +408,11 @@ int verify_user(char *name, char *password)
 	button(70,100,800,800,LIGHTCYAN,LIGHTCYAN,3);	//覆盖输入框
 	button(190,200,440,300,CYAN,LIGHTGRAY,3);				
 	puthz(200,238, "用户名或密码错误！", 24, 28, BLUE);
-	
-	
 	if (u != NULL)
 	{
 		free(u);
 		u = NULL;
 	}
-
 	if (fclose(fp) != 0)
 	{
 		printf("\n cannot close Database");

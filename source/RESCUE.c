@@ -4,8 +4,8 @@
 void rescue(int *page, User *u)
 {
 	int num = 0;
-	int carid = 0;
-	int state1 = 0;
+	int carid = 0;		//showcar中第几辆车辆
+	int state1 = 0;		//判断内容输入状态的参数
 	int state2 = 0;
 	int state3 = 0;
 	int state4 = 0;
@@ -281,7 +281,7 @@ void drawrescue(User* u, int* carid)
     setcolor(1);
     line(610,0,640,30);
     line(640,0,610,30);
-	show_car(u,90,162,1,carid);
+	show_car(u,90,162,1,carid);		//输出车辆信息
 }
 
 void write_rescuedata(User *u, int carid, int rescue1,int rescue2,int rescue3,int rescue4)
